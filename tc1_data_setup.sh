@@ -13,7 +13,7 @@ recurring_lkp_input=input_data/tc1_input_data_recurring_lkp.txt
 data_dir=/opt/app/sas/custom/data
 
 out_dir=$data_dir/output
-expected_output=$out_dir/tc1_ADD_REQUIRRING.expected
+expected_output=$out_dir/tc1_result.expected
 
 if [ $(ps aux |grep $LOGNAME|egrep "o2-adapters-pcrf-2.12.2.jar|esp" |grep -v egrep|wc -l) -ne 0 ]
 then
@@ -137,7 +137,8 @@ cp $recurring_lkp_input $data_dir/lookup_recurring/
 ################################################################################
 echo "TC1: 4. generating the expected output.."
 rm -f $expected_output
-echo "I,N:$Time1,$msisdn1,$Quota_Name1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,,,,,,,,,,,,,,$Quota_Status1,,,,$Quota_Usage1,,,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
+
+echo "I,N:$Time1,$msisdn1,$Quota_Name1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,,,,,,,,,,,,,,$Quota_Status1,,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
 
 ################################################################################
 echo " "

@@ -4,11 +4,13 @@
 
 esp_server_dir=/home/sal/Desktop/dev/2.2-pre/bin
 data_dir=/opt/app/sas/custom/data
+err_dir=/opt/app/sas/custom/data/error_messages
 out_dir=$data_dir/output
-jar_adapter_path=/home/sal/Desktop/sal/try5
-model_xml=$jar_adapter_path/EDR_PCRF_V6.35-sjk-NewFormat3.xml
+jar_adapter_path=/home/sal/Desktop/sal/try6
+model_xml=$jar_adapter_path/EDR_PCRF_V6.36-POSTPAID.xml
+output_file_name=result.csv
 
-for i in $(echo $esp_server_dir $data_dir $out_dir $jar_adapter_path)
+for i in $(echo $esp_server_dir $data_dir $err_dir $out_dir $jar_adapter_path)
 do
   if [ ! -d "$i" ]
   then
@@ -32,6 +34,9 @@ my_loc=$(pwd)
 for i in $(ls |grep "^tc.*_data_setup.sh$")
 do
   test_case_name=$(echo $i|cut -d'_' -f1)
+  cd $err_dir
+  rm -f *
+  cd $my_loc  
   echo "############################################################################"
   echo "starting $test_case_name at $(date).."
   ./$i
@@ -43,7 +48,7 @@ do
   fi
   ################################################################################
   echo "${test_case_name}: 5. starting the cep engine server with model=$model_xml.."
-  rm -f $out_dir/ADD_REQUIRRING.result.csv $out_dir/ADD_REQUIRRING.result.tmp $out_dir/ADD_REQUIRRING.result.OUT
+  rm -f $out_dir/$output_file_name $out_dir/$output_file_name.tmp $out_dir/$output_file_name.OUT
   cd $esp_server_dir
   ./dfesp_xml_server -pubsub 55555 -server 55556 -loglevel debug -model file:$model_xml &>${my_loc}/server.txt &
   echo " "
@@ -54,37 +59,48 @@ do
 
   ################################################################################
   sleep 3
-  while [ $(ls $out_dir |grep "ADD_REQUIRRING.result.csv" | wc -l) -eq 0 ]
+  while [ $(ls $out_dir |grep "$output_file_name" | wc -l) -eq 0 ]
   do
-    echo "waiting for $out_dir/ADD_REQUIRRING.result.csv to be created.."
+    echo "waiting for $out_dir/$output_file_name to be created.."
     sleep 3
   done
   ################################################################################
   ################################################################################
 
   echo "${test_case_name}:7. now we can compare results.."
-  cat $out_dir/ADD_REQUIRRING.result.csv | sed s/'I,N:'/'\n''I,N:'/g > $out_dir/ADD_REQUIRRING.result.tmp
+  cat $out_dir/$output_file_name | sed s/'I,N:'/'\n''I,N:'/g > $out_dir/$output_file_name.tmp
   
-  line_count1=$(wc -l $out_dir/ADD_REQUIRRING.result.tmp| awk '{print $1}')
-  tail -${line_count1} $out_dir/ADD_REQUIRRING.result.tmp > $out_dir/ADD_REQUIRRING.result.OUT
+  line_count1=$(wc -l $out_dir/$output_file_name.tmp| awk '{print $1}')
+  tail -${line_count1} $out_dir/$output_file_name.tmp > $out_dir/$output_file_name.OUT
 
-  rm -f $out_dir/ADD_REQUIRRING.result.tmp
-  if [ $(ls $out_dir |grep "${test_case_name}_ADD_REQUIRRING.expected" |wc -l) -ne 0 ]
+  rm -f $out_dir/$output_file_name.tmp
+  if [ $(ls $out_dir |grep "${test_case_name}_result.expected" |wc -l) -ne 0 ]
   then
-    if [ $(diff -w $out_dir/ADD_REQUIRRING.result.OUT $out_dir/${test_case_name}_ADD_REQUIRRING.expected |wc -l) -eq 0 ]
+    echo " "
+    echo "here is the contents we were looking for.."
+    cat $out_dir/${test_case_name}_result.expected
+    echo "here is what we got.."
+    cat $out_dir/$output_file_name.OUT
+    echo " "
+    if [ $(diff -w $out_dir/$output_file_name.OUT $out_dir/${test_case_name}_result.expected |wc -l) -eq 0 ]
     then
-      echo "RESULT: GOOD! match on ADD_REQUIRRING"
+      echo "RESULT: GOOD! match on $out_dir/$output_file_name.OUT with  $out_dir/${test_case_name}_result.expected"
     else
-      echo "RESULT: BAD! no match on ADD_REQUIRRING!!"
+      echo "ERROR!!!"
+      echo "ERROR!!!"
+      echo "RESULT: BAD! BAD! BAD! no match on $out_dir/$output_file_name.OUT with  $out_dir/${test_case_name}_result.expected"
+      echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+      echo "please fix!!!"
+#      exit
     fi
   else
     echo "RESULT: BAD! missing expected file!!"
   fi
-  echo " "
-  echo "here is the contents we were looking for.."
-  cat $out_dir/${test_case_name}_ADD_REQUIRRING.expected
-  echo "here is the EDR stream we used.."
-  cat $out_dir/ADD_REQUIRRING.result.OUT
+#  echo " "
+#  echo "here is the contents we were looking for.."
+#  cat $out_dir/${test_case_name}_result.expected
+#  echo "here is what we got.."
+#  cat $out_dir/$output_file_name.OUT
   echo " "
   ################################################################################
   echo "8. checking for processes to kill.."
