@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# nohup ./run_test.sh &> logs/test_execution_$(date +"%Y-%m-%d-%T").log &
+# ./run_test.sh tc1_data_setup.sh &> /tmp/bug_ignored_lines.log
 
 esp_server_dir=/home/sal/Desktop/dev/2.2-pre/bin
 data_dir=/opt/app/sas/custom/data
@@ -9,6 +9,14 @@ out_dir=$data_dir/output
 jar_adapter_path=/home/sal/Desktop/sal/try6
 model_xml=$jar_adapter_path/EDR_PCRF_V6.36-POSTPAID.xml
 output_file_name=result.csv
+
+if (( $# == 1 ))
+then
+  mylist=$1
+else 
+  mylist=$(ls |grep "^tc.*_data_setup.sh$")
+fi
+
 
 for i in $(echo $esp_server_dir $data_dir $err_dir $out_dir $jar_adapter_path)
 do
@@ -31,7 +39,7 @@ done
 
 my_loc=$(pwd)
 
-for i in $(ls |grep "^tc.*_data_setup.sh$")
+for i in $(echo $mylist)
 do
   test_case_name=$(echo $i|cut -d'_' -f1)
   cd $err_dir
@@ -70,9 +78,13 @@ do
   echo "${test_case_name}:7. now we can compare results.."
   cat $out_dir/$output_file_name | sed s/'I,N:'/'\n''I,N:'/g > $out_dir/$output_file_name.tmp
   
-  line_count1=$(wc -l $out_dir/$output_file_name.tmp| awk '{print $1}')
-  tail -${line_count1} $out_dir/$output_file_name.tmp > $out_dir/$output_file_name.OUT
-
+  if [ $(head -1 $out_dir/$output_file_name.tmp | wc -w) -eq "1" ]
+  then
+    line_count1=$(wc -l $out_dir/$output_file_name.tmp| awk '{print $1}')
+    tail -${line_count1} $out_dir/$output_file_name.tmp > $out_dir/$output_file_name.OUT
+  else
+    cp $out_dir/$output_file_name.tmp $out_dir/$output_file_name.OUT
+  fi
   rm -f $out_dir/$output_file_name.tmp
   if [ $(ls $out_dir |grep "${test_case_name}_result.expected" |wc -l) -ne 0 ]
   then

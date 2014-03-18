@@ -1,5 +1,5 @@
 #!/bin/bash
-# nohup ./test_case1_v0.1.sh &> logs/test_execution_$(date +"%Y-%m-%d-%T").log &
+
 echo "running test at $(date)"
 
 my_loc=$(pwd)
