@@ -26,12 +26,13 @@ echo "TC2: 0. design requirement: Data Usage in last 48 hours should be calculat
 echo "(add all Quota_Usage for a particular msisdn (with the same profile id)."
 echo " "
 echo "EDR data setup:"
-echo "Row1: a usage edr (not a throttle), Quota_Usage=100, Quota_Status=1, Quota_Value=99, 10 minutes ago"
-echo "Row2: a usage edr (not a throttle), Quota_Usage=200, Quota_Status=2, Quota_Value=99, 9 minutes ago"
-echo "Row3: the first 100% throttle edr (with usage), Quota_Usage=277, Quota_Status=6, Quota_Value=1, 8 minutes ago"
-echo "Row4: a usage edr (after the 100% throttle), Quota_Usage=150, Quota_Status=6, Quota_Value=0, 7 minutes ago"
-echo "Row5: a usage edr (after the 100% throttle), Quota_Usage=15, Quota_Status=6, Quota_Value=0, 6 minutes ago"
-echo "Row6: a usage edr (before the 100% throttle), Quota_Usage=999999, Quota_Status=1, Quota_Value=99, 49 hours ago (it should be ignored for the total usage value!)"
+echo "Row1: a usage edr (before the 100% throttle), Quota_Usage=999999, Quota_Status=1, Quota_Value=99, 49 hours ago (it should be ignored for the total usage value!)"
+echo "Row2: a usage edr (not a throttle), Quota_Usage=100, Quota_Status=1, Quota_Value=99, 10 minutes ago"
+echo "Row3: a usage edr (not a throttle), Quota_Usage=200, Quota_Status=2, Quota_Value=99, 9 minutes ago"
+echo "Row4: the first 100% throttle edr (with usage), Quota_Usage=277, Quota_Status=6, Quota_Value=1, 8 minutes ago"
+echo "Row5: a usage edr (after the 100% throttle), Quota_Usage=150, Quota_Status=6, Quota_Value=0, 7 minutes ago"
+echo "Row6: a usage edr (after the 100% throttle), Quota_Usage=15, Quota_Status=6, Quota_Value=0, 6 minutes ago"
+
 
 echo " "
 echo "Lookup setup:"
@@ -42,11 +43,11 @@ echo "TC2: 1. PCRD EDRs (input stream).."
 rm -f $throttle_input
 
 ###################
-# ROW1..
+# ROW1..this should be igored for the aggregation of the 1st throttle 100 event.
 # P1 - TriggerType, Time, MSISDN..
 p1_desc=$(echo "# TriggerType, Time,,,MSISDN,,,,,")
-TriggerType1=2; Time1=$(date --date='10 minutes ago' +"%Y-%m-%d %T"); msisdn1=4912345678901; Quota_Name1=Q_110_local_Month; Quota_Status1=1; 
-Quota_Usage1=100; Quota_Next_Reset_Time1=$(date --date='16 days' +"%Y-%m-%d %T"); Quota_Value1=99; PaymentType1=POSTPAID;
+TriggerType1=2; Time1=$(date --date='49 minutes ago' +"%Y-%m-%d %T"); msisdn1=4912345678901; Quota_Name1=Q_110_local_Month; Quota_Status1=1; 
+Quota_Usage1=999999; Quota_Next_Reset_Time1=$(date --date='16 days' +"%Y-%m-%d %T"); Quota_Value1=99; PaymentType1=POSTPAID;
 InitialVolume1=1230; IsRecurring1=Y;
 p1=$(echo "$TriggerType1,$Time1,,,$msisdn1,,,,,")
 
@@ -75,15 +76,17 @@ p7=$(echo ",,,,,,,$Quota_Value1,,")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 ####################
 # ROW2..
-Time2=$(date --date='9 minutes ago' +"%Y-%m-%d %T"); Quota_Usage2=200; Quota_Status2=1; Quota_Value2=99;
+#echo "Row2: a usage edr (not a throttle), Quota_Usage=100, Quota_Status=1, Quota_Value=99, 10 minutes ago"
+Time2=$(date --date='10 minutes ago' +"%Y-%m-%d %T"); Quota_Usage2=100; Quota_Status2=1; Quota_Value2=99;
 p1=$(echo "$TriggerType1,$Time2,,,$msisdn1,,,,,")
 p3=$(echo ",,,,,,$Quota_Name1,$Quota_Status2,,")
 p4=$(echo ",$Quota_Usage2,$Quota_Next_Reset_Time1,,,,,,,")
 p7=$(echo ",,,,,,,$Quota_Value2,,")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 ####
-# ROW3.. the throttle 100 event..
-Time3=$(date --date='8 minutes ago' +"%Y-%m-%d %T"); Quota_Usage3=277; Quota_Status3=6; Quota_Value3=1;
+# ROW3.. 
+#echo "Row3: a usage edr (not a throttle), Quota_Usage=200, Quota_Status=2, Quota_Value=99, 9 minutes ago"
+Time3=$(date --date='9 minutes ago' +"%Y-%m-%d %T"); Quota_Usage3=200; Quota_Status3=2; Quota_Value3=99;
 p1=$(echo "$TriggerType1,$Time3,,,$msisdn1,,,,,")
 p3=$(echo ",,,,,,$Quota_Name1,$Quota_Status3,,")
 p4=$(echo ",$Quota_Usage3,$Quota_Next_Reset_Time1,,,,,,,")
@@ -91,7 +94,8 @@ p7=$(echo ",,,,,,,$Quota_Value3,,")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 ####
 # ROW4..
-Time4=$(date --date='7 minutes ago' +"%Y-%m-%d %T"); Quota_Usage4=150; Quota_Status4=6; Quota_Value4=0;
+#echo "Row4: the first 100% throttle edr (with usage), Quota_Usage=277, Quota_Status=6, Quota_Value=1, 8 minutes ago"
+Time4=$(date --date='8 minutes ago' +"%Y-%m-%d %T"); Quota_Usage4=277; Quota_Status4=6; Quota_Value4=1;
 p1=$(echo "$TriggerType1,$Time4,,,$msisdn1,,,,,")
 p3=$(echo ",,,,,,$Quota_Name1,$Quota_Status4,,")
 p4=$(echo ",$Quota_Usage4,$Quota_Next_Reset_Time1,,,,,,,")
@@ -99,14 +103,16 @@ p7=$(echo ",,,,,,,$Quota_Value4,,")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 ####
 # ROW5..
-Time5=$(date --date='6 minutes ago' +"%Y-%m-%d %T"); Quota_Usage5=115; Quota_Status5=6; Quota_Value5=0;
+#echo "Row5: a usage edr (after the 100% throttle), Quota_Usage=150, Quota_Status=6, Quota_Value=0, 7 minutes ago"
+Time5=$(date --date='7 minutes ago' +"%Y-%m-%d %T"); Quota_Usage5=150; Quota_Status5=6; Quota_Value5=0;
 p1=$(echo "$TriggerType1,$Time5,,,$msisdn1,,,,,")
 p3=$(echo ",,,,,,$Quota_Name1,$Quota_Status5,,")
 p4=$(echo ",$Quota_Usage5,$Quota_Next_Reset_Time1,,,,,,,")
 p7=$(echo ",,,,,,,$Quota_Value5,,")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
-# ROW6.. it should be ignored for the total usage as it happened before 48 hours ago..
-Time6=$(date --date='49 hours ago' +"%Y-%m-%d %T"); Quota_Usage6=7; Quota_Status6=1; Quota_Value6=99;
+# ROW6.. 
+# echo "Row6: a usage edr (after the 100% throttle), Quota_Usage=15, Quota_Status=6, Quota_Value=0, 6 minutes ago"
+Time6=$(date --date='6 minutes ago' +"%Y-%m-%d %T"); Quota_Usage6=15; Quota_Status6=6; Quota_Value6=0;
 p1=$(echo "$TriggerType1,$Time6,,,$msisdn1,,,,,")
 p3=$(echo ",,,,,,$Quota_Name1,$Quota_Status6,,")
 p4=$(echo ",$Quota_Usage6,$Quota_Next_Reset_Time1,,,,,,,")
@@ -137,7 +143,7 @@ cp $recurring_lkp_input $data_dir/lookup_recurring/
 ################################################################################
 echo "TC2: 4. generating the expected output.."
 rm -f $expected_output
-echo "I,N:$Time3,$msisdn1,$Quota_Name1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,,,,,,,,,,,,,,$Quota_Status3,,,,$Quota_Usage3,,,,,,,,,,$PaymentType1,$((Quota_Usage1+Quota_Usage2+Quota_Usage3+Quota_Usage4+Quota_Usage5)),$IsRecurring1,$InitialVolume1" >> $expected_output
+echo "I,N:$Time4,$msisdn1,$Quota_Name1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,,,,,,,,,,,,,,$Quota_Status4,,,,$Quota_Usage4,,,,,,,,,,$PaymentType1,$((Quota_Usage2+Quota_Usage3+Quota_Usage4+Quota_Usage5+Quota_Usage6)),$IsRecurring1,$InitialVolume1" >> $expected_output
 
 ################################################################################
 echo " "
