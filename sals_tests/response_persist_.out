@@ -1,0 +1,1 @@
+usage: ./dfesp_xml_client -server <host:port> -file <input file> or -xml <xml text>

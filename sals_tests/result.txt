@@ -1,0 +1,87 @@
+[nicopc@localhost sals_tests]$ ./run_test_1flow.sh tc1_data_setup.sh
+############################################################################
+starting tc1 at Thu Mar 20 11:51:38 CET 2014..
+running test at Thu Mar 20 11:51:38 CET 2014
+TC1:
+R1: the CEP Engine delivers POSTPAID throttle 100 events with various metrics.
+EDRs which have a local QuotaName and TriggerType 1 to 6 are of interest.
+Throttle 100 events have the QuotaStatus=6 and QuotaValue=1.
+ 
+ 
+test strategy:
+input various combinations of QuotaName, TriggerType, QuotaStatus and QuotaValue 
+to confirm only valid combinations result in a processed postpaid throttle 100 event
+ 
+EDR data setup:
+Row1: a valid POSTPAID throttle 100 event (Quota_Name=Q_110_local_Month, TriggerType=2, Quota_Status=6, QuotaValue=1)
+Row2: a not valid POSTPAID throttle 100 event (TriggerType=7 instead of 1-6)
+Row3: a not valid POSTPAID throttle 100 event (Quota_Name = Q_110_roaming_Month)
+Row4: a not valid POSTPAID throttle 100 event (Quota_Status=4 instead of 6)
+Row5: a not valid POSTPAID throttle 100 event (QuotaValue=11 instead of 1)
+Row6: a not valid POSTPAID throttle 100 event (as its PREPAID)
+ 
+
+TC1: 1. PCRF EDRs (input stream)..
+TC1: 2. postpaid lkp..
+TC1: 3. recurring lkp..
+TC1: 4. generating the expected output..
+ 
+here is the contents we were looking for..
+I,N:2014-03-20 11:51:38,4912345678901,Q_110_local_Month,2014-04-05 12:51:38,2,,,,,,,,,,,,,,,,,,,,,,,,6,,,,1024,,,,,,,,,,POSTPAID,1024,Y,1230
+ 
+here is the postpaid lookup we used..
+4912345678901,POSTPAID
+4912345678902,POSTPAID
+4912345678903,POSTPAID
+4912345678904,POSTPAID
+4912345678905,POSTPAID
+4912345678906,PREPAID
+ 
+here is the recurring lookup we used..
+4912345678901,Q_110_local_Month,1230,Y
+4912345678902,Q_110_local_Month,1230,Y
+4912345678903,Q_110_local_Month,1230,Y
+4912345678904,Q_110_local_Month,1230,Y
+ 
+here is the EDR stream we used..
+2,2014-03-20 11:51:38,,,4912345678901,,,,,,,,,,,,,,,,,,,,,,Q_110_local_Month,6,,,,1024,2014-04-05 12:51:38,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,,
+7,2014-03-20 11:51:38,,,4912345678902,,,,,,,,,,,,,,,,,,,,,,Q_110_local_Month,6,,,,1024,2014-04-05 12:51:38,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,,
+2,2014-03-20 11:51:38,,,4912345678903,,,,,,,,,,,,,,,,,,,,,,Q_110_roaming_Month,6,,,,1024,2014-04-05 12:51:38,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,,
+2,2014-03-20 11:51:38,,,4912345678904,,,,,,,,,,,,,,,,,,,,,,Q_110_local_Month,4,,,,1024,2014-04-05 12:51:38,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,,
+2,2014-03-20 11:51:38,,,4912345678905,,,,,,,,,,,,,,,,,,,,,,Q_110_local_Month,4,,,,1024,2014-04-05 12:51:38,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,11,,
+2,2014-03-20 11:51:38,,,4912345678906,,,,,,,,,,,,,,,,,,,,,,Q_110_local_Month,6,,,,1024,2014-04-05 12:51:38,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,,
+tc1: 5. starting the cep engine server ..
+ 
+tc1: 6. starting the xml models dfesp_xml_client for /home/nicopc/Desktop/nicopc/try6/EDR_PCRF_V6.36-POSTPAID_client.xml..
+<response action='load' name='POSTPAID_THROTTLE_EVENT' pubsub='auto' threads='4' use-tagged-token='true' elapsed='27 ms'>
+    <message>project load POSTPAID_THROTTLE_EVENT succeeded</message>
+</response>
+
+tc1: 7. starting the /home/nicopc/Desktop/nicopc/try6/POSTPAID_start.xml..
+sleep 4
+<response action='start' name='POSTPAID_THROTTLE_EVENT' elapsed='0 ms'>
+    <message>project POSTPAID_THROTTLE_EVENT started</message>
+</response>
+
+tc1: 8. starting the /home/nicopc/Desktop/nicopc/try6/POSTPAID_restore.xml..
+tc1: 9. starting the adapters..
+<response restore='/opt/app/sas/custom/data/persist_postpaid_throttle_event' elapsed='0 ms'/>
+
+waiting for /opt/app/sas/custom/data/output_postpaid/result.csv to be created..
+waiting for /opt/app/sas/custom/data/output_postpaid/result.csv to be created..
+tc1:10. now we can compare results..
+ 
+here is the contents we were looking for..
+I,N:2014-03-20 11:51:38,4912345678901,Q_110_local_Month,2014-04-05 12:51:38,2,,,,,,,,,,,,,,,,,,,,,,,,6,,,,1024,,,,,,,,,,POSTPAID,1024,Y,1230
+here is what we got..
+I,N:2014-03-20 11:51:38,4912345678901,Q_110_local_Month,2014-04-05 12:51:38,2,,,,,,,,,,,,,,,,,,,,,,,,6,,,,1024,,,,,,,,,,POSTPAID,1024,Y,1230 
+RESULT: GOOD! match on /opt/app/sas/custom/data/output_postpaid/result.csv.OUT with  /opt/app/sas/custom/data/output_postpaid/tc1_result.expected
+ 
+tc1: 11. starting the /home/nicopc/Desktop/nicopc/try6/POSTPAID_persist.xml..
+10. checking for processes to kill..
+killing 5018
+killing 5049
+killing 5112
+./run_test_1flow.sh: line 47:  5112 Terminated              ./dfesp_xml_client -server localhost:55556 -file $model_xml_persist_path  (wd: ~/Desktop/dev/2.2-pre/bin)
+ending tc1 at Thu Mar 20 11:51:59 CET 2014..
+

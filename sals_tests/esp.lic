@@ -1,0 +1,2818 @@
+# workstation (none) valid for 365 days
+#
+# Data Management Base
+base = C6JCB6WWp7H3DtPsQCD6FBX6q
+# Data Management Quality
+quality = C6JCBWW6ppHTDWPqQTD6FBX6M
+# Data Management Studio
+studio = C6JCBmWBp9HKDWPsQJD6FBX6s
+# Data Management Studio Base
+dfp_base = C6JCBmWBp9HKDFPPQqD6FBX68
+# Data Management Studio Quality
+dfp_quality = C6JCBmW6p8HKD3P4QQD6FBX6H
+# Address/Geocoding/County/Phone Lookup
+verify = C6JCBJWHp6H5DZPrQCD6FBX6S
+# Address Verification - QAS
+verify_qas = C6JCBJWHp6H6DDP3QCD6FBX64
+# National Change of Address (NCOA)
+ncoa = C6JCBJWHp6HCDXPHQQD6FBX6r
+# Data Management Profile
+profile = C6JCB2WCpCHqDWPYQGD6FBX6C
+# Data Management Monitor
+monitor = C6JCBVWrpsH5DRPHQ3D6FBX6J
+# Data Management Monitor Web
+monitor_web = C6JCBVWrpsHQDVPQQCD6FBX6W
+# DataFlux Business Data Network
+busdatanet = C6JCB6W6p7HKDDPqQQD6FBX6H
+# DataFlux Reference Data Manager
+refdataman = C6JCBYWHp3HKDDPqQQD6FBX6Q
+# Data Management Explorer
+mdprofile = C6JCB9W9ptHTDMPKQGD6FBX6V
+# Data Management Customize
+customize = C6JCB7W6p7H9DMPmQCD6FBX6B
+# Data Management Server: Enterprise
+dmserver_enterprise = C6JCBmWHp6HPDVPpQ4D6FBX6H
+# Data Management Server: Standard
+dmserver_standard = C6JCBmWHp6HPD4PqQXD6FBX63
+# Data Management Server: SAS
+dmserver_sas = C6JCBmWHp6HPD4PPQqD6FBX6H
+# Data Management Server: Web
+dmserver_web = C6JCBmWHp6HPDrPXQDD6FBX6G
+# Data Management Server: Basic
+dmserver_basic = C6JCBmWHp6HPDFPPQqD6FBX68
+# SAS Event Stream Processing
+esp = C6JCB9WtptH7DMPDQCDBFBX6p
+# DataFlux Secure
+secure = C6JCBmWHpJHNDqPXQCD6FBX6n
+# DataFlux Secure: AES
+secure_aes = C6JCBmWHpJHHDVP3QCD6FBX6T
+# DataFlux flat XML and custom access
+xml_conv_p0 = C6JCBKWmpCHCDSPJQCD6FBX68
+# DataFlux X12, ATIS and HIPAA
+xml_conv_p1 = C6JCBKWmpCHCDSPJQtD6FBX69
+# DataFlux EDIFACT, EDIGAS, NCPDP, TRADACOMS
+xml_conv_p2 = C6JCBKWmpCHCDSPJQBD6FBX6N
+# DataFlux EANCOM
+xml_conv_p3 = C6JCBKWmpCHCDSPJQ6D6FBX6P
+# DataFlux IATA
+xml_conv_p4 = C6JCBKWmpCHCDSPJQ7D6FBX6Q
+# DataFlux converter internals
+xml_conv_p5 = C6JCBKWmpCHCDSPJQ8D6FBX6D
+# DataFlux HL7
+xml_conv_p6 = C6JCBKWmpCHCDSPJQ9D6FBX6F
+# DataFlux DI Data Flow
+di_dataflow = C6JCB8W3pMHHDRPPQVD6FBX6s
+# DataFlux DI Process Flow
+di_processflow = C6JCB8W3ptH7DMPDQVD6FBX6K
+# DataFlux Entity Resolution
+di_ent_resoln = C6JCB8W3pKHCDRPKQGD6FBX6R
+# DataFlux Contextual Extraction
+cont_ext = C6JCB7WrpsH9DVPSQ4D6FBX6m
+# DataFlux SAP
+sap = C6JCBmWWptH7DZPDQCD6FBX6Q
+# SAS Federation Server
+fs_server = C6JCBNWHpMH8DVPKQ5D6FBX6T
+# SAS Federation Server: SAS EBI
+fs_server_ebi = C6JCBNWHpMH3DFPLQCD6FBX6X
+# SAS Federation Server: Data Caching
+fs_server_cache = C6JCBNWHpMHMDDPDQLD6FBX6Y
+# SAS Federation Server: Federation
+fs_server_fed = C6JCBNWHpMHqDVPFQCD6FBX6F
+# SAS Driver for DB2 CS
+fs_db2 = C6JCB8WCpNHJDGPtQFD6FBX6t
+# SAS Driver for DB2 MVS
+fs_db2_mvs = C6JCB8WCpNHKDFPtQpD6FBX6F
+# SAS Driver for MySQL
+fs_mysql = C6JCB8WCpNHsDsP3QKD6FBX6B
+# SAS Driver for ODBC
+fs_odbc = C6JCB8WCpNHtDGPQQFD6FBX6H
+# SAS Driver for Oracle
+fs_oracle = C6JCB8WCpNHtDqPPQFD6FBX6C
+# SAS Driver for Teradata
+fs_teradata = C6JCB8WCpNH9DVPKQQD6FBX6N
+# SAS Driver for R/3
+fs_r3 = C6JCB8WCpNH7D7PsQCD6FBX65
+# SAS Driver for BASE
+fs_base = C6JCB8WCpNHJDDP3QGD6FBX6K
+# SAS Driver for Transactional Database
+fs_trans = C6JCB8WCpNH9DqPPQHD6FBX6L
+# SAS Driver for Netezza
+fs_netezza = C6JCB8WCpNHCDVPqQsD6FBX64
+# SAS Driver for Asterdata
+fs_aster = C6JCB8WCpNHHD4PqQ3D6FBX6p
+# SAS Driver for Greenplum
+fs_greenplum = C6JCB8WCpNH4DqPpQMD6FBX6W
+# SAS Driver for Sybase IQ
+fs_sybaseiq = C6JCB8WCpNH8DsPQQ2D6FBX6W
+# SAS Driver for PC files
+fs_pcfile = C6JCB8WCpNHBDXPGQ2D6FBX6r
+# DataFlux Authentication Server
+as_server = C6JCBBW6p8HRD4PKQ5D6FBX64
+# DF qMDM Solution for Customer Data
+cdi = CWJBBGW6p8HMDGPLQCDBFBX6S
+# DF Accelerator for Watch List Compliance
+wlc = CWJBBGW6p8HQDpPDQCDBFBX6W
+# DF Accelerator for Commodity Coding
+pdq = CWJBBGW6p8HBDGPMQCDBFBX6n
+# DF qMDM Solution for Product Data
+pdm = CWJBBGW6p8HBDGPmQCDBFBX6G
+# DF Accelerator for Customer Data Improvement
+cdq = CWJBBGW6p8HMDGPMQCDBFBX67
+# DF Accelerator for Customer Data Analysis
+cdqa = CWJBBGW6p8HMDGPPQCDBFBX6J
+# DF Accelerator for Customer Data Control
+cdc = CWJBBGW6p8HMDGPDQCDBFBX6K
+# DF SRM Solution
+srm = CWJBBGW6p8H8DqPmQCDBFBX65
+# DF Accelerator for Classification
+scl = CWJBBGW6p8H8DXPYQCDBFBX6V
+# DF Accelerator for Spend Analysis
+ssa = CWJBBGW6p8H8D4PPQCDBFBX6Y
+# DF Accelerator for Product Data Improvement
+spi = CWJBBGW6p8H8DKPLQCDBFBX6M
+# SAS MDM
+mdm = CWJBBGW6p8HsDGPmQCDBFBX6D
+# Studio/MDM Integration Package - Generic
+mdm_generic = CWJBBGW6p8HsDLPXQHDBFBX6q
+# Studio/MDM Integration Package - Insurance
+mdm_insurance = CWJBBGW6p8HsDWPpQqDBFBX6P
+# Studio/MDM Integration Package - Retail
+mdm_retail = CWJBBGW6p8HsDqPXQ4DBFBX6Q
+# Studio/MDM Integration Package - Healthcare
+mdm_healthcare = CWJBBGW6p8HsD2PXQQDBFBX6Z
+# Studio/MDM Integration Package - Banking
+mdm_banking = CWJBBGW6p8HsDFPPQHDBFBX6W
+# Teragram locale - all
+liti_all = CYJRBGW3ppHTDpPsQCDtFBX74
+# Teragram locale - Arabic
+liti_ar = CYJRBGW3ppH7DtPsQCDtFBX7V
+# Teragram locale - Czech
+liti_cs = CYJRBGW3pJH8DtPsQCDtFBX7n
+# Teragram locale - Danish
+liti_da = CYJRBGW3pMHHDtPsQCDtFBX7C
+# Teragram locale - German
+liti_de = CYJRBGW3pMH3DtPsQCDtFBX77
+# Teragram locale - Greek
+liti_el = CYJRBGW3pKHTDtPsQCDtFBX7X
+# Teragram locale - English
+liti_en = CYJRBGW3pKHCDtPsQCDtFBX7V
+# Teragram locale - Spanish
+liti_es = CYJRBGW3pKH8DtPsQCDtFBX7Y
+# Teragram locale - Finnish
+liti_fi = CYJRBGW3p3H5DtPsQCDtFBX7D
+# Teragram locale - French
+liti_fr = CYJRBGW3p3H7DtPsQCDtFBX7Y
+# Teragram locale - Hebrew
+liti_he = CYJRBGW3p4H3DtPsQCDtFBX7P
+# Teragram locale - Hungarian
+liti_hu = CYJRBGW3p4HNDtPsQCDtFBX7M
+# Teragram locale - Indonesian
+liti_id = CYJRBGW3pRHKDtPsQCDtFBX7P
+# Teragram locale - Italian
+liti_it = CYJRBGW3pRH9DtPsQCDtFBX7M
+# Teragram locale - Japanese
+liti_ja = CYJRBGW3p5HHDtPsQCDtFBX79
+# Teragram locale - Korean
+liti_ko = CYJRBGW3pSHtDtPsQCDtFBX7p
+# Teragram locale - Dutch
+liti_nl = CYJRBGW3psHTDtPsQCDtFBX7p
+# Teragram locale - Norwegian
+liti_no = CYJRBGW3psHtDtPsQCDtFBX7M
+# Teragram locale - Polish
+liti_pl = CYJRBGW3ptHTDtPsQCDtFBX7J
+# Teragram locale - Portuguese
+liti_pt = CYJRBGW3ptH9DtPsQCDtFBX7S
+# Teragram locale - Romanian
+liti_ro = CYJRBGW3p6HtDtPsQCDtFBX74
+# Teragram locale - Russian
+liti_ru = CYJRBGW3p6HNDtPsQCDtFBX7s
+# Teragram locale - Slovak
+liti_sk = CYJRBGW3p7HrDtPsQCDtFBX7K
+# Teragram locale - Swedish
+liti_sv = CYJRBGW3p7HPDtPsQCDtFBX7t
+# Teragram locale - Thai
+liti_th = CYJRBGW3p8HRDtPsQCDtFBX7J
+# Teragram locale - Turkish
+liti_tr = CYJRBGW3p8H7DtPsQCDtFBX7T
+# Teragram locale - Vietnamese
+liti_vi = CYJRBGW3pNH5DtPsQCDtFBX73
+# Teragram locale - Chinese
+liti_zh = CYJRBGW3pFHRDtPsQCDtFBX7R
+# US Address Verification
+addver_usps = C6JCBJW6p7HMDDP3QqD6FBX6J
+# US Delivery Point Validation
+addver_dpv = C6JCBJW6p7HKDKPRQCD6FBX6Z
+# US Residential Delivery Indicator
+addver_rdi = C6JCBJW6p7H7DGPLQCD6FBX67
+# US LACS-Link
+addver_lacs = C6JCBJW6p7HTDDPDQqD6FBX6L
+# Canadian Address Verification
+addver_cpost = C6JCBJWmppHBDMP3Q4D6FBX6Z
+# Australia
+addver_aus = C6JCBJWRpBHMDDP4QqDBFBX6G
+# Belgium
+addver_bel = C6JCBJWRpBHMDFPXQmDBFBX63
+# Brazil
+addver_bra = C6JCBJWRpBHMDFPKQQDBFBX64
+# China
+addver_chn = C6JCBJWRpBHMDXPZQHDBFBX6r
+# Czech Republic
+addver_cze = C6JCBJWRpBHMDXPTQGDBFBX69
+# Denmark
+addver_dnk = C6JCBJWRpBHMDGPpQYDBFBX6t
+# Egypt
+addver_egy = C6JCBJWRpBHMDVPVQTDBFBX6Q
+# Finland
+addver_fin = C6JCBJWRpBHMDZPLQHDBFBX6t
+# France
+addver_fra = C6JCBJWRpBHMDZPKQQDBFBX6r
+# Germany
+addver_deu = C6JCBJWRpBHMDGPXQRDBFBX6B
+# Greece
+addver_grc = C6JCBJWRpBHMDLPKQFDBFBX6C
+# Hong Kong
+addver_hkg = C6JCBJWRpBHMD2PWQZDBFBX6T
+# Hungary
+addver_hun = C6JCBJWRpBHMD2P4QHDBFBX6Z
+# India
+addver_ind = C6JCBJWRpBHMDWPpQXDBFBX6s
+# Italy
+addver_ita = C6JCBJWRpBHMDWPqQQDBFBX6B
+# Japan
+addver_jpn = C6JCBJWRpBHMDYPJQHDBFBX6X
+# Mylasia
+addver_mys = C6JCBJWRpBHMDHPrQqDBFBX6R
+# Mexico
+addver_mex = C6JCBJWRpBHMDHPXQrDBFBX6V
+# Netherlands
+addver_nld = C6JCBJWRpBHMDJPYQXDBFBX6B
+# New Zealand
+addver_nzl = C6JCBJWRpBHMDJPTQmDBFBX6M
+# Norway
+addver_nor = C6JCBJWRpBHMDJPHQ3DBFBX6Y
+# Poland
+addver_pol = C6JCBJWRpBHMDKPHQmDBFBX6Z
+# Portugal
+addver_prt = C6JCBJWRpBHMDKPKQ4DBFBX63
+# Russia
+addver_rus = C6JCBJWRpBHMDqP4QqDBFBX65
+# Slovakia
+addver_svk = C6JCBJWRpBHMD4PRQYDBFBX6M
+# South Africa
+addver_zaf = C6JCBJWRpBHMDCPPQVDBFBX68
+# Korea
+addver_kor = C6JCBJWRpBHMDmPHQ3DBFBX6L
+# Spain
+addver_esp = C6JCBJWRpBHMDVP3QMDBFBX6X
+# Sweeden
+addver_swe = C6JCBJWRpBHMD4P5QGDBFBX6Y
+# Thailand
+addver_tha = C6JCBJWRpBHMDRPZQQDBFBX6t
+# Turkey
+addver_tur = C6JCBJWRpBHMDRP4Q3DBFBX6S
+# Great Britain
+addver_gbr = C6JCBJWRpBHMDLPQQ3DBFBX6s
+# Africa
+addver_africa = C6JCBJWRpBH7DDPGQ3DBFBX6X
+# Central America
+addver_central_america = C6JCBJWRpBH7DXPPQpDBFBX67
+# East Asia
+addver_east_asia = C6JCBJWRpBH7DVPPQqDBFBX6X
+# Eastern Europe
+addver_eastern_europe = C6JCBJWRpBH7DVPXQ3DBFBX6Z
+# Middle East
+addver_middle_east = C6JCBJWRpBH7DHPXQqDBFBX6M
+# Oceania
+addver_oceania = C6JCBJWRpBH7DMPDQHDBFBX6Y
+# South America
+addver_south_america = C6JCBJWRpBH7D4PPQpDBFBX6m
+# West Asia
+addver_west_asia = C6JCBJWRpBH7DrPPQqDBFBX65
+# Western Europe
+addver_western_europe = C6JCBJWRpBH7DrPXQ3DBFBX6T
+# Arctic
+addver_arcitc = C6JCBJWRpBH7DDPKQFDBFBX6Q
+# World
+addver_world = C6JCBJWRpBH7DrPKQmDBFBX68
+# US Geocoding
+geo_us = C6JCBPWHpCHND4PsQCD6FBX68
+# Canadian Geocoding
+geo_ca = C6JCBPWHpCHMDDPsQCD6FBX67
+# Phone Lookup
+geo_phone = C6JCBPWHpCHBD2PHQHD6FBX6s
+# US Street-Level Geocoding
+geo_us_street = C6JCBPWHpCH8DRP4QqD6FBX6K
+# US Advanced Geocoding
+geo_us_plus = C6JCBPWHpCHHDGP4QqD6FBX63
+# Australia
+geo_aus = C6JCBPWRpBHMDDP4QqDBFBX6T
+# Belgium
+geo_bel = C6JCBPWRpBHMDFPXQmDBFBX6F
+# Brazil
+geo_bra = C6JCBPWRpBHMDFPKQQDBFBX6G
+# China
+geo_chn = C6JCBPWRpBHMDXPZQHDBFBX6n
+# Czech Republic
+geo_cze = C6JCBPWRpBHMDXPTQGDBFBX63
+# Denmark
+geo_dnk = C6JCBPWRpBHMDGPpQYDBFBX6p
+# Egypt
+geo_egy = C6JCBPWRpBHMDVPVQTDBFBX6R
+# Finland
+geo_fin = C6JCBPWRpBHMDZPLQHDBFBX6p
+# France
+geo_fra = C6JCBPWRpBHMDZPKQQDBFBX6n
+# Germany
+geo_deu = C6JCBPWRpBHMDGPXQRDBFBX6H
+# Greece
+geo_grc = C6JCBPWRpBHMDLPKQFDBFBX6m
+# Hong Kong
+geo_hkg = C6JCBPWRpBHMD2PWQZDBFBX6W
+# Hungary
+geo_hun = C6JCBPWRpBHMD2P4QHDBFBX6C
+# India
+geo_ind = C6JCBPWRpBHMDWPpQXDBFBX6Y
+# Italy
+geo_ita = C6JCBPWRpBHMDWPqQQDBFBX6H
+# Japan
+geo_jpn = C6JCBPWRpBHMDYPJQHDBFBX6r
+# Mylasia
+geo_mys = C6JCBPWRpBHMDHPrQqDBFBX6V
+# Mexico
+geo_mex = C6JCBPWRpBHMDHPXQrDBFBX6s
+# Netherlands
+geo_nld = C6JCBPWRpBHMDJPYQXDBFBX6H
+# New Zealand
+geo_nzl = C6JCBPWRpBHMDJPTQmDBFBX6Q
+# Norway
+geo_nor = C6JCBPWRpBHMDJPHQ3DBFBX67
+# Poland
+geo_pol = C6JCBPWRpBHMDKPHQmDBFBX6C
+# Portugal
+geo_prt = C6JCBPWRpBHMDKPKQ4DBFBX6F
+# Russia
+geo_rus = C6JCBPWRpBHMDqP4QqDBFBX6Z
+# Slovakia
+geo_svk = C6JCBPWRpBHMD4PRQYDBFBX6Q
+# South Africa
+geo_zaf = C6JCBPWRpBHMDCPPQVDBFBX6K
+# Korea
+geo_kor = C6JCBPWRpBHMDmPHQ3DBFBX6t
+# Spain
+geo_esp = C6JCBPWRpBHMDVP3QMDBFBX6r
+# Sweeden
+geo_swe = C6JCBPWRpBHMD4P5QGDBFBX67
+# Thailand
+geo_tha = C6JCBPWRpBHMDRPZQQDBFBX6p
+# Turkey
+geo_tur = C6JCBPWRpBHMDRP4Q3DBFBX6L
+# Great Britain
+geo_gbr = C6JCBPWRpBHMDLPQQ3DBFBX6Y
+# Africa
+geo_africa = C6JCBPWRpBH7DDPGQ3DBFBX6r
+# Central America
+geo_central_america = C6JCBPWRpBH7DXPPQpDBFBX6M
+# East Asia
+geo_east_asia = C6JCBPWRpBH7DVPPQqDBFBX6r
+# Eastern Europe
+geo_eastern_europe = C6JCBPWRpBH7DVPXQ3DBFBX6C
+# Middle East
+geo_middle_east = C6JCBPWRpBH7DHPXQqDBFBX6Q
+# Oceania
+geo_oceania = C6JCBPWRpBH7DMPDQHDBFBX67
+# South America
+geo_south_america = C6JCBPWRpBH7D4PPQpDBFBX68
+# West Asia
+geo_west_asia = C6JCBPWRpBH7DrPPQqDBFBX6Z
+# Western Europe
+geo_western_europe = C6JCBPWRpBH7DrPXQ3DBFBX6W
+# Arctic
+geo_arctic = C6JCBPWRpBH7DDPKQFDBFBX6R
+# World
+geo_world = C6JCBPWRpBH7DrPKQmDBFBX6K
+# QKB for Health & Life Sciences -- all locales
+qkb_hl_all = CLJTB6WKprH3DSPXQ3DsFBX7s
+# QKB for Health & Life Sciences -- global locale
+qkb_hl_gb = CLJTB6WKprH4DFPsQCDtFBX7V
+# QKB for Health & Life Sciences -- all Latin-1 encoding locales
+qkb_hl_l1 = CLJTB6WKprHTDBPsQCDtFBX7D
+# QKB for Health & Life Sciences -- all Latin-2 encoding locales
+qkb_hl_l2 = CLJTB6WKprHTD6PsQCDtFBX7F
+# QKB for Health & Life Sciences -- all Latin-5 encoding locales
+qkb_hl_l5 = CLJTB6WKprHTD9PsQCDtFBX7V
+# QKB for Health & Life Sciences -- all Latin Cyrillic encoding locales
+qkb_hl_lc = CLJTB6WKprHTDXPsQCDtFBX7m
+# QKB for Health & Life Sciences -- all Latin Thai encoding locales
+qkb_hl_ls = CLJTB6WKprHTD4PsQCDtFBX7t
+# QKB for Health & Life Sciences -- Danish
+qkb_hl_de = CLJTB6WKprHKDDPsQCDtFBX7D
+# QKB for Health & Life Sciences -- Danish (Denmark)
+qkb_hl_dedeu = CLJTB6WKprHKDDPFQHDmFBX74
+# QKB for Health & Life Sciences -- German
+qkb_hl_de = CLJTB6WKprHKDVPsQCDtFBX7V
+# QKB for Health & Life Sciences -- German (Germany)
+qkb_hl_dedeu = CLJTB6WKprHKDVPFQGD5FBX7T
+# QKB for Health & Life Sciences -- English
+qkb_hl_en = CLJTB6WKprH3DJPsQCDtFBX7M
+# QKB for Health & Life Sciences -- English (Australia)
+qkb_hl_enaus = CLJTB6WKprH3DJPPQRD4FBX7Y
+# QKB for Health & Life Sciences -- English (Canada)
+qkb_hl_encan = CLJTB6WKprH3DJPDQQDJFBX7S
+# QKB for Health & Life Sciences -- English (United Kingdom)
+qkb_hl_engbr = CLJTB6WKprH3DJPVQDDqFBX78
+# QKB for Health & Life Sciences -- English (United States)
+qkb_hl_enusa = CLJTB6WKprH3DJP4QqDDFBX7Y
+# QKB for Health & Life Sciences -- English (South Africa)
+qkb_hl_enzaf = CLJTB6WKprH3DJPTQQDZFBX7F
+# QKB for Health & Life Sciences -- French
+qkb_hl_fr = CLJTB6WKprHqDqPsQCDtFBX7R
+# QKB for Health & Life Sciences -- French (Canada)
+qkb_hl_frcan = CLJTB6WKprHqDqPDQQDJFBX7t
+# QKB for Health & Life Sciences -- French (France)
+qkb_hl_frfra = CLJTB6WKprHqDqPGQ3DDFBX7P
+# QKB for Health & Life Sciences -- Dutch
+qkb_hl_nl = CLJTB6WKprHCDpPsQCDtFBX7S
+# QKB for Health & Life Sciences -- Dutch (Netherlands)
+qkb_hl_nlnld = CLJTB6WKprHCDpPpQmDGFBX7Z
+# Reserved QKB Health & Life Sciences locale 001
+qkb_hl_re001 = CLJTB6WKprH7DVPsQCDBFBX7R
+# Reserved QKB Health & Life Sciences locale 002
+qkb_hl_re002 = CLJTB6WKprH7DVPsQCD6FBX75
+# Reserved QKB Health & Life Sciences locale 003
+qkb_hl_re003 = CLJTB6WKprH7DVPsQCD7FBX7S
+# Reserved QKB Health & Life Sciences locale 004
+qkb_hl_re004 = CLJTB6WKprH7DVPsQCD8FBX7r
+# Reserved QKB Health & Life Sciences locale 005
+qkb_hl_re005 = CLJTB6WKprH7DVPsQCD9FBX7T
+# Reserved QKB Health & Life Sciences locale 006
+qkb_hl_re006 = CLJTB6WKprH7DVPsQCDNFBX7s
+# Reserved QKB Health & Life Sciences locale 007
+qkb_hl_re007 = CLJTB6WKprH7DVPsQCDPFBX7C
+# Reserved QKB Health & Life Sciences locale 008
+qkb_hl_re008 = CLJTB6WKprH7DVPsQCDQFBX7t
+# Reserved QKB Health & Life Sciences locale 009
+qkb_hl_re009 = CLJTB6WKprH7DVPsQCDDFBX7B
+# Reserved QKB Health & Life Sciences locale 010
+qkb_hl_re010 = CLJTB6WKprH7DVPsQtDtFBX7R
+# Reserved QKB Health & Life Sciences locale 011
+qkb_hl_re011 = CLJTB6WKprH7DVPsQtDBFBX75
+# Reserved QKB Health & Life Sciences locale 012
+qkb_hl_re012 = CLJTB6WKprH7DVPsQtD6FBX7S
+# Reserved QKB Health & Life Sciences locale 013
+qkb_hl_re013 = CLJTB6WKprH7DVPsQtD7FBX7r
+# Reserved QKB Health & Life Sciences locale 014
+qkb_hl_re014 = CLJTB6WKprH7DVPsQtD8FBX7T
+# Reserved QKB Health & Life Sciences locale 015
+qkb_hl_re015 = CLJTB6WKprH7DVPsQtD9FBX7s
+# Reserved QKB Health & Life Sciences locale 016
+qkb_hl_re016 = CLJTB6WKprH7DVPsQtDNFBX7C
+# Reserved QKB Health & Life Sciences locale 017
+qkb_hl_re017 = CLJTB6WKprH7DVPsQtDPFBX7t
+# Reserved QKB Health & Life Sciences locale 018
+qkb_hl_re018 = CLJTB6WKprH7DVPsQtDQFBX7B
+# Reserved QKB Health & Life Sciences locale 019
+qkb_hl_re019 = CLJTB6WKprH7DVPsQtDDFBX76
+# Reserved QKB Health & Life Sciences locale 020
+qkb_hl_re020 = CLJTB6WKprH7DVPsQBDtFBX75
+# Reserved QKB Health & Life Sciences locale 021
+qkb_hl_re021 = CLJTB6WKprH7DVPsQBDBFBX7S
+# Reserved QKB Health & Life Sciences locale 022
+qkb_hl_re022 = CLJTB6WKprH7DVPsQBD6FBX7r
+# Reserved QKB Health & Life Sciences locale 023
+qkb_hl_re023 = CLJTB6WKprH7DVPsQBD7FBX7T
+# Reserved QKB Health & Life Sciences locale 024
+qkb_hl_re024 = CLJTB6WKprH7DVPsQBD8FBX7s
+# Reserved QKB Health & Life Sciences locale 025
+qkb_hl_re025 = CLJTB6WKprH7DVPsQBD9FBX7C
+# Reserved QKB Health & Life Sciences locale 026
+qkb_hl_re026 = CLJTB6WKprH7DVPsQBDNFBX7t
+# QKB for Product Data -- all locales
+qkb_pd_all = CLJTB6WTpMH3DSPXQ3DsFBX7s
+# QKB for Product Data -- global locale
+qkb_pd_gb = CLJTB6WTpMH4DFPsQCDtFBX7V
+# QKB for Product Data -- all Latin-1 encoding locales
+qkb_pd_l1 = CLJTB6WTpMHTDBPsQCDtFBX7D
+# QKB for Product Data -- all Latin-2 encoding locales
+qkb_pd_l2 = CLJTB6WTpMHTD6PsQCDtFBX7F
+# QKB for Product Data -- all Latin-5 encoding locales
+qkb_pd_l5 = CLJTB6WTpMHTD9PsQCDtFBX7V
+# QKB for Product Data -- all Latin Cyrillic encoding locales
+qkb_pd_lc = CLJTB6WTpMHTDXPsQCDtFBX7m
+# QKB for Product Data -- all Latin Thai encoding locales
+qkb_pd_ls = CLJTB6WTpMHTD4PsQCDtFBX7t
+# QKB for Product Data -- Czech
+qkb_pd_cs = CLJTB6WTpMHMD4PsQCDtFBX7q
+# QKB for Product Data -- Czech (Czech Republic)
+qkb_pd_cscze = CLJTB6WTpMHMD4PDQsDVFBX7Z
+# QKB for Product Data -- Danish
+qkb_pd_da = CLJTB6WTpMHKDDPsQCDtFBX7D
+# QKB for Product Data -- Danish (Denmark
+qkb_pd_dadnk = CLJTB6WTpMHKDDPFQHDmFBX74
+# QKB for Product Data -- German
+qkb_pd_de = CLJTB6WTpMHKDVPsQCDtFBX7V
+# QKB for Product Data -- German (Austria)
+qkb_pd_deaut = CLJTB6WTpMHKDVPPQRDRFBX7D
+# QKB for Product Data -- German (Germany)
+qkb_pd_dedeu = CLJTB6WTpMHKDVPFQGD5FBX7T
+# QKB for Product Data -- German (Switzerland)
+qkb_pd_deche = CLJTB6WTpMHKDVPDQLDVFBX7Y
+# QKB for Product Data -- English
+qkb_pd_en = CLJTB6WTpMH3DJPsQCDtFBX7M
+# QKB for Product Data -- English (Australia)
+qkb_pd_enaus = CLJTB6WTpMH3DJPPQRD4FBX7Y
+# QKB for Product Data -- English (Canada)
+qkb_pd_encan = CLJTB6WTpMH3DJPDQQDJFBX7S
+# QKB for Product Data -- English (Switzerland)
+qkb_pd_enche = CLJTB6WTpMH3DJPDQLDVFBX7R
+# QKB for Product Data -- English (United Kingdom)
+qkb_pd_engbr = CLJTB6WTpMH3DJPVQDDqFBX78
+# QKB for Product Data -- English (India)
+qkb_pd_enind = CLJTB6WTpMH3DJPLQHDGFBX78
+# QKB for Product Data -- English (Ireland)
+qkb_pd_enirl = CLJTB6WTpMH3DJPLQ3DpFBX7n
+# QKB for Product Data -- English (United States)
+qkb_pd_enusa = CLJTB6WTpMH3DJP4QqDDFBX7Y
+# QKB for Product Data -- English (South Africa)
+qkb_pd_enzaf = CLJTB6WTpMH3DJPTQQDZFBX7F
+# QKB for Product Data -- Spanish
+qkb_pd_es = CLJTB6WTpMH3D4PsQCDtFBX7R
+# QKB for Product Data -- Spanish (Spain)
+qkb_pd_esesp = CLJTB6WTpMH3D4PXQqDKFBX7J
+# QKB for Product Data -- Spanish (Mexico)
+qkb_pd_esmex = CLJTB6WTpMH3D4PmQGDTFBX7K
+# QKB for Product Data -- French
+qkb_pd_fr = CLJTB6WTpMHqDqPsQCDtFBX7R
+# QKB for Product Data -- French (Belgium)
+qkb_pd_frbel = CLJTB6WTpMHqDqPQQGDpFBX7B
+# QKB for Product Data -- French (Canada)
+qkb_pd_frcan = CLJTB6WTpMHqDqPDQQDJFBX7t
+# QKB for Product Data -- French (Switzerland)
+qkb_pd_frche = CLJTB6WTpMHqDqPDQLDVFBX7s
+# QKB for Product Data -- French (France)
+qkb_pd_frfra = CLJTB6WTpMHqDqPGQ3DDFBX7P
+# QKB for Product Data -- Italian
+qkb_pd_it = CLJTB6WTpMH5DRPsQCDtFBX7s
+# QKB for Product Data -- Italian (Switzerland)
+qkb_pd_itche = CLJTB6WTpMH5DRPDQLDVFBX77
+# QKB for Product Data -- Italian (Italy)
+qkb_pd_itita = CLJTB6WTpMH5DRPLQ4DDFBX7W
+# QKB for Product Data -- Dutch
+qkb_pd_nl = CLJTB6WTpMHCDpPsQCDtFBX7S
+# QKB for Product Data -- Dutch (Belgium)
+qkb_pd_nlbel = CLJTB6WTpMHCDpPQQGDpFBX77
+# QKB for Product Data -- Dutch (Netherlands)
+qkb_pd_nlnld = CLJTB6WTpMHCDpPpQmDGFBX7Z
+# QKB for Product Data -- Norwegian
+qkb_pd_no = CLJTB6WTpMHCDMPsQCDtFBX7s
+# QKB for Product Data -- Norwegian (Norway)
+qkb_pd_nonor = CLJTB6WTpMHCDMPpQJDqFBX7C
+# QKB for Product Data -- Polish
+qkb_pd_pl = CLJTB6WTpMHBDpPsQCDtFBX7T
+# QKB for Product Data -- Polish (Poland)
+qkb_pd_plpol = CLJTB6WTpMHBDpPJQJDpFBX75
+# QKB for Product Data -- Portuguese
+qkb_pd_pt = CLJTB6WTpMHBDRPsQCDtFBX79
+# QKB for Product Data -- Portuguese (Brazil)
+qkb_pd_ptbra = CLJTB6WTpMHBDRPQQ3DDFBX7L
+# QKB for Product Data -- Portuguese (Portugal)
+qkb_pd_ptprt = CLJTB6WTpMHBDRPJQ3DRFBX7V
+# QKB for Product Data -- Swedish
+qkb_pd_sv = CLJTB6WTpMH8DSPsQCDtFBX7F
+# QKB for Product Data -- Swedish (Sweden)
+qkb_pd_svswe = CLJTB6WTpMH8DSP3QSDVFBX7X
+# QKB for Product Data -- Turkish
+qkb_pd_tr = CLJTB6WTpMH9DqPsQCDtFBX7P
+# QKB for Product Data -- Turkish (Turkey)
+qkb_pd_trtur = CLJTB6WTpMH9DqPqQRDqFBX7p
+# Reserved QKB Product Data locale 001
+qkb_pd_re001 = CLJTB6WTpMH7DVPsQCDBFBX7R
+# Reserved QKB Product Data locale 002
+qkb_pd_re002 = CLJTB6WTpMH7DVPsQCD6FBX75
+# Reserved QKB Product Data locale 003
+qkb_pd_re003 = CLJTB6WTpMH7DVPsQCD7FBX7S
+# Reserved QKB Product Data locale 004
+qkb_pd_re004 = CLJTB6WTpMH7DVPsQCD8FBX7r
+# Reserved QKB Product Data locale 005
+qkb_pd_re005 = CLJTB6WTpMH7DVPsQCD9FBX7T
+# Reserved QKB Product Data locale 006
+qkb_pd_re006 = CLJTB6WTpMH7DVPsQCDNFBX7s
+# Reserved QKB Product Data locale 007
+qkb_pd_re007 = CLJTB6WTpMH7DVPsQCDPFBX7C
+# Reserved QKB Product Data locale 008
+qkb_pd_re008 = CLJTB6WTpMH7DVPsQCDQFBX7t
+# Reserved QKB Product Data locale 009
+qkb_pd_re009 = CLJTB6WTpMH7DVPsQCDDFBX7B
+# Reserved QKB Product Data locale 010
+qkb_pd_re010 = CLJTB6WTpMH7DVPsQtDtFBX7R
+# Reserved QKB Product Data locale 011
+qkb_pd_re011 = CLJTB6WTpMH7DVPsQtDBFBX75
+# Reserved QKB Product Data locale 012
+qkb_pd_re012 = CLJTB6WTpMH7DVPsQtD6FBX7S
+# Reserved QKB Product Data locale 013
+qkb_pd_re013 = CLJTB6WTpMH7DVPsQtD7FBX7r
+# Reserved QKB Product Data locale 014
+qkb_pd_re014 = CLJTB6WTpMH7DVPsQtD8FBX7T
+# Reserved QKB Product Data locale 015
+qkb_pd_re015 = CLJTB6WTpMH7DVPsQtD9FBX7s
+# Reserved QKB Product Data locale 016
+qkb_pd_re016 = CLJTB6WTpMH7DVPsQtDNFBX7C
+# Reserved QKB Product Data locale 017
+qkb_pd_re017 = CLJTB6WTpMH7DVPsQtDPFBX7t
+# Reserved QKB Product Data locale 018
+qkb_pd_re018 = CLJTB6WTpMH7DVPsQtDQFBX7B
+# Reserved QKB Product Data locale 019
+qkb_pd_re019 = CLJTB6WTpMH7DVPsQtDDFBX76
+# Reserved QKB Product Data locale 020
+qkb_pd_re020 = CLJTB6WTpMH7DVPsQBDtFBX75
+# Reserved QKB Product Data locale 021
+qkb_pd_re021 = CLJTB6WTpMH7DVPsQBDBFBX7S
+# Reserved QKB Product Data locale 022
+qkb_pd_re022 = CLJTB6WTpMH7DVPsQBD6FBX7r
+# Reserved QKB Product Data locale 023
+qkb_pd_re023 = CLJTB6WTpMH7DVPsQBD7FBX7T
+# Reserved QKB Product Data locale 024
+qkb_pd_re024 = CLJTB6WTpMH7DVPsQBD8FBX7s
+# Reserved QKB Product Data locale 025
+qkb_pd_re025 = CLJTB6WTpMH7DVPsQBD9FBX7C
+# Reserved QKB Product Data locale 026
+qkb_pd_re026 = CLJTB6WTpMH7DVPsQBDNFBX7t
+# QKB for Watchlist Compliance -- all locales
+qkb_wl_all = CLJTB6W8prH3DSPXQ3DsFBX7V
+# QKB for Watchlist Compliance -- global locale
+qkb_wl_gb = CLJTB6W8prH4DFPsQCDtFBX7R
+# QKB for Watchlist Compliance -- all Latin-1 encoding locales
+qkb_wl_l1 = CLJTB6W8prHTDBPsQCDtFBX7K
+# QKB for Watchlist Compliance -- all Latin-2 encoding locales
+qkb_wl_l2 = CLJTB6W8prHTD6PsQCDtFBX73
+# QKB for Watchlist Compliance -- all Latin-5 encoding locales
+qkb_wl_l5 = CLJTB6W8prHTD9PsQCDtFBX7R
+# QKB for Watchlist Compliance -- all Latin Cyrillic encoding locales
+qkb_wl_lc = CLJTB6W8prHTDXPsQCDtFBX7C
+# QKB for Watchlist Compliance -- all Latin Thai encoding locales
+qkb_wl_ls = CLJTB6W8prHTD4PsQCDtFBX7L
+# QKB for Watchlist Compliance -- Czech
+qkb_wl_cs = CLJTB6W8prHMD4PsQCDtFBX7N
+# QKB for Watchlist Compliance -- Czech (Czech Republic)
+qkb_wl_cscze = CLJTB6W8prHMD4PDQsDVFBX75
+# QKB for Watchlist Compliance -- Danish
+qkb_wl_da = CLJTB6W8prHKDDPsQCDtFBX7K
+# QKB for Watchlist Compliance -- Danish (Denmark
+qkb_wl_dadnk = CLJTB6W8prHKDDPFQHDmFBX7P
+# QKB for Watchlist Compliance -- German
+qkb_wl_de = CLJTB6W8prHKDVPsQCDtFBX7R
+# QKB for Watchlist Compliance -- German (Austria)
+qkb_wl_deaut = CLJTB6W8prHKDVPPQRDRFBX7K
+# QKB for Watchlist Compliance -- German (Germany)
+qkb_wl_dedeu = CLJTB6W8prHKDVPFQGD5FBX7G
+# QKB for Watchlist Compliance -- German (Switzerland)
+qkb_wl_deche = CLJTB6W8prHKDVPDQLDVFBX7s
+# QKB for Watchlist Compliance -- English
+qkb_wl_en = CLJTB6W8prH3DJPsQCDtFBX77
+# QKB for Watchlist Compliance -- English (Australia)
+qkb_wl_enaus = CLJTB6W8prH3DJPPQRD4FBX7s
+# QKB for Watchlist Compliance -- English (Canada)
+qkb_wl_encan = CLJTB6W8prH3DJPDQQDJFBX7F
+# QKB for Watchlist Compliance -- English (Switzerland)
+qkb_wl_enche = CLJTB6W8prH3DJPDQLDVFBX7Q
+# QKB for Watchlist Compliance -- English (United Kingdom)
+qkb_wl_engbr = CLJTB6W8prH3DJPVQDDqFBX7m
+# QKB for Watchlist Compliance -- English (India)
+qkb_wl_enind = CLJTB6W8prH3DJPLQHDGFBX7m
+# QKB for Watchlist Compliance -- English (Ireland)
+qkb_wl_enirl = CLJTB6W8prH3DJPLQ3DpFBX7r
+# QKB for Watchlist Compliance -- English (United States)
+qkb_wl_enusa = CLJTB6W8prH3DJP4QqDDFBX7s
+# QKB for Watchlist Compliance -- English (South Africa)
+qkb_wl_enzaf = CLJTB6W8prH3DJPTQQDZFBX73
+# QKB for Watchlist Compliance -- Spanish
+qkb_wl_es = CLJTB6W8prH3D4PsQCDtFBX7Q
+# QKB for Watchlist Compliance -- Spanish (Spain)
+qkb_wl_esesp = CLJTB6W8prH3D4PXQqDKFBX76
+# QKB for Watchlist Compliance -- Spanish (Mexico)
+qkb_wl_esmex = CLJTB6W8prH3D4PmQGDTFBX78
+# QKB for Watchlist Compliance -- French
+qkb_wl_fr = CLJTB6W8prHqDqPsQCDtFBX7Q
+# QKB for Watchlist Compliance -- French (Belgium)
+qkb_wl_frbel = CLJTB6W8prHqDqPQQGDpFBX7n
+# QKB for Watchlist Compliance -- French (Canada)
+qkb_wl_frcan = CLJTB6W8prHqDqPDQQDJFBX7L
+# QKB for Watchlist Compliance -- French (Switzerland)
+qkb_wl_frche = CLJTB6W8prHqDqPDQLDVFBX7V
+# QKB for Watchlist Compliance -- French (France)
+qkb_wl_frfra = CLJTB6W8prHqDqPGQ3DDFBX7J
+# QKB for Watchlist Compliance -- Italian
+qkb_wl_it = CLJTB6W8prH5DRPsQCDtFBX7V
+# QKB for Watchlist Compliance -- Italian (Switzerland)
+qkb_wl_itche = CLJTB6W8prH5DRPDQLDVFBX7Y
+# QKB for Watchlist Compliance -- Italian (Italy)
+qkb_wl_itita = CLJTB6W8prH5DRPLQ4DDFBX7T
+# QKB for Watchlist Compliance -- Dutch
+qkb_wl_nl = CLJTB6W8prHCDpPsQCDtFBX7F
+# QKB for Watchlist Compliance -- Dutch (Belgium)
+qkb_wl_nlbel = CLJTB6W8prHCDpPQQGDpFBX7Y
+# QKB for Watchlist Compliance -- Dutch (Netherlands)
+qkb_wl_nlnld = CLJTB6W8prHCDpPpQmDGFBX75
+# QKB for Watchlist Compliance -- Norwegian
+qkb_wl_no = CLJTB6W8prHCDMPsQCDtFBX7V
+# QKB for Watchlist Compliance -- Norwegian (Norway)
+qkb_wl_nonor = CLJTB6W8prHCDMPpQJDqFBX7Z
+# QKB for Watchlist Compliance -- Polish
+qkb_wl_pl = CLJTB6W8prHBDpPsQCDtFBX7G
+# QKB for Watchlist Compliance -- Polish (Poland)
+qkb_wl_plpol = CLJTB6W8prHBDpPJQJDpFBX7D
+# QKB for Watchlist Compliance -- Portuguese
+qkb_wl_pt = CLJTB6W8prHBDRPsQCDtFBX7p
+# QKB for Watchlist Compliance -- Portuguese (Brazil)
+qkb_wl_ptbra = CLJTB6W8prHBDRPQQ3DDFBX7S
+# QKB for Watchlist Compliance -- Portuguese (Portugal)
+qkb_wl_ptprt = CLJTB6W8prHBDRPJQ3DRFBX7R
+# QKB for Watchlist Compliance -- Swedish
+qkb_wl_sv = CLJTB6W8prH8DSPsQCDtFBX73
+# QKB for Watchlist Compliance -- Swedish (Sweden)
+qkb_wl_svswe = CLJTB6W8prH8DSP3QSDVFBX7q
+# QKB for Watchlist Compliance -- Turkish
+qkb_wl_tr = CLJTB6W8prH9DqPsQCDtFBX7J
+# QKB for Watchlist Compliance -- Turkish (Turkey)
+qkb_wl_trtur = CLJTB6W8prH9DqPqQRDqFBX7t
+# Reserved QKB Watchlist Compliance locale 001
+qkb_wl_re001 = CLJTB6W8prH7DVPsQCDBFBX7Q
+# Reserved QKB Watchlist Compliance locale 002
+qkb_wl_re002 = CLJTB6W8prH7DVPsQCD6FBX7D
+# Reserved QKB Watchlist Compliance locale 003
+qkb_wl_re003 = CLJTB6W8prH7DVPsQCD7FBX7F
+# Reserved QKB Watchlist Compliance locale 004
+qkb_wl_re004 = CLJTB6W8prH7DVPsQCD8FBX7X
+# Reserved QKB Watchlist Compliance locale 005
+qkb_wl_re005 = CLJTB6W8prH7DVPsQCD9FBX7G
+# Reserved QKB Watchlist Compliance locale 006
+qkb_wl_re006 = CLJTB6W8prH7DVPsQCDNFBX7V
+# Reserved QKB Watchlist Compliance locale 007
+qkb_wl_re007 = CLJTB6W8prH7DVPsQCDPFBX7Z
+# Reserved QKB Watchlist Compliance locale 008
+qkb_wl_re008 = CLJTB6W8prH7DVPsQCDQFBX7L
+# Reserved QKB Watchlist Compliance locale 009
+qkb_wl_re009 = CLJTB6W8prH7DVPsQCDDFBX7n
+# Reserved QKB Watchlist Compliance locale 010
+qkb_wl_re010 = CLJTB6W8prH7DVPsQtDtFBX7Q
+# Reserved QKB Watchlist Compliance locale 011
+qkb_wl_re011 = CLJTB6W8prH7DVPsQtDBFBX7D
+# Reserved QKB Watchlist Compliance locale 012
+qkb_wl_re012 = CLJTB6W8prH7DVPsQtD6FBX7F
+# Reserved QKB Watchlist Compliance locale 013
+qkb_wl_re013 = CLJTB6W8prH7DVPsQtD7FBX7X
+# Reserved QKB Watchlist Compliance locale 014
+qkb_wl_re014 = CLJTB6W8prH7DVPsQtD8FBX7G
+# Reserved QKB Watchlist Compliance locale 015
+qkb_wl_re015 = CLJTB6W8prH7DVPsQtD9FBX7V
+# Reserved QKB Watchlist Compliance locale 016
+qkb_wl_re016 = CLJTB6W8prH7DVPsQtDNFBX7Z
+# Reserved QKB Watchlist Compliance locale 017
+qkb_wl_re017 = CLJTB6W8prH7DVPsQtDPFBX7L
+# Reserved QKB Watchlist Compliance locale 018
+qkb_wl_re018 = CLJTB6W8prH7DVPsQtDQFBX7n
+# Reserved QKB Watchlist Compliance locale 019
+qkb_wl_re019 = CLJTB6W8prH7DVPsQtDDFBX7W
+# Reserved QKB Watchlist Compliance locale 020
+qkb_wl_re020 = CLJTB6W8prH7DVPsQBDtFBX7D
+# Reserved QKB Watchlist Compliance locale 021
+qkb_wl_re021 = CLJTB6W8prH7DVPsQBDBFBX7F
+# Reserved QKB Watchlist Compliance locale 022
+qkb_wl_re022 = CLJTB6W8prH7DVPsQBD6FBX7X
+# Reserved QKB Watchlist Compliance locale 023
+qkb_wl_re023 = CLJTB6W8prH7DVPsQBD7FBX7G
+# Reserved QKB Watchlist Compliance locale 024
+qkb_wl_re024 = CLJTB6W8prH7DVPsQBD8FBX7V
+# Reserved QKB Watchlist Compliance locale 025
+qkb_wl_re025 = CLJTB6W8prH7DVPsQBD9FBX7Z
+# Reserved QKB Watchlist Compliance locale 026
+qkb_wl_re026 = CLJTB6W8prH7DVPsQBDNFBX7L
+# QKB for Contact Info -- all locales
+qkb_ci_all = CLJTB6WmpRH3DSPXQ3DsFBX73
+# QKB for Contact Info -- global locale
+qkb_ci_gb = CLJTB6WmpRH4DFPsQCDtFBX79
+# QKB for Contact Info -- all Latin-1 encoding locales
+qkb_ci_l1 = CLJTB6WmpRHTDBPsQCDtFBX7B
+# QKB for Contact Info -- all Latin-2 encoding locales
+qkb_ci_l2 = CLJTB6WmpRHTD6PsQCDtFBX76
+# QKB for Contact Info -- all Latin-5 encoding locales
+qkb_ci_l5 = CLJTB6WmpRHTD9PsQCDtFBX79
+# QKB for Contact Info -- all Latin Cyrillic encoding locales
+qkb_ci_lc = CLJTB6WmpRHTDXPsQCDtFBX7X
+# QKB for Contact Info -- all Latin Thai encoding locales
+qkb_ci_ls = CLJTB6WmpRHTD4PsQCDtFBX74
+# QKB for Contact Info -- Afrikaans
+qkb_ci_af = CLJTB6WmpRHHDZPsQCDtFBX77
+# QKB for Contact Info -- Afrikaans (South Africa)
+qkb_ci_afzaf = CLJTB6WmpRHHDZPTQQDZFBX73
+# QKB for Contact Info -- Akan
+qkb_ci_ak = CLJTB6WmpRHHDmPsQCDtFBX7Q
+# QKB for Contact Info -- Akan (Ivory Coast)
+qkb_ci_akciv = CLJTB6WmpRHHDmPDQ2DSFBX7r
+# QKB for Contact Info -- Akan (Ghana)
+qkb_ci_akgha = CLJTB6WmpRHHDmPVQLDDFBX7V
+# QKB for Contact Info -- Amharic
+qkb_ci_am = CLJTB6WmpRHHDHPsQCDtFBX7F
+# QKB for Contact Info -- Amharic (Ethiopia)
+qkb_ci_ameth = CLJTB6WmpRHHDHPXQ4D2FBX7T
+# QKB for Contact Info -- Arabic
+qkb_ci_ar = CLJTB6WmpRHHDqPsQCDtFBX7L
+# QKB for Contact Info -- Arabic (United Arab Emirates)
+qkb_ci_arare = CLJTB6WmpRHHDqPPQ3DVFBX7R
+# QKB for Contact Info -- Arabic (Bahrain)
+qkb_ci_arbhr = CLJTB6WmpRHHDqPQQLDqFBX7T
+# QKB for Contact Info -- Arabic (Comoros)
+qkb_ci_arcom = CLJTB6WmpRHHDqPDQJDHFBX7t
+# QKB for Contact Info -- Arabic (Djibouti)
+qkb_ci_ardji = CLJTB6WmpRHHDqPFQWDWFBX74
+# QKB for Contact Info -- Arabic (Algeria)
+qkb_ci_ardza = CLJTB6WmpRHHDqPFQsDDFBX7t
+# QKB for Contact Info -- Arabic (Egypt)
+qkb_ci_aregy = CLJTB6WmpRHHDqPXQZDsFBX7N
+# QKB for Contact Info -- Arabic (Western Sahara)
+qkb_ci_aresh = CLJTB6WmpRHHDqPXQqD2FBX7B
+# QKB for Contact Info -- Arabic (Guinea)
+qkb_ci_argin = CLJTB6WmpRHHDqPVQ2DJFBX7C
+# QKB for Contact Info -- Arabic (Iraq)
+qkb_ci_arirq = CLJTB6WmpRHHDqPLQ3D3FBX7V
+# QKB for Contact Info -- Arabic (Israel)
+qkb_ci_arisr = CLJTB6WmpRHHDqPLQqDqFBX7L
+# QKB for Contact Info -- Arabic (Jordan)
+qkb_ci_arjor = CLJTB6WmpRHHDqP2QJDqFBX7G
+# QKB for Contact Info -- Arabic (Kuwait)
+qkb_ci_arkwt = CLJTB6WmpRHHDqPWQSDRFBX7M
+# QKB for Contact Info -- Arabic (Lebanon)
+qkb_ci_arlbn = CLJTB6WmpRHHDqPYQDDJFBX7T
+# QKB for Contact Info -- Arabic (Libya)
+qkb_ci_arlby = CLJTB6WmpRHHDqPYQDDsFBX7Q
+# QKB for Contact Info -- Arabic (Morocco)
+qkb_ci_armar = CLJTB6WmpRHHDqPmQQDqFBX7B
+# QKB for Contact Info -- Arabic (Mauritania)
+qkb_ci_armrt = CLJTB6WmpRHHDqPmQ3DRFBX7p
+# QKB for Contact Info -- Arabic (Oman)
+qkb_ci_aromn = CLJTB6WmpRHHDqPHQpDJFBX7X
+# QKB for Contact Info -- Arabic (Qatar)
+qkb_ci_arqat = CLJTB6WmpRHHDqPMQQDRFBX7P
+# QKB for Contact Info -- Arabic (Saudi Arabia)
+qkb_ci_arsau = CLJTB6WmpRHHDqP3QQD5FBX7F
+# QKB for Contact Info -- Arabic (Sudan)
+qkb_ci_arsdn = CLJTB6WmpRHHDqP3QXDJFBX7N
+# QKB for Contact Info -- Arabic (Syria)
+qkb_ci_arsyr = CLJTB6WmpRHHDqP3QTDqFBX7r
+# QKB for Contact Info -- Arabic (Tunisia)
+qkb_ci_artun = CLJTB6WmpRHHDqPqQRDJFBX7K
+# QKB for Contact Info -- Arabic (Yemen)
+qkb_ci_aryem = CLJTB6WmpRHHDqPrQGDHFBX7G
+# QKB for Contact Info -- Avaric
+qkb_ci_av = CLJTB6WmpRHHDSPsQCDtFBX7m
+# QKB for Contact Info -- Avaric (Azerbaijan)
+qkb_ci_avaze = CLJTB6WmpRHHDSPPQsDVFBX79
+# QKB for Contact Info -- Avaric (Russia)
+qkb_ci_avrus = CLJTB6WmpRHHDSPKQRD4FBX7r
+# QKB for Contact Info -- Aymara
+qkb_ci_ay = CLJTB6WmpRHHDsPsQCDtFBX7J
+# QKB for Contact Info -- Aymara (Bolivia)
+qkb_ci_aybol = CLJTB6WmpRHHDsPQQJDpFBX79
+# QKB for Contact Info -- Azerbaijani
+qkb_ci_az = CLJTB6WmpRHHDCPsQCDtFBX7M
+# QKB for Contact Info -- Azerbaijani (Azerbaijan)
+qkb_ci_azaze = CLJTB6WmpRHHDCPPQsDVFBX7D
+# QKB for Contact Info -- Bulgarian
+qkb_ci_bg = CLJTB6WmpRHJDLPsQCDtFBX79
+# QKB for Contact Info -- Bulgarian (Bulgaria)
+qkb_ci_bgbgr = CLJTB6WmpRHJDLPQQZDqFBX7H
+# QKB for Contact Info -- Bislama
+qkb_ci_bi = CLJTB6WmpRHJDWPsQCDtFBX7P
+# QKB for Contact Info -- Bislama (Vanuatu)
+qkb_ci_bivut = CLJTB6WmpRHJDWPRQRDRFBX7K
+# QKB for Contact Info -- Bambara
+qkb_ci_bm = CLJTB6WmpRHJDHPsQCDtFBX7X
+# QKB for Contact Info -- Bambara (Mali)
+qkb_ci_bmmli = CLJTB6WmpRHJDHPmQmDWFBX7C
+# QKB for Contact Info -- Bambara (Burkina Faso)
+qkb_ci_bmbfa = CLJTB6WmpRHJDHPQQVDDFBX7D
+# QKB for Contact Info -- Bambara (Ivory Coast)
+qkb_ci_bmciv = CLJTB6WmpRHJDHPDQ2DSFBX7C
+# QKB for Contact Info -- Bengali
+qkb_ci_bn = CLJTB6WmpRHJDJPsQCDtFBX7G
+# QKB for Contact Info -- Bengali (Bangladesh)
+qkb_ci_bnbgd = CLJTB6WmpRHJDJPQQZDGFBX7Z
+# QKB for Contact Info -- Bengali (India)
+qkb_ci_bnind = CLJTB6WmpRHJDJPLQHDGFBX7R
+# QKB for Contact Info -- Belarusian
+qkb_ci_be = CLJTB6WmpRHJDVPsQCDtFBX77
+# QKB for Contact Info -- Belarusian (Belarus)
+qkb_ci_beblr = CLJTB6WmpRHJDVPQQmDqFBX7K
+# QKB for Contact Info -- Bosnian
+qkb_ci_bs = CLJTB6WmpRHJD4PsQCDtFBX7W
+# QKB for Contact Info -- Bosnian (Bosnia and Herzegowina)
+qkb_ci_bsbih = CLJTB6WmpRHJD4PQQ2D2FBX73
+# QKB for Contact Info -- Bosnian (Serbia and Montenegro)
+qkb_ci_bsscg = CLJTB6WmpRHJD4P3QFDLFBX7t
+# QKB for Contact Info -- Catalan
+qkb_ci_ca = CLJTB6WmpRHMDDPsQCDtFBX7t
+# QKB for Contact Info -- Catalan (Andorra)
+qkb_ci_caand = CLJTB6WmpRHMDDPPQHDGFBX7Q
+# QKB for Contact Info -- Catalan (Spain)
+qkb_ci_caesp = CLJTB6WmpRHMDDPXQqDKFBX75
+# QKB for Contact Info -- Chamorro
+qkb_ci_ch = CLJTB6WmpRHMD2PsQCDtFBX7P
+# QKB for Contact Info -- Chamorro (Guam)
+qkb_ci_chgum = CLJTB6WmpRHMD2PVQRDHFBX76
+# QKB for Contact Info -- Cree
+qkb_ci_cr = CLJTB6WmpRHMDqPsQCDtFBX7W
+# QKB for Contact Info -- Cree (Canada)
+qkb_ci_crcan = CLJTB6WmpRHMDqPDQQDJFBX7K
+# QKB for Contact Info -- Czech
+qkb_ci_cs = CLJTB6WmpRHMD4PsQCDtFBX7Y
+# QKB for Contact Info -- Czech (Czech Republic)
+qkb_ci_cscze = CLJTB6WmpRHMD4PDQsDVFBX7N
+# QKB for Contact Info -- Danish
+qkb_ci_da = CLJTB6WmpRHKDDPsQCDtFBX7B
+# QKB for Contact Info -- Danish (Denmark
+qkb_ci_dadnk = CLJTB6WmpRHKDDPFQHDmFBX7m
+# QKB for Contact Info -- Danish (Greenland)
+qkb_ci_dagrl = CLJTB6WmpRHKDDPVQ3DpFBX74
+# QKB for Contact Info -- German
+qkb_ci_de = CLJTB6WmpRHKDVPsQCDtFBX79
+# QKB for Contact Info -- German (Austria)
+qkb_ci_deaut = CLJTB6WmpRHKDVPPQRDRFBX7B
+# QKB for Contact Info -- German (Belgium)
+qkb_ci_debel = CLJTB6WmpRHKDVPQQGDpFBX7V
+# QKB for Contact Info -- German (Germany)
+qkb_ci_dedeu = CLJTB6WmpRHKDVPFQGD5FBX7K
+# QKB for Contact Info -- German (Switzerland)
+qkb_ci_deche = CLJTB6WmpRHKDVPDQLDVFBX7F
+# QKB for Contact Info -- German (Liechtenstein)
+qkb_ci_delie = CLJTB6WmpRHKDVPYQ2DVFBX7p
+# QKB for Contact Info -- German (Luxembourg)
+qkb_ci_delux = CLJTB6WmpRHKDVPYQRDTFBX7n
+# QKB for Contact Info -- Dhiveli
+qkb_ci_dv = CLJTB6WmpRHKDSPsQCDtFBX7J
+# QKB for Contact Info -- Dhiveli (Maldives)
+qkb_ci_dvmdv = CLJTB6WmpRHKDSPmQXDSFBX7L
+# QKB for Contact Info -- Dzongkha
+qkb_ci_dz = CLJTB6WmpRHKDCPsQCDtFBX7q
+# QKB for Contact Info -- Dzongkha (Bhutan)
+qkb_ci_dzbtn = CLJTB6WmpRHKDCPQQ4DJFBX7n
+# QKB for Contact Info -- Ewe
+qkb_ci_ee = CLJTB6WmpRH3DVPsQCDtFBX7N
+# QKB for Contact Info -- Ewe (Ghana)
+qkb_ci_eegha = CLJTB6WmpRH3DVPVQLDDFBX7X
+# QKB for Contact Info -- Ewe (Togo)
+qkb_ci_eetgo = CLJTB6WmpRH3DVPqQZDMFBX76
+# QKB for Contact Info -- Greek
+qkb_ci_el = CLJTB6WmpRH3DpPsQCDtFBX7V
+# QKB for Contact Info -- Greek (Cyprus)
+qkb_ci_elcyp = CLJTB6WmpRH3DpPDQTDKFBX7X
+# QKB for Contact Info -- Greek (Greece)
+qkb_ci_elgrc = CLJTB6WmpRH3DpPVQ3DXFBX7S
+# QKB for Contact Info -- English
+qkb_ci_en = CLJTB6WmpRH3DJPsQCDtFBX7L
+# QKB for Contact Info -- English (Anguilla)
+qkb_ci_enaia = CLJTB6WmpRH3DJPPQ2DDFBX7L
+# QKB for Contact Info -- English (American Samoa)
+qkb_ci_enasm = CLJTB6WmpRH3DJPPQqDHFBX76
+# QKB for Contact Info -- English (Antarctica)
+qkb_ci_enata = CLJTB6WmpRH3DJPPQ4DDFBX7q
+# QKB for Contact Info -- English (Antigua and Barbuda)
+qkb_ci_enatg = CLJTB6WmpRH3DJPPQ4DLFBX7T
+# QKB for Contact Info -- English (Australia)
+qkb_ci_enaus = CLJTB6WmpRH3DJPPQRD4FBX7F
+# QKB for Contact Info -- English (Bahamas)
+qkb_ci_enbhs = CLJTB6WmpRH3DJPQQLD4FBX7s
+# QKB for Contact Info -- English (Belize)
+qkb_ci_enblz = CLJTB6WmpRH3DJPQQmDCFBX7D
+# QKB for Contact Info -- English (Bermuda)
+qkb_ci_enbmu = CLJTB6WmpRH3DJPQQpD5FBX79
+# QKB for Contact Info -- English (Barbados)
+qkb_ci_enbrb = CLJTB6WmpRH3DJPQQ3DFFBX7q
+# QKB for Contact Info -- English (Botswana)
+qkb_ci_enbwa = CLJTB6WmpRH3DJPQQSDDFBX7S
+# QKB for Contact Info -- English (Canada)
+qkb_ci_encan = CLJTB6WmpRH3DJPDQQDJFBX7J
+# QKB for Contact Info -- English (Cocos Islands)
+qkb_ci_encck = CLJTB6WmpRH3DJPDQFDmFBX7H
+# QKB for Contact Info -- English (Switzerland)
+qkb_ci_enche = CLJTB6WmpRH3DJPDQLDVFBX7p
+# QKB for Contact Info -- English (Cameroon)
+qkb_ci_encmr = CLJTB6WmpRH3DJPDQpDqFBX77
+# QKB for Contact Info -- English (Cook Islands)
+qkb_ci_encok = CLJTB6WmpRH3DJPDQJDmFBX7s
+# QKB for Contact Info -- English (Christmas Island)
+qkb_ci_encxr = CLJTB6WmpRH3DJPDQrDqFBX7Z
+# QKB for Contact Info -- English (Cayman Islands)
+qkb_ci_encym = CLJTB6WmpRH3DJPDQTDHFBX7F
+# QKB for Contact Info -- English (Dominica)
+qkb_ci_endma = CLJTB6WmpRH3DJPFQpDDFBX7J
+# QKB for Contact Info -- English (Fiji)
+qkb_ci_enfji = CLJTB6WmpRH3DJPGQWDWFBX75
+# QKB for Contact Info -- English (Falkland Islands)
+qkb_ci_enflk = CLJTB6WmpRH3DJPGQmDmFBX7s
+# QKB for Contact Info -- English (Federated States of Micronesia)
+qkb_ci_enfsm = CLJTB6WmpRH3DJPGQqDHFBX7P
+# QKB for Contact Info -- English (United Kingdom)
+qkb_ci_engbr = CLJTB6WmpRH3DJPVQDDqFBX7r
+# QKB for Contact Info -- English (Ghana)
+qkb_ci_engha = CLJTB6WmpRH3DJPVQLDDFBX7p
+# QKB for Contact Info -- English (Gibraltar)
+qkb_ci_engib = CLJTB6WmpRH3DJPVQ2DFFBX7J
+# QKB for Contact Info -- English (Gambia)
+qkb_ci_engmb = CLJTB6WmpRH3DJPVQpDFFBX7q
+# QKB for Contact Info -- English (Grenada)
+qkb_ci_engrd = CLJTB6WmpRH3DJPVQ3DGFBX7s
+# QKB for Contact Info -- English (Guam)
+qkb_ci_engum = CLJTB6WmpRH3DJPVQRDHFBX7F
+# QKB for Contact Info -- English (Guyana)
+qkb_ci_enguy = CLJTB6WmpRH3DJPVQRDsFBX7J
+# QKB for Contact Info -- English (Hong Kong)
+qkb_ci_enhkg = CLJTB6WmpRH3DJPZQYDLFBX7S
+# QKB for Contact Info -- English (Indonesia)
+qkb_ci_enidn = CLJTB6WmpRH3DJPLQXDJFBX7r
+# QKB for Contact Info -- English (India)
+qkb_ci_enind = CLJTB6WmpRH3DJPLQHDGFBX7r
+# QKB for Contact Info -- English (Ireland)
+qkb_ci_enirl = CLJTB6WmpRH3DJPLQ3DpFBX7Q
+# QKB for Contact Info -- English (Jamaica)
+qkb_ci_enjam = CLJTB6WmpRH3DJP2QQDHFBX7R
+# QKB for Contact Info -- English (Kenya)
+qkb_ci_enken = CLJTB6WmpRH3DJPWQGDJFBX7C
+# QKB for Contact Info -- English (Kiribati)
+qkb_ci_enkir = CLJTB6WmpRH3DJPWQ2DqFBX7P
+# QKB for Contact Info -- English (Saint Kitts and Nevis)
+qkb_ci_enkna = CLJTB6WmpRH3DJPWQHDDFBX7S
+# QKB for Contact Info -- English (Saint Lucia)
+qkb_ci_enlca = CLJTB6WmpRH3DJPYQFDDFBX7p
+# QKB for Contact Info -- English (Sri Lanka)
+qkb_ci_enlka = CLJTB6WmpRH3DJPYQYDDFBX7R
+# QKB for Contact Info -- English (Maldives)
+qkb_ci_enmdv = CLJTB6WmpRH3DJPmQXDSFBX7Q
+# QKB for Contact Info -- English (Malta)
+qkb_ci_enmlt = CLJTB6WmpRH3DJPmQmDRFBX7Z
+# QKB for Contact Info -- English (Norfolk Island)
+qkb_ci_ennfk = CLJTB6WmpRH3DJPpQVDmFBX7t
+# QKB for Contact Info -- English (Liberia)
+qkb_ci_enlbr = CLJTB6WmpRH3DJPYQDDqFBX7B
+# QKB for Contact Info -- English (Lesotho)
+qkb_ci_enlso = CLJTB6WmpRH3DJPYQqDMFBX7L
+# QKB for Contact Info -- English (Northern Mariana Islands)
+qkb_ci_enmnp = CLJTB6WmpRH3DJPmQHDKFBX7G
+# QKB for Contact Info -- English (Montserrat)
+qkb_ci_enmsr = CLJTB6WmpRH3DJPmQqDqFBX7m
+# QKB for Contact Info -- English (Malawi)
+qkb_ci_enmwi = CLJTB6WmpRH3DJPmQSDWFBX7Z
+# QKB for Contact Info -- English (Mauritius)
+qkb_ci_enmus = CLJTB6WmpRH3DJPmQRD4FBX7J
+# QKB for Contact Info -- English (Malaysia)
+qkb_ci_enmys = CLJTB6WmpRH3DJPmQTD4FBX7q
+# QKB for Contact Info -- English (Namibia)
+qkb_ci_ennam = CLJTB6WmpRH3DJPpQQDHFBX7T
+# QKB for Contact Info -- English (Nigeria)
+qkb_ci_ennga = CLJTB6WmpRH3DJPpQZDDFBX7q
+# QKB for Contact Info -- English (Niue)
+qkb_ci_enniu = CLJTB6WmpRH3DJPpQ2D5FBX7V
+# QKB for Contact Info -- English (Nauru)
+qkb_ci_ennru = CLJTB6WmpRH3DJPpQ3D5FBX7J
+# QKB for Contact Info -- English (New Zealand)
+qkb_ci_ennzl = CLJTB6WmpRH3DJPpQsDpFBX7H
+# QKB for Contact Info -- English (Pitcairn Islands)
+qkb_ci_enpcn = CLJTB6WmpRH3DJPJQFDJFBX76
+# QKB for Contact Info -- English (Philippines)
+qkb_ci_enphl = CLJTB6WmpRH3DJPJQLDpFBX79
+# QKB for Contact Info -- English (Palau)
+qkb_ci_enplw = CLJTB6WmpRH3DJPJQmDrFBX7p
+# QKB for Contact Info -- English (Papau New Guinea)
+qkb_ci_enpng = CLJTB6WmpRH3DJPJQHDLFBX7N
+# QKB for Contact Info -- English (Puerto Rico)
+qkb_ci_enpri = CLJTB6WmpRH3DJPJQ3DWFBX7G
+# QKB for Contact Info -- English (Rwanda)
+qkb_ci_enrwa = CLJTB6WmpRH3DJPKQSDDFBX7X
+# QKB for Contact Info -- English (Singapore)
+qkb_ci_ensgp = CLJTB6WmpRH3DJP3QZDKFBX7X
+# QKB for Contact Info -- English (S. Georgia and the S. Sandwich Islands)
+qkb_ci_ensgs = CLJTB6WmpRH3DJP3QZD4FBX7Z
+# QKB for Contact Info -- English (Saint Helena)
+qkb_ci_enshn = CLJTB6WmpRH3DJP3QLDJFBX7F
+# QKB for Contact Info -- English (Solomon Islands)
+qkb_ci_enslb = CLJTB6WmpRH3DJP3QmDFFBX76
+# QKB for Contact Info -- English (Sierra Leone)
+qkb_ci_ensle = CLJTB6WmpRH3DJP3QmDVFBX79
+# QKB for Contact Info -- English (Swaziland)
+qkb_ci_enswz = CLJTB6WmpRH3DJP3QSDCFBX76
+# QKB for Contact Info -- English (Seychelles)
+qkb_ci_ensyc = CLJTB6WmpRH3DJP3QTDXFBX7n
+# QKB for Contact Info -- English (Turks and Caicos)
+qkb_ci_entca = CLJTB6WmpRH3DJPqQFDDFBX7R
+# QKB for Contact Info -- English (Tokelau)
+qkb_ci_entkl = CLJTB6WmpRH3DJPqQYDpFBX7G
+# QKB for Contact Info -- English (Tonga)
+qkb_ci_enton = CLJTB6WmpRH3DJPqQJDJFBX7Y
+# QKB for Contact Info -- English (Trinidad and Tobago)
+qkb_ci_entto = CLJTB6WmpRH3DJPqQ4DMFBX7K
+# QKB for Contact Info -- English (Tuvalu)
+qkb_ci_entuv = CLJTB6WmpRH3DJPqQRDSFBX7T
+# QKB for Contact Info -- English (Uganda)
+qkb_ci_enuga = CLJTB6WmpRH3DJP4QZDDFBX7s
+# QKB for Contact Info -- English (United States)
+qkb_ci_enusa = CLJTB6WmpRH3DJP4QqDDFBX7F
+# QKB for Contact Info -- English (Saint Vincent and the Grenadines)
+qkb_ci_envct = CLJTB6WmpRH3DJPRQFDRFBX7Z
+# QKB for Contact Info -- English (British Virgin Islands)
+qkb_ci_envgb = CLJTB6WmpRH3DJPRQZDFFBX7t
+# QKB for Contact Info -- English (U.S. Virgin Islands)
+qkb_ci_envir = CLJTB6WmpRH3DJPRQ2DqFBX7Y
+# QKB for Contact Info -- English (Vanuatu)
+qkb_ci_envut = CLJTB6WmpRH3DJPRQRDRFBX7T
+# QKB for Contact Info -- English (Samoa)
+qkb_ci_enwsm = CLJTB6WmpRH3DJP5QqDHFBX7K
+# QKB for Contact Info -- English (South Africa)
+qkb_ci_enzaf = CLJTB6WmpRH3DJPTQQDZFBX76
+# QKB for Contact Info -- English (Zambia)
+qkb_ci_enzmb = CLJTB6WmpRH3DJPTQpDFFBX7F
+# QKB for Contact Info -- English (Zimbabwe)
+qkb_ci_enzwe = CLJTB6WmpRH3DJPTQSDVFBX7M
+# QKB for Contact Info -- Spanish
+qkb_ci_es = CLJTB6WmpRH3D4PsQCDtFBX7p
+# QKB for Contact Info -- Spanish (Andorra)
+qkb_ci_esand = CLJTB6WmpRH3D4PPQHDGFBX7R
+# QKB for Contact Info -- Spanish (Argentina)
+qkb_ci_esarg = CLJTB6WmpRH3D4PPQ3DLFBX7t
+# QKB for Contact Info -- Spanish (Belize)
+qkb_ci_esblz = CLJTB6WmpRH3D4PQQmDCFBX7Z
+# QKB for Contact Info -- Spanish (Bolivia)
+qkb_ci_esbol = CLJTB6WmpRH3D4PQQJDpFBX77
+# QKB for Contact Info -- Spanish (Chile)
+qkb_ci_eschl = CLJTB6WmpRH3D4PDQLDpFBX7T
+# QKB for Contact Info -- Spanish (Colombia)
+qkb_ci_escol = CLJTB6WmpRH3D4PDQJDpFBX78
+# QKB for Contact Info -- Spanish (Costa Rica)
+qkb_ci_escri = CLJTB6WmpRH3D4PDQ3DWFBX78
+# QKB for Contact Info -- Spanish (Cuba)
+qkb_ci_escub = CLJTB6WmpRH3D4PDQRDFFBX7t
+# QKB for Contact Info -- Spanish (Dominican Republic)
+qkb_ci_esdom = CLJTB6WmpRH3D4PFQJDHFBX7N
+# QKB for Contact Info -- Spanish (Ecuador)
+qkb_ci_esecu = CLJTB6WmpRH3D4PXQFD5FBX77
+# QKB for Contact Info -- Spanish (Western Sahara)
+qkb_ci_esesh = CLJTB6WmpRH3D4PXQqD2FBX7N
+# QKB for Contact Info -- Spanish (Spain)
+qkb_ci_esesp = CLJTB6WmpRH3D4PXQqDKFBX7Z
+# QKB for Contact Info -- Spanish (Equatorial Guineau)
+qkb_ci_esgnq = CLJTB6WmpRH3D4PVQHD3FBX7G
+# QKB for Contact Info -- Spanish (Guatemala)
+qkb_ci_esgtm = CLJTB6WmpRH3D4PVQ4DHFBX7Z
+# QKB for Contact Info -- Spanish (Honduras)
+qkb_ci_eshnd = CLJTB6WmpRH3D4PZQHDGFBX7t
+# QKB for Contact Info -- Spanish (Mexico)
+qkb_ci_esmex = CLJTB6WmpRH3D4PmQGDTFBX7n
+# QKB for Contact Info -- Spanish (Nicaragua)
+qkb_ci_esnic = CLJTB6WmpRH3D4PpQ2DXFBX7t
+# QKB for Contact Info -- Spanish (Panama)
+qkb_ci_espan = CLJTB6WmpRH3D4PJQQDJFBX79
+# QKB for Contact Info -- Spanish (Peru)
+qkb_ci_esper = CLJTB6WmpRH3D4PJQGDqFBX7V
+# QKB for Contact Info -- Spanish (Puerto Rico)
+qkb_ci_espri = CLJTB6WmpRH3D4PJQ3DWFBX7W
+# QKB for Contact Info -- Spanish (Paraguay)
+qkb_ci_espry = CLJTB6WmpRH3D4PJQ3DsFBX7s
+# QKB for Contact Info -- Spanish (El Salvador)
+qkb_ci_esslv = CLJTB6WmpRH3D4P3QmDSFBX74
+# QKB for Contact Info -- Spanish (Venezuela)
+qkb_ci_esven = CLJTB6WmpRH3D4PRQGDJFBX7L
+# QKB for Contact Info -- Spanish (Uruguay)
+qkb_ci_esury = CLJTB6WmpRH3D4P4Q3DsFBX77
+# QKB for Contact Info -- Estonian
+qkb_ci_et = CLJTB6WmpRH3DRPsQCDtFBX7H
+# QKB for Contact Info -- Estonian (Estonia)
+qkb_ci_etest = CLJTB6WmpRH3DRPXQqDRFBX7m
+# QKB for Contact Info -- Persian
+qkb_ci_fa = CLJTB6WmpRHqDDPsQCDtFBX77
+# QKB for Contact Info -- Persian (Afghanistan)
+qkb_ci_faafg = CLJTB6WmpRHqDDPPQVDLFBX7N
+# QKB for Contact Info -- Persian (Iran)
+qkb_ci_fairn = CLJTB6WmpRHqDDPLQ3DJFBX7s
+# QKB for Contact Info -- Fula
+qkb_ci_ff = CLJTB6WmpRHqDZPsQCDtFBX7Q
+# QKB for Contact Info -- Fula (Gambia)
+qkb_ci_ffgmb = CLJTB6WmpRHqDZPVQpDFFBX7m
+# QKB for Contact Info -- Fula (Guinea)
+qkb_ci_ffgin = CLJTB6WmpRHqDZPVQ2DJFBX74
+# QKB for Contact Info -- Finnish
+qkb_ci_fi = CLJTB6WmpRHqDWPsQCDtFBX7X
+# QKB for Contact Info -- Finnish (Finland)
+qkb_ci_fifin = CLJTB6WmpRHqDWPGQ2DJFBX75
+# QKB for Contact Info -- Fijian
+qkb_ci_fj = CLJTB6WmpRHqDYPsQCDtFBX7G
+# QKB for Contact Info -- Fijian (Fiji)
+qkb_ci_fjfji = CLJTB6WmpRHqDYPGQWDWFBX7q
+# QKB for Contact Info -- French
+qkb_ci_fr = CLJTB6WmpRHqDqPsQCDtFBX7p
+# QKB for Contact Info -- French (Burundi)
+qkb_ci_frbdi = CLJTB6WmpRHqDqPQQXDWFBX7K
+# QKB for Contact Info -- French (Belgium)
+qkb_ci_frbel = CLJTB6WmpRHqDqPQQGDpFBX7R
+# QKB for Contact Info -- French (Benin)
+qkb_ci_frben = CLJTB6WmpRHqDqPQQGDJFBX7S
+# QKB for Contact Info -- French (Burkina Faso)
+qkb_ci_frbfa = CLJTB6WmpRHqDqPQQVDDFBX7Y
+# QKB for Contact Info -- French (Central African Republic)
+qkb_ci_frcaf = CLJTB6WmpRHqDqPDQQDZFBX7m
+# QKB for Contact Info -- French (Canada)
+qkb_ci_frcan = CLJTB6WmpRHqDqPDQQDJFBX74
+# QKB for Contact Info -- French (Switzerland)
+qkb_ci_frche = CLJTB6WmpRHqDqPDQLDVFBX73
+# QKB for Contact Info -- French (Ivory Coast)
+qkb_ci_frciv = CLJTB6WmpRHqDqPDQ2DSFBX7Q
+# QKB for Contact Info -- French (Cameroon)
+qkb_ci_frcmr = CLJTB6WmpRHqDqPDQpDqFBX7Q
+# QKB for Contact Info -- French (Congo)
+qkb_ci_frcog = CLJTB6WmpRHqDqPDQJDLFBX7C
+# QKB for Contact Info -- French (Comoros)
+qkb_ci_frcom = CLJTB6WmpRHqDqPDQJDHFBX79
+# QKB for Contact Info -- French (Djibouti)
+qkb_ci_frdji = CLJTB6WmpRHqDqPFQWDWFBX7T
+# QKB for Contact Info -- French (France)
+qkb_ci_frfra = CLJTB6WmpRHqDqPGQ3DDFBX7C
+# QKB for Contact Info -- French (Gabon)
+qkb_ci_frgab = CLJTB6WmpRHqDqPVQQDFFBX7m
+# QKB for Contact Info -- French (Guinea)
+qkb_ci_frgin = CLJTB6WmpRHqDqPVQ2DJFBX78
+# QKB for Contact Info -- French (Guadeloupe)
+qkb_ci_frglp = CLJTB6WmpRHqDqPVQmDKFBX7D
+# QKB for Contact Info -- French (Equatorial Guinea)
+qkb_ci_frgnq = CLJTB6WmpRHqDqPVQHD3FBX7G
+# QKB for Contact Info -- French (French Guiana)
+qkb_ci_frguf = CLJTB6WmpRHqDqPVQRDZFBX7Q
+# QKB for Contact Info -- French (Haiti)
+qkb_ci_frhti = CLJTB6WmpRHqDqPZQ4DWFBX7X
+# QKB for Contact Info -- French (Cambodia)
+qkb_ci_frkhm = CLJTB6WmpRHqDqPWQLDHFBX7N
+# QKB for Contact Info -- French (Lebanon)
+qkb_ci_frlbn = CLJTB6WmpRHqDqPYQDDJFBX76
+# QKB for Contact Info -- French (Luxembourg)
+qkb_ci_frlux = CLJTB6WmpRHqDqPYQRDTFBX7r
+# QKB for Contact Info -- French (Monaco)
+qkb_ci_frmco = CLJTB6WmpRHqDqPmQFDMFBX79
+# QKB for Contact Info -- French (Madagascar)
+qkb_ci_frmdg = CLJTB6WmpRHqDqPmQXDLFBX7s
+# QKB for Contact Info -- French (Mali)
+qkb_ci_frmli = CLJTB6WmpRHqDqPmQmDWFBX7Q
+# QKB for Contact Info -- French (Mauritania)
+qkb_ci_frmrt = CLJTB6WmpRHqDqPmQ3DRFBX73
+# QKB for Contact Info -- French (Martinique)
+qkb_ci_frmtq = CLJTB6WmpRHqDqPmQ4D3FBX7K
+# QKB for Contact Info -- French (Mauritius)
+qkb_ci_frmus = CLJTB6WmpRHqDqPmQRD4FBX74
+# QKB for Contact Info -- French (Mayotte)
+qkb_ci_frmyt = CLJTB6WmpRHqDqPmQTDRFBX7T
+# QKB for Contact Info -- French (New Caledonia)
+qkb_ci_frncl = CLJTB6WmpRHqDqPpQFDpFBX77
+# QKB for Contact Info -- French (Niger)
+qkb_ci_frner = CLJTB6WmpRHqDqPpQGDqFBX7X
+# QKB for Contact Info -- French (French Polynesia)
+qkb_ci_frpyf = CLJTB6WmpRHqDqPJQTDZFBX7H
+# QKB for Contact Info -- French (Reunion)
+qkb_ci_frreu = CLJTB6WmpRHqDqPKQGD5FBX7Y
+# QKB for Contact Info -- French (Rwanda)
+qkb_ci_frrwa = CLJTB6WmpRHqDqPKQSDDFBX7n
+# QKB for Contact Info -- French (Senegal)
+qkb_ci_frsen = CLJTB6WmpRHqDqP3QGDJFBX7G
+# QKB for Contact Info -- French (Saint Pierre and Miquelon)
+qkb_ci_frspm = CLJTB6WmpRHqDqP3QMDHFBX7J
+# QKB for Contact Info -- French (Seychelles)
+qkb_ci_frsyc = CLJTB6WmpRHqDqP3QTDXFBX7H
+# QKB for Contact Info -- French (Chad)
+qkb_ci_frtcd = CLJTB6WmpRHqDqPqQFDGFBX7B
+# QKB for Contact Info -- French (Togo)
+qkb_ci_frtgo = CLJTB6WmpRHqDqPqQZDMFBX7n
+# QKB for Contact Info -- French (Vanuatu)
+qkb_ci_frvut = CLJTB6WmpRHqDqPRQRDRFBX76
+# QKB for Contact Info -- French (Wallis and Futuna)
+qkb_ci_frwlf = CLJTB6WmpRHqDqP5QmDZFBX7L
+# QKB for Contact Info -- French (Democratic Republic of the Congo)
+qkb_ci_frzar = CLJTB6WmpRHqDqPTQQDqFBX7m
+# QKB for Contact Info -- Irish
+qkb_ci_ga = CLJTB6WmpRH4DDPsQCDtFBX78
+# QKB for Contact Info -- Irish (Ireland)
+qkb_ci_gairl = CLJTB6WmpRH4DDPLQ3DpFBX7T
+# QKB for Contact Info -- Guarani
+qkb_ci_gn = CLJTB6WmpRH4DJPsQCDtFBX7W
+# QKB for Contact Info -- Guarani (Paraguay)
+qkb_ci_gnpry = CLJTB6WmpRH4DJPJQ3DsFBX7S
+# QKB for Contact Info -- Gujarati
+qkb_ci_gu = CLJTB6WmpRH4D5PsQCDtFBX7K
+# QKB for Contact Info -- Gujarati (India)
+qkb_ci_guind = CLJTB6WmpRH4D5PLQHDGFBX79
+# QKB for Contact Info -- Hebrew
+qkb_ci_he = CLJTB6WmpRHRDVPsQCDtFBX7D
+# QKB for Contact Info -- Hebrew (Israel)
+qkb_ci_heisr = CLJTB6WmpRHRDVPLQqDqFBX7D
+# QKB for Contact Info -- Hindi
+qkb_ci_hi = CLJTB6WmpRHRDWPsQCDtFBX7V
+# QKB for Contact Info -- Hindi (India)
+qkb_ci_hiind = CLJTB6WmpRHRDWPLQHDGFBX75
+# QKB for Contact Info -- Hiri Motu
+qkb_ci_ho = CLJTB6WmpRHRDMPsQCDtFBX7m
+# QKB for Contact Info -- Hiri Motu (Papau New Guinea)
+qkb_ci_hopng = CLJTB6WmpRHRDMPJQHDLFBX7F
+# QKB for Contact Info -- Croatian
+qkb_ci_hr = CLJTB6WmpRHRDqPsQCDtFBX7J
+# QKB for Contact Info -- Croatian (Croatia)
+qkb_ci_hrhrv = CLJTB6WmpRHRDqPZQ3DSFBX7K
+# QKB for Contact Info -- Haitian Creole
+qkb_ci_ht = CLJTB6WmpRHRDRPsQCDtFBX7K
+# QKB for Contact Info -- Haitian Creole (Haiti)
+qkb_ci_hthti = CLJTB6WmpRHRDRPZQ4DWFBX7L
+# QKB for Contact Info -- Hungarian
+qkb_ci_hu = CLJTB6WmpRHRD5PsQCDtFBX73
+# QKB for Contact Info -- Hungarian (Hungary)
+qkb_ci_huhun = CLJTB6WmpRHRD5PZQRDJFBX7J
+# QKB for Contact Info -- Armenian
+qkb_ci_hy = CLJTB6WmpRHRDsPsQCDtFBX75
+# QKB for Contact Info -- Armenian (Armenia)
+qkb_ci_hyarm = CLJTB6WmpRHRDsPPQ3DHFBX7L
+# QKB for Contact Info -- Greenlandic
+qkb_ci_kl = CLJTB6WmpRHrDpPsQCDtFBX7m
+# QKB for Contact Info -- Greenlandic (Greenland)
+qkb_ci_klgrl = CLJTB6WmpRHrDpPVQ3DpFBX7F
+# QKB for Contact Info -- Kanuri
+qkb_ci_kr = CLJTB6WmpRHrDqPsQCDtFBX73
+# QKB for Contact Info -- Kanuri (Niger)
+qkb_ci_krner = CLJTB6WmpRHrDqPpQGDqFBX7n
+# QKB for Contact Info -- Kanuri (Nigeria)
+qkb_ci_krnga = CLJTB6WmpRHrDqPpQZDDFBX7B
+# QKB for Contact Info -- Kurdish
+qkb_ci_ku = CLJTB6WmpRHrD5PsQCDtFBX7R
+# QKB for Contact Info -- Kurdish (Iraq)
+qkb_ci_kuirq = CLJTB6WmpRHrD5PLQ3D3FBX7q
+# QKB for Contact Info -- Indonesian
+qkb_ci_id = CLJTB6WmpRH5DGPsQCDtFBX7D
+# QKB for Contact Info -- Indonesian (Indonesia)
+qkb_ci_ididn = CLJTB6WmpRH5DGPLQXDJFBX73
+# QKB for Contact Info -- Igbo
+qkb_ci_ig = CLJTB6WmpRH5DLPsQCDtFBX7G
+# QKB for Contact Info -- Igbo (Nigeria)
+qkb_ci_ignga = CLJTB6WmpRH5DLPpQZDDFBX7M
+# QKB for Contact Info -- Sichuan Yi
+qkb_ci_ii = CLJTB6WmpRH5DWPsQCDtFBX7Z
+# QKB for Contact Info -- Sichuan Yi (China)
+qkb_ci_iichn = CLJTB6WmpRH5DWPDQLDJFBX7R
+# QKB for Contact Info -- Icelandic
+qkb_ci_is = CLJTB6WmpRH5D4PsQCDtFBX7K
+# QKB for Contact Info -- Icelandic (Iceland)
+qkb_ci_isisl = CLJTB6WmpRH5D4PLQqDpFBX7Y
+# QKB for Contact Info -- Italian
+qkb_ci_it = CLJTB6WmpRH5DRPsQCDtFBX73
+# QKB for Contact Info -- Italian (Switzerland)
+qkb_ci_itche = CLJTB6WmpRH5DRPDQLDVFBX7S
+# QKB for Contact Info -- Italian (Italy)
+qkb_ci_itita = CLJTB6WmpRH5DRPLQ4DDFBX7D
+# QKB for Contact Info -- Italian (Vatican City)
+qkb_ci_itvat = CLJTB6WmpRH5DRPRQQDRFBX7J
+# QKB for Contact Info -- Japanese
+qkb_ci_ja = CLJTB6WmpRHSDDPsQCDtFBX7P
+# QKB for Contact Info -- Japanese (Japan)
+qkb_ci_jajpn = CLJTB6WmpRHSDDP2QMDJFBX7B
+# QKB for Contact Info -- Japanese (Palau)
+qkb_ci_japlw = CLJTB6WmpRHSDDPJQmDrFBX7G
+# QKB for Contact Info -- Lao
+qkb_ci_lo = CLJTB6WmpRHTDMPsQCDtFBX7M
+# QKB for Contact Info -- Lao (Laos)
+qkb_ci_lolao = CLJTB6WmpRHTDMPYQQDMFBX79
+# QKB for Contact Info -- Georgian
+qkb_ci_ka = CLJTB6WmpRHrDDPsQCDtFBX7Q
+# QKB for Contact Info -- Georgian (Georgia)
+qkb_ci_kageo = CLJTB6WmpRHrDDPVQGDMFBX7K
+# QKB for Contact Info -- Kongo
+qkb_ci_kg = CLJTB6WmpRHrDLPsQCDtFBX7Z
+# QKB for Contact Info -- Kongo (Angola)
+qkb_ci_kgago = CLJTB6WmpRHrDLPPQZDMFBX7q
+# QKB for Contact Info -- Kongo (Congo)
+qkb_ci_kgcog = CLJTB6WmpRHrDLPDQJDLFBX7R
+# QKB for Contact Info -- Kongo (Democratic Republic of the Congo)
+qkb_ci_kgzar = CLJTB6WmpRHrDLPTQQDqFBX7V
+# QKB for Contact Info -- Kazakh
+qkb_ci_kk = CLJTB6WmpRHrDmPsQCDtFBX7Y
+# QKB for Contact Info -- Kazakh (Kazakhstan)
+qkb_ci_kkkaz = CLJTB6WmpRHrDmPWQQDCFBX7F
+# QKB for Contact Info -- Khmer
+qkb_ci_km = CLJTB6WmpRHrDHPsQCDtFBX7p
+# QKB for Contact Info -- Khmer (Cambodia)
+qkb_ci_kmkhm = CLJTB6WmpRHrDHPWQLDHFBX7N
+# QKB for Contact Info -- Korean
+qkb_ci_ko = CLJTB6WmpRHrDMPsQCDtFBX7J
+# QKB for Contact Info -- Korean (South Korea)
+qkb_ci_kokor = CLJTB6WmpRHrDMPWQJDqFBX7p
+# QKB for Contact Info -- Korean (North Korea)
+qkb_ci_koprk = CLJTB6WmpRHrDMPJQ3DmFBX7H
+# QKB for Contact Info -- Kashmiri
+qkb_ci_ks = CLJTB6WmpRHrD4PsQCDtFBX7q
+# QKB for Contact Info -- Kashmiri (India)
+qkb_ci_ksind = CLJTB6WmpRHrD4PLQHDGFBX7P
+# QKB for Contact Info -- Kyrgyz
+qkb_ci_ky = CLJTB6WmpRHrDsPsQCDtFBX7T
+# QKB for Contact Info -- Kyrgyz (Kyrgyzstan)
+qkb_ci_kykgz = CLJTB6WmpRHrDsPWQZDCFBX7S
+# QKB for Contact Info -- Latin
+qkb_ci_la = CLJTB6WmpRHTDDPsQCDtFBX7D
+# QKB for Contact Info -- Latin (Vatican City)
+qkb_ci_lavat = CLJTB6WmpRHTDDPRQQDRFBX7N
+# QKB for Contact Info -- Luxembourgish
+qkb_ci_lb = CLJTB6WmpRHTDFPsQCDtFBX7F
+# QKB for Contact Info -- Luxembourgish (Luxembourg)
+qkb_ci_lblux = CLJTB6WmpRHTDFPYQRDTFBX7H
+# QKB for Contact Info -- Luganda
+qkb_ci_lg = CLJTB6WmpRHTDLPsQCDtFBX7L
+# QKB for Contact Info -- Luganda (Uganda)
+qkb_ci_lguga = CLJTB6WmpRHTDLP4QZDDFBX7s
+# QKB for Contact Info -- Luxembourgish (Luxembourg)
+qkb_ci_ltlux = CLJTB6WmpRHTDRPYQRDTFBX78
+# QKB for Contact Info -- Lingala
+qkb_ci_ln = CLJTB6WmpRHTDJPsQCDtFBX7J
+# QKB for Contact Info -- Lingala (Democratic Republic of the Congo)
+qkb_ci_lnzar = CLJTB6WmpRHTDJPTQQDqFBX7H
+# QKB for Contact Info -- Lithuanian
+qkb_ci_lt = CLJTB6WmpRHTDRPsQCDtFBX7R
+# QKB for Contact Info -- Lithuanian (Lithuania)
+qkb_ci_ltltu = CLJTB6WmpRHTDRPYQ4D5FBX7t
+# QKB for Contact Info -- Luba
+qkb_ci_lu = CLJTB6WmpRHTD5PsQCDtFBX75
+# QKB for Contact Info -- Luba (Democratic Republic of the Congo)
+qkb_ci_luzar = CLJTB6WmpRHTD5PTQQDqFBX7R
+# QKB for Contact Info -- Latvian
+qkb_ci_lv = CLJTB6WmpRHTDSPsQCDtFBX7S
+# QKB for Contact Info -- Latvian (Latvia)
+qkb_ci_lvlva = CLJTB6WmpRHTDSPYQ5DDFBX7m
+# QKB for Contact Info -- Malagasy
+qkb_ci_mg = CLJTB6WmpRHsDLPsQCDtFBX7n
+# QKB for Contact Info -- Malagasy (Madagascar)
+qkb_ci_mgmdg = CLJTB6WmpRHsDLPmQXDLFBX75
+# QKB for Contact Info -- Marshallese
+qkb_ci_mh = CLJTB6WmpRHsD2PsQCDtFBX7W
+# QKB for Contact Info -- Marshallese (Marshall Islands)
+qkb_ci_mhmhl = CLJTB6WmpRHsD2PmQLDpFBX78
+# QKB for Contact Info -- Maori
+qkb_ci_mi = CLJTB6WmpRHsDWPsQCDtFBX7Y
+# QKB for Contact Info -- Maori (Cook Islands)
+qkb_ci_micok = CLJTB6WmpRHsDWPDQJDmFBX7B
+# QKB for Contact Info -- Maori (New Zealand)
+qkb_ci_minzl = CLJTB6WmpRHsDWPpQsDpFBX7K
+# QKB for Contact Info -- Moldovan
+qkb_ci_mo = CLJTB6WmpRHsDMPsQCDtFBX7K
+# QKB for Contact Info -- Moldovan (Moldova)
+qkb_ci_momda = CLJTB6WmpRHsDMPmQXDDFBX7r
+# QKB for Contact Info -- Maltese
+qkb_ci_mt = CLJTB6WmpRHsDRPsQCDtFBX75
+# QKB for Contact Info -- Maltese (Malta)
+qkb_ci_mtmlt = CLJTB6WmpRHsDRPmQmDRFBX7R
+# QKB for Contact Info -- Macedonian
+qkb_ci_mk = CLJTB6WmpRHsDmPsQCDtFBX7p
+# QKB for Contact Info -- Macedonian (Macedonia)
+qkb_ci_mkmkd = CLJTB6WmpRHsDmPmQYDGFBX76
+# QKB for Contact Info -- Mongolian
+qkb_ci_mn = CLJTB6WmpRHsDJPsQCDtFBX7M
+# QKB for Contact Info -- Mongolian (Mongolia)
+qkb_ci_mnmng = CLJTB6WmpRHsDJPmQHDLFBX7X
+# QKB for Contact Info -- Malay
+qkb_ci_ms = CLJTB6WmpRHsD4PsQCDtFBX7R
+# QKB for Contact Info -- Malay (Brunei)
+qkb_ci_msbrn = CLJTB6WmpRHsD4PQQ3DJFBX7n
+# QKB for Contact Info -- Malay (Christmas Island)
+qkb_ci_mscxr = CLJTB6WmpRHsD4PDQrDqFBX74
+# QKB for Contact Info -- Malay (Malaysia)
+qkb_ci_msmys = CLJTB6WmpRHsD4PmQTD4FBX78
+# QKB for Contact Info -- Malay (Singapore)
+qkb_ci_mssgp = CLJTB6WmpRHsD4P3QZDKFBX7K
+# QKB for Contact Info -- Burmese
+qkb_ci_my = CLJTB6WmpRHsDsPsQCDtFBX7C
+# QKB for Contact Info -- Burmese (Myanmar)
+qkb_ci_mymmr = CLJTB6WmpRHsDsPmQpDqFBX7T
+# QKB for Contact Info -- Nauruan
+qkb_ci_na = CLJTB6WmpRHCDDPsQCDtFBX7X
+# QKB for Contact Info -- Nauruan (Nauru)
+qkb_ci_nanru = CLJTB6WmpRHCDDPpQ3D5FBX7Y
+# QKB for Contact Info -- Nepali
+qkb_ci_ne = CLJTB6WmpRHCDVPsQCDtFBX7L
+# QKB for Contact Info -- Nepali (Nepal)
+qkb_ci_nenpl = CLJTB6WmpRHCDVPpQMDpFBX7X
+# QKB for Contact Info -- Dutch
+qkb_ci_nl = CLJTB6WmpRHCDpPsQCDtFBX7J
+# QKB for Contact Info -- Dutch (Aruba)
+qkb_ci_nlabw = CLJTB6WmpRHCDpPPQDDrFBX76
+# QKB for Contact Info -- Dutch (Netherlands Antilles)
+qkb_ci_nlant = CLJTB6WmpRHCDpPPQHDRFBX7X
+# QKB for Contact Info -- Dutch (Belgium)
+qkb_ci_nlbel = CLJTB6WmpRHCDpPQQGDpFBX7S
+# QKB for Contact Info -- Dutch (Netherlands)
+qkb_ci_nlnld = CLJTB6WmpRHCDpPpQmDGFBX7N
+# QKB for Contact Info -- Dutch (Suriname)
+qkb_ci_nlsur = CLJTB6WmpRHCDpP3QRDqFBX7C
+# QKB for Contact Info -- Dutch (South Africa)
+qkb_ci_nlzaf = CLJTB6WmpRHCDpPTQQDZFBX7D
+# QKB for Contact Info -- Norwegian
+qkb_ci_no = CLJTB6WmpRHCDMPsQCDtFBX73
+# QKB for Contact Info -- Norwegian (Norway)
+qkb_ci_nonor = CLJTB6WmpRHCDMPpQJDqFBX7q
+# QKB for Contact Info -- Ndebele
+qkb_ci_nr = CLJTB6WmpRHCDqPsQCDtFBX7R
+# QKB for Contact Info -- Ndebele (South Africa)
+qkb_ci_nrzaf = CLJTB6WmpRHCDqPTQQDZFBX7L
+# QKB for Contact Info -- Chichewa
+qkb_ci_ny = CLJTB6WmpRHCDsPsQCDtFBX7t
+# QKB for Contact Info -- Chichewa (Malawi)
+qkb_ci_nymwi = CLJTB6WmpRHCDsPmQSDWFBX7C
+# QKB for Contact Info -- Ojibwe
+qkb_ci_oj = CLJTB6WmpRHtDYPsQCDtFBX7H
+# QKB for Contact Info -- Ojibwe (Canada)
+qkb_ci_ojcan = CLJTB6WmpRHtDYPDQQDJFBX7R
+# QKB for Contact Info -- Ojibwe (United States)
+qkb_ci_ojusa = CLJTB6WmpRHtDYP4QqDDFBX7n
+# QKB for Contact Info -- Punjabi
+qkb_ci_pa = CLJTB6WmpRHBDDPsQCDtFBX7V
+# QKB for Contact Info -- Punjabi (India)
+qkb_ci_paind = CLJTB6WmpRHBDDPLQHDGFBX75
+# QKB for Contact Info -- Polish
+qkb_ci_pl = CLJTB6WmpRHBDpPsQCDtFBX7K
+# QKB for Contact Info -- Polish (Poland)
+qkb_ci_plpol = CLJTB6WmpRHBDpPJQJDpFBX7H
+# QKB for Contact Info -- Pashto
+qkb_ci_ps = CLJTB6WmpRHBD4PsQCDtFBX7r
+# QKB for Contact Info -- Pashto (Afghanistan)
+qkb_ci_psafg = CLJTB6WmpRHBD4PPQVDLFBX7C
+# QKB for Contact Info -- Portuguese
+qkb_ci_pt = CLJTB6WmpRHBDRPsQCDtFBX7T
+# QKB for Contact Info -- Portuguese (Angola)
+qkb_ci_ptago = CLJTB6WmpRHBDRPPQZDMFBX7D
+# QKB for Contact Info -- Portuguese (Brazil)
+qkb_ci_ptbra = CLJTB6WmpRHBDRPQQ3DDFBX7P
+# QKB for Contact Info -- Portuguese (Cape Verde)
+qkb_ci_ptcpv = CLJTB6WmpRHBDRPDQMDSFBX74
+# QKB for Contact Info -- Portuguese (Guinea-Bissau)
+qkb_ci_ptgnb = CLJTB6WmpRHBDRPVQHDFFBX7D
+# QKB for Contact Info -- Portuguese (Macau)
+qkb_ci_ptmac = CLJTB6WmpRHBDRPmQQDXFBX77
+# QKB for Contact Info -- Portuguese (Mozambique)
+qkb_ci_ptmoz = CLJTB6WmpRHBDRPmQJDCFBX79
+# QKB for Contact Info -- Portuguese (Portugal)
+qkb_ci_ptprt = CLJTB6WmpRHBDRPJQ3DRFBX79
+# QKB for Contact Info -- Portuguese (Sao Tome and Principe)
+qkb_ci_ptstp = CLJTB6WmpRHBDRP3Q4DKFBX7N
+# QKB for Contact Info -- Portuguese (East Timor)
+qkb_ci_pttmp = CLJTB6WmpRHBDRPqQpDKFBX7t
+# QKB for Contact Info -- Quechua
+qkb_ci_qu = CLJTB6WmpRH6D5PsQCDtFBX7C
+# QKB for Contact Info -- Quechua (Bolivia)
+qkb_ci_qubol = CLJTB6WmpRH6D5PQQJDpFBX7W
+# QKB for Contact Info -- Romansh
+qkb_ci_rm = CLJTB6WmpRH7DHPsQCDtFBX74
+# QKB for Contact Info -- Romansh (Switzerland)
+qkb_ci_rmche = CLJTB6WmpRH7DHPDQLDVFBX7T
+# QKB for Contact Info -- Kirundi
+qkb_ci_rn = CLJTB6WmpRH7DJPsQCDtFBX7R
+# QKB for Contact Info -- Kirundi (Burundi)
+qkb_ci_rnbdi = CLJTB6WmpRH7DJPQQXDWFBX7T
+# QKB for Contact Info -- Romanian
+qkb_ci_ro = CLJTB6WmpRH7DMPsQCDtFBX75
+# QKB for Contact Info -- Romanian (Moldova)
+qkb_ci_romda = CLJTB6WmpRH7DMPmQXDDFBX7B
+# QKB for Contact Info -- Romanian (Romania)
+qkb_ci_rorou = CLJTB6WmpRH7DMPKQJD5FBX76
+# QKB for Contact Info -- Russian
+qkb_ci_ru = CLJTB6WmpRH7D5PsQCDtFBX7t
+# QKB for Contact Info -- Russian (Belarus)
+qkb_ci_rublr = CLJTB6WmpRH7D5PQQmDqFBX7H
+# QKB for Contact Info -- Russian (Kazakhstan)
+qkb_ci_rukaz = CLJTB6WmpRH7D5PWQQDCFBX74
+# QKB for Contact Info -- Russian (Kyrgyzstan)
+qkb_ci_rukgz = CLJTB6WmpRH7D5PWQZDCFBX7s
+# QKB for Contact Info -- Russian (Russia)
+qkb_ci_rurus = CLJTB6WmpRH7D5PKQRD4FBX7G
+# QKB for Contact Info -- Kinyarwanda
+qkb_ci_rw = CLJTB6WmpRH7DrPsQCDtFBX76
+# QKB for Contact Info -- Kinyarwanda (Rwanda)
+qkb_ci_rwrwa = CLJTB6WmpRH7DrPKQSDDFBX7s
+# QKB for Contact Info -- Sangho
+qkb_ci_sg = CLJTB6WmpRH8DLPsQCDtFBX7J
+# QKB for Contact Info -- Sangho (Central African Republic)
+qkb_ci_sgcaf = CLJTB6WmpRH8DLPDQQDZFBX7H
+# QKB for Contact Info -- Serbo-Croatian
+qkb_ci_sh = CLJTB6WmpRH8D2PsQCDtFBX7M
+# QKB for Contact Info -- Serbo-Croatian (Bosnia and Herzegowina)
+qkb_ci_shbih = CLJTB6WmpRH8D2PQQ2D2FBX7r
+# QKB for Contact Info -- Sinhala
+qkb_ci_si = CLJTB6WmpRH8DWPsQCDtFBX7K
+# QKB for Contact Info -- Sinhala (Sri Lanka)
+qkb_ci_silka = CLJTB6WmpRH8DWPYQYDDFBX76
+# QKB for Contact Info -- Slovak
+qkb_ci_sk = CLJTB6WmpRH8DmPsQCDtFBX7q
+# QKB for Contact Info -- Slovak (Slovakia)
+qkb_ci_sksvk = CLJTB6WmpRH8DmP3Q5DmFBX7T
+# QKB for Contact Info -- Slovenian
+qkb_ci_sl = CLJTB6WmpRH8DpPsQCDtFBX74
+# QKB for Contact Info -- Slovenian (Slovenia)
+qkb_ci_slsvn = CLJTB6WmpRH8DpP3Q5DJFBX7B
+# QKB for Contact Info -- Samoan
+qkb_ci_sm = CLJTB6WmpRH8DHPsQCDtFBX7R
+# QKB for Contact Info -- Samoan (American Samoa)
+qkb_ci_smasm = CLJTB6WmpRH8DHPPQqDHFBX7L
+# QKB for Contact Info -- Samoan (Samoa)
+qkb_ci_smwsm = CLJTB6WmpRH8DHP5QqDHFBX76
+# QKB for Contact Info -- Albanian
+qkb_ci_sq = CLJTB6WmpRH8D3PsQCDtFBX7T
+# QKB for Contact Info -- Albanian (Albania)
+qkb_ci_sqalb = CLJTB6WmpRH8D3PPQmDFFBX7B
+# QKB for Contact Info -- Serbian
+qkb_ci_sr = CLJTB6WmpRH8DqPsQCDtFBX7s
+# QKB for Contact Info -- Serbian (Serbia and Montenegro)
+qkb_ci_srscg = CLJTB6WmpRH8DqP3QFDLFBX7n
+# QKB for Contact Info -- Swati
+qkb_ci_ss = CLJTB6WmpRH8D4PsQCDtFBX7C
+# QKB for Contact Info -- Swati (Swaziland)
+qkb_ci_ssswz = CLJTB6WmpRH8D4P3QSDCFBX7H
+# QKB for Contact Info -- Swati (South Africa)
+qkb_ci_sszaf = CLJTB6WmpRH8D4PTQQDZFBX7H
+# QKB for Contact Info -- Sesotho
+qkb_ci_st = CLJTB6WmpRH8DRPsQCDtFBX7t
+# QKB for Contact Info -- Sesotho (Lesotho)
+qkb_ci_stlso = CLJTB6WmpRH8DRPYQqDMFBX7t
+# QKB for Contact Info -- Sesotho (South Africa)
+qkb_ci_stzaf = CLJTB6WmpRH8DRPTQQDZFBX7J
+# QKB for Contact Info -- Swedish
+qkb_ci_sv = CLJTB6WmpRH8DSPsQCDtFBX76
+# QKB for Contact Info -- Swedish (Sweden)
+qkb_ci_svswe = CLJTB6WmpRH8DSP3QSDVFBX77
+# QKB for Contact Info -- Swahili
+qkb_ci_sw = CLJTB6WmpRH8DrPsQCDtFBX77
+# QKB for Contact Info -- Swahili (Kenya)
+qkb_ci_swken = CLJTB6WmpRH8DrPWQGDJFBX7J
+# QKB for Contact Info -- Swahili (Rwanda)
+qkb_ci_swrwa = CLJTB6WmpRH8DrPKQSDDFBX7C
+# QKB for Contact Info -- Swahili (Tanzania)
+qkb_ci_swtza = CLJTB6WmpRH8DrPqQsDDFBX78
+# QKB for Contact Info -- Swahili (Democratic Republic of the Congo)
+qkb_ci_swzar = CLJTB6WmpRH8DrPTQQDqFBX76
+# QKB for Contact Info -- Tamil
+qkb_ci_ta = CLJTB6WmpRH9DDPsQCDtFBX7W
+# QKB for Contact Info -- Tamil (India)
+qkb_ci_taind = CLJTB6WmpRH9DDPLQHDGFBX7s
+# QKB for Contact Info -- Tamil (Sri Lanka)
+qkb_ci_talka = CLJTB6WmpRH9DDPYQYDDFBX7S
+# QKB for Contact Info -- Tajik
+qkb_ci_tg = CLJTB6WmpRH9DLPsQCDtFBX7M
+# QKB for Contact Info -- Tajik (Tajikistan)
+qkb_ci_tgtjk = CLJTB6WmpRH9DLPqQWDmFBX7Y
+# QKB for Contact Info -- Thai
+qkb_ci_th = CLJTB6WmpRH9D2PsQCDtFBX7K
+# QKB for Contact Info -- Thai (Thailand)
+qkb_ci_ththa = CLJTB6WmpRH9D2PqQLDDFBX7P
+# QKB for Contact Info -- Tigrinya
+qkb_ci_ti = CLJTB6WmpRH9DWPsQCDtFBX73
+# QKB for Contact Info -- Tigrinya (Eritrea)
+qkb_ci_tieri = CLJTB6WmpRH9DWPXQ3DWFBX7X
+# QKB for Contact Info -- Turkmen
+qkb_ci_tk = CLJTB6WmpRH9DmPsQCDtFBX74
+# QKB for Contact Info -- Turkmen (Turkmenistan)
+qkb_ci_tktkm = CLJTB6WmpRH9DmPqQYDHFBX73
+# QKB for Contact Info -- Tagalog
+qkb_ci_tl = CLJTB6WmpRH9DpPsQCDtFBX7R
+# QKB for Contact Info -- Tagalog (Northern Mariana Islands)
+qkb_ci_tlmnp = CLJTB6WmpRH9DpPmQHDKFBX73
+# QKB for Contact Info -- Tagalog (Philippines)
+qkb_ci_tlphl = CLJTB6WmpRH9DpPJQLDpFBX7Y
+# QKB for Contact Info -- Setswana
+qkb_ci_tn = CLJTB6WmpRH9DJPsQCDtFBX7S
+# QKB for Contact Info -- Setswana (Botswana)
+qkb_ci_tnbwa = CLJTB6WmpRH9DJPQQSDDFBX7F
+# QKB for Contact Info -- Setswana (South Africa)
+qkb_ci_tnzaf = CLJTB6WmpRH9DJPTQQDZFBX7W
+# QKB for Contact Info -- Tongan
+qkb_ci_to = CLJTB6WmpRH9DMPsQCDtFBX7r
+# QKB for Contact Info -- Tongan (Tonga)
+qkb_ci_toton = CLJTB6WmpRH9DMPqQJDJFBX7C
+# QKB for Contact Info -- Turkish
+qkb_ci_tr = CLJTB6WmpRH9DqPsQCDtFBX7C
+# QKB for Contact Info -- Turkish (Cyprus)
+qkb_ci_trcyp = CLJTB6WmpRH9DqPDQTDKFBX7T
+# QKB for Contact Info -- Turkish (Turkey)
+qkb_ci_trtur = CLJTB6WmpRH9DqPqQRDqFBX7G
+# QKB for Contact Info -- Tsonga
+qkb_ci_ts = CLJTB6WmpRH9D4PsQCDtFBX7t
+# QKB for Contact Info -- Tsonga (South Africa)
+qkb_ci_tszaf = CLJTB6WmpRH9D4PTQQDZFBX7J
+# QKB for Contact Info -- Tahitian
+qkb_ci_ty = CLJTB6WmpRH9DsPsQCDtFBX7N
+# QKB for Contact Info -- Tahitian (French Polynesia)
+qkb_ci_typyf = CLJTB6WmpRH9DqPJQTDZFBX7t
+# QKB for Contact Info -- Ukrainian
+qkb_ci_uk = CLJTB6WmpRHNDmPsQCDtFBX7R
+# QKB for Contact Info -- Ukrainian (Ukraine)
+qkb_ci_ukukr = CLJTB6WmpRHNDmP4QYDqFBX7T
+# QKB for Contact Info -- Urdu
+qkb_ci_ur = CLJTB6WmpRHNDqPsQCDtFBX7t
+# QKB for Contact Info -- Urdu (India)
+qkb_ci_urind = CLJTB6WmpRHNDqPLQHDGFBX7n
+# QKB for Contact Info -- Urdu (Pakistan)
+qkb_ci_urpak = CLJTB6WmpRHNDqPJQQDmFBX7W
+# QKB for Contact Info -- Uzbek
+qkb_ci_uz = CLJTB6WmpRHNDCPsQCDtFBX7Q
+# QKB for Contact Info -- Uzbek (Uzbekistan)
+qkb_ci_uzuzb = CLJTB6WmpRHNDCP4QsDFFBX7X
+# QKB for Contact Info -- Venda
+qkb_ci_ve = CLJTB6WmpRHPDVPsQCDtFBX7M
+# QKB for Contact Info -- Venda (South Africa)
+qkb_ci_vezaf = CLJTB6WmpRHPDVPTQQDZFBX7F
+# QKB for Contact Info -- Venda (Zimbabwe)
+qkb_ci_vezwe = CLJTB6WmpRHPDVPTQSDVFBX7r
+# QKB for Contact Info -- Vietnamese
+qkb_ci_vi = CLJTB6WmpRHPDWPsQCDtFBX74
+# QKB for Contact Info -- Vietnamese (Vietnam)
+qkb_ci_vivnm = CLJTB6WmpRHPDWPRQHDHFBX7S
+# QKB for Contact Info -- Wolof
+qkb_ci_wo = CLJTB6WmpRHQDMPsQCDtFBX7C
+# QKB for Contact Info -- Wolof (Gambia)
+qkb_ci_wogmb = CLJTB6WmpRHQDMPVQpDFFBX7F
+# QKB for Contact Info -- Xhosa
+qkb_ci_xh = CLJTB6WmpRHDD2PsQCDtFBX7R
+# QKB for Contact Info -- Xhosa (South Africa)
+qkb_ci_xhzaf = CLJTB6WmpRHDD2PTQQDZFBX7L
+# QKB for Contact Info -- Shikomor
+qkb_ci_zd = CLJTB6WmpRHXDGPsQCDtFBX7q
+# QKB for Contact Info -- Shikomor (Comoros)
+qkb_ci_zdcom = CLJTB6WmpRHXDGPDQJDHFBX7X
+# QKB for Contact Info -- Chinese
+qkb_ci_zh = CLJTB6WmpRHXD2PsQCDtFBX7S
+# QKB for Contact Info -- Chinese (China)
+qkb_ci_zhchn = CLJTB6WmpRHXD2PDQLDJFBX7D
+# QKB for Contact Info -- Chinese (Christmas Island)
+qkb_ci_zhcxr = CLJTB6WmpRHXD2PDQrDqFBX75
+# QKB for Contact Info -- Chinese (Hong Kong)
+qkb_ci_zhhkg = CLJTB6WmpRHXD2PZQYDLFBX7F
+# QKB for Contact Info -- Chinese (Macau)
+qkb_ci_zhmac = CLJTB6WmpRHXD2PmQQDXFBX7B
+# QKB for Contact Info -- Chinese (Taiwan)
+qkb_ci_zhtwn = CLJTB6WmpRHXD2PqQSDJFBX7N
+# QKB for Contact Info -- Traditional Chinese
+qkb_ci_zt = CLJTB6WmpRHXDRPsQCDtFBX7P
+# QKB for Contact Info -- Traditional Chinese (Taiwan)
+qkb_ci_zttwn = CLJTB6WmpRHXDRPqQSDJFBX7Y
+# QKB for Contact Info -- Zulu
+qkb_ci_zu = CLJTB6WmpRHXD5PsQCDtFBX7Q
+# QKB for Contact Info -- Zulu (South Africa)
+qkb_ci_zuzaf = CLJTB6WmpRHXD5PTQQDZFBX7S
+# Reserved QKB Contact Info locale 001
+qkb_ci_re001 = CLJTB6WmpRH7DVPsQCDBFBX7p
+# Reserved QKB Contact Info locale 002
+qkb_ci_re002 = CLJTB6WmpRH7DVPsQCD6FBX7H
+# Reserved QKB Contact Info locale 003
+qkb_ci_re003 = CLJTB6WmpRH7DVPsQCD7FBX7J
+# Reserved QKB Contact Info locale 004
+qkb_ci_re004 = CLJTB6WmpRH7DVPsQCD8FBX7M
+# Reserved QKB Contact Info locale 005
+qkb_ci_re005 = CLJTB6WmpRH7DVPsQCD9FBX7K
+# Reserved QKB Contact Info locale 006
+qkb_ci_re006 = CLJTB6WmpRH7DVPsQCDNFBX73
+# Reserved QKB Contact Info locale 007
+qkb_ci_re007 = CLJTB6WmpRH7DVPsQCDPFBX7q
+# Reserved QKB Contact Info locale 008
+qkb_ci_re008 = CLJTB6WmpRH7DVPsQCDQFBX74
+# Reserved QKB Contact Info locale 009
+qkb_ci_re009 = CLJTB6WmpRH7DVPsQCDDFBX7R
+# Reserved QKB Contact Info locale 010
+qkb_ci_re010 = CLJTB6WmpRH7DVPsQtDtFBX7p
+# Reserved QKB Contact Info locale 011
+qkb_ci_re011 = CLJTB6WmpRH7DVPsQtDBFBX7H
+# Reserved QKB Contact Info locale 012
+qkb_ci_re012 = CLJTB6WmpRH7DVPsQtD6FBX7J
+# Reserved QKB Contact Info locale 013
+qkb_ci_re013 = CLJTB6WmpRH7DVPsQtD7FBX7M
+# Reserved QKB Contact Info locale 014
+qkb_ci_re014 = CLJTB6WmpRH7DVPsQtD8FBX7K
+# Reserved QKB Contact Info locale 015
+qkb_ci_re015 = CLJTB6WmpRH7DVPsQtD9FBX73
+# Reserved QKB Contact Info locale 016
+qkb_ci_re016 = CLJTB6WmpRH7DVPsQtDNFBX7q
+# Reserved QKB Contact Info locale 017
+qkb_ci_re017 = CLJTB6WmpRH7DVPsQtDPFBX74
+# Reserved QKB Contact Info locale 018
+qkb_ci_re018 = CLJTB6WmpRH7DVPsQtDQFBX7R
+# Reserved QKB Contact Info locale 019
+qkb_ci_re019 = CLJTB6WmpRH7DVPsQtDDFBX75
+# Reserved QKB Contact Info locale 020
+qkb_ci_re020 = CLJTB6WmpRH7DVPsQBDtFBX7H
+# Reserved QKB Contact Info locale 021
+qkb_ci_re021 = CLJTB6WmpRH7DVPsQBDBFBX7J
+# Reserved QKB Contact Info locale 022
+qkb_ci_re022 = CLJTB6WmpRH7DVPsQBD6FBX7M
+# Reserved QKB Contact Info locale 023
+qkb_ci_re023 = CLJTB6WmpRH7DVPsQBD7FBX7K
+# Reserved QKB Contact Info locale 024
+qkb_ci_re024 = CLJTB6WmpRH7DVPsQBD8FBX73
+# Reserved QKB Contact Info locale 025
+qkb_ci_re025 = CLJTB6WmpRH7DVPsQBD9FBX7q
+# Reserved QKB Contact Info locale 026
+qkb_ci_re026 = CLJTB6WmpRH7DVPsQBDNFBX74
+# QKB for Contact Info
+qkb_contdat = CLJTB6WmpCHCDRPFQQDRFBX7L
+# QKB for Watch List Compliance
+qkb_walcomp = CLJTB6W8ppHTDXPHQpDKFBX7H
+# QKB for General Compliance
+qkb_gencomp = CLJTB6WMpKHCDXPHQpDKFBX7X
+# QKB for Insurance Fraud
+qkb_insrfrd = CLJTB6W3psH8DqPGQ3DGFBX7q
+# QKB for General Fraud
+qkb_genlfrd = CLJTB6WMpKHCDpPGQ3DGFBX78
+# QKB for Business Data
+qkb_bsnsdat = CLJTB6WYp7HCD4PFQQDRFBX7W
+# QKB for Product Data
+qkb_proddat = CLJTB6WTp6HtDGPFQQDRFBX7n
+# QKB for Customer Data
+qkb_custdat = CLJTB6Wmp9H8DRPFQQDRFBX7q
+# QKB for Supplier Rationalization
+qkb_supprat = CLJTB6Wtp9HBDKPKQQDRFBX7Z
+# QKB for Master/Patient Index
+qkb_mpindex = CLJTB6W5ptH5DJPFQGDTFBX7M
+# QKB for Commodity Coding
+qkb_comcode = CLJTB6WmpCHsDXPHQXDVFBX7r
+# QKB for Health & Life Sciences
+qkb_helfsci = CLJTB6WKpKHTDZP3QFDWFBX7t
+# Reserved QKB 00001
+qkb_re00001 = CLJTB6WCpKHGDtPsQCDBFBX74
+# Reserved QKB 00002
+qkb_re00002 = CLJTB6WCpKHGDtPsQCD6FBX7R
+# Reserved QKB 00003
+qkb_re00003 = CLJTB6WCpKHGDtPsQCD7FBX75
+# Reserved QKB 00004
+qkb_re00004 = CLJTB6WCpKHGDtPsQCD8FBX7S
+# Reserved QKB 00005
+qkb_re00005 = CLJTB6WCpKHGDtPsQCD9FBX7r
+# QKB locale support -- all locales
+qkb_all = CtJ4BWW4pHH3DSPXQ3DsFBX7H
+# QKB locale support -- global locale
+qkb_gb = CtJ4BWW4pHH4DFPsQCDtFBX7B
+# QKB locale support -- all Latin-1 encoding locales
+qkb_l1 = CtJ4BWW4pHHTDBPsQCDtFBX7T
+# QKB locale support -- all Latin-2 encoding locales
+qkb_l2 = CtJ4BWW4pHHTDBPsQCDtFBX7T
+# QKB locale support -- all Latin-5 encoding locales
+qkb_l5 = CtJ4BWW4pHHTDBPsQCDtFBX7T
+# QKB locale support -- all Latin Cyrillic encoding locales
+qkb_lc = CtJ4BWW4pHHTDXPsQCDtFBX7P
+# QKB locale support -- all Latin Thai encoding locales
+qkb_ls = CtJ4BWW4pHHTD4PsQCDtFBX7M
+# QKB locale support -- Afrikaans
+qkb_af = CtJ4BWW4pHHHDZPsQCDtFBX7C
+# QKB locale support -- Afrikaans (South Africa)
+qkb_afzaf = CtJ4BWW4pHHHDZPTQQDZFBX7H
+# QKB locale support -- Akan
+qkb_ak = CtJ4BWW4pHHHDmPsQCDtFBX78
+# QKB locale support -- Akan (Ivory Coast)
+qkb_akciv = CtJ4BWW4pHHHDmPDQ2DSFBX74
+# QKB locale support -- Akan (Ghana)
+qkb_akgha = CtJ4BWW4pHHHDmPVQLDDFBX7D
+# QKB locale support -- Amharic
+qkb_am = CtJ4BWW4pHHHDHPsQCDtFBX7N
+# QKB locale support -- Amharic (Ethiopia)
+qkb_ameth = CtJ4BWW4pHHHDHPXQ4D2FBX7R
+# QKB locale support -- Arabic
+qkb_ar = CtJ4BWW4pHHHDqPsQCDtFBX7X
+# QKB locale support -- Arabic (United Arab Emirates)
+qkb_arare = CtJ4BWW4pHHHDqPPQ3DVFBX7K
+# QKB locale support -- Arabic (Bahrain)
+qkb_arbhr = CtJ4BWW4pHHHDqPQQLDqFBX7R
+# QKB locale support -- Arabic (Comoros)
+qkb_arcom = CtJ4BWW4pHHHDqPDQJDHFBX7r
+# QKB locale support -- Arabic (Djibouti)
+qkb_ardji = CtJ4BWW4pHHHDqPFQWDWFBX7M
+# QKB locale support -- Arabic (Algeria)
+qkb_ardza = CtJ4BWW4pHHHDqPFQsDDFBX7r
+# QKB locale support -- Arabic (Egypt)
+qkb_aregy = CtJ4BWW4pHHHDqPXQZDsFBX76
+# QKB locale support -- Arabic (Western Sahara)
+qkb_aresh = CtJ4BWW4pHHHDqPXQqD2FBX7T
+# QKB locale support -- Arabic (Guinea)
+qkb_argin = CtJ4BWW4pHHHDqPVQ2DJFBX7S
+# QKB locale support -- Arabic (Iraq)
+qkb_arirq = CtJ4BWW4pHHHDqPLQ3D3FBX7D
+# QKB locale support -- Arabic (Israel)
+qkb_arisr = CtJ4BWW4pHHHDqPLQqDqFBX7X
+# QKB locale support -- Arabic (Jordan)
+qkb_arjor = CtJ4BWW4pHHHDqP2QJDqFBX7Q
+# QKB locale support -- Arabic (Kuwait)
+qkb_arkwt = CtJ4BWW4pHHHDqPWQSDRFBX7m
+# QKB locale support -- Arabic (Lebanon)
+qkb_arlbn = CtJ4BWW4pHHHDqPYQDDJFBX7R
+# QKB locale support -- Arabic (Libya)
+qkb_arlby = CtJ4BWW4pHHHDqPYQDDsFBX78
+# QKB locale support -- Arabic (Morocco)
+qkb_armar = CtJ4BWW4pHHHDqPmQQDqFBX7T
+# QKB locale support -- Arabic (Mauritania)
+qkb_armrt = CtJ4BWW4pHHHDqPmQ3DRFBX7n
+# QKB locale support -- Arabic (Oman)
+qkb_aromn = CtJ4BWW4pHHHDqPHQpDJFBX7P
+# QKB locale support -- Arabic (Qatar)
+qkb_arqat = CtJ4BWW4pHHHDqPMQQDRFBX77
+# QKB locale support -- Arabic (Saudi Arabia)
+qkb_arsau = CtJ4BWW4pHHHDqP3QQD5FBX7N
+# QKB locale support -- Arabic (Sudan)
+qkb_arsdn = CtJ4BWW4pHHHDqP3QXDJFBX76
+# QKB locale support -- Arabic (Syria)
+qkb_arsyr = CtJ4BWW4pHHHDqP3QTDqFBX74
+# QKB locale support -- Arabic (Tunisia)
+qkb_artun = CtJ4BWW4pHHHDqPqQRDJFBX7p
+# QKB locale support -- Arabic (Yemen)
+qkb_aryem = CtJ4BWW4pHHHDqPrQGDHFBX7Q
+# QKB locale support -- Avaric
+qkb_av = CtJ4BWW4pHHHDSPsQCDtFBX7L
+# QKB locale support -- Avaric (Azerbaijan)
+qkb_avaze = CtJ4BWW4pHHHDSPPQsDVFBX7B
+# QKB locale support -- Avaric (Russia)
+qkb_avrus = CtJ4BWW4pHHHDSPKQRD4FBX74
+# QKB locale support -- Aymara
+qkb_ay = CtJ4BWW4pHHHDsPsQCDtFBX7Y
+# QKB locale support -- Aymara (Bolivia)
+qkb_aybol = CtJ4BWW4pHHHDsPQQJDpFBX7B
+# QKB locale support -- Azerbaijani
+qkb_az = CtJ4BWW4pHHHDCPsQCDtFBX7m
+# QKB locale support -- Azerbaijani (Azerbaijan)
+qkb_azaze = CtJ4BWW4pHHHDCPPQsDVFBX79
+# QKB locale support -- Bulgarian
+qkb_bg = CtJ4BWW4pHHJDLPsQCDtFBX7B
+# QKB locale support -- Bulgarian (Bulgaria)
+qkb_bgbgr = CtJ4BWW4pHHJDLPQQZDqFBX7W
+# QKB locale support -- Bislama
+qkb_bi = CtJ4BWW4pHHJDWPsQCDtFBX77
+# QKB locale support -- Bislama (Vanuatu)
+qkb_bivut = CtJ4BWW4pHHJDWPRQRDRFBX7p
+# QKB locale support -- Bambara
+qkb_bm = CtJ4BWW4pHHJDHPsQCDtFBX7P
+# QKB locale support -- Bambara (Mali)
+qkb_bmmli = CtJ4BWW4pHHJDHPmQmDWFBX7S
+# QKB locale support -- Bambara (Burkina Faso)
+qkb_bmbfa = CtJ4BWW4pHHJDHPQQVDDFBX79
+# QKB locale support -- Bambara (Ivory Coast)
+qkb_bmciv = CtJ4BWW4pHHJDHPDQ2DSFBX7S
+# QKB locale support -- Bengali
+qkb_bn = CtJ4BWW4pHHJDJPsQCDtFBX7Q
+# QKB locale support -- Bengali (Bangladesh)
+qkb_bnbgd = CtJ4BWW4pHHJDJPQQZDGFBX7F
+# QKB locale support -- Bengali (India)
+qkb_bnind = CtJ4BWW4pHHJDJPLQHDGFBX7K
+# QKB locale support -- Belarusian
+qkb_be = CtJ4BWW4pHHJDVPsQCDtFBX7C
+# QKB locale support -- Belarusian (Belarus)
+qkb_beblr = CtJ4BWW4pHHJDVPQQmDqFBX7p
+# QKB locale support -- Bosnian
+qkb_bs = CtJ4BWW4pHHJD4PsQCDtFBX7V
+# QKB locale support -- Bosnian (Bosnia and Herzegowina)
+qkb_bsbih = CtJ4BWW4pHHJD4PQQ2D2FBX7H
+# QKB locale support -- Bosnian (Serbia and Montenegro)
+qkb_bsscg = CtJ4BWW4pHHJD4P3QFDLFBX7r
+# QKB locale support -- Catalan
+qkb_ca = CtJ4BWW4pHHMDDPsQCDtFBX7r
+# QKB locale support -- Catalan (Andorra)
+qkb_caand = CtJ4BWW4pHHMDDPPQHDGFBX78
+# QKB locale support -- Catalan (Spain)
+qkb_caesp = CtJ4BWW4pHHMDDPXQqDKFBX73
+# QKB locale support -- Chamorro
+qkb_ch = CtJ4BWW4pHHMD2PsQCDtFBX77
+# QKB locale support -- Chamorro (Guam)
+qkb_chgum = CtJ4BWW4pHHMD2PVQRDHFBX7s
+# QKB locale support -- Cree
+qkb_cr = CtJ4BWW4pHHMDqPsQCDtFBX7V
+# QKB locale support -- Cree (Canada)
+qkb_crcan = CtJ4BWW4pHHMDqPDQQDJFBX7p
+# QKB locale support -- Czech
+qkb_cs = CtJ4BWW4pHHMD4PsQCDtFBX7Z
+# QKB locale support -- Czech (Czech Republic)
+qkb_cscze = CtJ4BWW4pHHMD4PDQsDVFBX76
+# QKB locale support -- Danish
+qkb_da = CtJ4BWW4pHHKDDPsQCDtFBX7T
+# QKB locale support -- Danish (Denmark
+qkb_dadnk = CtJ4BWW4pHHKDDPFQHDmFBX7L
+# QKB locale support -- Danish (Greenland)
+qkb_dagrl = CtJ4BWW4pHHKDDPVQ3DpFBX7M
+# QKB locale support -- German
+qkb_de = CtJ4BWW4pHHKDVPsQCDtFBX7B
+# QKB locale support -- German (Austria)
+qkb_deaut = CtJ4BWW4pHHKDVPPQRDRFBX7T
+# QKB locale support -- German (Belgium)
+qkb_debel = CtJ4BWW4pHHKDVPQQGDpFBX7D
+# QKB locale support -- German (Germany)
+qkb_dedeu = CtJ4BWW4pHHKDVPFQGD5FBX7p
+# QKB locale support -- German (Switzerland)
+qkb_deche = CtJ4BWW4pHHKDVPDQLDVFBX7N
+# QKB locale support -- German (Liechtenstein)
+qkb_delie = CtJ4BWW4pHHKDVPYQ2DVFBX7n
+# QKB locale support -- German (Luxembourg)
+qkb_delux = CtJ4BWW4pHHKDVPYQRDTFBX7G
+# QKB locale support -- Dhiveli
+qkb_dv = CtJ4BWW4pHHKDSPsQCDtFBX7Y
+# QKB locale support -- Dhiveli (Maldives)
+qkb_dvmdv = CtJ4BWW4pHHKDSPmQXDSFBX7X
+# QKB locale support -- Dzongkha
+qkb_dz = CtJ4BWW4pHHKDCPsQCDtFBX7J
+# QKB locale support -- Dzongkha (Bhutan)
+qkb_dzbtn = CtJ4BWW4pHHKDCPQQ4DJFBX7G
+# QKB locale support -- Ewe
+qkb_ee = CtJ4BWW4pHH3DVPsQCDtFBX76
+# QKB locale support -- Ewe (Ghana)
+qkb_eegha = CtJ4BWW4pHH3DVPVQLDDFBX7P
+# QKB locale support -- Ewe (Togo)
+qkb_eetgo = CtJ4BWW4pHH3DVPqQZDMFBX7s
+# QKB locale support -- Greek
+qkb_el = CtJ4BWW4pHH3DpPsQCDtFBX7D
+# QKB locale support -- Greek (Cyprus)
+qkb_elcyp = CtJ4BWW4pHH3DpPDQTDKFBX7P
+# QKB locale support -- Greek (Greece)
+qkb_elgrc = CtJ4BWW4pHH3DpPVQ3DXFBX7q
+# QKB locale support -- English
+qkb_en = CtJ4BWW4pHH3DJPsQCDtFBX7X
+# QKB locale support -- English (Anguilla)
+qkb_enaia = CtJ4BWW4pHH3DJPPQ2DDFBX7X
+# QKB locale support -- English (American Samoa)
+qkb_enasm = CtJ4BWW4pHH3DJPPQqDHFBX7s
+# QKB locale support -- English (Antarctica)
+qkb_enata = CtJ4BWW4pHH3DJPPQ4DDFBX7J
+# QKB locale support -- English (Antigua and Barbuda)
+qkb_enatg = CtJ4BWW4pHH3DJPPQ4DLFBX7R
+# QKB locale support -- English (Australia)
+qkb_enaus = CtJ4BWW4pHH3DJPPQRD4FBX7N
+# QKB locale support -- English (Bahamas)
+qkb_enbhs = CtJ4BWW4pHH3DJPQQLD4FBX75
+# QKB locale support -- English (Belize)
+qkb_enblz = CtJ4BWW4pHH3DJPQQmDCFBX79
+# QKB locale support -- English (Bermuda)
+qkb_enbmu = CtJ4BWW4pHH3DJPQQpD5FBX7B
+# QKB locale support -- English (Barbados)
+qkb_enbrb = CtJ4BWW4pHH3DJPQQ3DFFBX7J
+# QKB locale support -- English (Botswana)
+qkb_enbwa = CtJ4BWW4pHH3DJPQQSDDFBX7q
+# QKB locale support -- English (Canada)
+qkb_encan = CtJ4BWW4pHH3DJPDQQDJFBX7Y
+# QKB locale support -- English (Cocos Islands)
+qkb_encck = CtJ4BWW4pHH3DJPDQFDmFBX7W
+# QKB locale support -- English (Switzerland)
+qkb_enche = CtJ4BWW4pHH3DJPDQLDVFBX7n
+# QKB locale support -- English (Cameroon)
+qkb_encmr = CtJ4BWW4pHH3DJPDQpDqFBX7C
+# QKB locale support -- English (Cook Islands)
+qkb_encok = CtJ4BWW4pHH3DJPDQJDmFBX75
+# QKB locale support -- English (Christmas Island)
+qkb_encxr = CtJ4BWW4pHH3DJPDQrDqFBX7F
+# QKB locale support -- English (Cayman Islands)
+qkb_encym = CtJ4BWW4pHH3DJPDQTDHFBX7N
+# QKB locale support -- English (Dominica)
+qkb_endma = CtJ4BWW4pHH3DJPFQpDDFBX7Y
+# QKB locale support -- English (Fiji)
+qkb_enfji = CtJ4BWW4pHH3DJPGQWDWFBX73
+# QKB locale support -- English (Falkland Islands)
+qkb_enflk = CtJ4BWW4pHH3DJPGQmDmFBX75
+# QKB locale support -- English (Federated States of Micronesia)
+qkb_enfsm = CtJ4BWW4pHH3DJPGQqDHFBX77
+# QKB locale support -- English (United Kingdom)
+qkb_engbr = CtJ4BWW4pHH3DJPVQDDqFBX74
+# QKB locale support -- English (Ghana)
+qkb_engha = CtJ4BWW4pHH3DJPVQLDDFBX7n
+# QKB locale support -- English (Gibraltar)
+qkb_engib = CtJ4BWW4pHH3DJPVQ2DFFBX7Y
+# QKB locale support -- English (Gambia)
+qkb_engmb = CtJ4BWW4pHH3DJPVQpDFFBX7J
+# QKB locale support -- English (Grenada)
+qkb_engrd = CtJ4BWW4pHH3DJPVQ3DGFBX75
+# QKB locale support -- English (Guam)
+qkb_engum = CtJ4BWW4pHH3DJPVQRDHFBX7N
+# QKB locale support -- English (Guyana)
+qkb_enguy = CtJ4BWW4pHH3DJPVQRDsFBX7Y
+# QKB locale support -- English (Hong Kong)
+qkb_enhkg = CtJ4BWW4pHH3DJPZQYDLFBX7q
+# QKB locale support -- English (Indonesia)
+qkb_enidn = CtJ4BWW4pHH3DJPLQXDJFBX74
+# QKB locale support -- English (India)
+qkb_enind = CtJ4BWW4pHH3DJPLQHDGFBX74
+# QKB locale support -- English (Ireland)
+qkb_enirl = CtJ4BWW4pHH3DJPLQ3DpFBX78
+# QKB locale support -- English (Jamaica)
+qkb_enjam = CtJ4BWW4pHH3DJP2QQDHFBX7K
+# QKB locale support -- English (Kenya)
+qkb_enken = CtJ4BWW4pHH3DJPWQGDJFBX7S
+# QKB locale support -- English (Kiribati)
+qkb_enkir = CtJ4BWW4pHH3DJPWQ2DqFBX77
+# QKB locale support -- English (Saint Kitts and Nevis)
+qkb_enkna = CtJ4BWW4pHH3DJPWQHDDFBX7q
+# QKB locale support -- English (Saint Lucia)
+qkb_enlca = CtJ4BWW4pHH3DJPYQFDDFBX7n
+# QKB locale support -- English (Sri Lanka)
+qkb_enlka = CtJ4BWW4pHH3DJPYQYDDFBX7K
+# QKB locale support -- English (Maldives)
+qkb_enmdv = CtJ4BWW4pHH3DJPmQXDSFBX78
+# QKB locale support -- English (Malta)
+qkb_enmlt = CtJ4BWW4pHH3DJPmQmDRFBX7F
+# QKB locale support -- English (Norfolk Island)
+qkb_ennfk = CtJ4BWW4pHH3DJPpQVDmFBX7r
+# QKB locale support -- English (Liberia)
+qkb_enlbr = CtJ4BWW4pHH3DJPYQDDqFBX7T
+# QKB locale support -- English (Lesotho)
+qkb_enlso = CtJ4BWW4pHH3DJPYQqDMFBX7X
+# QKB locale support -- English (Northern Mariana Islands)
+qkb_enmnp = CtJ4BWW4pHH3DJPmQHDKFBX7Q
+# QKB locale support -- English (Montserrat)
+qkb_enmsr = CtJ4BWW4pHH3DJPmQqDqFBX7L
+# QKB locale support -- English (Malawi)
+qkb_enmwi = CtJ4BWW4pHH3DJPmQSDWFBX7F
+# QKB locale support -- English (Mauritius)
+qkb_enmus = CtJ4BWW4pHH3DJPmQRD4FBX7Y
+# QKB locale support -- English (Malaysia)
+qkb_enmys = CtJ4BWW4pHH3DJPmQTD4FBX7J
+# QKB locale support -- English (Namibia)
+qkb_ennam = CtJ4BWW4pHH3DJPpQQDHFBX7R
+# QKB locale support -- English (Nigeria)
+qkb_ennga = CtJ4BWW4pHH3DJPpQZDDFBX7J
+# QKB locale support -- English (Niue)
+qkb_enniu = CtJ4BWW4pHH3DJPpQ2D5FBX7D
+# QKB locale support -- English (Nauru)
+qkb_ennru = CtJ4BWW4pHH3DJPpQ3D5FBX7Y
+# QKB locale support -- English (New Zealand)
+qkb_ennzl = CtJ4BWW4pHH3DJPpQsDpFBX7W
+# QKB locale support -- English (Pitcairn Islands)
+qkb_enpcn = CtJ4BWW4pHH3DJPJQFDJFBX7s
+# QKB locale support -- English (Philippines)
+qkb_enphl = CtJ4BWW4pHH3DJPJQLDpFBX7B
+# QKB locale support -- English (Palau)
+qkb_enplw = CtJ4BWW4pHH3DJPJQmDrFBX7n
+# QKB locale support -- English (Papau New Guinea)
+qkb_enpng = CtJ4BWW4pHH3DJPJQHDLFBX76
+# QKB locale support -- English (Puerto Rico)
+qkb_enpri = CtJ4BWW4pHH3DJPJQ3DWFBX7Q
+# QKB locale support -- English (Rwanda)
+qkb_enrwa = CtJ4BWW4pHH3DJPKQSDDFBX7P
+# QKB locale support -- English (Singapore)
+qkb_ensgp = CtJ4BWW4pHH3DJP3QZDKFBX7P
+# QKB locale support -- English (S. Georgia and the S. Sandwich Islands)
+qkb_ensgs = CtJ4BWW4pHH3DJP3QZD4FBX7F
+# QKB locale support -- English (Saint Helena)
+qkb_enshn = CtJ4BWW4pHH3DJP3QLDJFBX7N
+# QKB locale support -- English (Solomon Islands)
+qkb_enslb = CtJ4BWW4pHH3DJP3QmDFFBX7s
+# QKB locale support -- English (Sierra Leone)
+qkb_ensle = CtJ4BWW4pHH3DJP3QmDVFBX7B
+# QKB locale support -- English (Swaziland)
+qkb_enswz = CtJ4BWW4pHH3DJP3QSDCFBX7s
+# QKB locale support -- English (Seychelles)
+qkb_ensyc = CtJ4BWW4pHH3DJP3QTDXFBX7G
+# QKB locale support -- English (Turks and Caicos)
+qkb_entca = CtJ4BWW4pHH3DJPqQFDDFBX7K
+# QKB locale support -- English (Tokelau)
+qkb_entkl = CtJ4BWW4pHH3DJPqQYDpFBX7Q
+# QKB locale support -- English (Tonga)
+qkb_enton = CtJ4BWW4pHH3DJPqQJDJFBX7Z
+# QKB locale support -- English (Trinidad and Tobago)
+qkb_entto = CtJ4BWW4pHH3DJPqQ4DMFBX7p
+# QKB locale support -- English (Tuvalu)
+qkb_entuv = CtJ4BWW4pHH3DJPqQRDSFBX7R
+# QKB locale support -- English (Uganda)
+qkb_enuga = CtJ4BWW4pHH3DJP4QZDDFBX75
+# QKB locale support -- English (United States)
+qkb_enusa = CtJ4BWW4pHH3DJP4QqDDFBX7N
+# QKB locale support -- English (Saint Vincent and the Grenadines)
+qkb_envct = CtJ4BWW4pHH3DJPRQFDRFBX7F
+# QKB locale support -- English (British Virgin Islands)
+qkb_envgb = CtJ4BWW4pHH3DJPRQZDFFBX7r
+# QKB locale support -- English (U.S. Virgin Islands)
+qkb_envir = CtJ4BWW4pHH3DJPRQ2DqFBX7Z
+# QKB locale support -- English (Vanuatu)
+qkb_envut = CtJ4BWW4pHH3DJPRQRDRFBX7R
+# QKB locale support -- English (Samoa)
+qkb_enwsm = CtJ4BWW4pHH3DJP5QqDHFBX7p
+# QKB locale support -- English (South Africa)
+qkb_enzaf = CtJ4BWW4pHH3DJPTQQDZFBX7s
+# QKB locale support -- English (Zambia)
+qkb_enzmb = CtJ4BWW4pHH3DJPTQpDFFBX7N
+# QKB locale support -- English (Zimbabwe)
+qkb_enzwe = CtJ4BWW4pHH3DJPTQSDVFBX7m
+# QKB locale support -- Spanish
+qkb_es = CtJ4BWW4pHH3D4PsQCDtFBX7n
+# QKB locale support -- Spanish (Andorra)
+qkb_esand = CtJ4BWW4pHH3D4PPQHDGFBX7K
+# QKB locale support -- Spanish (Argentina)
+qkb_esarg = CtJ4BWW4pHH3D4PPQ3DLFBX7r
+# QKB locale support -- Spanish (Belize)
+qkb_esblz = CtJ4BWW4pHH3D4PQQmDCFBX7F
+# QKB locale support -- Spanish (Bolivia)
+qkb_esbol = CtJ4BWW4pHH3D4PQQJDpFBX7C
+# QKB locale support -- Spanish (Chile)
+qkb_eschl = CtJ4BWW4pHH3D4PDQLDpFBX7R
+# QKB locale support -- Spanish (Colombia)
+qkb_escol = CtJ4BWW4pHH3D4PDQJDpFBX7t
+# QKB locale support -- Spanish (Costa Rica)
+qkb_escri = CtJ4BWW4pHH3D4PDQ3DWFBX7t
+# QKB locale support -- Spanish (Cuba)
+qkb_escub = CtJ4BWW4pHH3D4PDQRDFFBX7r
+# QKB locale support -- Spanish (Dominican Republic)
+qkb_esdom = CtJ4BWW4pHH3D4PFQJDHFBX76
+# QKB locale support -- Spanish (Ecuador)
+qkb_esecu = CtJ4BWW4pHH3D4PXQFD5FBX7C
+# QKB locale support -- Spanish (Western Sahara)
+qkb_esesh = CtJ4BWW4pHH3D4PXQqD2FBX76
+# QKB locale support -- Spanish (Spain)
+qkb_esesp = CtJ4BWW4pHH3D4PXQqDKFBX7F
+# QKB locale support -- Spanish (Equatorial Guineau)
+qkb_esgnq = CtJ4BWW4pHH3D4PVQHD3FBX7Q
+# QKB locale support -- Spanish (Guatemala)
+qkb_esgtm = CtJ4BWW4pHH3D4PVQ4DHFBX7F
+# QKB locale support -- Spanish (Honduras)
+qkb_eshnd = CtJ4BWW4pHH3D4PZQHDGFBX7r
+# QKB locale support -- Spanish (Mexico)
+qkb_esmex = CtJ4BWW4pHH3D4PmQGDTFBX7G
+# QKB locale support -- Spanish (Nicaragua)
+qkb_esnic = CtJ4BWW4pHH3D4PpQ2DXFBX7r
+# QKB locale support -- Spanish (Panama)
+qkb_espan = CtJ4BWW4pHH3D4PJQQDJFBX7B
+# QKB locale support -- Spanish (Peru)
+qkb_esper = CtJ4BWW4pHH3D4PJQGDqFBX7D
+# QKB locale support -- Spanish (Puerto Rico)
+qkb_espri = CtJ4BWW4pHH3D4PJQ3DWFBX7V
+# QKB locale support -- Spanish (Paraguay)
+qkb_espry = CtJ4BWW4pHH3D4PJQ3DsFBX75
+# QKB locale support -- Spanish (El Salvador)
+qkb_esslv = CtJ4BWW4pHH3D4P3QmDSFBX7M
+# QKB locale support -- Spanish (Venezuela)
+qkb_esven = CtJ4BWW4pHH3D4PRQGDJFBX7X
+# QKB locale support -- Spanish (Uruguay)
+qkb_esury = CtJ4BWW4pHH3D4P4Q3DsFBX7C
+# QKB locale support -- Estonian
+qkb_et = CtJ4BWW4pHH3DRPsQCDtFBX7W
+# QKB locale support -- Estonian (Estonia)
+qkb_etest = CtJ4BWW4pHH3DRPXQqDRFBX7L
+# QKB locale support -- Persian
+qkb_fa = CtJ4BWW4pHHqDDPsQCDtFBX7C
+# QKB locale support -- Persian (Afghanistan)
+qkb_faafg = CtJ4BWW4pHHqDDPPQVDLFBX76
+# QKB locale support -- Persian (Iran)
+qkb_fairn = CtJ4BWW4pHHqDDPLQ3DJFBX75
+# QKB locale support -- Fula
+qkb_ff = CtJ4BWW4pHHqDZPsQCDtFBX78
+# QKB locale support -- Fula (Gambia)
+qkb_ffgmb = CtJ4BWW4pHHqDZPVQpDFFBX7L
+# QKB locale support -- Fula (Guinea)
+qkb_ffgin = CtJ4BWW4pHHqDZPVQ2DJFBX7M
+# QKB locale support -- Finnish
+qkb_fi = CtJ4BWW4pHHqDWPsQCDtFBX7P
+# QKB locale support -- Finnish (Finland)
+qkb_fifin = CtJ4BWW4pHHqDWPGQ2DJFBX73
+# QKB locale support -- Fijian
+qkb_fj = CtJ4BWW4pHHqDYPsQCDtFBX7Q
+# QKB locale support -- Fijian (Fiji)
+qkb_fjfji = CtJ4BWW4pHHqDYPGQWDWFBX7J
+# QKB locale support -- French
+qkb_fr = CtJ4BWW4pHHqDqPsQCDtFBX7n
+# QKB locale support -- French (Burundi)
+qkb_frbdi = CtJ4BWW4pHHqDqPQQXDWFBX7p
+# QKB locale support -- French (Belgium)
+qkb_frbel = CtJ4BWW4pHHqDqPQQGDpFBX7K
+# QKB locale support -- French (Benin)
+qkb_frben = CtJ4BWW4pHHqDqPQQGDJFBX7q
+# QKB locale support -- French (Burkina Faso)
+qkb_frbfa = CtJ4BWW4pHHqDqPQQVDDFBX7Z
+# QKB locale support -- French (Central African Republic)
+qkb_frcaf = CtJ4BWW4pHHqDqPDQQDZFBX7L
+# QKB locale support -- French (Canada)
+qkb_frcan = CtJ4BWW4pHHqDqPDQQDJFBX7M
+# QKB locale support -- French (Switzerland)
+qkb_frche = CtJ4BWW4pHHqDqPDQLDVFBX7H
+# QKB locale support -- French (Ivory Coast)
+qkb_frciv = CtJ4BWW4pHHqDqPDQ2DSFBX78
+# QKB locale support -- French (Cameroon)
+qkb_frcmr = CtJ4BWW4pHHqDqPDQpDqFBX78
+# QKB locale support -- French (Congo)
+qkb_frcog = CtJ4BWW4pHHqDqPDQJDLFBX7S
+# QKB locale support -- French (Comoros)
+qkb_frcom = CtJ4BWW4pHHqDqPDQJDHFBX7B
+# QKB locale support -- French (Djibouti)
+qkb_frdji = CtJ4BWW4pHHqDqPFQWDWFBX7R
+# QKB locale support -- French (France)
+qkb_frfra = CtJ4BWW4pHHqDqPGQ3DDFBX7S
+# QKB locale support -- French (Gabon)
+qkb_frgab = CtJ4BWW4pHHqDqPVQQDFFBX7L
+# QKB locale support -- French (Guinea)
+qkb_frgin = CtJ4BWW4pHHqDqPVQ2DJFBX7t
+# QKB locale support -- French (Guadeloupe)
+qkb_frglp = CtJ4BWW4pHHqDqPVQmDKFBX79
+# QKB locale support -- French (Equatorial Guinea)
+qkb_frgnq = CtJ4BWW4pHHqDqPVQHD3FBX7Q
+# QKB locale support -- French (French Guiana)
+qkb_frguf = CtJ4BWW4pHHqDqPVQRDZFBX78
+# QKB locale support -- French (Haiti)
+qkb_frhti = CtJ4BWW4pHHqDqPZQ4DWFBX7P
+# QKB locale support -- French (Cambodia)
+qkb_frkhm = CtJ4BWW4pHHqDqPWQLDHFBX76
+# QKB locale support -- French (Lebanon)
+qkb_frlbn = CtJ4BWW4pHHqDqPYQDDJFBX7s
+# QKB locale support -- French (Luxembourg)
+qkb_frlux = CtJ4BWW4pHHqDqPYQRDTFBX74
+# QKB locale support -- French (Monaco)
+qkb_frmco = CtJ4BWW4pHHqDqPmQFDMFBX7B
+# QKB locale support -- French (Madagascar)
+qkb_frmdg = CtJ4BWW4pHHqDqPmQXDLFBX75
+# QKB locale support -- French (Mali)
+qkb_frmli = CtJ4BWW4pHHqDqPmQmDWFBX78
+# QKB locale support -- French (Mauritania)
+qkb_frmrt = CtJ4BWW4pHHqDqPmQ3DRFBX7H
+# QKB locale support -- French (Martinique)
+qkb_frmtq = CtJ4BWW4pHHqDqPmQ4D3FBX7p
+# QKB locale support -- French (Mauritius)
+qkb_frmus = CtJ4BWW4pHHqDqPmQRD4FBX7M
+# QKB locale support -- French (Mayotte)
+qkb_frmyt = CtJ4BWW4pHHqDqPmQTDRFBX7R
+# QKB locale support -- French (New Caledonia)
+qkb_frncl = CtJ4BWW4pHHqDqPpQFDpFBX7C
+# QKB locale support -- French (Niger)
+qkb_frner = CtJ4BWW4pHHqDqPpQGDqFBX7P
+# QKB locale support -- French (French Polynesia)
+qkb_frpyf = CtJ4BWW4pHHqDqPJQTDZFBX7W
+# QKB locale support -- French (Reunion)
+qkb_frreu = CtJ4BWW4pHHqDqPKQGD5FBX7Z
+# QKB locale support -- French (Rwanda)
+qkb_frrwa = CtJ4BWW4pHHqDqPKQSDDFBX7G
+# QKB locale support -- French (Senegal)
+qkb_frsen = CtJ4BWW4pHHqDqP3QGDJFBX7Q
+# QKB locale support -- French (Saint Pierre and Miquelon)
+qkb_frspm = CtJ4BWW4pHHqDqP3QMDHFBX7Y
+# QKB locale support -- French (Seychelles)
+qkb_frsyc = CtJ4BWW4pHHqDqP3QTDXFBX7W
+# QKB locale support -- French (Chad)
+qkb_frtcd = CtJ4BWW4pHHqDqPqQFDGFBX7T
+# QKB locale support -- French (Togo)
+qkb_frtgo = CtJ4BWW4pHHqDqPqQZDMFBX7G
+# QKB locale support -- French (Vanuatu)
+qkb_frvut = CtJ4BWW4pHHqDqPRQRDRFBX7s
+# QKB locale support -- French (Wallis and Futuna)
+qkb_frwlf = CtJ4BWW4pHHqDqP5QmDZFBX7X
+# QKB locale support -- French (Democratic Republic of the Congo)
+qkb_frzar = CtJ4BWW4pHHqDqPTQQDqFBX7L
+# QKB locale support -- Irish
+qkb_ga = CtJ4BWW4pHH4DDPsQCDtFBX7t
+# QKB locale support -- Irish (Ireland)
+qkb_gairl = CtJ4BWW4pHH4DDPLQ3DpFBX7R
+# QKB locale support -- Guarani
+qkb_gn = CtJ4BWW4pHH4DJPsQCDtFBX7V
+# QKB locale support -- Guarani (Paraguay)
+qkb_gnpry = CtJ4BWW4pHH4DJPJQ3DsFBX7q
+# QKB locale support -- Gujarati
+qkb_gu = CtJ4BWW4pHH4D5PsQCDtFBX7p
+# QKB locale support -- Gujarati (India)
+qkb_guind = CtJ4BWW4pHH4D5PLQHDGFBX7B
+# QKB locale support -- Hebrew
+qkb_he = CtJ4BWW4pHHRDVPsQCDtFBX79
+# QKB locale support -- Hebrew (Israel)
+qkb_heisr = CtJ4BWW4pHHRDVPLQqDqFBX79
+# QKB locale support -- Hindi
+qkb_hi = CtJ4BWW4pHHRDWPsQCDtFBX7D
+# QKB locale support -- Hindi (India)
+qkb_hiind = CtJ4BWW4pHHRDWPLQHDGFBX73
+# QKB locale support -- Hiri Motu
+qkb_ho = CtJ4BWW4pHHRDMPsQCDtFBX7L
+# QKB locale support -- Hiri Motu (Papau New Guinea)
+qkb_hopng = CtJ4BWW4pHHRDMPJQHDLFBX7N
+# QKB locale support -- Croatian
+qkb_hr = CtJ4BWW4pHHRDqPsQCDtFBX7Y
+# QKB locale support -- Croatian (Croatia)
+qkb_hrhrv = CtJ4BWW4pHHRDqPZQ3DSFBX7p
+# QKB locale support -- Haitian Creole
+qkb_ht = CtJ4BWW4pHHRDRPsQCDtFBX7p
+# QKB locale support -- Haitian Creole (Haiti)
+qkb_hthti = CtJ4BWW4pHHRDRPZQ4DWFBX7X
+# QKB locale support -- Hungarian
+qkb_hu = CtJ4BWW4pHHRD5PsQCDtFBX7H
+# QKB locale support -- Hungarian (Hungary)
+qkb_huhun = CtJ4BWW4pHHRD5PZQRDJFBX7Y
+# QKB locale support -- Armenian
+qkb_hy = CtJ4BWW4pHHRDsPsQCDtFBX73
+# QKB locale support -- Armenian (Armenia)
+qkb_hyarm = CtJ4BWW4pHHRDsPPQ3DHFBX7X
+# QKB locale support -- Greenlandic
+qkb_kl = CtJ4BWW4pHHrDpPsQCDtFBX7L
+# QKB locale support -- Greenlandic (Greenland)
+qkb_klgrl = CtJ4BWW4pHHrDpPVQ3DpFBX7N
+# QKB locale support -- Kanuri
+qkb_kr = CtJ4BWW4pHHrDqPsQCDtFBX7H
+# QKB locale support -- Kanuri (Niger)
+qkb_krner = CtJ4BWW4pHHrDqPpQGDqFBX7G
+# QKB locale support -- Kanuri (Nigeria)
+qkb_krnga = CtJ4BWW4pHHrDqPpQZDDFBX7T
+# QKB locale support -- Kurdish
+qkb_ku = CtJ4BWW4pHHrD5PsQCDtFBX7K
+# QKB locale support -- Kurdish (Iraq)
+qkb_kuirq = CtJ4BWW4pHHrD5PLQ3D3FBX7J
+# QKB locale support -- Indonesian
+qkb_id = CtJ4BWW4pHH5DGPsQCDtFBX79
+# QKB locale support -- Indonesian (Indonesia)
+qkb_ididn = CtJ4BWW4pHH5DGPLQXDJFBX7H
+# QKB locale support -- Igbo
+qkb_ig = CtJ4BWW4pHH5DLPsQCDtFBX7Q
+# QKB locale support -- Igbo (Nigeria)
+qkb_ignga = CtJ4BWW4pHH5DLPpQZDDFBX7m
+# QKB locale support -- Sichuan Yi
+qkb_ii = CtJ4BWW4pHH5DWPsQCDtFBX7F
+# QKB locale support -- Sichuan Yi (China)
+qkb_iichn = CtJ4BWW4pHH5DWPDQLDJFBX7K
+# QKB locale support -- Icelandic
+qkb_is = CtJ4BWW4pHH5D4PsQCDtFBX7p
+# QKB locale support -- Icelandic (Iceland)
+qkb_isisl = CtJ4BWW4pHH5D4PLQqDpFBX7Z
+# QKB locale support -- Italian
+qkb_it = CtJ4BWW4pHH5DRPsQCDtFBX7H
+# QKB locale support -- Italian (Switzerland)
+qkb_itche = CtJ4BWW4pHH5DRPDQLDVFBX7q
+# QKB locale support -- Italian (Italy)
+qkb_itita = CtJ4BWW4pHH5DRPLQ4DDFBX79
+# QKB locale support -- Italian (Vatican City)
+qkb_itvat = CtJ4BWW4pHH5DRPRQQDRFBX7Y
+# QKB locale support -- Japanese
+qkb_ja = CtJ4BWW4pHHSDDPsQCDtFBX77
+# QKB locale support -- Japanese (Japan)
+qkb_jajpn = CtJ4BWW4pHHSDDP2QMDJFBX7T
+# QKB locale support -- Japanese (Palau)
+qkb_japlw = CtJ4BWW4pHHSDDPJQmDrFBX7Q
+# QKB locale support -- Lao
+qkb_lo = CtJ4BWW4pHHTDMPsQCDtFBX7m
+# QKB locale support -- Lao (Laos)
+qkb_lolao = CtJ4BWW4pHHTDMPYQQDMFBX7B
+# QKB locale support -- Georgian
+qkb_ka = CtJ4BWW4pHHrDDPsQCDtFBX78
+# QKB locale support -- Georgian (Georgia)
+qkb_kageo = CtJ4BWW4pHHrDDPVQGDMFBX7p
+# QKB locale support -- Kongo
+qkb_kg = CtJ4BWW4pHHrDLPsQCDtFBX7F
+# QKB locale support -- Kongo (Angola)
+qkb_kgago = CtJ4BWW4pHHrDLPPQZDMFBX7J
+# QKB locale support -- Kongo (Congo)
+qkb_kgcog = CtJ4BWW4pHHrDLPDQJDLFBX7K
+# QKB locale support -- Kongo (Democratic Republic of the Congo)
+qkb_kgzar = CtJ4BWW4pHHrDLPTQQDqFBX7D
+# QKB locale support -- Kazakh
+qkb_kk = CtJ4BWW4pHHrDmPsQCDtFBX7Z
+# QKB locale support -- Kazakh (Kazakhstan)
+qkb_kkkaz = CtJ4BWW4pHHrDmPWQQDCFBX7N
+# QKB locale support -- Khmer
+qkb_km = CtJ4BWW4pHHrDHPsQCDtFBX7n
+# QKB locale support -- Khmer (Cambodia)
+qkb_kmkhm = CtJ4BWW4pHHrDHPWQLDHFBX76
+# QKB locale support -- Korean
+qkb_ko = CtJ4BWW4pHHrDMPsQCDtFBX7Y
+# QKB locale support -- Korean (South Korea)
+qkb_kokor = CtJ4BWW4pHHrDMPWQJDqFBX7n
+# QKB locale support -- Korean (North Korea)
+qkb_koprk = CtJ4BWW4pHHrDMPJQ3DmFBX7W
+# QKB locale support -- Kashmiri
+qkb_ks = CtJ4BWW4pHHrD4PsQCDtFBX7J
+# QKB locale support -- Kashmiri (India)
+qkb_ksind = CtJ4BWW4pHHrD4PLQHDGFBX77
+# QKB locale support -- Kyrgyz
+qkb_ky = CtJ4BWW4pHHrDsPsQCDtFBX7R
+# QKB locale support -- Kyrgyz (Kyrgyzstan)
+qkb_kykgz = CtJ4BWW4pHHrDsPWQZDCFBX7q
+# QKB locale support -- Latin
+qkb_la = CtJ4BWW4pHHTDDPsQCDtFBX79
+# QKB locale support -- Latin (Vatican City)
+qkb_lavat = CtJ4BWW4pHHTDDPRQQDRFBX76
+# QKB locale support -- Luxembourgish
+qkb_lb = CtJ4BWW4pHHTDFPsQCDtFBX7N
+# QKB locale support -- Luxembourgish (Luxembourg)
+qkb_lblux = CtJ4BWW4pHHTDFPYQRDTFBX7W
+# QKB locale support -- Luganda
+qkb_lg = CtJ4BWW4pHHTDLPsQCDtFBX7X
+# QKB locale support -- Luganda (Uganda)
+qkb_lguga = CtJ4BWW4pHHTDLP4QZDDFBX75
+# QKB locale support -- Luxembourgish (Luxembourg)
+qkb_ltlux = CtJ4BWW4pHHTDRPYQRDTFBX7t
+# QKB locale support -- Lingala
+qkb_ln = CtJ4BWW4pHHTDJPsQCDtFBX7Y
+# QKB locale support -- Lingala (Democratic Republic of the Congo)
+qkb_lnzar = CtJ4BWW4pHHTDJPTQQDqFBX7W
+# QKB locale support -- Lithuanian
+qkb_lt = CtJ4BWW4pHHTDRPsQCDtFBX7K
+# QKB locale support -- Lithuanian (Lithuania)
+qkb_ltltu = CtJ4BWW4pHHTDRPYQ4D5FBX7r
+# QKB locale support -- Luba
+qkb_lu = CtJ4BWW4pHHTD5PsQCDtFBX73
+# QKB locale support -- Luba (Democratic Republic of the Congo)
+qkb_luzar = CtJ4BWW4pHHTD5PTQQDqFBX7K
+# QKB locale support -- Latvian
+qkb_lv = CtJ4BWW4pHHTDSPsQCDtFBX7q
+# QKB locale support -- Latvian (Latvia)
+qkb_lvlva = CtJ4BWW4pHHTDSPYQ5DDFBX7L
+# QKB locale support -- Malagasy
+qkb_mg = CtJ4BWW4pHHsDLPsQCDtFBX7G
+# QKB locale support -- Malagasy (Madagascar)
+qkb_mgmdg = CtJ4BWW4pHHsDLPmQXDLFBX73
+# QKB locale support -- Marshallese
+qkb_mh = CtJ4BWW4pHHsD2PsQCDtFBX7V
+# QKB locale support -- Marshallese (Marshall Islands)
+qkb_mhmhl = CtJ4BWW4pHHsD2PmQLDpFBX7t
+# QKB locale support -- Maori
+qkb_mi = CtJ4BWW4pHHsDWPsQCDtFBX7Z
+# QKB locale support -- Maori (Cook Islands)
+qkb_micok = CtJ4BWW4pHHsDWPDQJDmFBX7T
+# QKB locale support -- Maori (New Zealand)
+qkb_minzl = CtJ4BWW4pHHsDWPpQsDpFBX7p
+# QKB locale support -- Moldovan
+qkb_mo = CtJ4BWW4pHHsDMPsQCDtFBX7p
+# QKB locale support -- Moldovan (Moldova)
+qkb_momda = CtJ4BWW4pHHsDMPmQXDDFBX74
+# QKB locale support -- Maltese
+qkb_mt = CtJ4BWW4pHHsDRPsQCDtFBX73
+# QKB locale support -- Maltese (Malta)
+qkb_mtmlt = CtJ4BWW4pHHsDRPmQmDRFBX7K
+# QKB locale support -- Macedonian
+qkb_mk = CtJ4BWW4pHHsDmPsQCDtFBX7n
+# QKB locale support -- Macedonian (Macedonia)
+qkb_mkmkd = CtJ4BWW4pHHsDmPmQYDGFBX7s
+# QKB locale support -- Mongolian
+qkb_mn = CtJ4BWW4pHHsDJPsQCDtFBX7m
+# QKB locale support -- Mongolian (Mongolia)
+qkb_mnmng = CtJ4BWW4pHHsDJPmQHDLFBX7P
+# QKB locale support -- Malay
+qkb_ms = CtJ4BWW4pHHsD4PsQCDtFBX7K
+# QKB locale support -- Malay (Brunei)
+qkb_msbrn = CtJ4BWW4pHHsD4PQQ3DJFBX7G
+# QKB locale support -- Malay (Christmas Island)
+qkb_mscxr = CtJ4BWW4pHHsD4PDQrDqFBX7M
+# QKB locale support -- Malay (Malaysia)
+qkb_msmys = CtJ4BWW4pHHsD4PmQTD4FBX7t
+# QKB locale support -- Malay (Singapore)
+qkb_mssgp = CtJ4BWW4pHHsD4P3QZDKFBX7p
+# QKB locale support -- Burmese
+qkb_my = CtJ4BWW4pHHsDsPsQCDtFBX7S
+# QKB locale support -- Burmese (Myanmar)
+qkb_mymmr = CtJ4BWW4pHHsDsPmQpDqFBX7R
+# QKB locale support -- Nauruan
+qkb_na = CtJ4BWW4pHHCDDPsQCDtFBX7P
+# QKB locale support -- Nauruan (Nauru)
+qkb_nanru = CtJ4BWW4pHHCDDPpQ3D5FBX7Z
+# QKB locale support -- Nepali
+qkb_ne = CtJ4BWW4pHHCDVPsQCDtFBX7X
+# QKB locale support -- Nepali (Nepal)
+qkb_nenpl = CtJ4BWW4pHHCDVPpQMDpFBX7P
+# QKB locale support -- Dutch
+qkb_nl = CtJ4BWW4pHHCDpPsQCDtFBX7Y
+# QKB locale support -- Dutch (Aruba)
+qkb_nlabw = CtJ4BWW4pHHCDpPPQDDrFBX7s
+# QKB locale support -- Dutch (Netherlands Antilles)
+qkb_nlant = CtJ4BWW4pHHCDpPPQHDRFBX7P
+# QKB locale support -- Dutch (Belgium)
+qkb_nlbel = CtJ4BWW4pHHCDpPQQGDpFBX7q
+# QKB locale support -- Dutch (Netherlands)
+qkb_nlnld = CtJ4BWW4pHHCDpPpQmDGFBX76
+# QKB locale support -- Dutch (Suriname)
+qkb_nlsur = CtJ4BWW4pHHCDpP3QRDqFBX7S
+# QKB locale support -- Dutch (South Africa)
+qkb_nlzaf = CtJ4BWW4pHHCDpPTQQDZFBX79
+# QKB locale support -- Norwegian
+qkb_no = CtJ4BWW4pHHCDMPsQCDtFBX7H
+# QKB locale support -- Norwegian (Norway)
+qkb_nonor = CtJ4BWW4pHHCDMPpQJDqFBX7J
+# QKB locale support -- Ndebele
+qkb_nr = CtJ4BWW4pHHCDqPsQCDtFBX7K
+# QKB locale support -- Ndebele (South Africa)
+qkb_nrzaf = CtJ4BWW4pHHCDqPTQQDZFBX7X
+# QKB locale support -- Chichewa
+qkb_ny = CtJ4BWW4pHHCDsPsQCDtFBX7r
+# QKB locale support -- Chichewa (Malawi)
+qkb_nymwi = CtJ4BWW4pHHCDsPmQSDWFBX7S
+# QKB locale support -- Ojibwe
+qkb_oj = CtJ4BWW4pHHtDYPsQCDtFBX7W
+# QKB locale support -- Ojibwe (Canada)
+qkb_ojcan = CtJ4BWW4pHHtDYPDQQDJFBX7K
+# QKB locale support -- Ojibwe (United States)
+qkb_ojusa = CtJ4BWW4pHHtDYP4QqDDFBX7G
+# QKB locale support -- Punjabi
+qkb_pa = CtJ4BWW4pHHBDDPsQCDtFBX7D
+# QKB locale support -- Punjabi (India)
+qkb_paind = CtJ4BWW4pHHBDDPLQHDGFBX73
+# QKB locale support -- Polish
+qkb_pl = CtJ4BWW4pHHBDpPsQCDtFBX7p
+# QKB locale support -- Polish (Poland)
+qkb_plpol = CtJ4BWW4pHHBDpPJQJDpFBX7W
+# QKB locale support -- Pashto
+qkb_ps = CtJ4BWW4pHHBD4PsQCDtFBX74
+# QKB locale support -- Pashto (Afghanistan)
+qkb_psafg = CtJ4BWW4pHHBD4PPQVDLFBX7S
+# QKB locale support -- Portuguese
+qkb_pt = CtJ4BWW4pHHBDRPsQCDtFBX7R
+# QKB locale support -- Portuguese (Angola)
+qkb_ptago = CtJ4BWW4pHHBDRPPQZDMFBX79
+# QKB locale support -- Portuguese (Brazil)
+qkb_ptbra = CtJ4BWW4pHHBDRPQQ3DDFBX77
+# QKB locale support -- Portuguese (Cape Verde)
+qkb_ptcpv = CtJ4BWW4pHHBDRPDQMDSFBX7M
+# QKB locale support -- Portuguese (Guinea-Bissau)
+qkb_ptgnb = CtJ4BWW4pHHBDRPVQHDFFBX79
+# QKB locale support -- Portuguese (Macau)
+qkb_ptmac = CtJ4BWW4pHHBDRPmQQDXFBX7C
+# QKB locale support -- Portuguese (Mozambique)
+qkb_ptmoz = CtJ4BWW4pHHBDRPmQJDCFBX7B
+# QKB locale support -- Portuguese (Portugal)
+qkb_ptprt = CtJ4BWW4pHHBDRPJQ3DRFBX7B
+# QKB locale support -- Portuguese (Sao Tome and Principe)
+qkb_ptstp = CtJ4BWW4pHHBDRP3Q4DKFBX76
+# QKB locale support -- Portuguese (East Timor)
+qkb_pttmp = CtJ4BWW4pHHBDRPqQpDKFBX7r
+# QKB locale support -- Quechua
+qkb_qu = CtJ4BWW4pHH6D5PsQCDtFBX7S
+# QKB locale support -- Quechua (Bolivia)
+qkb_qubol = CtJ4BWW4pHH6D5PQQJDpFBX7V
+# QKB locale support -- Romansh
+qkb_rm = CtJ4BWW4pHH7DHPsQCDtFBX7M
+# QKB locale support -- Romansh (Switzerland)
+qkb_rmche = CtJ4BWW4pHH7DHPDQLDVFBX7R
+# QKB locale support -- Kirundi
+qkb_rn = CtJ4BWW4pHH7DJPsQCDtFBX7K
+# QKB locale support -- Kirundi (Burundi)
+qkb_rnbdi = CtJ4BWW4pHH7DJPQQXDWFBX7R
+# QKB locale support -- Romanian
+qkb_ro = CtJ4BWW4pHH7DMPsQCDtFBX73
+# QKB locale support -- Romanian (Moldova)
+qkb_romda = CtJ4BWW4pHH7DMPmQXDDFBX7T
+# QKB locale support -- Romanian (Romania)
+qkb_rorou = CtJ4BWW4pHH7DMPKQJD5FBX7s
+# QKB locale support -- Russian
+qkb_ru = CtJ4BWW4pHH7D5PsQCDtFBX7r
+# QKB locale support -- Russian (Belarus)
+qkb_rublr = CtJ4BWW4pHH7D5PQQmDqFBX7W
+# QKB locale support -- Russian (Kazakhstan)
+qkb_rukaz = CtJ4BWW4pHH7D5PWQQDCFBX7M
+# QKB locale support -- Russian (Kyrgyzstan)
+qkb_rukgz = CtJ4BWW4pHH7D5PWQZDCFBX75
+# QKB locale support -- Russian (Russia)
+qkb_rurus = CtJ4BWW4pHH7D5PKQRD4FBX7Q
+# QKB locale support -- Kinyarwanda
+qkb_rw = CtJ4BWW4pHH7DrPsQCDtFBX7s
+# QKB locale support -- Kinyarwanda (Rwanda)
+qkb_rwrwa = CtJ4BWW4pHH7DrPKQSDDFBX75
+# QKB locale support -- Sangho
+qkb_sg = CtJ4BWW4pHH8DLPsQCDtFBX7Y
+# QKB locale support -- Sangho (Central African Republic)
+qkb_sgcaf = CtJ4BWW4pHH8DLPDQQDZFBX7W
+# QKB locale support -- Serbo-Croatian
+qkb_sh = CtJ4BWW4pHH8D2PsQCDtFBX7m
+# QKB locale support -- Serbo-Croatian (Bosnia and Herzegowina)
+qkb_shbih = CtJ4BWW4pHH8D2PQQ2D2FBX74
+# QKB locale support -- Sinhala
+qkb_si = CtJ4BWW4pHH8DWPsQCDtFBX7p
+# QKB locale support -- Sinhala (Sri Lanka)
+qkb_silka = CtJ4BWW4pHH8DWPYQYDDFBX7s
+# QKB locale support -- Slovak
+qkb_sk = CtJ4BWW4pHH8DmPsQCDtFBX7J
+# QKB locale support -- Slovak (Slovakia)
+qkb_sksvk = CtJ4BWW4pHH8DmP3Q5DmFBX7R
+# QKB locale support -- Slovenian
+qkb_sl = CtJ4BWW4pHH8DpPsQCDtFBX7M
+# QKB locale support -- Slovenian (Slovenia)
+qkb_slsvn = CtJ4BWW4pHH8DpP3Q5DJFBX7T
+# QKB locale support -- Samoan
+qkb_sm = CtJ4BWW4pHH8DHPsQCDtFBX7K
+# QKB locale support -- Samoan (American Samoa)
+qkb_smasm = CtJ4BWW4pHH8DHPPQqDHFBX7X
+# QKB locale support -- Samoan (Samoa)
+qkb_smwsm = CtJ4BWW4pHH8DHP5QqDHFBX7s
+# QKB locale support -- Albanian
+qkb_sq = CtJ4BWW4pHH8D3PsQCDtFBX7R
+# QKB locale support -- Albanian (Albania)
+qkb_sqalb = CtJ4BWW4pHH8D3PPQmDFFBX7T
+# QKB locale support -- Serbian
+qkb_sr = CtJ4BWW4pHH8DqPsQCDtFBX75
+# QKB locale support -- Serbian (Serbia and Montenegro)
+qkb_srscg = CtJ4BWW4pHH8DqP3QFDLFBX7G
+# QKB locale support -- Swati
+qkb_ss = CtJ4BWW4pHH8D4PsQCDtFBX7S
+# QKB locale support -- Swati (Swaziland)
+qkb_ssswz = CtJ4BWW4pHH8D4P3QSDCFBX7W
+# QKB locale support -- Swati (South Africa)
+qkb_sszaf = CtJ4BWW4pHH8D4PTQQDZFBX7W
+# QKB locale support -- Sesotho
+qkb_st = CtJ4BWW4pHH8DRPsQCDtFBX7r
+# QKB locale support -- Sesotho (Lesotho)
+qkb_stlso = CtJ4BWW4pHH8DRPYQqDMFBX7r
+# QKB locale support -- Sesotho (South Africa)
+qkb_stzaf = CtJ4BWW4pHH8DRPTQQDZFBX7Y
+# QKB locale support -- Swedish
+qkb_sv = CtJ4BWW4pHH8DSPsQCDtFBX7s
+# QKB locale support -- Swedish (Sweden)
+qkb_svswe = CtJ4BWW4pHH8DSP3QSDVFBX7C
+# QKB locale support -- Swahili
+qkb_sw = CtJ4BWW4pHH8DrPsQCDtFBX7C
+# QKB locale support -- Swahili (Kenya)
+qkb_swken = CtJ4BWW4pHH8DrPWQGDJFBX7Y
+# QKB locale support -- Swahili (Rwanda)
+qkb_swrwa = CtJ4BWW4pHH8DrPKQSDDFBX7S
+# QKB locale support -- Swahili (Tanzania)
+qkb_swtza = CtJ4BWW4pHH8DrPqQsDDFBX7t
+# QKB locale support -- Swahili (Democratic Republic of the Congo)
+qkb_swzar = CtJ4BWW4pHH8DrPTQQDqFBX7s
+# QKB locale support -- Tamil
+qkb_ta = CtJ4BWW4pHH9DDPsQCDtFBX7V
+# QKB locale support -- Tamil (India)
+qkb_taind = CtJ4BWW4pHH9DDPLQHDGFBX75
+# QKB locale support -- Tamil (Sri Lanka)
+qkb_talka = CtJ4BWW4pHH9DDPYQYDDFBX7q
+# QKB locale support -- Tajik
+qkb_tg = CtJ4BWW4pHH9DLPsQCDtFBX7m
+# QKB locale support -- Tajik (Tajikistan)
+qkb_tgtjk = CtJ4BWW4pHH9DLPqQWDmFBX7Z
+# QKB locale support -- Thai
+qkb_th = CtJ4BWW4pHH9D2PsQCDtFBX7p
+# QKB locale support -- Thai (Thailand)
+qkb_ththa = CtJ4BWW4pHH9D2PqQLDDFBX77
+# QKB locale support -- Tigrinya
+qkb_ti = CtJ4BWW4pHH9DWPsQCDtFBX7H
+# QKB locale support -- Tigrinya (Eritrea)
+qkb_tieri = CtJ4BWW4pHH9DWPXQ3DWFBX7P
+# QKB locale support -- Turkmen
+qkb_tk = CtJ4BWW4pHH9DmPsQCDtFBX7M
+# QKB locale support -- Turkmen (Turkmenistan)
+qkb_tktkm = CtJ4BWW4pHH9DmPqQYDHFBX7H
+# QKB locale support -- Tagalog
+qkb_tl = CtJ4BWW4pHH9DpPsQCDtFBX7K
+# QKB locale support -- Tagalog (Northern Mariana Islands)
+qkb_tlmnp = CtJ4BWW4pHH9DpPmQHDKFBX7H
+# QKB locale support -- Tagalog (Philippines)
+qkb_tlphl = CtJ4BWW4pHH9DpPJQLDpFBX7Z
+# QKB locale support -- Setswana
+qkb_tn = CtJ4BWW4pHH9DJPsQCDtFBX7q
+# QKB locale support -- Setswana (Botswana)
+qkb_tnbwa = CtJ4BWW4pHH9DJPQQSDDFBX7N
+# QKB locale support -- Setswana (South Africa)
+qkb_tnzaf = CtJ4BWW4pHH9DJPTQQDZFBX7V
+# QKB locale support -- Tongan
+qkb_to = CtJ4BWW4pHH9DMPsQCDtFBX74
+# QKB locale support -- Tongan (Tonga)
+qkb_toton = CtJ4BWW4pHH9DMPqQJDJFBX7S
+# QKB locale support -- Turkish
+qkb_tr = CtJ4BWW4pHH9DqPsQCDtFBX7S
+# QKB locale support -- Turkish (Cyprus)
+qkb_trcyp = CtJ4BWW4pHH9DqPDQTDKFBX7R
+# QKB locale support -- Turkish (Turkey)
+qkb_trtur = CtJ4BWW4pHH9DqPqQRDqFBX7Q
+# QKB locale support -- Tsonga
+qkb_ts = CtJ4BWW4pHH9D4PsQCDtFBX7r
+# QKB locale support -- Tsonga (South Africa)
+qkb_tszaf = CtJ4BWW4pHH9D4PTQQDZFBX7Y
+# QKB locale support -- Tahitian
+qkb_ty = CtJ4BWW4pHH9DsPsQCDtFBX76
+# QKB locale support -- Tahitian (French Polynesia)
+qkb_typyf = CtJ4BWW4pHH9DqPJQTDZFBX7r
+# QKB locale support -- Ukrainian
+qkb_uk = CtJ4BWW4pHHNDmPsQCDtFBX7K
+# QKB locale support -- Ukrainian (Ukraine)
+qkb_ukukr = CtJ4BWW4pHHNDmP4QYDqFBX7R
+# QKB locale support -- Urdu
+qkb_ur = CtJ4BWW4pHHNDqPsQCDtFBX7r
+# QKB locale support -- Urdu (India)
+qkb_urind = CtJ4BWW4pHHNDqPLQHDGFBX7G
+# QKB locale support -- Urdu (Pakistan)
+qkb_urpak = CtJ4BWW4pHHNDqPJQQDmFBX7V
+# QKB locale support -- Uzbek
+qkb_uz = CtJ4BWW4pHHNDCPsQCDtFBX78
+# QKB locale support -- Uzbek (Uzbekistan)
+qkb_uzuzb = CtJ4BWW4pHHNDCP4QsDFFBX7P
+# QKB locale support -- Venda
+qkb_ve = CtJ4BWW4pHHPDVPsQCDtFBX7m
+# QKB locale support -- Venda (South Africa)
+qkb_vezaf = CtJ4BWW4pHHPDVPTQQDZFBX7N
+# QKB locale support -- Venda (Zimbabwe)
+qkb_vezwe = CtJ4BWW4pHHPDVPTQSDVFBX74
+# QKB locale support -- Vietnamese
+qkb_vi = CtJ4BWW4pHHPDWPsQCDtFBX7M
+# QKB locale support -- Vietnamese (Vietnam)
+qkb_vivnm = CtJ4BWW4pHHPDWPRQHDHFBX7q
+# QKB locale support -- Wolof
+qkb_wo = CtJ4BWW4pHHQDMPsQCDtFBX7S
+# QKB locale support -- Wolof (Gambia)
+qkb_wogmb = CtJ4BWW4pHHQDMPVQpDFFBX7N
+# QKB locale support -- Xhosa
+qkb_xh = CtJ4BWW4pHHDD2PsQCDtFBX7K
+# QKB locale support -- Xhosa (South Africa)
+qkb_xhzaf = CtJ4BWW4pHHDD2PTQQDZFBX7X
+# QKB locale support -- Shikomor
+qkb_zd = CtJ4BWW4pHHXDGPsQCDtFBX7J
+# QKB locale support -- Shikomor (Comoros)
+qkb_zdcom = CtJ4BWW4pHHXDGPDQJDHFBX7P
+# QKB locale support -- Chinese
+qkb_zh = CtJ4BWW4pHHXD2PsQCDtFBX7q
+# QKB locale support -- Chinese (China)
+qkb_zhchn = CtJ4BWW4pHHXD2PDQLDJFBX79
+# QKB locale support -- Chinese (Christmas Island)
+qkb_zhcxr = CtJ4BWW4pHHXD2PDQrDqFBX73
+# QKB locale support -- Chinese (Hong Kong)
+qkb_zhhkg = CtJ4BWW4pHHXD2PZQYDLFBX7N
+# QKB locale support -- Chinese (Macau)
+qkb_zhmac = CtJ4BWW4pHHXD2PmQQDXFBX7T
+# QKB locale support -- Chinese (Taiwan)
+qkb_zhtwn = CtJ4BWW4pHHXD2PqQSDJFBX76
+# QKB locale support -- Traditional Chinese
+qkb_zt = CtJ4BWW4pHHXDRPsQCDtFBX77
+# QKB locale support -- Traditional Chinese (Taiwan)
+qkb_zttwn = CtJ4BWW4pHHXDRPqQSDJFBX7Z
+# QKB locale support -- Zulu
+qkb_zu = CtJ4BWW4pHHXD5PsQCDtFBX78
+# QKB locale support -- Zulu (South Africa)
+qkb_zuzaf = CtJ4BWW4pHHXD5PTQQDZFBX7q

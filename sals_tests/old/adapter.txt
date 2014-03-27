@@ -1,0 +1,43 @@
+2014-03-20 11:07:56,833 [main           ] INFO  MainSupport                    - Apache Camel 2.12.2 starting
+2014-03-20 11:07:57,019 [main           ] INFO  ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3e2d015f: startup date [Thu Mar 20 11:07:57 CET 2014]; root of context hierarchy
+2014-03-20 11:07:57,120 [main           ] INFO  XmlBeanDefinitionReader        - Loading XML bean definitions from class path resource [META-INF/spring/camel-context.xml]
+2014-03-20 11:07:59,244 [main           ] INFO  DefaultListableBeanFactory     - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@dcddc96: defining beans [template,consumerTemplate,camel:beanPostProcessor,camel,dfESP,doneFilter,cepPublisherProcessor,cepSubscriberProcessor,parseExcelFile,rtdm-webservice]; root of factory hierarchy
+2014-03-20 11:07:59,635 [main           ] INFO  DefaultTypeConverter           - Loaded 190 type converters
+*********************************************************************************
+The PCRF Adapter  will route files from the FTP server to the CEP Engine: 
+Use ctrl + c to stop this application.
+*********************************************************************************
+2014-03-20 11:07:59,674 [main           ] INFO  SpringCamelContext             - Apache Camel 2.12.2 (CamelContext: camel) is starting
+2014-03-20 11:07:59,674 [main           ] INFO  SpringCamelContext             - StreamCaching is enabled on CamelContext: camel
+2014-03-20 11:07:59,674 [main           ] INFO  ManagedManagementStrategy      - JMX is enabled
+2014-03-20 11:08:00,373 [main           ] INFO  DefaultStreamCachingStrategy   - StreamCaching in use with spool directory: /tmp/camel/camel-tmp-96d8379e-f2f1-47f6-a101-3846e7531d77 and rules: [Spool > 128K body size]
+ESP Project Name: dfESP://localhost:55555/POSTPAID_THROTTLE_EVENT
+ESP Project Name: dfESP://localhost:55555/POSTPAID_THROTTLE_EVENT
+Schema of the window: TriggerType:int64,Time*:stamp,SubscriberIdentifier:int64,IMSI:int64,MSISDN*:int64,IMEI:string,PaidType:int64,Category:string,Home_Service_Zone:string,Visit_Service_Zone:string,CGI:string,SAI:string,RAI:string,SGSNAddress:string,MCC_MNC:int32,Roam_Status:int64,Roam_Region:string,AccessType:int64,IPCan_Type:int64,UEIP:string,APN:string,Download_Bandwidth:int64,Upload_Bandwidth:int64,Service_Package_Name:string,Service_Name:string,Rule_Name:string,Quota_Name*:string,Quota_Status:int32,Quota_Consumption:int64,Quota_Balance:int64,Quota_Recharge:int64,Quota_Usage:int64,Quota_Next_Reset_Time*:stamp,Account_Name:string,Account_Status:int64,Account_Privilege:int64,Personal_Value:double,Account_Balance:double,Account_Consumption:double,Account_Usage:double,PCRF_IP_Address:string,Account_Next_Reset_Time:stamp,Field43:string,Field44:string,Field45:string,Field46:string,Field47:string,Field48:string,Field49:string,Field50:string,Field51:string,Field52:string,Field53:string,Field54:string,Field55:string,Field56:string,Field57:string,Field58:string,Field59:string,Field60:string,Field61:string,Field62:string,Field63:string,Field64:string,Field65:string,Field66:string,Field67:string,Quota_Value:int64
+ESP Project Name: dfESP://localhost:55555/POSTPAID_THROTTLE_EVENT
+ESP Project Name: dfESP://localhost:55555/POSTPAID_THROTTLE_EVENT
+Schema of the window: MSISDN*:int64,PaidType_From_Lookup:string
+ESP Project Name: dfESP://localhost:55555/POSTPAID_THROTTLE_EVENT
+ESP Project Name: dfESP://localhost:55555/POSTPAID_THROTTLE_EVENT
+Schema of the window: MSISDN*:int64,ProfileID:string,VolumeInBytes:int64,RecurringID:string
+2014-03-20 11:08:00,995 [main           ] INFO  SpringCamelContext             - Skipping starting of route pcrf-edr-postpaid as its configured with autoStartup=false
+2014-03-20 11:08:01,016 [main           ] INFO  SpringCamelContext             - Route: lookup-postpaid started and consuming from: Endpoint[file:///opt/app/sas/custom/data/lookup_postpaid?doneFileName=%24%7Bfile%3Aname%7D.done&move=.done]
+2014-03-20 11:08:01,016 [main           ] INFO  SpringCamelContext             - Skipping starting of route lookup-recurring as its configured with autoStartup=false
+Schema of the window: Time*:stamp,MSISDN*:int64,Quota_Name*:string,Quota_Next_Reset_Time*:stamp,TriggerType:int64,SubscriberIdentifier:int64,IMSI:int64,IMEI:string,PaidType:int64,Category:string,Home_Service_Zone:string,Visit_Service_Zone:string,CGI:string,SAI:string,RAI:string,SGSNAddress:string,MCC_MNC:int32,Roam_Status:int64,Roam_Region:int64,AccessType:int64,IPCan_Type:int64,UEIP:string,APN:string,Download_Bandwidth:int64,Upload_Bandwidth:int64,Service_Package_Name:string,Service_Name:string,Rule_Name:string,Quota_Status:int32,Quota_Consumption:int64,Quota_Balance:int64,Quota_Recharge:int64,Quota_Usage:int64,Account_Name:string,Account_Status:int64,Account_Privilege:int64,Personal_Value:double,Account_Balance:double,Account_Consumption:double,Account_Usage:double,PCRF_IP_Address:string,Account_Next_Reset_Time:stamp,PaidType_From_Lookup:string,VolumeIn48Hours:int64,IdentifingRequirring:string,VolumeInBytes:int64
+2014-03-20 11:08:01,103 [main           ] INFO  SpringCamelContext             - Route: cep-output-postpaid started and consuming from: Endpoint[dfESP://localhost:55555/POSTPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/ADD_REQUIRRING]
+2014-03-20 11:08:01,117 [main           ] INFO  SpringCamelContext             - Total 4 routes, of which 2 is started.
+2014-03-20 11:08:01,119 [main           ] INFO  SpringCamelContext             - Apache Camel 2.12.2 (CamelContext: camel) started in 1.448 seconds
+2014-03-20 11:08:02,062 [lookup_postpaid] INFO  lookup-postpaid                - Starting to process LOOKUP_POSTPAID file: tc1_input_data_postpaid_lkp.txt
+2014-03-20 11:08:02,123 [lookup_postpaid] INFO  lookup-postpaid                - Done processing LOOKUP_POSTPAID file: tc1_input_data_postpaid_lkp.txt
+2014-03-20 11:08:02,164 [ - OnCompletion] INFO  SpringCamelContext             - Route: lookup-recurring started and consuming from: Endpoint[file:///opt/app/sas/custom/data/lookup_recurring?doneFileName=%24%7Bfile%3Aname%7D.done&move=.done]
+2014-03-20 11:08:03,167 [ookup_recurring] INFO  lookup-recurring               - Starting to process LOOKUP_RECURRING file: tc1_input_data_recurring_lkp.txt
+2014-03-20 11:08:03,210 [ookup_recurring] INFO  lookup-recurring               - Done processing LOOKUP_RECURRING file: tc1_input_data_recurring_lkp.txt
+2014-03-20 11:08:03,225 [ - OnCompletion] INFO  SpringCamelContext             - Route: pcrf-edr-postpaid started and consuming from: Endpoint[file:///opt/app/sas/custom/data/pcrf_files_postpaid?move=.done&recursive=true&sortBy=%24%7Bfile%3Aname%7D]
+2014-03-20 11:08:04,232 [_files_postpaid] INFO  pcrf-edr-postpaid              - Starting to process EDR file: tc1_EDR_UPCC231_MPU484_4924_40131211100031.csv.gz
+2014-03-20 11:08:04,243 [Thread-4       ] INFO  cep-output-postpaid            - CEP Engine Output for ADD_REQUIRRING: I,N:2014-03-20 11:07:47,4912345678901,Q_110_local_Month,2014-04-05 12:07:47,2,,,,,,,,,,,,,,,,,,,,,,,,6,,,,1024,,,,,,,,,,POSTPAID,1024,Y,1230
+2014-03-20 11:08:04,246 [_files_postpaid] INFO  pcrf-edr-postpaid              - Done processing EDR file: tc1_EDR_UPCC231_MPU484_4924_40131211100031.csv.gz
+2014-03-20 11:08:04,266 [Thread-4       ] INFO  cep-output-postpaid            - Done processing CEP Engine Output
+2014-03-20 11:08:04,267 [Thread-4       ] INFO  cep-output-postpaid            - Processing RTDM Engine Input
+CEP Output: I,N:2014-03-20 11:07:47,4912345678901,Q_110_local_Month,2014-04-05 12:07:47,2,,,,,,,,,,,,,,,,,,,,,,,,6,,,,1024,,,,,,,,,,POSTPAID,1024,Y,1230
+Input to RTDM Engine: [Ljava.lang.Object;@6f3c8f81
+2014-03-20 11:08:04,430 [Thread-4       ] INFO  cep-output-postpaid            - Done Processing RTDM Engine Input

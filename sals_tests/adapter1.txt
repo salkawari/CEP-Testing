@@ -1,0 +1,49 @@
+2014-03-24 16:17:40,086 [main           ] INFO  MainSupport                    - Apache Camel 2.12.2 starting
+2014-03-24 16:17:40,345 [main           ] INFO  ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@33776426: startup date [Mon Mar 24 16:17:40 CET 2014]; root of context hierarchy
+2014-03-24 16:17:40,559 [main           ] INFO  XmlBeanDefinitionReader        - Loading XML bean definitions from class path resource [META-INF/spring/camel-context.xml]
+2014-03-24 16:17:43,914 [main           ] INFO  DefaultListableBeanFactory     - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@14b051: defining beans [template,consumerTemplate,camel:beanPostProcessor,camel,dfESP,doneFilter,myPolicy,inputForPostpaidRTDM,outputFromPostPaidRTDM,startRequirringRoute,startPostpaidRoute,startPrepaidRoute,startFonicRoute,startPcrfFtpRoute,rtdm-webservice,deadLetterErrorHandler]; root of factory hierarchy
+2014-03-24 16:17:44,280 [main           ] INFO  SpringCamelContext             - Apache Camel 2.12.2 (CamelContext: camel) is starting
+2014-03-24 16:17:44,282 [main           ] INFO  SpringCamelContext             - StreamCaching is enabled on CamelContext: camel
+2014-03-24 16:17:44,283 [main           ] INFO  ManagedManagementStrategy      - JMX is enabled
+2014-03-24 16:17:44,671 [main           ] INFO  DefaultTypeConverter           - Loaded 190 type converters
+2014-03-24 16:17:44,945 [main           ] INFO  SpringCamelContext             - Apache Camel 2.12.2 (CamelContext: camel) is shutting down
+2014-03-24 16:17:44,965 [main           ] INFO  SpringCamelContext             - Apache Camel 2.12.2 (CamelContext: camel) uptime 0.671 seconds
+2014-03-24 16:17:44,965 [main           ] INFO  SpringCamelContext             - Apache Camel 2.12.2 (CamelContext: camel) is shutdown in 0.006 seconds
+2014-03-24 16:17:44,965 [main           ] INFO  MainSupport                    - Apache Camel 2.12.2 stopping
+Exception in thread "main" org.apache.camel.RuntimeCamelException: org.apache.camel.FailedToCreateRouteException: Failed to create route pcrf-edr-postpaid at: >>> Unmarshal[ref:my-gzip] <<< in route: Route(pcrf-edr-postpaid)[[From[file:/opt/app/sas/custom/data... because of Data format 'jaxb' could not be created. Ensure that the data format is valid and the associated Camel component is present on the classpath
+	at org.apache.camel.util.ObjectHelper.wrapRuntimeCamelException(ObjectHelper.java:1352)
+	at org.apache.camel.spring.SpringCamelContext.onApplicationEvent(SpringCamelContext.java:120)
+	at org.apache.camel.spring.CamelContextFactoryBean.onApplicationEvent(CamelContextFactoryBean.java:301)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:96)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:334)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:948)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:482)
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:139)
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:93)
+	at org.apache.camel.spring.Main.createDefaultApplicationContext(Main.java:186)
+	at org.apache.camel.spring.Main.doStart(Main.java:140)
+	at org.apache.camel.support.ServiceSupport.start(ServiceSupport.java:61)
+	at org.apache.camel.main.MainSupport.run(MainSupport.java:148)
+	at com.sas.o2.cep.pcrf.PCRFFTPServer.main(PCRFFTPServer.java:32)
+Caused by: org.apache.camel.FailedToCreateRouteException: Failed to create route pcrf-edr-postpaid at: >>> Unmarshal[ref:my-gzip] <<< in route: Route(pcrf-edr-postpaid)[[From[file:/opt/app/sas/custom/data... because of Data format 'jaxb' could not be created. Ensure that the data format is valid and the associated Camel component is present on the classpath
+	at org.apache.camel.model.RouteDefinition.addRoutes(RouteDefinition.java:912)
+	at org.apache.camel.model.RouteDefinition.addRoutes(RouteDefinition.java:177)
+	at org.apache.camel.impl.DefaultCamelContext.startRoute(DefaultCamelContext.java:770)
+	at org.apache.camel.impl.DefaultCamelContext.startRouteDefinitions(DefaultCamelContext.java:1914)
+	at org.apache.camel.impl.DefaultCamelContext.doStartCamel(DefaultCamelContext.java:1670)
+	at org.apache.camel.impl.DefaultCamelContext.doStart(DefaultCamelContext.java:1544)
+	at org.apache.camel.spring.SpringCamelContext.doStart(SpringCamelContext.java:179)
+	at org.apache.camel.support.ServiceSupport.start(ServiceSupport.java:61)
+	at org.apache.camel.impl.DefaultCamelContext.start(DefaultCamelContext.java:1512)
+	at org.apache.camel.spring.SpringCamelContext.maybeStart(SpringCamelContext.java:228)
+	at org.apache.camel.spring.SpringCamelContext.onApplicationEvent(SpringCamelContext.java:118)
+	... 12 more
+Caused by: java.lang.IllegalArgumentException: Data format 'jaxb' could not be created. Ensure that the data format is valid and the associated Camel component is present on the classpath
+	at org.apache.camel.model.DataFormatDefinition.getDataFormat(DataFormatDefinition.java:90)
+	at org.apache.camel.model.DataFormatDefinition.getDataFormat(DataFormatDefinition.java:70)
+	at org.apache.camel.model.UnmarshalDefinition.createProcessor(UnmarshalDefinition.java:160)
+	at org.apache.camel.model.ProcessorDefinition.makeProcessor(ProcessorDefinition.java:500)
+	at org.apache.camel.model.ProcessorDefinition.addRoutes(ProcessorDefinition.java:213)
+	at org.apache.camel.model.RouteDefinition.addRoutes(RouteDefinition.java:909)
+	... 22 more
+2014-03-24 16:17:44,969 [Thread-0       ] INFO  MainSupport$HangupInterceptor  - Received hang up - stopping the main instance.
