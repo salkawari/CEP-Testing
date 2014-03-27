@@ -1,31 +1,30 @@
 #!/bin/bash
-# nohup ./test_case1_v0.1.sh &> logs/test_execution_$(date +"%Y-%m-%d-%T").log &
 echo "running test at $(date)"
 
 my_loc=$(pwd)
 
-echo "POSTPAID" > SINGLE_FLOW_TYPE.conf
-echo "EDR_PCRF_V6.36-POSTPAID_load.xml" > MODEL_XML_NAME.conf
+echo "PREPAID" > SINGLE_FLOW_TYPE.conf
+echo "EDR_PCRF_V6.36-PREPAID_load.xml" > MODEL_XML_NAME.conf
 
- 
-throttle_file=tc1_EDR_UPCC231_MPU484_4924_40131211100031.csv
+ ${string,,}
+throttle_file=tc4_EDR_UPCC231_MPU484_4924_40131211100031.csv
 throttle_input=input_data/$throttle_file
 
-postpaid_lkp_file=tc1_input_data_postpaid_lkp.txt
-postpaid_lkp_input=input_data/$postpaid_lkp_file
+prepaid_lkp_file=tc4_input_data_prepaid_lkp.txt
+prepaid_lkp_input=input_data/$prepaid_lkp_file
 
-recurring_lkp_file=tc1_input_data_recurring_lkp.txt
+recurring_lkp_file=tc4_input_data_recurring_lkp.txt
 recurring_lkp_input=input_data/$recurring_lkp_file
 
 data_dir=/opt/app/sas/custom/data
 
-out_dir=$data_dir/output_postpaid
+out_dir=$data_dir/output_prepaid
 if [ ! -d "$out_dir" ]
 then 
   mkdir -p $out_dir;
 fi
 
-expected_output=$out_dir/tc1_result.expected
+expected_output=$out_dir/tc4_result.expected
 
 if [ $(ps aux |grep $LOGNAME|egrep "o2-adapters-pcrf-2.12.2.jar|esp" |grep -v egrep|wc -l) -ne 0 ]
 then
@@ -34,37 +33,36 @@ then
   exit
 fi
 ################################################################################
-echo "TC1:"
-./requirement_1.sh
+echo "tc4:"
+./requirement_3.sh
 echo " "
 echo "test strategy:"
 echo "input various combinations of QuotaName, TriggerType, QuotaStatus and QuotaValue "
-echo "to confirm only valid combinations result in a processed postpaid throttle 100 event"
+echo "to confirm only valid combinations result in a processed prepaid throttle 100 event"
 echo " "
 echo "EDR data setup:"
-echo "Row1: a valid POSTPAID throttle 100 event (Quota_Name=Q_110_local_Month, TriggerType=2, Quota_Status=6, QuotaValue=1)"
-echo "Row2: a not valid POSTPAID throttle 100 event (TriggerType=7 instead of 1-6)"
-echo "Row3: a not valid POSTPAID throttle 100 event (Quota_Name = Q_110_roaming_Month)"
-echo "Row4: a not valid POSTPAID throttle 100 event (Quota_Status=4 instead of 6)"
-echo "Row5: a not valid POSTPAID throttle 100 event (QuotaValue=11 instead of 1)"
-echo "Row6: a not valid POSTPAID throttle 100 event (as its PREPAID)"
+echo "Row1: a valid PREPAID throttle 100 event (Quota_Name=Q_110_local_Month, TriggerType=2, Quota_Status=6, QuotaValue=1)"
+echo "Row2: a not valid PREPAID throttle 100 event (TriggerType=7 instead of 1-6)"
+echo "Row3: a not valid PREPAID throttle 100 event (Quota_Name = Q_110_roaming_Month)"
+echo "Row4: a not valid PREPAID throttle 100 event (Quota_Status=4 instead of 6)"
+echo "Row5: a not valid PREPAID throttle 100 event (QuotaValue=11 instead of 1)"
+echo "Row6: a not valid PREPAID throttle 100 event (as its POSTPAID)"
 
 echo " "
 echo ""
 ################################################################################
 ################################################################################
-echo "TC1: 1. PCRF EDRs (input stream).."
+echo "tc4: 1. PCRF EDRs (input stream).."
 rm -f $throttle_input
 
 ###################
 # ROW1..
-# 2014-03-10 14:48:24 -> datecp $postpaid_lkp_input $data_dir/lookup_paymenttype/
-  #p1=$(echo "$TriggerType,$Time,$SubscriberIdentifier,$IMSI,$MSISDN,$IMEI,$PaidType,$Category,$Home_Service_Zone,$Visit_Service_Zone")
+p1_desc=$(echo "$TriggerType,$Time,$SubscriberIdentifier,$IMSI,$MSISDN,$IMEI,$PaidType,$Category,$Home_Service_Zone,$Visit_Service_Zone")
 
 # P1 - TriggerType, Time, MSISDN..
 p1_desc=$(echo "# TriggerType, Time,,,MSISDN,,,,,")
 TriggerType1=2; Time1=$(date +"%Y-%m-%d %T"); msisdn1=4912345678901; Quota_Name1=Q_110_local_Month; Quota_Status1=6; 
-Quota_Usage1=1024; Quota_Next_Reset_Time1=$(date --date='16 days' +"%Y-%m-%d %T"); Quota_Value1=1; PaymentType1=POSTPAID;
+Quota_Usage1=1024; Quota_Next_Reset_Time1=$(date --date='16 days' +"%Y-%m-%d %T"); Quota_Value1=1; PaymentType1=PREPAID;
 InitialVolume1=1230; IsRecurring1=Y;
 p1=$(echo "$TriggerType1,$Time1,,,$msisdn1,,,,,")
 
@@ -93,33 +91,33 @@ p7=$(echo ",,,,,,,$Quota_Value1,,")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 ####################
 # ROW2..
-msisdn2=4912345678902;
+msisdn2=4922345678902;
 TriggerType2=7
 p1=$(echo "$TriggerType2,$Time1,,,$msisdn2,,,,,")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 ####
 # ROW3..
-msisdn3=4912345678903;
+msisdn3=4922345678903;
 Quota_Name3=Q_110_roaming_Month
 p1=$(echo "$TriggerType1,$Time1,,,$msisdn3,,,,,")
 p3=$(echo ",,,,,,$Quota_Name3,$Quota_Status1,,")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 ####
 # ROW4..
-msisdn4=4912345678904;
+msisdn4=4922345678904;
 Quota_Status4=4
 p1=$(echo "$TriggerType1,$Time1,,,$msisdn4,,,,,")
 p3=$(echo ",,,,,,$Quota_Name1,$Quota_Status4,,")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 ####
 # ROW5..
-msisdn5=4912345678905;
+msisdn5=4922345678905;
 Quota_Value5=11
 p1=$(echo "$TriggerType1,$Time1,,,$msisdn5,,,,,")
 p7=$(echo ",,,,,,,$Quota_Value5,,")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 # ROW6..
-msisdn6=4912345678906;
+msisdn6=4922345678906;
 Quota_Value6=11
 p1=$(echo "$TriggerType1,$Time1,,,$msisdn6,,,,,")
 p3=$(echo ",,,,,,$Quota_Name1,$Quota_Status1,,")
@@ -129,23 +127,23 @@ echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 ###################
 rm -f ${throttle_input}.gz
 gzip $throttle_input
-cp ${throttle_input}.gz $data_dir/pcrf_files_postpaid/
+cp ${throttle_input}.gz $data_dir/pcrf_files_prepaid/
 
 Quota_Total1=$Quota_Usage1
 ################################################################################
-echo "TC1: 2. postpaid lkp.."
-rm -f $postpaid_lkp_input
-echo "$msisdn1,$PaymentType1" >> $postpaid_lkp_input
-echo "$msisdn2,$PaymentType1" >> $postpaid_lkp_input
-echo "$msisdn3,$PaymentType1" >> $postpaid_lkp_input
-echo "$msisdn4,$PaymentType1" >> $postpaid_lkp_input
-echo "$msisdn5,$PaymentType1" >> $postpaid_lkp_input
-echo "$msisdn6,PREPAID" >> $postpaid_lkp_input
-cp $postpaid_lkp_input $data_dir/lookup_paymenttype/
-cp $postpaid_lkp_input $data_dir/lookup_paymenttype/${postpaid_lkp_file}.done
+echo "tc4: 2. prepaid lkp.."
+rm -f $prepaid_lkp_input
+echo "$msisdn1,$PaymentType1" >> $prepaid_lkp_input
+echo "$msisdn2,$PaymentType1" >> $prepaid_lkp_input
+echo "$msisdn3,$PaymentType1" >> $prepaid_lkp_input
+echo "$msisdn4,$PaymentType1" >> $prepaid_lkp_input
+echo "$msisdn5,$PaymentType1" >> $prepaid_lkp_input
+echo "$msisdn6,POSTPAID" >> $prepaid_lkp_input
+cp $prepaid_lkp_input $data_dir/lookup_paymenttype/
+cp $prepaid_lkp_input $data_dir/lookup_paymenttype/${prepaid_lkp_file}.done
 
 ################################################################################
-echo "TC1: 3. recurring lkp.."
+echo "tc4: 3. recurring lkp.."
 rm -f $recurring_lkp_input
 echo "$msisdn1,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
 echo "$msisdn2,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
@@ -158,25 +156,24 @@ cp $recurring_lkp_input $data_dir/lookup_recurring/${recurring_lkp_file}.done
 
 
 ################################################################################
-echo "TC1: 4. generating the expected output.."
+echo "tc4: 4. generating the expected output.."
 rm -f $expected_output
 
 echo "I,N:$Time1,$msisdn1,$Quota_Name1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,,,,,,,,,,,,,,$Quota_Status1,,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
-
 
 ################################################################################
 echo " "
 echo "here is the contents we were looking for.."
 cat $expected_output
 echo " "
-echo "here is the postpaid lookup we used.."
-cat $data_dir/lookup_paymenttype/tc1_input_data_postpaid_lkp.txt
+echo "here is the prepaid lookup we used.."
+cat $data_dir/lookup_paymenttype/tc4_input_data_prepaid_lkp.txt
 echo " "
 echo "here is the recurring lookup we used.."
-cat $data_dir/lookup_recurring/tc1_input_data_recurring_lkp.txt
+cat $data_dir/lookup_recurring/tc4_input_data_recurring_lkp.txt
 echo " "
 echo "here is the EDR stream we used.."
-gzip -dc $data_dir/pcrf_files_postpaid/${throttle_file}.gz
+gzip -dc $data_dir/pcrf_files_prepaid/${throttle_file}.gz
 
 
 
