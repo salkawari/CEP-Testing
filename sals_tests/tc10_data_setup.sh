@@ -34,7 +34,7 @@ then
 fi
 ################################################################################
 echo "tc10:"
-./requirement_1.sh
+./requirement_10.sh
 echo " "
 echo "test strategy:"
 echo "input various combinations of QuotaName, TriggerType, QuotaStatus and QuotaValue "
