@@ -41,12 +41,14 @@ echo "input various combinations of QuotaName, TriggerType, QuotaStatus and Quot
 echo "to confirm only valid combinations result in a processed postpaid throttle 100 event"
 echo " "
 echo "EDR data setup:"
-echo "Row1: a valid POSTPAID throttle 100 event (Quota_Name=Q_110_local_Month, TriggerType=2, Quota_Status=6, QuotaValue=1)"
-echo "Row2: a not valid POSTPAID throttle 100 event (TriggerType=7 instead of 1-6)"
-echo "Row3: a not valid POSTPAID throttle 100 event (Quota_Name = Q_110_roaming_Month)"
-echo "Row4: a not valid POSTPAID throttle 100 event (Quota_Status=4 instead of 6)"
-echo "Row5: a not valid POSTPAID throttle 100 event (QuotaValue=11 instead of 1)"
-echo "Row6: a not valid POSTPAID throttle 100 event (as its PREPAID)"
+echo "Row1: a not valid POSTPAID throttle 100 event (Quota_Name=Q_110_local_Month, TriggerType=2, Quota_Status=6, QuotaValue=1)"
+echo "Row2: a valid POSTPAID throttle 100 event (Quota_Name=Q_109_local_Month, TriggerType=2, Quota_Status=6, QuotaValue=1)"
+echo "Row3: a valid POSTPAID throttle 100 event (Quota_Name=Q_68_local_Month, TriggerType=2, Quota_Status=6, QuotaValue=1)"
+echo "Row4: a valid POSTPAID throttle 100 event (Quota_Name=Q_72_local_Month, TriggerType=2, Quota_Status=6, QuotaValue=1)"
+echo "Row5: a valid POSTPAID throttle 100 event (Quota_Name=Q_81_local_Month, TriggerType=2, Quota_Status=6, QuotaValue=1)"
+echo "Row6: a valid POSTPAID throttle 100 event (Quota_Name=Q_74_local_Month, TriggerType=2, Quota_Status=6, QuotaValue=1)"
+echo "Row7: a valid POSTPAID throttle 100 event (Quota_Name=Q_117_local_Month, TriggerType=2, Quota_Status=6, QuotaValue=1)"
+echo "Row8: a valid POSTPAID throttle 100 event (Quota_Name=Q_127_local_Month, TriggerType=2, Quota_Status=6, QuotaValue=1)"
 
 echo " "
 echo ""
@@ -93,37 +95,51 @@ echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 ####################
 # ROW2..
 msisdn2=4912345678902;
-TriggerType2=7
-p1=$(echo "$TriggerType2,$Time1,,,$msisdn2,,,,,")
+Quota_Name2=Q_109_local_Month
+p1=$(echo "$TriggerType1,$Time1,,,$msisdn2,,,,,")
+p3=$(echo ",,,,,,$Quota_Name2,$Quota_Status1,,")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 ####
 # ROW3..
 msisdn3=4912345678903;
-Quota_Name3=Q_110_roaming_Month
+Quota_Name3=Q_68_local_Month
 p1=$(echo "$TriggerType1,$Time1,,,$msisdn3,,,,,")
 p3=$(echo ",,,,,,$Quota_Name3,$Quota_Status1,,")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+
 ####
 # ROW4..
 msisdn4=4912345678904;
-Quota_Status4=4
+Quota_Name4=Q_72_local_Month
 p1=$(echo "$TriggerType1,$Time1,,,$msisdn4,,,,,")
-p3=$(echo ",,,,,,$Quota_Name1,$Quota_Status4,,")
+p3=$(echo ",,,,,,$Quota_Name4,$Quota_Status1,,")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 ####
 # ROW5..
 msisdn5=4912345678905;
-Quota_Value5=11
+Quota_Name5=Q_81_local_Month
 p1=$(echo "$TriggerType1,$Time1,,,$msisdn5,,,,,")
-p7=$(echo ",,,,,,,$Quota_Value5,,")
+p3=$(echo ",,,,,,$Quota_Name5,$Quota_Status1,,")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 # ROW6..
 msisdn6=4912345678906;
-Quota_Value6=11
+Quota_Name6=Q_74_local_Month
 p1=$(echo "$TriggerType1,$Time1,,,$msisdn6,,,,,")
-p3=$(echo ",,,,,,$Quota_Name1,$Quota_Status1,,")
-p7=$(echo ",,,,,,,$Quota_Value1,,")
+p3=$(echo ",,,,,,$Quota_Name6,$Quota_Status1,,")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+# ROW7..
+msisdn7=4912345678907;
+Quota_Name7=Q_117_local_Month
+p1=$(echo "$TriggerType1,$Time1,,,$msisdn7,,,,,")
+p3=$(echo ",,,,,,$Quota_Name7,$Quota_Status1,,")
+echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+# ROW8..
+msisdn8=4912345678908;
+Quota_Name8=Q_127_local_Month
+p1=$(echo "$TriggerType1,$Time1,,,$msisdn8,,,,,")
+p3=$(echo ",,,,,,$Quota_Name8,$Quota_Status1,,")
+echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+
 
 ###################
 rm -f ${throttle_input}.gz
@@ -139,7 +155,9 @@ echo "$msisdn2,$PaymentType1" >> $postpaid_lkp_input
 echo "$msisdn3,$PaymentType1" >> $postpaid_lkp_input
 echo "$msisdn4,$PaymentType1" >> $postpaid_lkp_input
 echo "$msisdn5,$PaymentType1" >> $postpaid_lkp_input
-echo "$msisdn6,PREPAID" >> $postpaid_lkp_input
+echo "$msisdn6,$PaymentType1" >> $postpaid_lkp_input
+echo "$msisdn7,$PaymentType1" >> $postpaid_lkp_input
+echo "$msisdn8,$PaymentType1" >> $postpaid_lkp_input
 cp $postpaid_lkp_input $data_dir/lookup_paymenttype/
 cp $postpaid_lkp_input $data_dir/lookup_paymenttype/${postpaid_lkp_file}.done
 
@@ -147,9 +165,13 @@ cp $postpaid_lkp_input $data_dir/lookup_paymenttype/${postpaid_lkp_file}.done
 echo "tc10: 3. recurring lkp.."
 rm -f $recurring_lkp_input
 echo "$msisdn1,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
-echo "$msisdn2,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
-echo "$msisdn3,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
-echo "$msisdn4,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
+echo "$msisdn2,$Quota_Name2,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
+echo "$msisdn3,$Quota_Name3,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
+echo "$msisdn4,$Quota_Name4,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
+echo "$msisdn5,$Quota_Name5,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
+echo "$msisdn6,$Quota_Name6,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
+echo "$msisdn7,$Quota_Name7,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
+echo "$msisdn8,$Quota_Name8,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
 cp $recurring_lkp_input $data_dir/lookup_recurring/
 cp $recurring_lkp_input $data_dir/lookup_recurring/${recurring_lkp_file}.done
 
@@ -160,8 +182,13 @@ cp $recurring_lkp_input $data_dir/lookup_recurring/${recurring_lkp_file}.done
 echo "tc10: 4. generating the expected output.."
 rm -f $expected_output
 
-echo "I,N:$Time1,$msisdn1,$Quota_Name1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,,,,,,,,,,,,,,$Quota_Status1,,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
-
+echo "I,N:$Time1,$msisdn2,$Quota_Name2,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,,,,,,,,,,,,,,$Quota_Status1,,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
+echo "I,N:$Time1,$msisdn3,$Quota_Name3,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,,,,,,,,,,,,,,$Quota_Status1,,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
+echo "I,N:$Time1,$msisdn4,$Quota_Name4,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,,,,,,,,,,,,,,$Quota_Status1,,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
+echo "I,N:$Time1,$msisdn5,$Quota_Name5,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,,,,,,,,,,,,,,$Quota_Status1,,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
+echo "I,N:$Time1,$msisdn6,$Quota_Name6,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,,,,,,,,,,,,,,$Quota_Status1,,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
+echo "I,N:$Time1,$msisdn7,$Quota_Name7,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,,,,,,,,,,,,,,$Quota_Status1,,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
+echo "I,N:$Time1,$msisdn8,$Quota_Name8,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,,,,,,,,,,,,,,$Quota_Status1,,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
 
 ################################################################################
 echo " "
