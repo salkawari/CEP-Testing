@@ -102,7 +102,7 @@ i=$1
   echo "${test_case_name}: 5. starting the cep engine server .."
   rm -f $out_dir/$output_file_name $out_dir/$output_file_name.tmp $out_dir/$output_file_name.OUT
   cd $esp_server_dir
-  ./dfesp_xml_server -pubsub 55555 -server 55556 -loglevel debug -badevents /opt/app/sas/custom/data/bad_server_events &>${my_loc}/server.txt &
+  ./dfesp_xml_server -pubsub 55555 -server 55556 -loglevel debug -badevents /opt/app/sas/custom/data/bad_server_events/error.txt &>${my_loc}/server.txt &
   echo " "
   sleep 4
 #  ################################################################################
@@ -125,10 +125,10 @@ i=$1
 #  echo " "
 #
 ##################################################################################
-PREPAID_LOAD=/home/nicopc/Desktop/nicopc/try8/EDR_PCRF_V6.36-PREPAID_load.xml
-PREPAID_START=/home/nicopc/Desktop/nicopc/try8/PREPAID_start.xml
-PREPAID_RESTORE=/home/nicopc/Desktop/nicopc/try8/PREPAID_restore.xml
-PREPAID_PERSIST=/home/nicopc/Desktop/nicopc/try8/PREPAID_persist.xml
+PREPAID_LOAD=/home/$LOGNAME/Desktop/$LOGNAME/try8/EDR_PCRF_V6.36-PREPAID_load.xml
+PREPAID_START=/home/$LOGNAME/Desktop/$LOGNAME/try8/PREPAID_start.xml
+PREPAID_RESTORE=/home/$LOGNAME/Desktop/$LOGNAME/try8/PREPAID_restore.xml
+PREPAID_PERSIST=/home/$LOGNAME/Desktop/$LOGNAME/try8/PREPAID_persist.xml
 for i in $(echo "$PREPAID_LOAD $PREPAID_START $PREPAID_RESTORE $PREPAID_PERSIST")
 do
   if [ ! -e "$i" ]
@@ -158,10 +158,10 @@ done
   echo " "
   sleep 1
 ##################################################################################
-POSTPAID_LOAD=/home/nicopc/Desktop/nicopc/try8/EDR_PCRF_V6.36-POSTPAID_load.xml
-POSTPAID_START=/home/nicopc/Desktop/nicopc/try8/POSTPAID_start.xml
-POSTPAID_RESTORE=/home/nicopc/Desktop/nicopc/try8/POSTPAID_restore.xml
-POSTPAID_PERSIST=/home/nicopc/Desktop/nicopc/try8/POSTPAID_persist.xml
+POSTPAID_LOAD=/home/$LOGNAME/Desktop/$LOGNAME/try8/EDR_PCRF_V6.36-POSTPAID_load.xml
+POSTPAID_START=/home/$LOGNAME/Desktop/$LOGNAME/try8/POSTPAID_start.xml
+POSTPAID_RESTORE=/home/$LOGNAME/Desktop/$LOGNAME/try8/POSTPAID_restore.xml
+POSTPAID_PERSIST=/home/$LOGNAME/Desktop/$LOGNAME/try8/POSTPAID_persist.xml
 for i in $(echo "$POSTPAID_LOAD $POSTPAID_START $POSTPAID_RESTORE $POSTPAID_PERSIST")
 do
   if [ ! -e "$i" ]
@@ -191,10 +191,10 @@ done
   echo " "
   sleep 1
 ##################################################################################
-FONIC_LOAD=/home/nicopc/Desktop/nicopc/try8/EDR_PCRF_V6.36-FONIC_load.xml
-FONIC_START=/home/nicopc/Desktop/nicopc/try8/FONIC_start.xml
-FONIC_RESTORE=/home/nicopc/Desktop/nicopc/try8/FONIC_restore.xml
-FONIC_PERSIST=/home/nicopc/Desktop/nicopc/try8/FONIC_persist.xml
+FONIC_LOAD=/home/$LOGNAME/Desktop/$LOGNAME/try8/EDR_PCRF_V6.36-FONIC_load.xml
+FONIC_START=/home/$LOGNAME/Desktop/$LOGNAME/try8/FONIC_start.xml
+FONIC_RESTORE=/home/$LOGNAME/Desktop/$LOGNAME/try8/FONIC_restore.xml
+FONIC_PERSIST=/home/$LOGNAME/Desktop/$LOGNAME/try8/FONIC_persist.xml
 for i in $(echo "$FONIC_LOAD $FONIC_START $FONIC_RESTORE $FONIC_PERSIST")
 do
   if [ ! -e "$i" ]
