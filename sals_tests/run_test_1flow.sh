@@ -117,10 +117,17 @@ do
   echo " "
 
 ##################################################################################
-PREPAID_LOAD=/home/$LOGNAME/Desktop/$LOGNAME/try8/EDR_PCRF_V6.36-PREPAID_load.xml
-PREPAID_START=/home/$LOGNAME/Desktop/$LOGNAME/try8/PREPAID_start.xml
-PREPAID_RESTORE=/home/$LOGNAME/Desktop/$LOGNAME/try8/PREPAID_restore.xml
-PREPAID_PERSIST=/home/$LOGNAME/Desktop/$LOGNAME/try8/PREPAID_persist.xml
+if [ $(echo $SINGLE_FLOW_TYPE| grep "PREPAID" |wc -l) -eq 1 ]
+then
+  echo "note we are using the new xml... $model_xml_def_path"
+  PREPAID_LOAD=$model_xml_def_path
+else
+  PREPAID_LOAD=/home/nicopc/Desktop/nicopc/try8/EDR_PCRF_V6.36-PREPAID_load.xml
+fi
+
+PREPAID_START=/home/nicopc/Desktop/nicopc/try8/PREPAID_start.xml
+PREPAID_RESTORE=/home/nicopc/Desktop/nicopc/try8/PREPAID_restore.xml
+PREPAID_PERSIST=/home/nicopc/Desktop/nicopc/try8/PREPAID_persist.xml
 for i in $(echo "$PREPAID_LOAD $PREPAID_START $PREPAID_RESTORE $PREPAID_PERSIST")
 do
   if [ ! -e "$i" ]
@@ -150,10 +157,17 @@ done
   echo " "
   sleep 1
 ##################################################################################
-POSTPAID_LOAD=/home/$LOGNAME/Desktop/$LOGNAME/try8/EDR_PCRF_V6.36-POSTPAID_load.xml
-POSTPAID_START=/home/$LOGNAME/Desktop/$LOGNAME/try8/POSTPAID_start.xml
-POSTPAID_RESTORE=/home/$LOGNAME/Desktop/$LOGNAME/try8/POSTPAID_restore.xml
-POSTPAID_PERSIST=/home/$LOGNAME/Desktop/$LOGNAME/try8/POSTPAID_persist.xml
+if [ $(echo $SINGLE_FLOW_TYPE| grep "POSTPAID" |wc -l) -eq 1 ]
+then
+  echo "note we are using the new xml... $model_xml_def_path"
+  POSTPAID_LOAD=$model_xml_def_path
+else
+  POSTPAID_LOAD=/home/nicopc/Desktop/nicopc/try8/EDR_PCRF_V6.36-POSTPAID_load.xml
+fi
+
+POSTPAID_START=/home/nicopc/Desktop/nicopc/try8/POSTPAID_start.xml
+POSTPAID_RESTORE=/home/nicopc/Desktop/nicopc/try8/POSTPAID_restore.xml
+POSTPAID_PERSIST=/home/nicopc/Desktop/nicopc/try8/POSTPAID_persist.xml
 for i in $(echo "$POSTPAID_LOAD $POSTPAID_START $POSTPAID_RESTORE $POSTPAID_PERSIST")
 do
   if [ ! -e "$i" ]
@@ -183,12 +197,18 @@ done
   echo " "
   sleep 1
 ##################################################################################
+if [ $(echo $SINGLE_FLOW_TYPE| grep "FONIC" |wc -l) -eq 1 ]
+then
+  echo "note we are using the new xml... $model_xml_def_path"
+  FONIC_LOAD=$model_xml_def_path
+else
+  FONIC_LOAD=/home/nicopc/Desktop/nicopc/try8/EDR_PCRF_V6.36-FONIC_load.xml
+fi
 
 
-FONIC_LOAD=/home/$LOGNAME/Desktop/$LOGNAME/try8/EDR_PCRF_V6.36-FONIC_load.xml
-FONIC_START=/home/$LOGNAME/Desktop/$LOGNAME/try8/FONIC_start.xml
-FONIC_RESTORE=/home/$LOGNAME/Desktop/$LOGNAME/try8/FONIC_restore.xml
-FONIC_PERSIST=/home/$LOGNAME/Desktop/$LOGNAME/try8/FONIC_persist.xml
+FONIC_START=/home/nicopc/Desktop/nicopc/try8/FONIC_start.xml
+FONIC_RESTORE=/home/nicopc/Desktop/nicopc/try8/FONIC_restore.xml
+FONIC_PERSIST=/home/nicopc/Desktop/nicopc/try8/FONIC_persist.xml
 for i in $(echo "$FONIC_LOAD $FONIC_START $FONIC_RESTORE $FONIC_PERSIST")
 do
   if [ ! -e "$i" ]
