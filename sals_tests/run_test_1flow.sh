@@ -93,7 +93,7 @@ do
   echo "${test_case_name}: 5. starting the cep engine server .."
   rm -f $out_dir/$output_file_name $out_dir/$output_file_name.tmp $out_dir/$output_file_name.OUT
   cd $esp_server_dir
-  echo "starting with the following command ... ./dfesp_xml_server -pubsub 55555 -server 55556 -loglevel debug -badevents $data_dir/bad_server_events >${my_loc}/server.txt"
+  echo "starting with the following command ... ./dfesp_xml_server -pubsub 55555 -server 55556 -loglevel debug -badevents $data_dir/bad_server_events/error.txt >${my_loc}/server.txt"
   ./dfesp_xml_server -pubsub 55555 -server 55556 -loglevel debug -badevents $data_dir/bad_server_events/error.txt &>${my_loc}/server.txt &
   echo " "
   sleep 4
