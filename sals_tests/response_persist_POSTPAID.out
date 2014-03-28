@@ -1,4 +1,4 @@
-<response path='/opt/app/sas/custom/data/persist_postpaid_throttle_event' project='POSTPAID_THROTTLE_EVENT' elapsed='2 ms'>
+<response path='/opt/app/sas/custom/data/persist_postpaid_throttle_event' project='POSTPAID_THROTTLE_EVENT' elapsed='4 ms'>
     <message>project 'POSTPAID_THROTTLE_EVENT' successfully saved to '/opt/app/sas/custom/data/persist_postpaid_throttle_event'</message>
 </response>
 
