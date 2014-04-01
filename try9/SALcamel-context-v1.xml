@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor 
+	license agreements. See the NOTICE file distributed with this work for additional 
+	information regarding copyright ownership. The ASF licenses this file to 
+	You under the Apache License, Version 2.0 (the "License"); you may not use 
+	this file except in compliance with the License. You may obtain a copy of 
+	the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
+	by applicable law or agreed to in writing, software distributed under the 
+	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
+	OF ANY KIND, either express or implied. See the License for the specific 
+	language governing permissions and limitations under the License. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cxf="http://camel.apache.org/schema/cxf"
+	xsi:schemaLocation="
+         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+         http://camel.apache.org/schema/cxf
+		 http://camel.apache.org/schema/cxf/camel-cxf.xsd">
+
+
+
+	<camelContext id="camel" xmlns="http://camel.apache.org/schema/spring" streamCache="true"
+		errorHandlerRef="deadLetterErrorHandler">
+
+
+
+<!-- 		<route routePolicyRef="myPolicy" id="pcrf-ftp-server" autoStartup="false">
+			<from
+				uri="ftp://10.118.74.15/?username=nativeBIC&amp;password=952CiB259&amp;stepwise=true&amp;delay=100&amp;move=${file:name}.trans&amp;recursive=true&amp;binary=true&amp;filter=#doneFilter&amp;maxMessagesPerPoll=100&amp;eagerMaxMessagesPerPoll=false&amp;localWorkDirectory=/tmp" />
+			<multicast>
+				<to uri="file:/opt/app/sas/custom/data/pcrf_files_postpaid" />
+				<to uri="file:/opt/app/sas/custom/data/pcrf_files_prepaid" />
+				<to uri="file:/opt/app/sas/custom/data/pcrf_files_fonic" />
+				<log message="Downloaded file ${file:name} complete."></log>
+			</multicast>
+		</route>
+ -->
+
+<!-- 
+		<route id="pcrf-ftp-server" autoStartup="true">
+			<from
+				uri="ftp://localhost:21/?username=test&amp;password=test&amp;stepwise=true&amp;delay=5000&amp;move=${file:name}.trans&amp;recursive=true&amp;binary=true&amp;filter=#doneFilter&amp;maxMessagesPerPoll=1&amp;eagerMaxMessagesPerPoll=false" />
+			<multicast>
+				<to uri="file://C:/temp/outputfile/pcrf_files_postpaid" />
+				<to uri="file://C:/temp/outputfile/pcrf_files_prepaid" />
+				<to uri="file://C:/temp/outputfile/pcrf_files_fonic" />
+			</multicast>
+
+			<log message="Downloaded file ${file:name} complete."></log>
+		</route> -->
+
+
+<!--  
+		<route routePolicyRef="myPolicy" id="pcrf-ftp-server" autoStartup="false">
+			<from
+				uri="ftp://10.118.74.15/20140401/?username=nativeBIC&amp;password=952CiB259&amp;stepwise=true&amp;delay=3s&amp;move=${file:name}.trans&amp;recursive=true&amp;binary=true&amp;filter=#doneFilter&amp;maxMessagesPerPoll=1&amp;eagerMaxMessagesPerPoll=false&amp;localWorkDirectory=/tmp" />
+			<multicast />
+			<to uri="file:/opt/app/sas/custom/data/pcrf_files_postpaid" />
+			<to uri="file:/opt/app/sas/custom/data/pcrf_files_prepaid" />
+			<to uri="file:/opt/app/sas/custom/data/pcrf_files_fonic" />
+			<log message="Downloaded file ${file:name} complete."></log>
+		</route>
+		
+-->
+
+		<route routePolicyRef="myPolicy" id="pcrf-edr-postpaid" autoStartup="false">
+			<from
+				uri="file:/opt/app/sas/custom/data/pcrf_files_postpaid?move=.done&amp;recursive=true&amp;sortBy=${file:name}" />
+			<log message="Starting to process EDR file: ${header.CamelFileName}" />
+			<unmarshal>
+				<gzip />
+			</unmarshal>
+			<unmarshal>
+				<csv />
+			</unmarshal>
+			<log message="record for the engine (pcrf-edr-postpaid) ${body}" />
+                     <split>
+                           <tokenize token="\n" group="1"></tokenize>
+                     <to
+                            uri="dfESP://localhost:55555/POSTPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/PCRF_DATA_USAGE_STREAM" />
+                     </split>  
+			<log message="Done processing EDR file: ${header.CamelFileName}" />
+		</route>
+
+		<route routePolicyRef="myPolicy" id="pcrf-edr-prepaid" autoStartup="false">
+			<from
+				uri="file:/opt/app/sas/custom/data/pcrf_files_prepaid?move=.done&amp;recursive=true&amp;sortBy=${file:name}" />
+			<log message="Starting to process EDR file: ${header.CamelFileName}" />
+			<unmarshal>
+				<gzip />
+			</unmarshal>
+			<unmarshal>
+				<csv />
+			</unmarshal>
+                     <split>
+                           <tokenize token="\n" group="1"></tokenize>
+                     <to
+                            uri="dfESP://localhost:55555/PREPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/PCRF_DATA_USAGE_STREAM" />
+                     </split>  
+			<log message="Done processing EDR file: ${header.CamelFileName}" />
+		</route>
+
+		<route routePolicyRef="myPolicy" id="pcrf-edr-fonic" autoStartup="false">
+			<from
+				uri="file:/opt/app/sas/custom/data/pcrf_files_fonic?move=.done&amp;recursive=true&amp;sortBy=${file:name}" />
+			<log message="Starting to process EDR file: ${header.CamelFileName}" />
+			<unmarshal>
+				<gzip />
+			</unmarshal>
+			<unmarshal>
+				<csv />
+			</unmarshal>
+                     <split>
+                           <tokenize token="\n" group="1"></tokenize>
+                     <to
+                            uri="dfESP://localhost:55555/FONIC_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/PCRF_DATA_USAGE_STREAM" />
+                     </split>  
+			<log message="Done processing EDR file: ${header.CamelFileName}" />
+		</route>
+
+		<route routePolicyRef="myPolicy" id="lookup-postpaid" autoStartup="true">
+			<from
+				uri="file:/opt/app/sas/custom/data/lookup_paymenttype?move=.done&amp;doneFileName=${file:name}.done" />
+			<onCompletion>
+				<process ref="startRequirringRoute"></process>
+			</onCompletion>
+			 <split streaming="true" parallelProcessing="true"> 			
+				<tokenize token="\n" group="10000"></tokenize>
+				<unmarshal>
+					<csv />
+				</unmarshal>
+				<log message="Starting to process LOOKUP_POSTPAID file: ${header.CamelFileName}" />
+				<multicast>
+				<log message="record for the engine (lookup-postpaid) ${body}" />
+					<to uri="dfESP://localhost:55555/POSTPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/PAIDTYPE_SOURCE_LOOKUP" />
+				    <to uri="dfESP://localhost:55555/PREPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/PAIDTYPE_SOURCE_LOOKUP" />
+				   <to uri="dfESP://localhost:55555/FONIC_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/PAIDTYPE_SOURCE_LOOKUP" /> 
+				</multicast>
+
+				<log message="Done processing LOOKUP_POSTPAID file: ${header.CamelFileName}" />
+			</split>
+		</route>
+
+		<route routePolicyRef="myPolicy" id="lookup-requirring" autoStartup="false">
+			<from
+				uri="file:/opt/app/sas/custom/data/lookup_recurring?move=.done&amp;doneFileName=${file:name}.done" />
+			<onCompletion>
+				<process ref="startPostpaidRoute"></process>
+				<process ref="startPrepaidRoute"></process>
+				<process ref="startFonicRoute"></process> 
+				<!--<process ref="startPcrFtpRoute"></process>-->
+			</onCompletion>
+			<!-- <split streaming="true" parallelProcessing="true"> -->
+			<split streaming="true" parallelProcessing="true">
+				<!--  <log message="Starting to process LOOKUP_RECURRING file: ${header.CamelFileName}" /> -->
+				<tokenize token="\n" group="10000"></tokenize>
+				<unmarshal>
+					<csv />
+				</unmarshal>
+				<multicast>
+				<log message="record for the engine (lookup-requirring) ${body}" />
+					<to
+						uri="dfESP://localhost:55555/POSTPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/REQUIRRING_TYPE_SOURCE_LOOKUP" />
+				    <to uri="dfESP://localhost:55555/PREPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/REQUIRRING_TYPE_SOURCE_LOOKUP" />
+				    <to uri="dfESP://localhost:55555/FONIC_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/REQUIRRING_TYPE_SOURCE_LOOKUP" />  
+				</multicast>
+
+				<log message="Done processing LOOKUP_REQUIRRING file: ${header.CamelFileName}" />
+			</split>
+		</route>
+
+		<route id="cep-output-postpaid" autoStartup="true">
+			<from uri="dfESP://localhost:55555/POSTPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/ADD_REQUIRRING" />
+			<log message="CEP Engine Postpaid Output for ADD_REQUIRRING: ${body}" />
+			<to uri="file:/opt/app/sas/custom/data/output_postpaid?fileName=result.csv&amp;fileExist=Append"></to>
+			<!--<process ref="inputForPostpaidRTDM"></process>
+			  <to uri="cxf:bean:rtdm-webservice"></to>
+			<process ref="outputFromPostPaidRTDM"></process>-->
+			<log message="Done CEP Postpaid Engine Output" />
+		</route>
+		
+		<route id="cep-output-prepaid" autoStartup="true">
+			<from uri="dfESP://localhost:55555/PREPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/ADD_REQUIRRING" />
+			<log message="CEP Engine Prepaid Output for ADD_REQUIRRING: ${body}" />
+			<to uri="file:/opt/app/sas/custom/data/output_prepaid?fileName=result.csv&amp;fileExist=Append"></to>
+			<!--<process ref="inputForPrepaidRTDM"></process>
+			    <to uri="cxf:bean:rtdm-webservice"></to>
+			<process ref="outputFromPostPaidRTDM"></process>-->
+			<log message="Done CEP Prepaid Engine Output" />
+		</route>
+
+		<route id="cep-output-fonic" autoStartup="true">
+			<from uri="dfESP://localhost:55555/FONIC_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/ADD_REQUIRRING" />
+			<log message="CEP Engine Fonic Output for ADD_REQUIRRING: ${body}" />
+			<to uri="file:/opt/app/sas/custom/data/output_prepaid?fileName=result.csv&amp;fileExist=Append"></to>
+			<!--<process ref="inputForPrepaidRTDM"></process>
+			    <to uri="cxf:bean:rtdm-webservice"></to>
+			<process ref="outputFromPostPaidRTDM"></process>-->
+			<log message="Done CEP Fonic Engine Output" />
+		</route>		
+
+
+
+	</camelContext>
+
+	<bean id="doneFilter" class="com.sas.o2.cep.pcrf.ExcludeDoneFilesFilter"></bean>
+	<bean id="myPolicy" class="com.sas.o2.cep.pcrf.PolicyForStartAndStopRoutes" />
+	<bean id="inputForPostpaidRTDM" class="com.sas.o2.cep.pcrf.CreateInputForRTDM"></bean>
+	<bean id="outputFromPostPaidRTDM" class="com.sas.o2.cep.pcrf.CreateOutputfromRTDM"></bean>
+
+	<bean id="startRequirringRoute" class="com.sas.o2.cep.pcrf.ProcessorForStartingRoute">
+		<constructor-arg index="0" value="lookup-requirring" />
+	</bean>
+	<bean id="startPostpaidRoute" class="com.sas.o2.cep.pcrf.ProcessorForStartingRoute">
+		<constructor-arg index="0" value="pcrf-edr-postpaid" />
+	</bean>
+	<bean id="startPrepaidRoute" class="com.sas.o2.cep.pcrf.ProcessorForStartingRoute">
+		<constructor-arg index="0" value="pcrf-edr-prepaid" />
+	</bean>
+	<bean id="startFonicRoute" class="com.sas.o2.cep.pcrf.ProcessorForStartingRoute">
+		<constructor-arg index="0" value="pcrf-edr-fonic" />
+	</bean>
+	<!--<bean id="startPcrfFtpRoute" class="com.sas.o2.cep.pcrf.ProcessorForStartingRoute">
+		<constructor-arg index="0" value="pcrf-ftp-server" />
+	</bean>-->
+
+	<cxf:cxfEndpoint id="rtdm-webservice" address="http://demucvtr15.dev.de.pri.o2.com:8680/RTDM/Event"
+		serviceClass="com.sas.xml.schema.sas_svcs.rtdm_1_1.wsdl.EventPortType" wsdlURL="wsdl/ESP_Test_Event.wsdl" />
+
+	<bean id="deadLetterErrorHandler" class="org.apache.camel.builder.DeadLetterChannelBuilder">
+		<property name="deadLetterUri" value="file:/opt/app/sas/custom/data/error_messages/" />
+		<property name="useOriginalMessage" value="true"></property>
+	</bean>
+	
+	
+	
+	<!--  
+	<bean id="parseExcelFile" class="com.sas.o2.cep.pcrf.ParseExcelFile"></bean>
+	-->
+
+
+
+</beans>
