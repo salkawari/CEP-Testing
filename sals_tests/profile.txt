@@ -1,0 +1,3 @@
+export DFESP_HOME=/home/sal/2.2-pre
+export LD_LIBRARY_PATH=$DFESP_HOME/lib
+export PATH=$PATH:$DFESP_HOME/bin
