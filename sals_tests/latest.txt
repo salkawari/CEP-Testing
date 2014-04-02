@@ -1,5 +1,0 @@
-cd /home/$LOGNAME/Desktop/dev/2.2-pre/bin
-./dfesp_xml_server -pubsub 55555 -server 55556 -loglevel debug -model file:/home/nicopc/Desktop/nicopc/try7/EDR_PCRF_V6.36-POSTPAID.xml &
-
-cd /home/$LOGNAME/Desktop/$LOGNAME/try7
-java -jar o2-adapters-pcrf-2.12.2.jar

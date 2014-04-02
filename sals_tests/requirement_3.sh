@@ -1,7 +1,4 @@
-echo "R3: the CEP Engine delivers PREPAID throttle 100 events with various metrics."
-echo "EDRs which have a local QuotaName and TriggerType 1 to 6 are of interest."
-echo "Throttle 100 events have the QuotaStatus=6 and QuotaValue=1."
-echo " "
-
-
-
+echo "R3: The Quota Total is defined as the total usage amount "
+echo "For a given throttle 100 event. For example 3 usage events"
+echo "followed by 1 throttle event would result in all the usage"
+echo "from all 4 EDRs."

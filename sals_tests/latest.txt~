@@ -1,2 +1,0 @@
-cd /home/$LOGNAME/Desktop/dev/2.2-pre/bin
-./dfesp_xml_server -pubsub 55555 -server 55556 -loglevel debug -model file:/home/nicopc/Desktop/nicopc/try7/EDR_PCRF_V6.36-POSTPAID.xml

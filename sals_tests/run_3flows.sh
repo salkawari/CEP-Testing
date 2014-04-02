@@ -11,14 +11,15 @@ data_dir=/opt/app/sas/custom/data
 err_dir=/opt/app/sas/custom/data/error_messages
 
 input_dir=input_data
-jar_adapter_path=/home/$LOGNAME/Desktop/$LOGNAME/try9
-JAR_FILE_NAME=o2-adapters-pcrf-2.12.2-try5-POST-PRE-FONIC.jar
 
+start_stop_dir=start_stop_dir
 
 output_file_name=result.csv
 
 # we set this to be blank to make sure our test sets this value..
 
+rm -fr $(cat start_stop_dir/START_STOP_CONFIG.txt|grep "cep_adapter_log_file"|cut -d'=' -f2)
+rm -fr $(cat start_stop_dir/START_STOP_CONFIG.txt|grep "cep_server_log_file"|cut -d'=' -f2)
 
 if (( $# == 1 ))
 then
@@ -27,67 +28,54 @@ else
   mylist=$(ls |grep "^tc.*_data_setup.sh$")
 fi
 
+echo "mylist=$mylist"
+
 #rm -fr $data_dir
 my_loc=$(pwd)
 
-for i in $(echo "$esp_server_dir $data_dir $err_dir $jar_adapter_path $input_dir $data_dir/pcrf_files_prepaid $data_dir/pcrf_files_postpaid $data_dir/lookup_paymenttype $data_dir/lookup_paymenttype $data_dir/lookup_recurring $data_dir/output_prepaid $data_dir/output_postpaid $data_dir/output_fonic $data_dir/bad_server_events")
+echo "cleaning out $data_dir"
+rm -fr $data_dir
+
+needed_directories=$(echo "$esp_server_dir $data_dir $err_dir $jar_adapter_path")
+needed_directories=$(echo "$needed_directories $input_dir $data_dir/pcrf_files_prepaid $data_dir/pcrf_files_postpaid")
+needed_directories=$(echo "$needed_directories $data_dir/lookup_paymenttype $data_dir/lookup_recurring")
+needed_directories=$(echo "$needed_directories $data_dir/output_prepaid $data_dir/output_postpaid $data_dir/output_fonic")
+needed_directories=$(echo "$needed_directories $data_dir/bad_server_events ${jar_adapter_path} ${my_loc}/${start_stop_dir}")
+needed_directories=$(echo "$needed_directories $data_dir/persist_fonic_throttle_event $data_dir/persist_prepaid_throttle_event")
+needed_directories=$(echo "$needed_directories $data_dir/persist_postpaid_throttle_event")
+
+
+for needed_dir in $(echo $needed_directories)
 do
-  if [ ! -d "$i" ]
+  if [ ! -d "$needed_dir" ]
   then
-    echo "creating $i"
-    mkdir -p $i
+    echo "creating $needed_dir"
+    mkdir -p $needed_dir
   fi
 done
-
-for i in $(echo "$model_xml_path")
-do
-  if [ ! -e "$i" ]
-  then
-    echo "please make sure you have setup your model xml properly (or update the location used in this script!)."
-    echo "it is looking for $i and not finding it"
-    echo "exiting the script - please fix and rerun!!!"
-    exit;
-  fi
-done
-
-
 
 for i in $(echo $mylist)
 do
   test_case_name=$(echo $i|cut -d'_' -f1)
   cd $err_dir
   rm -f *
+  cd $data_dir/output_postpaid
+  rm -f *
+  cd $data_dir/output_prepaid
+  rm -f *
+  cd $data_dir/output_fonic
+  rm -f *
+
   cd $my_loc  
   echo "############################################################################"
   echo "starting $test_case_name at $(date).."
   ./$i
   export SINGLE_FLOW_TYPE=$(cat SINGLE_FLOW_TYPE.conf)
-  export model_file_name=$(cat MODEL_XML_NAME.conf)
-
 
   out_dir=$data_dir/output_$(echo ${SINGLE_FLOW_TYPE,,} )
   if [ ! -d "$out_dir" ]
   then
     mkdir -p $out_dir;
-  fi
-
-  model_xml_def_path=$jar_adapter_path/${model_file_name}
-  model_xml_start_path=$jar_adapter_path/${SINGLE_FLOW_TYPE}_start.xml
-  model_xml_restore_path=$jar_adapter_path/${SINGLE_FLOW_TYPE}_restore.xml
-  model_xml_persist_path=$jar_adapter_path/${SINGLE_FLOW_TYPE}_persist.xml
-  missing_a_file=N
-  for j in $(echo "$model_xml_def_path $model_xml_start_path $model_xml_restore_path $model_xml_persist_path")
-  do
-    if [ ! -e "$j" ]
-    then
-      echo "ERROR!!! Missing input xml configuration $j!!!! Please copy over and then rerun test!!!!"
-      missing_a_file=Y
-    fi
-  done
-  if [ "$missing_a_file" == "Y" ]
-  then
-    echo "exiting as missing atleast 1 xml config file!"
-    exit
   fi
 
   if [ $(ps aux |grep $LOGNAME|egrep "jar|esp" |grep -v egrep|wc -l) -ne 0 ]
@@ -97,164 +85,13 @@ do
     exit
   fi
   ################################################################################
-  echo "${test_case_name}: 5. starting the cep engine server .."
-  rm -f $out_dir/$output_file_name $out_dir/$output_file_name.tmp $out_dir/$output_file_name.OUT
-  cd $esp_server_dir
-  echo "starting with the following command ... ./dfesp_xml_server -pubsub 55555 -server 55556 -loglevel debug -badevents $data_dir/bad_server_events >${my_loc}/server.txt"
-  ./dfesp_xml_server -pubsub 55555 -server 55556 -loglevel debug -badevents $data_dir/bad_server_events/error.txt &>${my_loc}/server.txt &
-  echo " "
-  sleep 3
-  ################################################################################
-
-  echo "${test_case_name}: 6 a). loading the xml model via $model_xml_def_path.."
-  echo "./dfesp_xml_client -server localhost:55556 -file $model_xml_def_path.."
-  ./dfesp_xml_client -server localhost:55556 -file $model_xml_def_path &
-  echo " "
-  sleep 1
-
-  echo "${test_case_name}: 6 b). starting xml model via $model_xml_start_path.."
-  echo "./dfesp_xml_client -server localhost:55556 -file $model_xml_start_path"
-  ./dfesp_xml_client -server localhost:55556 -file $model_xml_start_path &
-  echo " "
-  sleep 1
-
-  echo "${test_case_name}: 6 c). restoring via $model_xml_restore_path.."
-  echo "./dfesp_xml_client -server localhost:55556 -file $model_xml_restore_path"
-  ./dfesp_xml_client -server localhost:55556 -file $model_xml_restore_path &> ${my_loc}/response_restore_${SINGLE_FLOW_TYPE}.out
-  echo " "
-
-##################################################################################
-if [ $(echo $SINGLE_FLOW_TYPE| grep "PREPAID" |wc -l) -eq 1 ]
-then
-  echo "note we are using the new xml... $model_xml_def_path"
-  PREPAID_LOAD=$model_xml_def_path
-else
-  PREPAID_LOAD=$jar_adapter_path/EDR_PCRF_V6.36-PREPAID_load.xml
-fi
-
-PREPAID_START=$jar_adapter_path/PREPAID_start.xml
-PREPAID_RESTORE=$jar_adapter_path/PREPAID_restore.xml
-PREPAID_PERSIST=$jar_adapter_path/PREPAID_persist.xml
-for i in $(echo "$PREPAID_LOAD $PREPAID_START $PREPAID_RESTORE $PREPAID_PERSIST")
-do
-  if [ ! -e "$i" ]
-  then
-    echo "missing $i!!! exiting!!!"
-    exit
-  fi
-done
-
-  echo "${test_case_name}: PREPAID 7 a). loading the xml model via $PREPAID_LOAD.."
-  echo "./dfesp_xml_client -server localhost:55556 -file $PREPAID_LOAD.."
-  ./dfesp_xml_client -server localhost:55556 -file $PREPAID_LOAD &
-  echo " "
-  sleep 1
-  
-
-
-  echo "${test_case_name}: PREPAID 7 b). starting xml model via $PREPAID_START.."
-  echo "./dfesp_xml_client -server localhost:55556 -file $PREPAID_START.."
-  ./dfesp_xml_client -server localhost:55556 -file $PREPAID_START &
-  echo " "
-  sleep 1
-
-  echo "${test_case_name}: PREPAID 7 c). restoring xml model via $PREPAID_RESTORE.."
-  echo "./dfesp_xml_client -server localhost:55556 -file $PREPAID_RESTORE.."
-  ./dfesp_xml_client -server localhost:55556 -file $PREPAID_RESTORE &
-  echo " "
-  sleep 1
-##################################################################################
-if [ $(echo $SINGLE_FLOW_TYPE| grep "POSTPAID" |wc -l) -eq 1 ]
-then
-  echo "note we are using the new xml... $model_xml_def_path"
-  POSTPAID_LOAD=$model_xml_def_path
-else
-  POSTPAID_LOAD=$jar_adapter_path/EDR_PCRF_V6.36-POSTPAID_load.xml
-fi
-
-POSTPAID_START=$jar_adapter_path/POSTPAID_start.xml
-POSTPAID_RESTORE=$jar_adapter_path/POSTPAID_restore.xml
-POSTPAID_PERSIST=$jar_adapter_path/POSTPAID_persist.xml
-for i in $(echo "$POSTPAID_LOAD $POSTPAID_START $POSTPAID_RESTORE $POSTPAID_PERSIST")
-do
-  if [ ! -e "$i" ]
-  then
-    echo "missing $i!!! exiting!!!"
-    exit
-  fi
-done
-
-  echo "${test_case_name}: POSTPAID 8 a). loading the xml model via $POSTPAID_LOAD.."
-  echo "./dfesp_xml_client -server localhost:55556 -file $POSTPAID_LOAD.."
-  ./dfesp_xml_client -server localhost:55556 -file $POSTPAID_LOAD &
-  echo " "
-  sleep 1
-  
-
-
-  echo "${test_case_name}: POSTPAID 8 b). starting xml model via $POSTPAID_START.."
-  echo "./dfesp_xml_client -server localhost:55556 -file $POSTPAID_START.."
-  ./dfesp_xml_client -server localhost:55556 -file $POSTPAID_START &
-  echo " "
-  sleep 1
-
-  echo "${test_case_name}: POSTPAID 8 c). restoring xml model via $POSTPAID_RESTORE.."
-  echo "./dfesp_xml_client -server localhost:55556 -file $POSTPAID_RESTORE.."
-  ./dfesp_xml_client -server localhost:55556 -file $POSTPAID_RESTORE &
-  echo " "
-  sleep 1
-##################################################################################
-if [ $(echo $SINGLE_FLOW_TYPE| grep "FONIC" |wc -l) -eq 1 ]
-then
-  echo "note we are using the new xml... $model_xml_def_path"
-  FONIC_LOAD=$model_xml_def_path
-else
-  FONIC_LOAD=$jar_adapter_path/EDR_PCRF_V6.36-FONIC_load.xml
-fi
-
-
-FONIC_START=$jar_adapter_path/FONIC_start.xml
-FONIC_RESTORE=$jar_adapter_path/FONIC_restore.xml
-FONIC_PERSIST=$jar_adapter_path/FONIC_persist.xml
-for i in $(echo "$FONIC_LOAD $FONIC_START $FONIC_RESTORE $FONIC_PERSIST")
-do
-  if [ ! -e "$i" ]
-  then
-    echo "missing $i!!! exiting!!!"
-    exit
-  fi
-done
-
-  echo "${test_case_name}: FONIC 9 a). loading the xml model via $FONIC_LOAD.."
-  echo "./dfesp_xml_client -server localhost:55556 -file $FONIC_LOAD.."
-  ./dfesp_xml_client -server localhost:55556 -file $FONIC_LOAD &
-  echo " "
-  sleep 1
-  
-  echo "${test_case_name}: FONIC 9 b). starting xml model via $FONIC_START.."
-  echo "./dfesp_xml_client -server localhost:55556 -file $FONIC_START.."
-  ./dfesp_xml_client -server localhost:55556 -file $FONIC_START &
-  echo " "
-  sleep 1
-
-  echo "${test_case_name}: FONIC 9 c). restoring xml model via $FONIC_RESTORE.."
-  echo "./dfesp_xml_client -server localhost:55556 -file $FONIC_RESTORE.."
-  ./dfesp_xml_client -server localhost:55556 -file $FONIC_RESTORE &
-  echo " "
-  sleep 1
-
-##################################################################################
-#
-#  echo "${test_case_name}: 8. restoring via $model_xml_restore_path.."
-#  echo "./dfesp_xml_client -server localhost:55556 -file $model_xml_restore_path"
-#  ./dfesp_xml_client -server localhost:55556 -file $model_xml_restore_path &> ${my_loc}/response_restore_${SINGLE_FLOW_TYPE}.out
-#  echo " "
-#
-#  ################################################################################
-  echo "${test_case_name}: 10. starting the adapters java -jar ${jar_adapter_path}/${JAR_FILE_NAME}.."
-  cd $jar_adapter_path
-  java -jar $JAR_FILE_NAME &>${my_loc}/adapter.txt &
-
+  cd $my_loc/$start_stop_dir
+  ./START_CEP_ENGINE.sh
+  ./START_CEP_MODEL.sh POSTPAID_THROTTLE_EVENT
+  ./START_CEP_MODEL.sh PREPAID_THROTTLE_EVENT
+  ./START_CEP_MODEL.sh FONIC_THROTTLE_EVENT
+  ./START_CEP_ADAPTER.sh
+   cd $my_loc 
   ################################################################################
   sleep 4
   max_count=$(expr 6)
@@ -296,7 +133,24 @@ done
       echo " "
       if [ $(diff -w $out_dir/$output_file_name.OUT $out_dir/${test_case_name}_result.expected |wc -l) -eq 0 ]
       then
-        echo "${test_case_name}: RESULT: GOOD! match on $out_dir/$output_file_name.OUT with  $out_dir/${test_case_name}_result.expected"
+        touch ${my_loc}/EXPECTED_BAD_FILES.conf
+        missing_bad_file=n
+        for expected_bad_file in $(cat ${my_loc}/EXPECTED_BAD_FILES.conf)
+        do
+          echo "checking for expected bad file $expected_bad_file in $err_dir.."
+          if [ ! -e "${err_dir}/${expected_bad_file}" ]
+          then
+            echo "ERROR! Missing expected bad file ${err_dir}/${expected_bad_file}"
+            missing_bad_file=y
+          fi
+        done
+
+        if [ $(echo $missing_bad_file |grep n|wc -w) -ne 0 ]
+        then
+          echo "${test_case_name}: RESULT: GOOD! match on $out_dir/$output_file_name.OUT with  $out_dir/${test_case_name}_result.expected"
+        else
+          echo "${test_case_name}: RESULT: Failed!! Missing expected bad file ${err_dir}/${expected_bad_file} (good file output match on $out_dir/$output_file_name.OUT with  $out_dir/${test_case_name}_result.expected)"
+        fi
       else
         echo "ERROR!!!"
         echo "ERROR!!!"
@@ -308,40 +162,15 @@ done
       echo "RESULT: BAD! missing expected file!!"
     fi
 
-    echo " "
-    echo "###########################################################################"
-    echo "${test_case_name}: 12 PREPAID a). persisting via $model_xml_persist_path.."
-    cd $esp_server_dir  
-    echo "./dfesp_xml_client -server localhost:55556 -file $model_xml_persist_path"
-    ./dfesp_xml_client -server localhost:55556 -file $model_xml_persist_path &> ${my_loc}/response_persist_${SINGLE_FLOW_TYPE}.out
-    echo " "
-    echo "${test_case_name}: 12 POSTPAID b). persisting xml model via $POSTPAID_PERSIST.."
-    echo "./dfesp_xml_client -server localhost:55556 -file $POSTPAID_PERSIST.."
-    ./dfesp_xml_client -server localhost:55556 -file $POSTPAID_PERSIST &
-    echo " "
-    echo "${test_case_name}: 12 FONIC c). persist xml model via $FONIC_PERSIST.."
-    echo "./dfesp_xml_client -server localhost:55556 -file $FONIC_PERSIST.."
-    ./dfesp_xml_client -server localhost:55556 -file $FONIC_PERSIST &
-    echo " "
-    sleep 1
+    cd $my_loc/$start_stop_dir
+    ./STOP_CEP_MODEL.sh POSTPAID_THROTTLE_EVENT
+    ./STOP_CEP_MODEL.sh PREPAID_THROTTLE_EVENT
+    ./STOP_CEP_MODEL.sh FONIC_THROTTLE_EVENT
+    ./STOP_CEP_ADAPTER.sh
+    ./STOP_CEP_ENGINE.sh
 
   fi
-    cd $my_loc
-    ################################################################################
-    echo "13. checking for processes to kill.."
-    for j in $(ps aux |grep $LOGNAME|egrep "jar" |grep -v egrep| awk '{print $2}')
-    do
-      echo "killing adapter $j"
-      kill $j
-    done
-    sleep 4
 
-    for j in $(ps aux|grep $LOGNAME|grep -v grep|egrep "dfesp_xml_server|jar|esp" | awk '{print $2}')
-    do
-      echo "killing -9 $j";
-      kill $j;
-    done
-    sleep 4
   cd $my_loc
   echo "ending $test_case_name at $(date).."
   echo "############################################################################"
@@ -349,8 +178,8 @@ done
   
 done
 
-rm -f SINGLE_FLOW_TYPE.conf  ${my_loc}/response_restore_${SINGLE_FLOW_TYPE}.out ${my_loc}/response_restore_${SINGLE_FLOW_TYPE}.out
-#export SINGLE_FLOW_TYPE=$(echo "")
+rm -f SINGLE_FLOW_TYPE.conf 
+
 
 
 

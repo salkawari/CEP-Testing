@@ -5,7 +5,10 @@ echo "running test at $(date)"
 my_loc=$(pwd)
 
 echo "POSTPAID" > SINGLE_FLOW_TYPE.conf
-echo "EDR_PCRF_V6.36-POSTPAID_RAMP_UP_A.xml" > MODEL_XML_NAME.conf
+#echo "EDR_PCRF_V6.36-POSTPAID_RAMP_UP_A.xml" > MODEL_XML_NAME.conf
+echo "copying start_stop_dir/EDR_PCRF_V6.36-POSTPAID_RAMP_UP_A.xml to start_stop_dir/POSTPAID_load.xml.."
+cp start_stop_dir/EDR_PCRF_V6.36-POSTPAID_RAMP_UP_A.xml start_stop_dir/POSTPAID_load.xml
+echo "" > EXPECTED_BAD_FILES.conf
  
 throttle_file=tc10_EDR_UPCC231_MPU484_4924_40131211100031.csv
 throttle_input=input_data/$throttle_file

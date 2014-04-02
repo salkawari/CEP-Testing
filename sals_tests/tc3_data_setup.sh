@@ -5,7 +5,8 @@ echo "running test at $(date)"
 my_loc=$(pwd)
  
 echo "POSTPAID" > SINGLE_FLOW_TYPE.conf
-echo "EDR_PCRF_V6.36-POSTPAID_load.xml" > MODEL_XML_NAME.conf
+#echo "EDR_PCRF_V6.36-POSTPAID_load.xml" > MODEL_XML_NAME.conf
+echo "" > EXPECTED_BAD_FILES.conf
 
 
 throttle_file=tc3_EDR_UPCC231_MPU484_4924_40131211100031.csv
@@ -36,35 +37,34 @@ fi
 ################################################################################
 ################################################################################
 echo "TC3:"
-./requirement_2.sh
+./requirement_3.sh
 echo " "
 echo "test strategy:"
-echo "we make sure the join between the postpaid throttle 100 event works correctly"
-echo "(via msisdn and  the QuotaName). We also confirm that when no lookup entry is "
-echo "found, the postpaid throttle 100 event reaches the output but with these 2 "
-echo "attributes empty. E.g. prepaid throttle 100 events shouldnt be seen in the output of the CEP Engine."
+echo "we have 2 usage ERDs followed by a throttle 100 postpaid event"
+echo "The total usage should therefore be the total of these 3 EDRs"
+echo "another usage event after this should be ignored"
 echo " "
 echo " "
 echo "EDR data setup:"
-echo "Row1: a POSTPAID throttle 100, Quota_name=Q_110_local_Month"
-echo "Row2: a POSTPAID throttle 100, Quota_name=Q_444_local_Month"
+echo "Row1: a POSTPAID usage EDR (usage=1) (Quota_Status1=16)"
+echo "Row2: a POSTPAID usage EDR (usage=10)"
+echo "Row3: a POSTPAID Postpaid throttle EDR (usage=100)"
+echo "Row4: a POSTPAID usage event (usage=1000) - ignored"
 echo " "
 echo " "
-echo "Recurring Lookup Setup:"
-echo "Row1: same msisdn but different quota name, is_recurring=Y, InitVol=1230"
-echo "Row2: same msisdn and quota name as in the edr event, is_recurring=N, InitVol=1777"
 echo ""
+
 ################################################################################
 ################################################################################
 echo "tc3: 1. PCRD EDRs (input stream).."
 rm -f $throttle_input
 
 ###################
-# ROW1..
+# ROW1.. a usage event only (usage 1)..
 # P1 - TriggerType, Time, MSISDN..
 p1_desc=$(echo "# TriggerType, Time,,,MSISDN,,,,,")
-TriggerType1=2; Time1=$(date --date='10 minutes ago' +"%Y-%m-%d %T"); msisdn1=4912345678901; Quota_Name1=Q_110_local_Month; Quota_Status1=6; 
-Quota_Usage1=100; Quota_Next_Reset_Time1=$(date --date='16 days' +"%Y-%m-%d %T"); Quota_Value1=1; PaymentType1=POSTPAID;
+TriggerType1=2; Time1=$(date --date='10 minutes ago' +"%Y-%m-%d %T"); msisdn1=4912345678901; Quota_Name1=Q_110_local_Month; Quota_Status1=16; 
+Quota_Usage1=1; Quota_Next_Reset_Time1=$(date --date='16 days' +"%Y-%m-%d %T"); Quota_Value1=1; PaymentType1=POSTPAID;
 InitialVolume1=1230; IsRecurring1=Y;
 p1=$(echo "$TriggerType1,$Time1,,,$msisdn1,,,,,")
 
@@ -92,10 +92,24 @@ p7=$(echo ",,,,,,,$Quota_Value1,,")
 
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 ######
-# ROW2.. valid postpaid throttle
-msisdn2=4912345678902;  Quota_Name2=Q_444_local_Month
-p1=$(echo "$TriggerType1,$Time1,,,$msisdn2,,,,,")
-p3=$(echo ",,,,,,$Quota_Name2,$Quota_Status1,,")
+# ROW2.. a usage event only (usage 10)
+Time2=$(date --date='9 minutes ago' +"%Y-%m-%d %T"); Quota_Usage2=10
+p1=$(echo "$TriggerType1,$Time2,,,$msisdn1,,,,,")
+p4=$(echo ",$Quota_Usage2,$Quota_Next_Reset_Time1,,,,,,,")
+echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+######
+# ROW3.. a throttle 100 (usage 100)
+Time3=$(date --date='8 minutes ago' +"%Y-%m-%d %T"); Quota_Status3=6; Quota_Usage3=100
+p1=$(echo "$TriggerType1,$Time3,,,$msisdn1,,,,,")
+p3=$(echo ",,,,,,$Quota_Name1,$Quota_Status3,,")
+p4=$(echo ",$Quota_Usage3,$Quota_Next_Reset_Time1,,,,,,,")
+echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+######
+# ROW4.. a usage event only (usage 1000)
+Time4=$(date --date='7 minutes ago' +"%Y-%m-%d %T"); Quota_Status4=16; Quota_Usage4=1000
+p1=$(echo "$TriggerType1,$Time4,,,$msisdn1,,,,,")
+p3=$(echo ",,,,,,$Quota_Name1,$Quota_Status4,,")
+p4=$(echo ",$Quota_Usage4,$Quota_Next_Reset_Time1,,,,,,,")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 ####################
 ###################
@@ -104,11 +118,11 @@ gzip $throttle_input
 cp ${throttle_input}.gz $data_dir/pcrf_files_postpaid/
 
 Quota_Total1=$Quota_Usage1
+
 ################################################################################
 echo "tc3: 2. postpaid lkp.."
 rm -f $postpaid_lkp_input
 echo "$msisdn1,$PaymentType1" >> $postpaid_lkp_input
-echo "$msisdn2,$PaymentType1" >> $postpaid_lkp_input
 cp $postpaid_lkp_input $data_dir/lookup_paymenttype/
 cp $postpaid_lkp_input $data_dir/lookup_paymenttype/${postpaid_lkp_file}.done
 
@@ -123,12 +137,14 @@ cp $recurring_lkp_input $data_dir/lookup_recurring/${recurring_lkp_file}.done
 
 ################################################################################
 
-
+echo "debug Quota_Usage1=$Quota_Usage1"
+echo "debug Quota_Usage2=$Quota_Usage2"
+echo "debug Quota_Usage3=$Quota_Usage3"
+echo "debug All 3=$(($Quota_Usage1 + $Quota_Usage2 + $Quota_Usage3))"
 ################################################################################
 echo "tc3: 4. generating the expected output.."
 rm -f $expected_output
-echo "I,N:$Time1,$msisdn1,$Quota_Name1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,,,,,,,,,,,,,,$Quota_Status1,,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$((Quota_Usage1)),$IsRecurring2,$InitialVolume2" >> $expected_output
-echo "I,N:$Time1,$msisdn2,$Quota_Name2,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,,,,,,,,,,,,,,$Quota_Status1,,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$((Quota_Usage1)),," >> $expected_output
+echo "I,N:$Time3,$msisdn1,$Quota_Name1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,,,,,,,,,,,,,,$Quota_Status3,,,,$Quota_Usage3,,,,,,,,,,$PaymentType1,$(($Quota_Usage1 + $Quota_Usage2 + $Quota_Usage3)),$IsRecurring2,$InitialVolume2" >> $expected_output
 
 ################################################################################
 echo " "
@@ -143,6 +159,5 @@ cat $data_dir/lookup_recurring/tc3_input_data_recurring_lkp.txt
 echo " "
 echo "here is the EDR stream we used.."
 gzip -dc $data_dir/pcrf_files_postpaid/${throttle_file}.gz
-
 
 

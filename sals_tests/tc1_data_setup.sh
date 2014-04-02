@@ -6,6 +6,7 @@ my_loc=$(pwd)
 
 echo "POSTPAID" > SINGLE_FLOW_TYPE.conf
 echo "EDR_PCRF_V6.36-POSTPAID_load.xml" > MODEL_XML_NAME.conf
+echo "" > EXPECTED_BAD_FILES.conf
 
  
 throttle_file=tc1_EDR_UPCC231_MPU484_4924_40131211100031.csv
