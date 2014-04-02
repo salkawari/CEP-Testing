@@ -1,0 +1,13 @@
+# This is a config file for starting and stopping the cep server and cep models.
+myhost=localhost.localdomain
+esp_server_dir=/home/sal/Desktop/dev/2.2-pre/bin
+
+bad_events_dir=/opt/app/sas/custom/data/bad_server_events
+bad_events_file=bad_events.txt
+
+cep_server_log_file=/home/sal/sals_tests/cep_server.log
+
+cep_adapter_dir=/home/sal/Desktop/sal/try9
+cep_adapter_file=o2-adapters-pcrf-2.12.2_external_camel_context.jar
+
+cep_adapter_log_file=/home/sal/sals_tests/cep_adapter.log
