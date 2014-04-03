@@ -1,0 +1,436 @@
+now calling ./run_3flows.sh tc88_data_setup.sh ..
+mylist=tc88_data_setup.sh
+cleaning out /opt/app/sas/custom/data
+creating /opt/app/sas/custom/data
+creating /opt/app/sas/custom/data/error_messages
+creating /opt/app/sas/custom/data/pcrf_files_prepaid
+creating /opt/app/sas/custom/data/pcrf_files_postpaid
+creating /opt/app/sas/custom/data/lookup_paymenttype
+creating /opt/app/sas/custom/data/lookup_recurring
+creating /opt/app/sas/custom/data/output_prepaid
+creating /opt/app/sas/custom/data/output_postpaid
+creating /opt/app/sas/custom/data/output_fonic
+creating /opt/app/sas/custom/data/bad_server_events
+creating /opt/app/sas/custom/data/persist_fonic_throttle_event
+creating /opt/app/sas/custom/data/persist_prepaid_throttle_event
+creating /opt/app/sas/custom/data/persist_postpaid_throttle_event
+############################################################################
+starting tc88 at Thu Apr  3 08:14:36 PDT 2014..
+running test at Thu Apr  3 08:14:36 PDT 2014
+tc8:
+R8: Changes to the lookups are used as soon as they are made available
+ 
+test strategy:
+we add a text file instead of a gzip file, then we add a valid file
+ 
+ 
+EDR data setup:
+file 1: 
+msisdn1 throttle100 event
+msisdn2 throttle100 event
+msisdn3 throttle100 event
+
+Recurring Lookup
+isRecurring=Y for all
+
+Payment Type Lookup:
+msisdn1 postpaid
+msisdn2 postpaid
+msisdn3 postpaid
+
+start cep
+all 3 throttle 100 postpaid reach the output
+
+
+load a new Payment Type Lookup:
+msisdn1 postpaid
+msisdn2 prepaid
+msisdn3 fonic
+
+only msisdn2 should reach the output
+
+Payment Type Lookup:
+msisdn1 postpaid
+msisdn2 postpaid
+msisdn3 postpaid
+
+Recurring Lookup
+isRecurring=N for all
+
+
+starting the cep components...
+calling ./START_CEP_ENGINE.sh  
+cd /home/sal/Desktop/dev/2.2-pre/bin
+starting the cep server at Thu Apr  3 08:14:37 PDT 2014..
+./dfesp_xml_server -pubsub 55555 -server 55556 -loglevel debug -badevents /opt/app/sas/custom/data/bad_server_events/bad_events.txt >> /home/sal/sals_tests/cep_server.log
+running in the following cep server process..
+sal      40578  1.0  0.8 518076 15828 pts/0    Sl+  08:14   0:00 ./dfesp_xml_server -pubsub 55555 -server 55556 -loglevel debug -badevents /opt/app/sas/custom/data/bad_server_events/bad_events.txt
+calling ./START_CEP_MODEL.sh POSTPAID_THROTTLE_EVENT 
+cd /home/sal/Desktop/dev/2.2-pre/bin
+1/3) loading the cep model at Thu Apr  3 08:14:40 PDT 2014..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/POSTPAID_THROTTLE_EVENT_load.xml
+<response action='load' name='POSTPAID_THROTTLE_EVENT' pubsub='auto' threads='4' use-tagged-token='true' elapsed='33 ms'>
+    <message>project load POSTPAID_THROTTLE_EVENT succeeded</message>
+</response>
+
+2/3) starting the cep model..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/POSTPAID_THROTTLE_EVENT_start.xml
+ 
+<response action='start' name='POSTPAID_THROTTLE_EVENT' elapsed='0 ms'>
+    <message>project POSTPAID_THROTTLE_EVENT started</message>
+</response>
+
+3/3) restoring an existing binaries for this cep model..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/POSTPAID_THROTTLE_EVENT_restore.xml
+ 
+<response restore='/opt/app/sas/custom/data/persist_postpaid_throttle_event' elapsed='0 ms'/>
+
+calling ./START_CEP_MODEL.sh PREPAID_THROTTLE_EVENT 
+cd /home/sal/Desktop/dev/2.2-pre/bin
+1/3) loading the cep model at Thu Apr  3 08:14:43 PDT 2014..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/PREPAID_THROTTLE_EVENT_load.xml
+<response action='load' name='PREPAID_THROTTLE_EVENT' pubsub='auto' threads='4' use-tagged-token='true' elapsed='28 ms'>
+    <message>project load PREPAID_THROTTLE_EVENT succeeded</message>
+</response>
+
+2/3) starting the cep model..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/PREPAID_THROTTLE_EVENT_start.xml
+ 
+<response action='start' name='PREPAID_THROTTLE_EVENT' elapsed='0 ms'>
+    <message>project PREPAID_THROTTLE_EVENT started</message>
+</response>
+
+3/3) restoring an existing binaries for this cep model..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/PREPAID_THROTTLE_EVENT_restore.xml
+ 
+<response restore='/opt/app/sas/custom/data/persist_prepaid_throttle_event' elapsed='0 ms'/>
+
+calling ./START_CEP_MODEL.sh FONIC_THROTTLE_EVENT 
+cd /home/sal/Desktop/dev/2.2-pre/bin
+1/3) loading the cep model at Thu Apr  3 08:14:46 PDT 2014..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/FONIC_THROTTLE_EVENT_load.xml
+<response action='load' name='FONIC_THROTTLE_EVENT' pubsub='auto' threads='4' use-tagged-token='true' elapsed='32 ms'>
+    <message>project load FONIC_THROTTLE_EVENT succeeded</message>
+</response>
+
+2/3) starting the cep model..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/FONIC_THROTTLE_EVENT_start.xml
+ 
+<response action='start' name='FONIC_THROTTLE_EVENT' elapsed='0 ms'>
+    <message>project FONIC_THROTTLE_EVENT started</message>
+</response>
+
+3/3) restoring an existing binaries for this cep model..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/FONIC_THROTTLE_EVENT_restore.xml
+ 
+<response restore='/opt/app/sas/custom/data/persist_fonic_throttle_event' elapsed='0 ms'/>
+
+calling ./START_CEP_ADAPTER.sh  
+cd /home/sal/sals_tests/try9
+starting the cep adapter.. java -jar o2-adapters-pcrf-2.12.2_external_camel_context.jar >> /home/sal/sals_tests/cep_adapter.log
+running in the following cep adapter process..
+sal      40578  1.0  1.6 1319508 31604 pts/0   Sl+  08:14   0:00 ./dfesp_xml_server -pubsub 55555 -server 55556 -loglevel debug -badevents /opt/app/sas/custom/data/bad_server_events/bad_events.txt
+now we move the paymenttype lkp into the cep engine..
+now we move the recurring lkp into the cep engine..
+now we move the EDRs into the cep engine..
+tc8: part1..
+here is the postpaid lookup we used..
+4912345678901,POSTPAID
+4912345678902,POSTPAID
+4912345678903,POSTPAID
+ 
+here is the recurring lookup we used..
+4912345678901,Q_110_local_Month,1230,Y
+4912345678902,Q_110_local_Month,1230,Y
+4912345678903,Q_110_local_Month,1230,Y
+ 
+here is the EDR stream we used..
+2,2014-04-03 06:14:50,,,4912345678901,,,,,,,,,,,,,,,,,,,,,,Q_110_local_Month,6,,,,1,2014-04-19 08:14:50,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,,
+2,2014-04-03 06:14:50,,,4912345678902,,,,,,,,,,,,,,,,,,,,,,Q_110_local_Month,6,,,,1,2014-04-19 08:14:50,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,,
+2,2014-04-03 06:14:50,,,4912345678903,,,,,,,,,,,,,,,,,,,,,,Q_110_local_Month,6,,,,1,2014-04-19 08:14:50,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,,
+
+here is the 2nd file we send off..
+
+####################################################
+part2..
+now we change the lookups so that msisdn2 is prepaid and msisdn3 is fonic
+here is the postpaid lookup we used..
+4912345678901,POSTPAID
+4912345678902,PREPAID
+4912345678903,FONIC
+ 
+here is the EDR stream we used.. (this is the valid file)
+2,2014-04-03 07:24:50,,,4912345678901,,,,,,,,,,,,,,,,,,,,,,Q_110_local_Month,6,,,,1,2014-04-19 08:14:50,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,,
+2,2014-04-03 07:24:50,,,4912345678902,,,,,,,,,,,,,,,,,,,,,,Q_110_local_Month,6,,,,1,2014-04-19 08:14:50,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,,
+2,2014-04-03 07:24:50,,,4912345678903,,,,,,,,,,,,,,,,,,,,,,Q_110_local_Month,6,,,,1,2014-04-19 08:14:50,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,,
+now we move the paymenttype lkp into the cep engine..
+now we move the EDR stream into the cep engine..
+
+####################################################
+
+here is the 3rd file we send off..
+####################################################
+
+####################################################
+part3..
+now we change the lookups so that all are postpaid and isRecurring=N
+now we move the paymenttype lkp into the cep engine..
+now we move the recurring lkp into the cep engine..
+now we move the EDR Stream into the cep engine..
+here is the postpaid lookup we used..
+4912345678901,POSTPAID
+4912345678902,POSTPAID
+4912345678903,POSTPAID
+ 
+here is the recurring lookup we used..
+4912345678901,Q_110_local_Month,5,N
+4912345678902,Q_110_local_Month,5,N
+4912345678903,Q_110_local_Month,5,N
+ 
+here is the EDR stream we used.. (this is the valid file)
+2,2014-04-03 07:34:51,,,4912345678901,,,,,,,,,,,,,,,,,,,,,,Q_110_local_Month,6,,,,1,2014-04-19 08:14:50,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,,
+2,2014-04-03 07:34:51,,,4912345678902,,,,,,,,,,,,,,,,,,,,,,Q_110_local_Month,6,,,,1,2014-04-19 08:14:50,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,,
+2,2014-04-03 07:34:51,,,4912345678903,,,,,,,,,,,,,,,,,,,,,,Q_110_local_Month,6,,,,1,2014-04-19 08:14:50,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,,
+
+stopping the cep components...(as it will be started by the main testing framework
+calling ./STOP_CEP_ADAPTER.sh  
+killing 40760..
+calling ./STOP_CEP_MODEL.sh POSTPAID_THROTTLE_EVENT 
+cd /home/sal/Desktop/dev/2.2-pre/bin
+1/3) persisting the cep model at Thu Apr  3 08:14:51 PDT 2014..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/POSTPAID_THROTTLE_EVENT_persist.xml
+<response path='/opt/app/sas/custom/data/persist_postpaid_throttle_event' project='POSTPAID_THROTTLE_EVENT' elapsed='5 ms'>
+    <message>project 'POSTPAID_THROTTLE_EVENT' successfully saved to '/opt/app/sas/custom/data/persist_postpaid_throttle_event'</message>
+</response>
+
+2/3) stopping the cep model..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/POSTPAID_THROTTLE_EVENT_stop.xml
+ 
+<response action='start' name='POSTPAID_THROTTLE_EVENT' elapsed='0 ms'>
+    <message>project POSTPAID_THROTTLE_EVENT started</message>
+</response>
+
+3/3) removing the cep model from memory..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/POSTPAID_THROTTLE_EVENT_remove.xml
+ 
+calling ./STOP_CEP_MODEL.sh PREPAID_THROTTLE_EVENT 
+cd /home/sal/Desktop/dev/2.2-pre/bin
+1/3) persisting the cep model at Thu Apr  3 08:14:54 PDT 2014..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/PREPAID_THROTTLE_EVENT_persist.xml
+<response path='/opt/app/sas/custom/data/persist_prepaid_throttle_event' project='PREPAID_THROTTLE_EVENT' elapsed='4 ms'>
+    <message>project 'PREPAID_THROTTLE_EVENT' successfully saved to '/opt/app/sas/custom/data/persist_prepaid_throttle_event'</message>
+</response>
+
+<response action='remove' name='POSTPAID_THROTTLE_EVENT' elapsed='1599 ms'>
+    <message>project  removal succeeded</message>
+</response>
+
+2/3) stopping the cep model..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/PREPAID_THROTTLE_EVENT_stop.xml
+ 
+<response action='start' name='PREPAID_THROTTLE_EVENT' elapsed='0 ms'>
+    <message>project PREPAID_THROTTLE_EVENT started</message>
+</response>
+
+3/3) removing the cep model from memory..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/PREPAID_THROTTLE_EVENT_remove.xml
+ 
+calling ./STOP_CEP_MODEL.sh FONIC_THROTTLE_EVENT 
+cd /home/sal/Desktop/dev/2.2-pre/bin
+1/3) persisting the cep model at Thu Apr  3 08:14:57 PDT 2014..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/FONIC_THROTTLE_EVENT_persist.xml
+<response path='/opt/app/sas/custom/data/persist_fonic_throttle_event' project='FONIC_THROTTLE_EVENT' elapsed='4 ms'>
+    <message>project 'FONIC_THROTTLE_EVENT' successfully saved to '/opt/app/sas/custom/data/persist_fonic_throttle_event'</message>
+</response>
+
+<response action='remove' name='PREPAID_THROTTLE_EVENT' elapsed='1602 ms'>
+    <message>project  removal succeeded</message>
+</response>
+
+2/3) stopping the cep model..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/FONIC_THROTTLE_EVENT_stop.xml
+ 
+<response action='start' name='FONIC_THROTTLE_EVENT' elapsed='0 ms'>
+    <message>project FONIC_THROTTLE_EVENT started</message>
+</response>
+
+3/3) removing the cep model from memory..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/FONIC_THROTTLE_EVENT_remove.xml
+ 
+calling ./STOP_CEP_ENGINE.sh  
+killing 40578..
+waiting on the following processes to stop..
+40578
+ 
+here is the contents we were looking for..
+I,N:2014-04-03 06:14:50,4912345678901,Q_110_local_Month,2014-04-19 08:14:50,2,,,,,,,,,,,,,,,,,,,,,,,,6,,,,1,,,,,,,,,,POSTPAID,1,Y,1230
+I,N:2014-04-03 06:14:50,4912345678902,Q_110_local_Month,2014-04-19 08:14:50,2,,,,,,,,,,,,,,,,,,,,,,,,6,,,,1,,,,,,,,,,POSTPAID,1,Y,1230
+I,N:2014-04-03 06:14:50,4912345678903,Q_110_local_Month,2014-04-19 08:14:50,2,,,,,,,,,,,,,,,,,,,,,,,,6,,,,1,,,,,,,,,,POSTPAID,1,Y,1230
+I,N:2014-04-03 07:24:50,4912345678901,Q_110_local_Month,2014-04-19 08:14:50,2,,,,,,,,,,,,,,,,,,,,,,,,6,,,,1,,,,,,,,,,POSTPAID,2,Y,1230
+I,N:2014-04-03 07:34:51,4912345678901,Q_110_local_Month,2014-04-19 08:14:50,2,,,,,,,,,,,,,,,,,,,,,,,,6,,,,1,,,,,,,,,,POSTPAID,3,N,5
+I,N:2014-04-03 07:34:51,4912345678902,Q_110_local_Month,2014-04-19 08:14:50,2,,,,,,,,,,,,,,,,,,,,,,,,6,,,,1,,,,,,,,,,POSTPAID,2,N,5
+I,N:2014-04-03 07:34:51,4912345678903,Q_110_local_Month,2014-04-19 08:14:50,2,,,,,,,,,,,,,,,,,,,,,,,,6,,,,1,,,,,,,,,,POSTPAID,2,N,5
+ 
+calling ./START_CEP_ENGINE.sh  
+cd /home/sal/Desktop/dev/2.2-pre/bin
+starting the cep server at Thu Apr  3 08:15:04 PDT 2014..
+./dfesp_xml_server -pubsub 55555 -server 55556 -loglevel debug -badevents /opt/app/sas/custom/data/bad_server_events/bad_events.txt >> /home/sal/sals_tests/cep_server.log
+running in the following cep server process..
+sal      41016  0.7  0.7 518080 13788 pts/0    Sl+  08:15   0:00 ./dfesp_xml_server -pubsub 55555 -server 55556 -loglevel debug -badevents /opt/app/sas/custom/data/bad_server_events/bad_events.txt
+calling ./START_CEP_MODEL.sh POSTPAID_THROTTLE_EVENT 
+cd /home/sal/Desktop/dev/2.2-pre/bin
+1/3) loading the cep model at Thu Apr  3 08:15:07 PDT 2014..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/POSTPAID_THROTTLE_EVENT_load.xml
+<response action='load' name='POSTPAID_THROTTLE_EVENT' pubsub='auto' threads='4' use-tagged-token='true' elapsed='35 ms'>
+    <message>project load POSTPAID_THROTTLE_EVENT succeeded</message>
+</response>
+
+2/3) starting the cep model..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/POSTPAID_THROTTLE_EVENT_start.xml
+ 
+<response action='start' name='POSTPAID_THROTTLE_EVENT' elapsed='0 ms'>
+    <message>project POSTPAID_THROTTLE_EVENT started</message>
+</response>
+
+3/3) restoring an existing binaries for this cep model..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/POSTPAID_THROTTLE_EVENT_restore.xml
+ 
+<response restore='/opt/app/sas/custom/data/persist_postpaid_throttle_event' elapsed='0 ms'/>
+
+calling ./START_CEP_MODEL.sh PREPAID_THROTTLE_EVENT 
+cd /home/sal/Desktop/dev/2.2-pre/bin
+1/3) loading the cep model at Thu Apr  3 08:15:10 PDT 2014..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/PREPAID_THROTTLE_EVENT_load.xml
+<response action='load' name='PREPAID_THROTTLE_EVENT' pubsub='auto' threads='4' use-tagged-token='true' elapsed='32 ms'>
+    <message>project load PREPAID_THROTTLE_EVENT succeeded</message>
+</response>
+
+2/3) starting the cep model..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/PREPAID_THROTTLE_EVENT_start.xml
+ 
+<response action='start' name='PREPAID_THROTTLE_EVENT' elapsed='0 ms'>
+    <message>project PREPAID_THROTTLE_EVENT started</message>
+</response>
+
+3/3) restoring an existing binaries for this cep model..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/PREPAID_THROTTLE_EVENT_restore.xml
+ 
+<response restore='/opt/app/sas/custom/data/persist_prepaid_throttle_event' elapsed='0 ms'/>
+
+calling ./START_CEP_MODEL.sh FONIC_THROTTLE_EVENT 
+cd /home/sal/Desktop/dev/2.2-pre/bin
+1/3) loading the cep model at Thu Apr  3 08:15:13 PDT 2014..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/FONIC_THROTTLE_EVENT_load.xml
+<response action='load' name='FONIC_THROTTLE_EVENT' pubsub='auto' threads='4' use-tagged-token='true' elapsed='31 ms'>
+    <message>project load FONIC_THROTTLE_EVENT succeeded</message>
+</response>
+
+2/3) starting the cep model..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/FONIC_THROTTLE_EVENT_start.xml
+ 
+<response action='start' name='FONIC_THROTTLE_EVENT' elapsed='0 ms'>
+    <message>project FONIC_THROTTLE_EVENT started</message>
+</response>
+
+3/3) restoring an existing binaries for this cep model..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/FONIC_THROTTLE_EVENT_restore.xml
+ 
+<response restore='/opt/app/sas/custom/data/persist_fonic_throttle_event' elapsed='0 ms'/>
+
+calling ./START_CEP_ADAPTER.sh  
+cd /home/sal/sals_tests/try9
+starting the cep adapter.. java -jar o2-adapters-pcrf-2.12.2_external_camel_context.jar >> /home/sal/sals_tests/cep_adapter.log
+running in the following cep adapter process..
+sal      41016  1.0  1.5 1319512 29552 pts/0   Sl+  08:15   0:00 ./dfesp_xml_server -pubsub 55555 -server 55556 -loglevel debug -badevents /opt/app/sas/custom/data/bad_server_events/bad_events.txt
+waiting for /opt/app/sas/custom/data/output_postpaid/result.csv to be created..
+tc88:11. now we can compare results..
+here is the contents we were looking for..
+I,N:2014-04-03 06:14:50,4912345678901,Q_110_local_Month,2014-04-19 08:14:50,2,,,,,,,,,,,,,,,,,,,,,,,,6,,,,1,,,,,,,,,,POSTPAID,1,Y,1230
+I,N:2014-04-03 06:14:50,4912345678902,Q_110_local_Month,2014-04-19 08:14:50,2,,,,,,,,,,,,,,,,,,,,,,,,6,,,,1,,,,,,,,,,POSTPAID,1,Y,1230
+I,N:2014-04-03 06:14:50,4912345678903,Q_110_local_Month,2014-04-19 08:14:50,2,,,,,,,,,,,,,,,,,,,,,,,,6,,,,1,,,,,,,,,,POSTPAID,1,Y,1230
+I,N:2014-04-03 07:24:50,4912345678901,Q_110_local_Month,2014-04-19 08:14:50,2,,,,,,,,,,,,,,,,,,,,,,,,6,,,,1,,,,,,,,,,POSTPAID,2,Y,1230
+I,N:2014-04-03 07:34:51,4912345678901,Q_110_local_Month,2014-04-19 08:14:50,2,,,,,,,,,,,,,,,,,,,,,,,,6,,,,1,,,,,,,,,,POSTPAID,3,N,5
+I,N:2014-04-03 07:34:51,4912345678902,Q_110_local_Month,2014-04-19 08:14:50,2,,,,,,,,,,,,,,,,,,,,,,,,6,,,,1,,,,,,,,,,POSTPAID,2,N,5
+I,N:2014-04-03 07:34:51,4912345678903,Q_110_local_Month,2014-04-19 08:14:50,2,,,,,,,,,,,,,,,,,,,,,,,,6,,,,1,,,,,,,,,,POSTPAID,2,N,5
+here is what we got..
+I,N:2014-04-03 07:24:50,4912345678901,Q_110_local_Month,2014-04-19 08:14:50,2,,,,,,,,,,,,,,,,,,,,,,,,6,,,,1,,,,,,,,,,POSTPAID,1,N,5
+I,N:2014-04-03 07:24:50,4912345678902,Q_110_local_Month,2014-04-19 08:14:50,2,,,,,,,,,,,,,,,,,,,,,,,,6,,,,1,,,,,,,,,,POSTPAID,1,N,5
+I,N:2014-04-03 07:24:50,4912345678903,Q_110_local_Month,2014-04-19 08:14:50,2,,,,,,,,,,,,,,,,,,,,,,,,6,,,,1,,,,,,,,,,POSTPAID,1,N,5
+I,N:2014-04-03 07:34:51,4912345678901,Q_110_local_Month,2014-04-19 08:14:50,2,,,,,,,,,,,,,,,,,,,,,,,,6,,,,1,,,,,,,,,,POSTPAID,2,N,5
+I,N:2014-04-03 07:34:51,4912345678902,Q_110_local_Month,2014-04-19 08:14:50,2,,,,,,,,,,,,,,,,,,,,,,,,6,,,,1,,,,,,,,,,POSTPAID,2,N,5
+I,N:2014-04-03 07:34:51,4912345678903,Q_110_local_Month,2014-04-19 08:14:50,2,,,,,,,,,,,,,,,,,,,,,,,,6,,,,1,,,,,,,,,,POSTPAID,2,N,5
+I,N:2014-04-03 06:14:50,4912345678901,Q_110_local_Month,2014-04-19 08:14:50,2,,,,,,,,,,,,,,,,,,,,,,,,6,,,,1,,,,,,,,,,POSTPAID,3,N,5
+I,N:2014-04-03 06:14:50,4912345678902,Q_110_local_Month,2014-04-19 08:14:50,2,,,,,,,,,,,,,,,,,,,,,,,,6,,,,1,,,,,,,,,,POSTPAID,3,N,5
+I,N:2014-04-03 06:14:50,4912345678903,Q_110_local_Month,2014-04-19 08:14:50,2,,,,,,,,,,,,,,,,,,,,,,,,6,,,,1,,,,,,,,,,POSTPAID,3,N,5
+calling ./STOP_CEP_ADAPTER.sh  
+killing 41187..
+waiting on the following processes to stop..
+41187
+calling ./STOP_CEP_MODEL.sh POSTPAID_THROTTLE_EVENT 
+cd /home/sal/Desktop/dev/2.2-pre/bin
+1/3) persisting the cep model at Thu Apr  3 08:15:29 PDT 2014..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/POSTPAID_THROTTLE_EVENT_persist.xml
+<response path='/opt/app/sas/custom/data/persist_postpaid_throttle_event' project='POSTPAID_THROTTLE_EVENT' elapsed='3 ms'>
+    <message>project 'POSTPAID_THROTTLE_EVENT' successfully saved to '/opt/app/sas/custom/data/persist_postpaid_throttle_event'</message>
+</response>
+
+2/3) stopping the cep model..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/POSTPAID_THROTTLE_EVENT_stop.xml
+ 
+<response action='start' name='POSTPAID_THROTTLE_EVENT' elapsed='0 ms'>
+    <message>project POSTPAID_THROTTLE_EVENT started</message>
+</response>
+
+3/3) removing the cep model from memory..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/POSTPAID_THROTTLE_EVENT_remove.xml
+ 
+calling ./STOP_CEP_MODEL.sh PREPAID_THROTTLE_EVENT 
+cd /home/sal/Desktop/dev/2.2-pre/bin
+1/3) persisting the cep model at Thu Apr  3 08:15:32 PDT 2014..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/PREPAID_THROTTLE_EVENT_persist.xml
+<response path='/opt/app/sas/custom/data/persist_prepaid_throttle_event' project='PREPAID_THROTTLE_EVENT' elapsed='3 ms'>
+    <message>project 'PREPAID_THROTTLE_EVENT' successfully saved to '/opt/app/sas/custom/data/persist_prepaid_throttle_event'</message>
+</response>
+
+<response action='remove' name='POSTPAID_THROTTLE_EVENT' elapsed='1223 ms'>
+    <message>project  removal succeeded</message>
+</response>
+
+2/3) stopping the cep model..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/PREPAID_THROTTLE_EVENT_stop.xml
+ 
+<response action='start' name='PREPAID_THROTTLE_EVENT' elapsed='0 ms'>
+    <message>project PREPAID_THROTTLE_EVENT started</message>
+</response>
+
+3/3) removing the cep model from memory..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/PREPAID_THROTTLE_EVENT_remove.xml
+ 
+calling ./STOP_CEP_MODEL.sh FONIC_THROTTLE_EVENT 
+cd /home/sal/Desktop/dev/2.2-pre/bin
+1/3) persisting the cep model at Thu Apr  3 08:15:35 PDT 2014..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/FONIC_THROTTLE_EVENT_persist.xml
+<response path='/opt/app/sas/custom/data/persist_fonic_throttle_event' project='FONIC_THROTTLE_EVENT' elapsed='3 ms'>
+    <message>project 'FONIC_THROTTLE_EVENT' successfully saved to '/opt/app/sas/custom/data/persist_fonic_throttle_event'</message>
+</response>
+
+<response action='remove' name='PREPAID_THROTTLE_EVENT' elapsed='1208 ms'>
+    <message>project  removal succeeded</message>
+</response>
+
+2/3) stopping the cep model..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/FONIC_THROTTLE_EVENT_stop.xml
+ 
+<response action='start' name='FONIC_THROTTLE_EVENT' elapsed='0 ms'>
+    <message>project FONIC_THROTTLE_EVENT started</message>
+</response>
+
+3/3) removing the cep model from memory..
+./dfesp_xml_client -server localhost.localdomain:55556 -file /home/sal/sals_tests/start_stop_dir/FONIC_THROTTLE_EVENT_remove.xml
+ 
+calling ./STOP_CEP_ENGINE.sh  
+killing 41016..
+waiting on the following processes to stop..
+41016
+ending tc88 at Thu Apr  3 08:15:41 PDT 2014..
+############################################################################

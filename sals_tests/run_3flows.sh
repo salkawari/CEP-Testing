@@ -8,7 +8,7 @@ echo "now calling $0 ${1} ${2}.."
 
 esp_server_dir=/home/$LOGNAME/Desktop/dev/2.2-pre/bin
 data_dir=/opt/app/sas/custom/data
-err_dir=/opt/app/sas/custom/data/error_messages
+error_dir=/opt/app/sas/custom/data/error_messages
 
 input_dir=input_data
 
@@ -36,7 +36,7 @@ my_loc=$(pwd)
 echo "cleaning out $data_dir"
 rm -fr $data_dir
 
-needed_directories=$(echo "$esp_server_dir $data_dir $err_dir $jar_adapter_path")
+needed_directories=$(echo "$esp_server_dir $data_dir $error_dir $jar_adapter_path")
 needed_directories=$(echo "$needed_directories $input_dir $data_dir/pcrf_files_prepaid $data_dir/pcrf_files_postpaid")
 needed_directories=$(echo "$needed_directories $data_dir/lookup_paymenttype $data_dir/lookup_recurring")
 needed_directories=$(echo "$needed_directories $data_dir/output_prepaid $data_dir/output_postpaid $data_dir/output_fonic")
@@ -57,13 +57,15 @@ done
 for i in $(echo $mylist)
 do
   test_case_name=$(echo $i|cut -d'_' -f1)
-  cd $err_dir
+  cd $error_dir
   rm -f *
   cd $data_dir/output_postpaid
   rm -f *
   cd $data_dir/output_prepaid
   rm -f *
   cd $data_dir/output_fonic
+  rm -f *
+  cd $data_dir/error_messages
   rm -f *
 
   cd $my_loc  
@@ -102,74 +104,104 @@ do
     my_waits=$(($my_waits+1))
     sleep 4    
   done
+
+  output_matched_flag=n;
+  bad_files_expected_flag=n;
+  missing_bad_file_flag=n;
+  found_bad_file_flag=n;
+
+  # check to see no bad file exists..
+  if [ $(ls $error_dir|wc -c) -ne 0 ]
+  then
+    found_bad_file_flag=y
+  fi
+
+
+
+  echo "${test_case_name}:11. now we can compare results.."
+  cat $out_dir/$output_file_name | sed s/'I,N:'/'\n''I,N:'/g > $out_dir/$output_file_name.tmp
+  
+  if [ $(head -1 $out_dir/$output_file_name.tmp | wc -w) -eq "0" ]
+  then
+    line_count1=$(wc -l $out_dir/$output_file_name.tmp| awk '{print $1}')
+    tail -${line_count1} $out_dir/$output_file_name.tmp > $out_dir/$output_file_name.OUT
+  else
+    cp $out_dir/$output_file_name.tmp $out_dir/$output_file_name.OUT
+  fi
+  rm -f $out_dir/$output_file_name.tmp
+
+   ## checking that the output files matched the expected files..
+  if [ $(diff -w $out_dir/$output_file_name.OUT $out_dir/${test_case_name}_result.expected |wc -l) -eq 0 ]
+  then
+    output_matched_flag=y;
+  fi
+    
+  ## checking what bad files were expected..
+  if [ $(cat ${my_loc}/EXPECTED_BAD_FILES.conf|wc -w) -ne 0 ]
+  then
+    bad_files_expected_flag=y;
+
+    ## go through the list of expected bad output files to make sure they exist..
+    for expected_bad_file in $(cat ${my_loc}/EXPECTED_BAD_FILES.conf)
+    do
+      echo "checking for expected bad file $expected_bad_file in $error_dir.."
+      if [ ! -e "${error_dir}/${expected_bad_file}" ]
+      then
+        echo "ERROR! Missing expected bad file ${error_dir}/${expected_bad_file}"
+        missing_bad_file_flag=y
+        all_missing=$(echo "$all_missing $expected_bad_file")
+      fi
+    done
+  fi
+    
+
+############
+  echo "here is the contents we were looking for.."
+  cat $out_dir/${test_case_name}_result.expected
+  echo "here is what we got.."
+  cat $out_dir/$output_file_name.OUT
+  echo ""
+
+  ## now we output the result of the test..
   if [ $my_waits -ge $max_count ]
   then 
     echo "output file was not created! test failed!!!"
     echo "${test_case_name}: RESULT: FAILED!"
-  else
 
+  elif ( [ "$output_matched_flag" == "y" ] ) && ( [ "$bad_files_expected_flag" == "n" ] ) && ( [ "$found_bad_file_flag" == "n" ] )
+  then
+    echo "${test_case_name}: RESULT: SUCCESS!!! (no bad files expected and none found)"
 
-    ################################################################################
-    ################################################################################
+  elif ( [ "$output_matched_flag" == "y" ] ) && ( [ "$bad_files_expected_flag" == "n" ] ) && ( [ "$found_bad_file_flag" == "y" ] )
+  then
+    found_bad_files=$(ls $error_dir)
+    echo "${test_case_name}: RESULT: FAILURE!!! (no bad files expected but some were found.. $found_bad_files)"
 
-    echo "${test_case_name}:11. now we can compare results.."
-    cat $out_dir/$output_file_name | sed s/'I,N:'/'\n''I,N:'/g > $out_dir/$output_file_name.tmp
-    
-    if [ $(head -1 $out_dir/$output_file_name.tmp | wc -w) -eq "0" ]
-    then
-      line_count1=$(wc -l $out_dir/$output_file_name.tmp| awk '{print $1}')
-      tail -${line_count1} $out_dir/$output_file_name.tmp > $out_dir/$output_file_name.OUT
-    else
-      cp $out_dir/$output_file_name.tmp $out_dir/$output_file_name.OUT
-    fi
-    rm -f $out_dir/$output_file_name.tmp
-    if [ $(ls $out_dir |grep "${test_case_name}_result.expected" |wc -l) -ne 0 ]
-    then
-      echo " "
-      echo "here is the contents we were looking for.."
-      cat $out_dir/${test_case_name}_result.expected
-      echo "here is what we got.."
-      cat $out_dir/$output_file_name.OUT
-      echo " "
-      if [ $(diff -w $out_dir/$output_file_name.OUT $out_dir/${test_case_name}_result.expected |wc -l) -eq 0 ]
-      then
-        touch ${my_loc}/EXPECTED_BAD_FILES.conf
-        missing_bad_file=n
-        for expected_bad_file in $(cat ${my_loc}/EXPECTED_BAD_FILES.conf)
-        do
-          echo "checking for expected bad file $expected_bad_file in $err_dir.."
-          if [ ! -e "${err_dir}/${expected_bad_file}" ]
-          then
-            echo "ERROR! Missing expected bad file ${err_dir}/${expected_bad_file}"
-            missing_bad_file=y
-          fi
-        done
+  elif ( [ "$output_matched_flag" == "y" ] ) && ( [ "$bad_files_expected_flag" == "y" ] ) && ( [ "$found_bad_file_flag" == "n" ] )
+  then
+    found_bad_files=$(ls $error_dir)
+    echo "${test_case_name}: RESULT: FAILURE!!! (bad files were expected but none found)"
 
-        if [ $(echo $missing_bad_file |grep n|wc -w) -ne 0 ]
-        then
-          echo "${test_case_name}: RESULT: GOOD! match on $out_dir/$output_file_name.OUT with  $out_dir/${test_case_name}_result.expected"
-        else
-          echo "${test_case_name}: RESULT: Failed!! Missing expected bad file ${err_dir}/${expected_bad_file} (good file output match on $out_dir/$output_file_name.OUT with  $out_dir/${test_case_name}_result.expected)"
-        fi
-      else
-        echo "ERROR!!!"
-        echo "ERROR!!!"
-        echo "${test_case_name}: RESULT: FAILED! BAD! BAD! no match on $out_dir/$output_file_name.OUT with  $out_dir/${test_case_name}_result.expected"
-        echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-        echo "please fix!!!"
-      fi
-    else
-      echo "RESULT: BAD! missing expected file!!"
-    fi
+  elif ( [ "$output_matched_flag" == "y" ] ) && ( [ "$bad_files_expected_flag" == "y" ] ) && ( [ "$missing_bad_file_flag" == "n" ] )
+  then
+    found_bad_files=$(ls $error_dir)
+    echo "${test_case_name}: RESULT: SUCCESS!!! (bad files expected and all found)"
+
+  elif ( [ "$output_matched_flag" == "y" ] ) && ( [ "$bad_files_expected_flag" == "y" ] ) && ( [ "$missing_bad_file_flag" == "y" ] )
+  then
+    found_bad_files=$(ls $error_dir)
+    echo "${test_case_name}: RESULT: SUCCESS!!! (bad files expected and not all found.. $all_missing)"
+
+  fi
 
     cd $my_loc/$start_stop_dir
+    ./STOP_CEP_ADAPTER.sh
     ./STOP_CEP_MODEL.sh POSTPAID_THROTTLE_EVENT
     ./STOP_CEP_MODEL.sh PREPAID_THROTTLE_EVENT
     ./STOP_CEP_MODEL.sh FONIC_THROTTLE_EVENT
-    ./STOP_CEP_ADAPTER.sh
     ./STOP_CEP_ENGINE.sh
+    ################################################################################
 
-  fi
 
   cd $my_loc
   echo "ending $test_case_name at $(date).."

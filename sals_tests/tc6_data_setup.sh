@@ -10,7 +10,8 @@ echo "" > EXPECTED_BAD_FILES.conf
 
 
 throttle_file=tc6_EDR_UPCC231_MPU484_4924_40131211100031.csv
-throttle_input=input_data/$throttle_file
+throttle_dir=input_data
+throttle_input=$throttle_dir/$throttle_file
 
 postpaid_lkp_file=tc6_input_data_postpaid_lkp.txt
 postpaid_lkp_input=input_data/$postpaid_lkp_file
@@ -36,22 +37,20 @@ then
 fi
 ################################################################################
 ################################################################################
-echo "TC6:"
+echo "tc6:"
 ./requirement_5.sh
 echo " "
 echo "test strategy:"
-echo "we remove any previously persisted data"
-echo "then we process some EDRs thus generating some data which should be aggregated"
-echo "we then stop and start the server."
-echo "then we process some more EDRs and make sure the aggregated data includes"
-echo "the persisted data from before."
+echo "we add various usage and throttle events and make sure we have"
+echo "a mix of usage EDRs which are relevant for 1 or more throtte 100 events"
+echo "and some usage EDRs which are not relevant for any throttle 100 events."
 echo " "
 echo " "
 echo "EDR data setup:"
-echo "Row1: Postpaid MSISDN A (usage=1)  - 10 minutes ago"
-echo "Row2: Postpaid MSISDN B (usage=2)  - 10 minutes ago"
-echo "Row3: Postpaid MSISDN B (usage=2)  - 10 minutes ago"
+echo "Row1: Postpaid usageA (1) - 51 hours ago (no relevant for any throttle events)"
 echo "Row2: Postpaid usageB (2) - 49 hours ago (relevant for Throttle1 only)"
+echo "stop cep"
+echo "start cep"
 echo "Row3: Postpaid usageC (4) - 48 hours ago (relevant for Throttle1 and Throttle2)"
 echo "Row4: Postpaid Throttle1 (8) - 2 hours ago (the total usage includes usageB and usageC (and Throttle1) )"
 echo "Row5: Postpaid usageD (16) - 3 minutes ago (relevant for Throttle2 only)"
@@ -69,7 +68,7 @@ rm -f $throttle_input
 # Row1: Postpaid usageA (1) - 50 hours ago (no relevant for any throttle events)
 # P1 - TriggerType, Time, MSISDN..
 p1_desc=$(echo "# TriggerType, Time,,,MSISDN,,,,,")
-TriggerType1=2; Time1=$(date --date='50 hours ago' +"%Y-%m-%d %T"); msisdn1=4912345678901; Quota_Name1=Q_110_local_Month; Quota_Status1=16; 
+TriggerType1=2; Time1=$(date --date='51 hours ago' +"%Y-%m-%d %T"); msisdn1=4912345678901; Quota_Name1=Q_110_local_Month; Quota_Status1=16; 
 Quota_Usage1=1; Quota_Next_Reset_Time1=$(date --date='16 days' +"%Y-%m-%d %T"); Quota_Value1=1; PaymentType1=POSTPAID;
 InitialVolume1=1230; IsRecurring1=Y;
 p1=$(echo "$TriggerType1,$Time1,,,$msisdn1,,,,,")
@@ -103,6 +102,65 @@ Time2=$(date --date='49 hours ago' +"%Y-%m-%d %T"); Quota_Usage2=2
 p1=$(echo "$TriggerType1,$Time2,,,$msisdn1,,,,,")
 p4=$(echo ",$Quota_Usage2,$Quota_Next_Reset_Time1,,,,,,,")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+######
+
+
+echo "mv $throttle_input ${throttle_dir}/a${throttle_file}"
+mv $throttle_input ${throttle_dir}/a${throttle_file}
+
+echo "rm -f ${throttle_dir}/a${throttle_file}.gz"
+rm -f ${throttle_dir}/a${throttle_file}.gz
+
+echo "gzip ${throttle_dir}/a${throttle_file}"
+gzip ${throttle_dir}/a${throttle_file}
+
+echo "cp ${throttle_dir}/a${throttle_file}.gz $data_dir/pcrf_files_postpaid/"
+cp ${throttle_dir}/a${throttle_file}.gz $data_dir/pcrf_files_postpaid/
+
+
+
+################################################################################
+echo "tc6: 2. postpaid lkp.."
+rm -f $postpaid_lkp_input
+echo "$msisdn1,$PaymentType1" >> $postpaid_lkp_input
+cp $postpaid_lkp_input $data_dir/lookup_paymenttype/
+cp $postpaid_lkp_input $data_dir/lookup_paymenttype/${postpaid_lkp_file}.done
+
+################################################################################
+echo "tc6: 3. recurring lkp.."
+rm -f $recurring_lkp_input
+echo "$msisdn1,Q_111_local_Month,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
+InitialVolume2=1777; IsRecurring2=N;
+echo "$msisdn1,$Quota_Name1,$InitialVolume2,$IsRecurring2" >> $recurring_lkp_input
+cp $recurring_lkp_input $data_dir/lookup_recurring/
+cp $recurring_lkp_input $data_dir/lookup_recurring/${recurring_lkp_file}.done
+
+################################################################################
+
+my_loc2=$(pwd)
+
+echo "starting the cep components..."
+  cd $my_loc/start_stop_dir
+  ./START_CEP_ENGINE.sh
+  ./START_CEP_MODEL.sh POSTPAID_THROTTLE_EVENT
+  ./START_CEP_MODEL.sh PREPAID_THROTTLE_EVENT
+  ./START_CEP_MODEL.sh FONIC_THROTTLE_EVENT
+  ./START_CEP_ADAPTER.sh
+
+echo "stopping the cep components..."
+    ./STOP_CEP_ADAPTER.sh
+    ./STOP_CEP_MODEL.sh POSTPAID_THROTTLE_EVENT
+    ./STOP_CEP_MODEL.sh PREPAID_THROTTLE_EVENT
+    ./STOP_CEP_MODEL.sh FONIC_THROTTLE_EVENT
+    ./STOP_CEP_ENGINE.sh
+
+
+cd $my_loc2
+rm $throttle_input
+touch $throttle_input
+rm -f ${throttle_input}.gz
+
+
 ######
 # Row3: Postpaid usageC (4) - 48 hours ago (relevant for Throttle1 and Throttle2)
 Time3=$(date --date='48 hours ago' +"%Y-%m-%d %T"); Quota_Usage3=4
@@ -167,8 +225,9 @@ cp $recurring_lkp_input $data_dir/lookup_recurring/${recurring_lkp_file}.done
 ################################################################################
 echo "tc6: 4. generating the expected output.."
 rm -f $expected_output
-echo "I,N:$Time4,$msisdn1,$Quota_Name1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,,,,,,,,,,,,,,$Quota_Status1,,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$((Quota_Usage3 + Quota_Usage4)),$IsRecurring2,$InitialVolume2" >> $expected_output
-echo "I,N:$Time6,$msisdn1,$Quota_Name1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,,,,,,,,,,,,,,$Quota_Status1,,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$((Quota_Usage3 + Quota_Usage4 + Quota_Usage5 + Quota_Usage6)),$IsRecurring2,$InitialVolume2" >> $expected_output
+echo "Quota_Usage2=$Quota_Usage2, Quota_Usage3=$Quota_Usage3, Quota_Usage4=$Quota_Usage4, total=$(($Quota_Usage2 + $Quota_Usage3 + $Quota_Usage4))"
+echo "I,N:$Time4,$msisdn1,$Quota_Name1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,,,,,,,,,,,,,,$Quota_Status4,,,,$Quota_Usage4,,,,,,,,,,$PaymentType1,$(($Quota_Usage2 + $Quota_Usage3 + $Quota_Usage4)),$IsRecurring2,$InitialVolume2" >> $expected_output
+echo "I,N:$Time6,$msisdn1,$Quota_Name1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,,,,,,,,,,,,,,$Quota_Status6,,,,$Quota_Usage6,,,,,,,,,,$PaymentType1,$(($Quota_Usage3 + $Quota_Usage4 + $Quota_Usage5 + $Quota_Usage6)),$IsRecurring2,$InitialVolume2" >> $expected_output
 
 ################################################################################
 echo " "
