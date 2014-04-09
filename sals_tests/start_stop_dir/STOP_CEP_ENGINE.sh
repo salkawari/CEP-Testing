@@ -17,7 +17,7 @@ while [ $(ps aux|grep -i dfesp_xml_server| grep -v grep | awk '{print $2}'|wc -w
 do
   echo "waiting on the following processes to stop.."
   echo $(ps aux|grep -i dfesp_xml_server| grep -v grep | awk '{print $2}')
-  sleep 3
+  sleep 5
 done
 
 
