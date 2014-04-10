@@ -306,6 +306,13 @@
                                                                    or (TriggerType == 4) or (TriggerType == 5) or (TriggerType == 6))
                                                                    and match_string(Quota_Name,'*local*')
                                                                    and PaidType_From_Lookup=='PREPAID'
+                                                                   and (   (Quota_Name == 'Q_130_local_Month') 
+                                                                        or (Quota_Name == 'Q_143_local_Month')
+                                                                        or (Quota_Name == 'Q_144_local_Month')
+                                                                        or (Quota_Name == 'Q_145_local_Month')
+                                                                        or (Quota_Name == 'Q_88_local_Day')
+                                                                        or (Quota_Name == 'Q_38_local_Month')
+							               )
 							</expression>
 						</window-filter>
 

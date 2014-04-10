@@ -7,7 +7,7 @@ bad_events_file=bad_events.txt
 
 cep_server_log_file=/home/sal/sals_tests/cep_server.log
 
-cep_adapter_dir=/home/sal/sals_tests/try10
+cep_adapter_dir=/home/sal/sals_tests/try11
 cep_adapter_file=o2-adapters-pcrf-2.12.2.jar
 cep_adapter_params1=-Dorg.apache.camel.jmx.createRmiConnector=True -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=1616 
 cep_adapter_params2=-Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.local.only=false 

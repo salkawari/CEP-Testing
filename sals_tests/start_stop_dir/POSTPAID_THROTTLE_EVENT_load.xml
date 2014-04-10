@@ -306,6 +306,26 @@
                                                                    or (TriggerType == 4) or (TriggerType == 5) or (TriggerType == 6))
                                                                    and match_string(Quota_Name,'*local*')
                                                                    and PaidType_From_Lookup=='POSTPAID'
+                                                                  and (   (Quota_Name == 'Q_23_local_Month') 
+                                                                       or (Quota_Name == 'Q_68_local_Month') 
+                                                                       or (Quota_Name == 'Q_72_local_Month') 
+                                                                       or (Quota_Name == 'Q_74_local_Month') 
+                                                                       or (Quota_Name == 'Q_81_local_Month') 
+                                                                       or (Quota_Name == 'Q_109_local_Month') 
+                                                                       or (Quota_Name == 'Q_117_local_Month') 
+                                                                       or (Quota_Name == 'Q_127_local_Month')
+                                                                       or (Quota_Name == 'Q_11_local_Month') 
+                                                                       or (Quota_Name == 'Q_25_local_Month')
+                                                                       or (Quota_Name == 'Q_37_local_Month')
+                                                                       or (Quota_Name == 'Q_73_local_Month')
+                                                                       or (Quota_Name == 'Q_91_local_Month')
+                                                                       or (Quota_Name == 'Q_93_local_Month')
+                                                                       or (Quota_Name == 'Q_108_local_Month')
+                                                                       or (Quota_Name == 'Q_110_local_Month')
+                                                                       or (Quota_Name == 'Q_111_local_Month')
+                                                                       or (Quota_Name == 'Q_124_local_Month')
+                                                                       or (Quota_Name == 'Q_131_local_Month')
+							            )
 							</expression>
 						</window-filter>
 
