@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor 
+	license agreements. See the NOTICE file distributed with this work for additional 
+	information regarding copyright ownership. The ASF licenses this file to 
+	You under the Apache License, Version 2.0 (the "License"); you may not use 
+	this file except in compliance with the License. You may obtain a copy of 
+	the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
+	by applicable law or agreed to in writing, software distributed under the 
+	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
+	OF ANY KIND, either express or implied. See the License for the specific 
+	language governing permissions and limitations under the License. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cxf="http://camel.apache.org/schema/cxf"
+	xsi:schemaLocation="
+         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+         http://camel.apache.org/schema/cxf
+		 http://camel.apache.org/schema/cxf/camel-cxf.xsd">
+
+
+
+	<camelContext id="camel" xmlns="http://camel.apache.org/schema/spring" streamCache="true"
+		errorHandlerRef="deadLetterErrorHandler">
+
+
+
+
+
+ 		<route routePolicyRef="myPolicy" id="pcrf-edr-prepaid" autoStartup="false">
+			<from
+				uri="file:/opt/app/sas/custom/data/pcrf_files_prepaid?move=.done&amp;recursive=true&amp;sortBy=${file:name}" />
+			<log message="Starting to process EDR file: ${header.CamelFileName}" />
+			<unmarshal>
+				<gzip />
+			</unmarshal>
+			<unmarshal>
+				<csv />
+			</unmarshal>
+			<to uri="dfESP://localhost:55555/PREPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/PCRF_DATA_USAGE_STREAM" />
+			<log message="Done processing EDR file: ${header.CamelFileName}" />
+		</route>
+
+
+		<route routePolicyRef="myPolicy" id="lookup-paymenttype" autoStartup="true">
+			<from
+				uri="file:/opt/app/sas/custom/data/lookup_paymenttype?move=.done&amp;doneFileName=${file:name}.done" />
+			<onCompletion>
+				<process ref="startRequirringRoute"></process>
+			</onCompletion>
+			<split streaming="true" parallelProcessing="true">
+				<tokenize token="\n" group="10000"></tokenize>
+				<unmarshal>
+					<csv />
+				</unmarshal>
+
+				<multicast>
+					<log message="Starting to process LOOKUP PAYMENT TYPE file: ${header.CamelFileName}" />
+			       	        <to uri="dfESP://localhost:55555/PREPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/PAIDTYPE_SOURCE_LOOKUP" /> 
+					<log message="Done processing LOOKUP PAYMENT TYPE file: ${header.CamelFileName}" />
+				</multicast>
+
+
+			</split>
+		</route>
+
+		<route routePolicyRef="myPolicy" id="lookup-requirring" autoStartup="false">
+			<from
+				uri="file:/opt/app/sas/custom/data/lookup_recurring?move=.done&amp;doneFileName=${file:name}.done&amp;recursive=true" />
+			<onCompletion>				
+				<process ref="startPrepaidRoute"></process>
+			</onCompletion>
+			<unmarshal>
+				<zipFile/>
+			</unmarshal>
+			<split streaming="true" parallelProcessing="true">				
+				<tokenize token="\n" group="10000"></tokenize>
+				<unmarshal>
+					<csv />
+				</unmarshal>
+				<multicast>
+					<log message="Starting to process LOOKUP_REQUIRRING file: ${header.CamelFileName}" />
+				        <to uri="dfESP://localhost:55555/PREPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/PAIDTYPE_SOURCE_LOOKUP" />
+				</multicast>
+
+				<log message="Done processing LOOKUP_REQUIRRING file: ${header.CamelFileName}" />
+			</split>
+		</route>
+		
+		<route id="cep-output-prepaid" autoStartup="true">
+			<from uri="dfESP://localhost:55555/PREPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/ADD_REQUIRRING" />
+			<log message="CEP Engine PREPAID Output for ADD_REQUIRRING: ${body}" />
+			<to uri="file:/opt/app/sas/custom/data/output_prepaid?fileName=result.csv&amp;fileExist=Append"></to>
+			<log message="Done CEP Engine PREPAID Output" />
+		</route>
+
+	</camelContext>
+
+	<bean id="filterAfterDownTime" class="com.sas.o2.cep.pcrf.DownTimeFilter"></bean>
+	<bean id="doneFilter" class="com.sas.o2.cep.pcrf.ExcludeDoneFilesFilter"></bean>
+	<bean id="myPolicy" class="com.sas.o2.cep.pcrf.PolicyForStartAndStopRoutes" />
+	<bean id="inputForPostpaidRTDM" class="com.sas.o2.cep.pcrf.CreateInputForRTDM"></bean>
+	<bean id="outputFromPostPaidRTDM" class="com.sas.o2.cep.pcrf.CreateOutputfromRTDM"></bean>
+	<bean id="pcrfSorter" class="com.sas.o2.cep.pcrf.SortingStrategy"></bean>
+
+	<bean id="startRequirringRoute" class="com.sas.o2.cep.pcrf.ProcessorForStartingRoute">
+		<constructor-arg index="0" value="lookup-requirring" />
+	</bean>
+	<bean id="startPostpaidRoute" class="com.sas.o2.cep.pcrf.ProcessorForStartingRoute">
+		<constructor-arg index="0" value="pcrf-edr-postpaid" />
+	</bean>
+	<bean id="startPrepaidRoute" class="com.sas.o2.cep.pcrf.ProcessorForStartingRoute">
+		<constructor-arg index="0" value="pcrf-edr-prepaid" />
+	</bean>
+	<bean id="startFonicRoute" class="com.sas.o2.cep.pcrf.ProcessorForStartingRoute">
+		<constructor-arg index="0" value="pcrf-edr-fonic" />
+	</bean>
+	<bean id="startPcrfFtpBerlinRoute" class="com.sas.o2.cep.pcrf.ProcessorForStartingRoute">
+		<constructor-arg index="0" value="pcrf-ftp-server-berlin" />
+	</bean>
+	
+	<bean id="startPcrfFtpDuesseldorfRoute" class="com.sas.o2.cep.pcrf.ProcessorForStartingRoute">
+		<constructor-arg index="0" value="pcrf-ftp-server-duesseldorf" />
+	</bean>
+
+	<cxf:cxfEndpoint id="rtdm-webservice" address="http://10.99.15.34:80/RTDM/Event"
+		serviceClass="com.sas.xml.schema.sas_svcs.rtdm_1_1.wsdl.EventPortType" wsdlURL="wsdl-postpaid/RTCC_CEP_EVENT.wsdl"/>
+    
+	<bean id="deadLetterErrorHandler" class="org.apache.camel.builder.DeadLetterChannelBuilder">
+		<property name="deadLetterUri" value="file:/opt/app/sas/custom/data/error_messages" />
+		<property name="useOriginalMessage" value="false"></property>
+	</bean>
+
+
+
+
+</beans>
