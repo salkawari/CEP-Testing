@@ -38,13 +38,13 @@
 									<field name='CGI' type='string' />
 									<field name='SAI' type='string' />
 									<field name='RAI' type='string' />
-									<field name='SGSNAddress' type='string' />
+									<field name='SGSNAddress' type='string' key='true'/>
 									<field name='MCC_MNC' type='int32' />
 									<field name='Roam_Status' type='int64' />
 									<field name='Roam_Region' type='string' />
 									<field name='AccessType' type='int64' />
 									<field name='IPCan_Type' type='int64' />
-									<field name='UEIP' type='string' />
+									<field name='UEIP' type='string' key='true'/>
 									<field name='APN' type='string' />
 									<field name='Download_Bandwidth' type='int64' />
 									<field name='Upload_Bandwidth' type='int64' />
@@ -53,7 +53,7 @@
 									<field name='Rule_Name' type='string' />
 									<field name='Quota_Name' type='string' key='true' />
 									<field name='Quota_Status' type='int32' />
-									<field name='Quota_Consumption' type='int64' />
+									<field name='Quota_Consumption' type='int64' key='true' />
 									<field name='Quota_Balance' type='int64' />
 									<field name='Quota_Recharge' type='int64' />
 									<field name='Quota_Usage' type='int64' />
@@ -177,13 +177,13 @@
 								<field-selection name="CGI" source="l_CGI" />
 								<field-selection name="SAI" source="l_SAI" />
 								<field-selection name="RAI" source="l_RAI" />
-								<field-selection name="SGSNAddress" source="l_SGSNAddress" />
+<!--								<field-selection name="SGSNAddress" source="l_SGSNAddress" /> -->
 								<field-selection name="MCC_MNC" source="l_MCC_MNC" />
 								<field-selection name="Roam_Status" source="l_Roam_Status" />
 								<field-selection name="Roam_Region" source="l_Roam_Status" />
 								<field-selection name="AccessType" source="l_AccessType" />
 								<field-selection name="IPCan_Type" source="l_IPCan_Type" />
-								<field-selection name="UEIP" source="l_UEIP" />
+<!--								<field-selection name="UEIP" source="l_UEIP" /> -->
 								<field-selection name="APN" source="l_APN" />
 								<field-selection name="Download_Bandwidth" source="l_Download_Bandwidth" />
 								<field-selection name="Upload_Bandwidth" source="l_Upload_Bandwidth" />
@@ -191,7 +191,7 @@
 								<field-selection name="Service_Name" source="l_Service_Name" />
 								<field-selection name="Rule_Name" source="l_Rule_Name" />
 								<field-selection name="Quota_Status" source="l_Quota_Status" />
-								<field-selection name="Quota_Consumption" source="l_Quota_Consumption" />
+<!--								<field-selection name="Quota_Consumption" source="l_Quota_Consumption" /> -->
 								<field-selection name="Quota_Balance" source="l_Quota_Balance" />
 								<field-selection name="Quota_Recharge" source="l_Quota_Recharge" />
 								<field-selection name="Quota_Usage" source="l_Quota_Usage" />
@@ -236,13 +236,13 @@
 								<field-selection name="CGI" source="l_CGI" />
 								<field-selection name="SAI" source="l_SAI" />
 								<field-selection name="RAI" source="l_RAI" />
-								<field-selection name="SGSNAddress" source="l_SGSNAddress" />
+<!--								<field-selection name="SGSNAddress" source="l_SGSNAddress" /> -->
 								<field-selection name="MCC_MNC" source="l_MCC_MNC" />
 								<field-selection name="Roam_Status" source="l_Roam_Status" />
 								<field-selection name="Roam_Region" source="l_Roam_Status" />
 								<field-selection name="AccessType" source="l_AccessType" />
 								<field-selection name="IPCan_Type" source="l_IPCan_Type" />
-								<field-selection name="UEIP" source="l_UEIP" />
+<!--								<field-selection name="UEIP" source="l_UEIP" /> -->
 								<field-selection name="APN" source="l_APN" />
 								<field-selection name="Download_Bandwidth" source="l_Download_Bandwidth" />
 								<field-selection name="Upload_Bandwidth" source="l_Upload_Bandwidth" />
@@ -250,7 +250,7 @@
 								<field-selection name="Service_Name" source="l_Service_Name" />
 								<field-selection name="Rule_Name" source="l_Rule_Name" />
 								<field-selection name="Quota_Status" source="l_Quota_Status" />
-								<field-selection name="Quota_Consumption" source="l_Quota_Consumption" />
+<!--								<field-selection name="Quota_Consumption" source="l_Quota_Consumption" /> -->
 								<field-selection name="Quota_Balance" source="l_Quota_Balance" />
 								<field-selection name="Quota_Recharge" source="l_Quota_Recharge" />
 								<field-selection name="Quota_Usage" source="l_Quota_Usage" />
@@ -302,9 +302,10 @@
 
 						<window-filter name="FILTER_PCRF_DATA_USAGE" id="filter_pcrf_data_usage" index="pi_EMPTY"
 							pubsub='true'>
-							<expression>(PaidType_From_Lookup == 'FONIC') and ((TriggerType == 1) or (TriggerType ==
-								2) or (TriggerType == 3) or (TriggerType == 4) or (TriggerType == 5) or (TriggerType
-								== 6)) and match_string(Quota_Name,'*local*')
+							<expression> ((TriggerType == 1) or (TriggerType == 2) or (TriggerType == 3) 
+                                                                   or (TriggerType == 4) or (TriggerType == 5) or (TriggerType == 6))
+                                                                   and match_string(Quota_Name,'*local*')
+                                                                   and PaidType_From_Lookup=='FONIC'
 							</expression>
 						</window-filter>
 
@@ -317,7 +318,10 @@
 									<field name="Time" type="stamp" key="true" />
 									<field name="MSISDN" type="int64" key="true" />
 									<field name="Quota_Name" type="string" key="true" />
-									<field name="Quota_Next_Reset_Time" type="stamp" key="true" />
+									<field name="Quota_Next_Reset_Time" type="stamp" key="true" />                         
+                  <field name='SGSNAddress' type='string' key='true'/>
+                  <field name='UEIP' type='string' key='true'/>
+                  <field name='Quota_Consumption' type='int64' key='true' />
 
 									<!--  
 									<field name="Quota_Next_Reset_Time_Integer" type="int64" />

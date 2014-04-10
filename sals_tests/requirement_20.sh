@@ -1,4 +1,5 @@
 echo "R20: When the data for the primary columns is partially / fully empty, "
 echo "they get redirected to the bad_events subfolder (for possible later analysis)."
 echo "The other records in the EDR stream should still be processed by the CEP engine."
+echo "The primary key columns are Time, MSISDN, SGSNAddress, UEIP, Quota_Name, Quota_consumption and Quota_Next_Reset_Time"
 echo " "
