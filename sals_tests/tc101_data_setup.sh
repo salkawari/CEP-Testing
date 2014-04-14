@@ -108,20 +108,20 @@ fi
 }
 
 # ROW1..
-TriggerType1=2;                                                g_TriggerType=$TriggerType1;
-Time1=$(date +"%Y-%m-%d %T");                                  g_Time=$Time1;
-msisdn1=4912345678901;                                         g_msisdn=$msisdn1;
-Quota_Name1=Q_110_local_Month;                                 g_Quota_Name=$Quota_Name1;
-Quota_Status1=6;                                               g_Quota_Status=$Quota_Status1;
-Quota_Usage1=1024;                                             g_Quota_Usage=$Quota_Usage1;
-Quota_Next_Reset_Time1=$(date --date='16 days ago' +"%Y-%m-%d %T");g_Quota_Next_Reset_Time=$Quota_Next_Reset_Time1;
-Quota_Value1=1;                                                g_Quota_Value=$Quota_Value1;
-PaymentType1=POSTPAID;                                         g_PaymentType=$PaymentType1;
-InitialVolume1=1230;                                           g_InitialVolume=$InitialVolume1;
-IsRecurring1=Y;                                                g_IsRecurring=$IsRecurring1;
-SGSNAddress1=0;                                                g_SGSNAddress=$SGSNAddress1;
-UEIP1=1.2.3.4;                                                 g_UEIP=$UEIP1;
-Quota_Consumption1=12                                          g_Quota_Consumption=$Quota_Consumption1;
+TriggerType1=2;                                                g_TriggerType=$TriggerType1; #p1
+Time1=$(date +"%Y-%m-%d %T");                                  g_Time=$Time1; #p1
+msisdn1=4912345678901;                                         g_msisdn=$msisdn1; #p1
+Quota_Name1=Q_110_local_Month;                                 g_Quota_Name=$Quota_Name1; #p3
+Quota_Status1=6;                                               g_Quota_Status=$Quota_Status1; #p3
+Quota_Usage1=1024;                                             g_Quota_Usage=$Quota_Usage1; #p4
+Quota_Next_Reset_Time1=$(date --date='16 days' +"%Y-%m-%d %T");g_Quota_Next_Reset_Time=$Quota_Next_Reset_Time1; #p4
+Quota_Value1=1;                                                g_Quota_Value=$Quota_Value1; # p7
+PaymentType1=POSTPAID;                                         g_PaymentType=$PaymentType1; # payment type lookup
+InitialVolume1=1230;                                           g_InitialVolume=$InitialVolume1; # recurring lkp
+IsRecurring1=Y;                                                g_IsRecurring=$IsRecurring1; # recurring lkp
+SGSNAddress1=0;                                                g_SGSNAddress=$SGSNAddress1; #p2
+UEIP1=1.2.3.4;                                                 g_UEIP=$UEIP1; #p2
+Quota_Consumption1=12                                          g_Quota_Consumption=$Quota_Consumption1; #p3
 
 p1=$(ret_line "PCRF_EDR" "1")
 p2=$(ret_line "PCRF_EDR" "2")
@@ -135,36 +135,39 @@ echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 ####################
 # ROW2.. bad trigger type
 msisdn2=4912345678902; g_msisdn=$msisdn2;
-TriggerType2=7;        g_TriggerType=$TriggerType2;
+TriggerType2=7;        g_TriggerType=$TriggerType2; #p1
 p1=$(ret_line "PCRF_EDR" "1")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 
 ####
 # ROW3.. bad quota name
 msisdn3=4912345678903;          g_msisdn=$msisdn3;
-Quota_Name3=Q_110_roaming_Month; g_Quota_Name=$Quota_Name3;
+Quota_Name3=Q_110_roaming_Month; g_Quota_Name=$Quota_Name3; #p3
 p1=$(ret_line "PCRF_EDR" "1")
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 ####
 # ROW4.. bad quota status
 msisdn4=4912345678904; g_msisdn=$msisdn4;
-Quota_Status4=4;       g_Quota_Status=$Quota_Status4;
 p1=$(ret_line "PCRF_EDR" "1")
+Quota_Name4=Q_110_local_Month; g_Quota_Name=$Quota_Name4; #p3
+Quota_Status4=4;       g_Quota_Status=$Quota_Status4; #p3
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 ####
 # ROW5.. bad quota value
 msisdn5=4912345678905; g_msisdn=$msisdn5;
-Quota_Value5=11;       g_Quota_Value=$Quota_Value5;
 p1=$(ret_line "PCRF_EDR" "1")
+Quota_Status4=6;       g_Quota_Status=$Quota_Status5; #p3
+p3=$(ret_line "PCRF_EDR" "3")
+Quota_Value5=11;       g_Quota_Value=$Quota_Value5; #p7
 p7=$(ret_line "PCRF_EDR" "7")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+####
 # ROW6.. its prepaid!
-msisdn6=4912345678906; g_msisdn=$msisdn6;
-Quota_Value6=11;       g_Quota_Value=$Quota_Value6;
+msisdn6=4912345678906; g_msisdn=$msisdn6; #p1
 p1=$(ret_line "PCRF_EDR" "1")
-p3=$(ret_line "PCRF_EDR" "3")
+Quota_Value6=1;       g_Quota_Value=$Quota_Value6; #p7
 p7=$(ret_line "PCRF_EDR" "7")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 

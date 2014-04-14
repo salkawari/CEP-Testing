@@ -114,7 +114,7 @@ msisdn1=4912345678901;                                         g_msisdn=$msisdn1
 Quota_Name1=Q_110_local_Month;                                 g_Quota_Name=$Quota_Name1; # p3
 Quota_Status1=6;                                               g_Quota_Status=$Quota_Status1; # p3
 Quota_Usage1=1;                                                g_Quota_Usage=$Quota_Usage1; # p4
-Quota_Next_Reset_Time1=$(date --date='16 days ago' +"%Y-%m-%d %T");g_Quota_Next_Reset_Time=$Quota_Next_Reset_Time1; # p4
+Quota_Next_Reset_Time1=$(date --date='16 days' +"%Y-%m-%d %T");g_Quota_Next_Reset_Time=$Quota_Next_Reset_Time1; # p4
 Quota_Value1=1;                                                g_Quota_Value=$Quota_Value1; # p7
 PaymentType1=POSTPAID;                                         g_PaymentType=$PaymentType1; # payment type lookup
 InitialVolume1=1230;                                           g_InitialVolume=$InitialVolume1; # recurring lkp

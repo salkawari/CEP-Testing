@@ -120,7 +120,7 @@ msisdn1=4912345678901;                                             g_msisdn=$msi
 Quota_Name1=Q_110_local_Month;                                     g_Quota_Name=$Quota_Name1; # p3
 Quota_Status1=6;                                                   g_Quota_Status=$Quota_Status1; # p3
 Quota_Usage1=1;                                                    g_Quota_Usage=$Quota_Usage1; # p4
-Quota_Next_Reset_Time1=$(date --date='16 days ago' +"%Y-%m-%d %T");g_Quota_Next_Reset_Time=$Quota_Next_Reset_Time1; # p4
+Quota_Next_Reset_Time1=$(date --date='16 days' +"%Y-%m-%d %T");    g_Quota_Next_Reset_Time=$Quota_Next_Reset_Time1; # p4
 Quota_Value1=1;                                                    g_Quota_Value=$Quota_Value1; # p7
 PaymentType1=POSTPAID;                                             g_PaymentType=$PaymentType1; # payment type lookup
 InitialVolume1=1230;                                               g_InitialVolume=$InitialVolume1; # recurring lkp
@@ -165,7 +165,7 @@ echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
 # ROW5.. valid
 msisdn5=4912345678905; g_msisdn=$msisdn5;
-Time5=$(date --date='16 days ago' +"%Y-%m-%d %T");  g_Time=$Time5; # p1
+Time5=$(date --date='16 days' +"%Y-%m-%d %T");  g_Time=$Time5; # p1
 p1=$(ret_line "PCRF_EDR" "1")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
@@ -193,7 +193,7 @@ echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 # ROW9.. valid
 msisdn9=4912345678909; g_msisdn=$msisdn9;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Next_Reset_Time9=$(date --date='16 days ago' +"%Y-%m-%d %T");g_Quota_Next_Reset_Time=$Quota_Next_Reset_Time9; # p4
+Quota_Next_Reset_Time9=$(date --date='16 days' +"%Y-%m-%d %T");g_Quota_Next_Reset_Time=$Quota_Next_Reset_Time9; # p4
 p4=$(ret_line "PCRF_EDR" "4")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
@@ -219,7 +219,7 @@ echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 # ROW13.. valid
 msisdn13=4912345678913; g_msisdn=$msisdn13;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Next_Reset_Time13=$(date --date='16 days ago' +"%Y-%m-%d %T"); g_Quota_Next_Reset_Time=$Quota_Next_Reset_Time13; # p4
+Quota_Next_Reset_Time13=$(date --date='16 days' +"%Y-%m-%d %T"); g_Quota_Next_Reset_Time=$Quota_Next_Reset_Time13; # p4
 p4=$(ret_line "PCRF_EDR" "4")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #echo $(date --date='16 days ago' +"%Y-%m-%d %T")

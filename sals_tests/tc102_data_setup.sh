@@ -115,7 +115,7 @@ msisdn1=4912345678901;                                         g_msisdn=$msisdn1
 Quota_Name1=Q_110_local_Month;                                 g_Quota_Name=$Quota_Name1;
 Quota_Status1=6;                                               g_Quota_Status=$Quota_Status1;
 Quota_Usage1=1024;                                             g_Quota_Usage=$Quota_Usage1;
-Quota_Next_Reset_Time1=$(date --date='16 days ago' +"%Y-%m-%d %T");g_Quota_Next_Reset_Time=$Quota_Next_Reset_Time1;
+Quota_Next_Reset_Time1=$(date --date='16 days' +"%Y-%m-%d %T");g_Quota_Next_Reset_Time=$Quota_Next_Reset_Time1;
 Quota_Value1=1;                                                g_Quota_Value=$Quota_Value1;
 PaymentType1=POSTPAID;                                         g_PaymentType=$PaymentType1;
 InitialVolume1=1230;                                           g_InitialVolume=$InitialVolume1;
