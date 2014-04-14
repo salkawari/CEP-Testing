@@ -204,7 +204,7 @@ do
   elif ( [ "$output_matched_flag" == "y" ] ) && ( [ "$bad_files_expected_flag" == "y" ] ) && ( [ "$missing_bad_file_flag" == "y" ] )
   then
     found_bad_files=$(ls $error_dir)
-    echo "${test_case_name}: RESULT: SUCCESS!!! (bad files expected and not all found.. $all_missing)"
+    echo "${test_case_name}: RESULT: FAILURE!!! (bad files expected and not all found.. $all_missing)"
   else
     echo "${test_case_name}: RESULT: FAILURE!!! output doesnt match the input"
   fi

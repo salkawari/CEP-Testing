@@ -114,20 +114,20 @@ fi
 }
 ###################
 # ROW1..a throttle 100 event - good Q_110_local_Month..
-TriggerType1=2;                                                g_TriggerType=$TriggerType1;  #p1
-Time1=$(date --date='50 hours ago' +"%Y-%m-%d %T");            g_Time=$Time1; # p1
-msisdn1=4912345678901;                                         g_msisdn=$msisdn1; # p1
-Quota_Name1=Q_110_local_Month;                                 g_Quota_Name=$Quota_Name1; # p3
-Quota_Status1=6;                                               g_Quota_Status=$Quota_Status1; # p3
-Quota_Usage1=1;                                                g_Quota_Usage=$Quota_Usage1; # p4
-Quota_Next_Reset_Time1=$(date --date='16 days' +"%Y-%m-%d %T");g_Quota_Next_Reset_Time=$Quota_Next_Reset_Time1; # p4
-Quota_Value1=1;                                                g_Quota_Value=$Quota_Value1; # p7
-PaymentType1=POSTPAID;                                         g_PaymentType=$PaymentType1; # payment type lookup
-InitialVolume1=1230;                                           g_InitialVolume=$InitialVolume1; # recurring lkp
-IsRecurring1=Y;                                                g_IsRecurring=$IsRecurring1; # recurring lkp
-SGSNAddress1=0;                                                g_SGSNAddress=$SGSNAddress1; # p2
-UEIP1=1.2.3.4;                                                 g_UEIP=$UEIP1; # p2
-Quota_Consumption1=12                                          g_Quota_Consumption=$Quota_Consumption1; # p3
+TriggerType1=2;                                                    g_TriggerType=$TriggerType1;  #p1
+Time1=$(date --date='50 hours ago' +"%Y-%m-%d %T");                g_Time=$Time1; # p1
+msisdn1=4912345678901;                                             g_msisdn=$msisdn1; # p1
+Quota_Name1=Q_110_local_Month;                                     g_Quota_Name=$Quota_Name1; # p3
+Quota_Status1=6;                                                   g_Quota_Status=$Quota_Status1; # p3
+Quota_Usage1=1;                                                    g_Quota_Usage=$Quota_Usage1; # p4
+Quota_Next_Reset_Time1=$(date --date='16 days ago' +"%Y-%m-%d %T");g_Quota_Next_Reset_Time=$Quota_Next_Reset_Time1; # p4
+Quota_Value1=1;                                                    g_Quota_Value=$Quota_Value1; # p7
+PaymentType1=POSTPAID;                                             g_PaymentType=$PaymentType1; # payment type lookup
+InitialVolume1=1230;                                               g_InitialVolume=$InitialVolume1; # recurring lkp
+IsRecurring1=Y;                                                    g_IsRecurring=$IsRecurring1; # recurring lkp
+SGSNAddress1=0;                                                    g_SGSNAddress=$SGSNAddress1; # p2
+UEIP1=1.2.3.4;                                                     g_UEIP=$UEIP1; # p2
+Quota_Consumption1=12                                              g_Quota_Consumption=$Quota_Consumption1; # p3
 
 p1=$(ret_line "PCRF_EDR" "1")
 p2=$(ret_line "PCRF_EDR" "2")
@@ -138,11 +138,19 @@ p6=$(ret_line "PCRF_EDR" "6")
 p7=$(ret_line "PCRF_EDR" "7")
 
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+#echo $(date --date='16 days ago' +"%Y-%m-%d %T")
+#echo "Quota_Next_Reset_Time1=$Quota_Next_Reset_Time1"
+#tmp=$(date --date='16 days' +"%Y-%m-%d %T");
+#echo "tmp=$tmp"
+#echo "throttle_input 1 ($g_Quota_Next_Reset_Time, $Quota_Next_Reset_Time1) =$p1,$p2,$p3,$p4,$p5,$p6,$p7"
+#echo "............................................................................................................"
+
 #########################
 # ROW2.. invalid - missing msisdn
 msisdn2=; g_msisdn=$msisdn2; # p1
 p1=$(ret_line "PCRF_EDR" "1")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+msisdn2=4912345678902;
 #########################
 # ROW3.. valid
 msisdn3=4912345678903; g_msisdn=$msisdn3;
@@ -157,7 +165,7 @@ echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
 # ROW5.. valid
 msisdn5=4912345678905; g_msisdn=$msisdn5;
-Time5=$(date --date='16 days' +"%Y-%m-%d %T");  g_Time=$Time5; # p1
+Time5=$(date --date='16 days ago' +"%Y-%m-%d %T");  g_Time=$Time5; # p1
 p1=$(ret_line "PCRF_EDR" "1")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
@@ -171,7 +179,7 @@ echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 # ROW7.. valid
 msisdn7=4912345678907; g_msisdn=$msisdn7;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name7=;                                 g_Quota_Name=$Quota_Name7; # p3
+Quota_Name7=Q_110_local_Month;                                 g_Quota_Name=$Quota_Name7; # p3
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
@@ -179,12 +187,14 @@ echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 msisdn8=4912345678908; g_msisdn=$msisdn8;
 p1=$(ret_line "PCRF_EDR" "1")
 Quota_Next_Reset_Time8=; g_Quota_Next_Reset_Time=$Quota_Next_Reset_Time8; # p4
+p4=$(ret_line "PCRF_EDR" "4")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
 # ROW9.. valid
 msisdn9=4912345678909; g_msisdn=$msisdn9;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Next_Reset_Time9=$(date --date='16 days' +"%Y-%m-%d %T");g_Quota_Next_Reset_Time=$Quota_Next_Reset_Time9; # p4
+Quota_Next_Reset_Time9=$(date --date='16 days ago' +"%Y-%m-%d %T");g_Quota_Next_Reset_Time=$Quota_Next_Reset_Time9; # p4
+p4=$(ret_line "PCRF_EDR" "4")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
 # ROW10.. invalid time
@@ -203,7 +213,19 @@ echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 msisdn12=4912345678912; g_msisdn=$msisdn12;
 p1=$(ret_line "PCRF_EDR" "1")
 Quota_Next_Reset_Time12=hi; g_Quota_Next_Reset_Time=$Quota_Next_Reset_Time12; # p4
+p4=$(ret_line "PCRF_EDR" "4")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+#########################
+# ROW13.. valid
+msisdn13=4912345678913; g_msisdn=$msisdn13;
+p1=$(ret_line "PCRF_EDR" "1")
+Quota_Next_Reset_Time13=$(date --date='16 days ago' +"%Y-%m-%d %T"); g_Quota_Next_Reset_Time=$Quota_Next_Reset_Time13; # p4
+p4=$(ret_line "PCRF_EDR" "4")
+echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+#echo $(date --date='16 days ago' +"%Y-%m-%d %T")
+#echo "throttle_input 13($g_Quota_Next_Reset_Time, $Quota_Next_Reset_Time13) =$p1,$p2,$p3,$p4,$p5,$p6,$p7"
+#echo "............................................................................................................"
+#exit
 #########################
 
 echo "${tc}: 1. feeding in the EDR file.."
@@ -232,6 +254,7 @@ echo "$msisdn9,$PaymentType1" >> $paymenttype_lkp_input
 echo "$msisdn10,$PaymentType1" >> $paymenttype_lkp_input
 echo "$msisdn11,$PaymentType1" >> $paymenttype_lkp_input
 echo "$msisdn12,$PaymentType1" >> $paymenttype_lkp_input
+echo "$msisdn13,$PaymentType1" >> $paymenttype_lkp_input
 
 
 cp $paymenttype_lkp_input $data_dir/lookup_paymenttype/
@@ -242,6 +265,12 @@ echo "${tc}: 3. recurring lkp.."
 rm -f $recurring_lkp_input
 echo "$msisdn1,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
 echo "$msisdn1,Q_110999999_local_Month,555,N" >> $recurring_lkp_input
+
+echo "$msisdn5,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
+echo "$msisdn5,Q_110999999_local_Month,555,N" >> $recurring_lkp_input
+
+echo "$msisdn9,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
+echo "$msisdn9,Q_110999999_local_Month,555,N" >> $recurring_lkp_input
 
 cp ${recurring_lkp_input} $data_dir/lookup_recurring/OUT
 cd $data_dir/lookup_recurring/OUT
@@ -264,6 +293,8 @@ echo "I,N:$Time1,$msisdn7,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,
 echo "I,N:$Time1,$msisdn9,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
 
 echo "I,N:$Time1,$msisdn11,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+
+echo "I,N:$Time1,$msisdn13,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
 
 
 cd $my_loc

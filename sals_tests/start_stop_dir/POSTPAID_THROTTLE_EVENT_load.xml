@@ -115,7 +115,7 @@
 							<schema>
 								<fields>
 									<field name="MSISDN" type="int64" key="true" />
-									<field name="ProfileID" type="string" />
+									<field name="ProfileID" type="string" key="true" />
 									<field name="VolumeInBytes" type="int64" />
 									<field name="RecurringID" type="string" />
 									
