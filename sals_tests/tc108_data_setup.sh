@@ -6,18 +6,20 @@ my_loc=$(pwd)
 tc=tc108
 
 echo "POSTPAID" > SINGLE_FLOW_TYPE.conf
-echo "EDR_PCRF_V6.36-POSTPAID_load.xml" > MODEL_XML_NAME.conf
 echo "" > EXPECTED_BAD_FILES.conf
 
+. ./pcrf_helper.sh
+export SINGLE_FLOW_TYPE=$(get_flowtype_lower)
  
 throttle_file=${tc}_EDR_UPCC231_MPU484_4924_40131211100031.csv
 throttle_input=input_data/$throttle_file
 
-paymenttype_lkp_file=${tc}_input_data_paymenttype_lkp.txt
-paymenttype_lkp_input=input_data/$paymenttype_lkp_file
+paymenttype_lkp_file=${tc}_input_data_${SINGLE_FLOW_TYPE}_lkp.txt
+paymenttype_lkp_input=input_data/${paymenttype_lkp_file}
 
 recurring_lkp_file=${tc}_input_data_recurring_lkp.txt
 recurring_lkp_input=input_data/$recurring_lkp_file
+
 
 data_dir=/opt/app/sas/custom/data
 
@@ -40,7 +42,7 @@ echo "${tc}:"
 ./requirement_11.sh
 echo " "
 echo "test strategy:"
-echo "send in quota_names that should be processed in phase2 and those which shouldnt"
+echo "(${SINGLE_FLOW_TYPE}) send in quota_names that should be processed in phase2 and those which shouldnt"
 echo "send in all 19 good quota_names and"
 echo "send in some other quota_names mixed in"
 echo " "
@@ -236,21 +238,6 @@ p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
 
-# ROW17.. throttle in the list Q_11_local_Month
-msisdn17=4912345678917; g_msisdn=$msisdn17;
-p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name17=Q_11_local_Month;  g_Quota_Name=$Quota_Name17; # p3
-p3=$(ret_line "PCRF_EDR" "3")
-echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
-#########################
-# ROW18.. throttle in not the list Q_911_local_Month
-msisdn18=4912345678918; g_msisdn=$msisdn18;
-p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name18=Q_911_local_Month;  g_Quota_Name=$Quota_Name18; # p3
-p3=$(ret_line "PCRF_EDR" "3")
-echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
-#########################
-
 # ROW19.. throttle in the list Q_25_local_Month
 msisdn19=4912345678919; g_msisdn=$msisdn19;
 p1=$(ret_line "PCRF_EDR" "1")
@@ -431,8 +418,6 @@ echo "$msisdn13,$PaymentType1" >> $paymenttype_lkp_input
 echo "$msisdn14,$PaymentType1" >> $paymenttype_lkp_input
 echo "$msisdn15,$PaymentType1" >> $paymenttype_lkp_input
 echo "$msisdn16,$PaymentType1" >> $paymenttype_lkp_input
-echo "$msisdn17,$PaymentType1" >> $paymenttype_lkp_input
-echo "$msisdn18,$PaymentType1" >> $paymenttype_lkp_input
 echo "$msisdn19,$PaymentType1" >> $paymenttype_lkp_input
 echo "$msisdn20,$PaymentType1" >> $paymenttype_lkp_input
 echo "$msisdn21,$PaymentType1" >> $paymenttype_lkp_input
@@ -456,6 +441,7 @@ echo "$msisdn38,$PaymentType1" >> $paymenttype_lkp_input
 
 cp $paymenttype_lkp_input $data_dir/lookup_paymenttype/
 cp $paymenttype_lkp_input $data_dir/lookup_paymenttype/${paymenttype_lkp_file}.done
+copy_paymenttypes
 echo ""
 ################################################################################
 echo "${tc}: 3. recurring lkp.."
@@ -464,13 +450,14 @@ echo "$msisdn1,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_inp
 echo "$msisdn2,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
 echo "$msisdn3,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
 
-cp ${recurring_lkp_input} $data_dir/lookup_recurring/OUT
-cd $data_dir/lookup_recurring/OUT
+
+cp ${recurring_lkp_input} $data_dir/lookup_requirring/OUT
+cd $data_dir/lookup_requirring/OUT
 zip ${recurring_lkp_file}.zip ./${recurring_lkp_file}
 #rm ${recurring_lkp_file}
 touch ${recurring_lkp_file}.zip.done
 
-ls -rtl $data_dir/lookup_recurring/OUT
+ls -rtl $data_dir/lookup_requirring/OUT
 
 Quota_Total1=$Quota_Usage1
 
@@ -489,8 +476,6 @@ echo "I,N:$Time1,$msisdn11,$SGSNAddress1,$UEIP1,$Quota_Name11,$Quota_Consumption
 echo "I,N:$Time1,$msisdn13,$SGSNAddress1,$UEIP1,$Quota_Name13,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
 
 echo "I,N:$Time1,$msisdn15,$SGSNAddress1,$UEIP1,$Quota_Name15,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn17,$SGSNAddress1,$UEIP1,$Quota_Name17,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
 
 echo "I,N:$Time1,$msisdn19,$SGSNAddress1,$UEIP1,$Quota_Name19,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
 

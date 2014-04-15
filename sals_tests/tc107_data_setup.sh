@@ -6,18 +6,20 @@ my_loc=$(pwd)
 tc=tc107
 
 echo "POSTPAID" > SINGLE_FLOW_TYPE.conf
-echo "EDR_PCRF_V6.36-POSTPAID_load.xml" > MODEL_XML_NAME.conf
 echo "" > EXPECTED_BAD_FILES.conf
 
+. ./pcrf_helper.sh
+export SINGLE_FLOW_TYPE=$(get_flowtype_lower)
  
 throttle_file=${tc}_EDR_UPCC231_MPU484_4924_40131211100031.csv
 throttle_input=input_data/$throttle_file
 
-paymenttype_lkp_file=${tc}_input_data_paymenttype_lkp.txt
-paymenttype_lkp_input=input_data/$paymenttype_lkp_file
+paymenttype_lkp_file=${tc}_input_data_${SINGLE_FLOW_TYPE}_lkp.txt
+paymenttype_lkp_input=input_data/${paymenttype_lkp_file}
 
 recurring_lkp_file=${tc}_input_data_recurring_lkp.txt
 recurring_lkp_input=input_data/$recurring_lkp_file
+
 
 data_dir=/opt/app/sas/custom/data
 
@@ -151,6 +153,8 @@ echo "$msisdn2,$PaymentType1" >> $paymenttype_lkp_input
 echo "$msisdn3,$PaymentType1" >> $paymenttype_lkp_input
 cp $paymenttype_lkp_input $data_dir/lookup_paymenttype/
 cp $paymenttype_lkp_input $data_dir/lookup_paymenttype/${paymenttype_lkp_file}.done
+copy_paymenttypes
+
 echo ""
 ################################################################################
 echo "${tc}: 3. recurring lkp.."
@@ -159,13 +163,14 @@ echo "$msisdn1,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_inp
 echo "$msisdn2,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
 echo "$msisdn3,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
 
-cp ${recurring_lkp_input} $data_dir/lookup_recurring/OUT
-cd $data_dir/lookup_recurring/OUT
+
+cp ${recurring_lkp_input} $data_dir/lookup_requirring/OUT
+cd $data_dir/lookup_requirring/OUT
 zip ${recurring_lkp_file}.zip ./${recurring_lkp_file}
 #rm ${recurring_lkp_file}
 touch ${recurring_lkp_file}.zip.done
 
-ls -rtl $data_dir/lookup_recurring/OUT
+ls -rtl $data_dir/lookup_requirring/OUT
 
 echo "I,N:$Time1,$msisdn1,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
 
@@ -233,9 +238,10 @@ echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> input_data/a${throttle_file}
 # we feed first the lookups, then the 2nd edr file in..
 cp input_data/a${paymenttype_lkp_file} $data_dir/lookup_paymenttype/
 cp input_data/a${paymenttype_lkp_file} $data_dir/lookup_paymenttype/a${paymenttype_lkp_file}.done
+copy_paymenttypes
 
-cp input_data/a${recurring_lkp_file} $data_dir/lookup_recurring/OUT
-cd $data_dir/lookup_recurring/OUT
+cp input_data/a${recurring_lkp_file} $data_dir/lookup_requirring/OUT
+cd $data_dir/lookup_requirring/OUT
 zip a${recurring_lkp_file}.zip ./a${recurring_lkp_file}
 touch a${recurring_lkp_file}.zip.done
 cd $my_loc
@@ -292,11 +298,13 @@ echo ""
 # we feed first the lookups, then the 2nd edr file in..
 cp input_data/b${paymenttype_lkp_file} $data_dir/lookup_paymenttype/
 cp input_data/b${paymenttype_lkp_file} $data_dir/lookup_paymenttype/b${paymenttype_lkp_file}.done
+copy_paymenttypes
 
-cp input_data/b${recurring_lkp_file} $data_dir/lookup_recurring/OUT
-cd $data_dir/lookup_recurring/OUT
+cp input_data/b${recurring_lkp_file} $data_dir/lookup_requirring/OUT
+cd $data_dir/lookup_requirring/OUT
 zip b${recurring_lkp_file}.zip ./b${recurring_lkp_file}
 touch b${recurring_lkp_file}.zip.done
+
 
 cd $my_loc
 rm -f input_data/b${throttle_file}.gz

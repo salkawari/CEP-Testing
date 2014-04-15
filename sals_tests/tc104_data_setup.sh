@@ -6,22 +6,23 @@ my_loc=$(pwd)
 tc=tc104
 
 echo "POSTPAID" > SINGLE_FLOW_TYPE.conf
-echo "EDR_PCRF_V6.36-POSTPAID_load.xml" > MODEL_XML_NAME.conf
 echo "" > EXPECTED_BAD_FILES.conf
 
+. ./pcrf_helper.sh
+export SINGLE_FLOW_TYPE=$(get_flowtype_lower)
  
 throttle_file=${tc}_EDR_UPCC231_MPU484_4924_40131211100031.csv
 throttle_input=input_data/$throttle_file
 
-postpaid_lkp_file=${tc}_input_data_postpaid_lkp.txt
-postpaid_lkp_input=input_data/$postpaid_lkp_file
+paymenttype_lkp_file=${tc}_input_data_${SINGLE_FLOW_TYPE}_lkp.txt
+paymenttype_lkp_input=input_data/${paymenttype_lkp_file}
 
 recurring_lkp_file=${tc}_input_data_recurring_lkp.txt
 recurring_lkp_input=input_data/$recurring_lkp_file
 
 data_dir=/opt/app/sas/custom/data
 
-out_dir=$data_dir/output_postpaid
+out_dir=$data_dir/output_${SINGLE_FLOW_TYPE}
 if [ ! -d "$out_dir" ]
 then 
   mkdir -p $out_dir;
@@ -40,19 +41,19 @@ echo "${tc}:"
 ./requirement_3.sh
 echo " "
 echo "test strategy:"
-echo "we add various usage and throttle events and make sure we have"
+echo "we add various usage and POSTPAID throttle events and make sure we have"
 echo "a mix of usage EDRs which are relevant for 1 or more throtte 100 events"
 echo "and some usage EDRs which are not relevant for any throttle 100 events."
 echo " "
 echo " "
 echo "EDR data setup:"
-echo "Row1: Postpaid usageA (1) - 50 hours ago (no relevant for any throttle events)"
-echo "Row2: Postpaid usageB (2) - 49 hours ago (relevant for Throttle1 only)"
-echo "Row3: Postpaid usageC (4) - 48 hours ago (relevant for Throttle1 and Throttle2)"
-echo "Row4: Postpaid Throttle1 (8) - 3 hours ago (the total usage includes usageB and usageC (and Throttle1) )"
-echo "Row5: Postpaid usageD (16) - 3 minutes ago (relevant for Throttle2 only)"
-echo "Row6: Postpaid Throttle2 (32) - 2 minutes ago (the total usage includes usageC, Throttle1, usageD (and Throttle2) )"
-echo "Row7: Postpaid usageE (64) - 1 minute ago (not relevant for any throttle events)"
+echo "Row1: ${SINGLE_FLOW_TYPE} usageA (1) - 50 hours ago (no relevant for any throttle events)"
+echo "Row2: ${SINGLE_FLOW_TYPE} usageB (2) - 49 hours ago (relevant for Throttle1 only)"
+echo "Row3: ${SINGLE_FLOW_TYPE} usageC (4) - 48 hours ago (relevant for Throttle1 and Throttle2)"
+echo "Row4: ${SINGLE_FLOW_TYPE} Throttle1 (8) - 3 hours ago (the total usage includes usageB and usageC (and Throttle1) )"
+echo "Row5: ${SINGLE_FLOW_TYPE} usageD (16) - 3 minutes ago (relevant for Throttle2 only)"
+echo "Row6: ${SINGLE_FLOW_TYPE} Throttle2 (32) - 2 minutes ago (the total usage includes usageC, Throttle1, usageD (and Throttle2) )"
+echo "Row7: ${SINGLE_FLOW_TYPE} usageE (64) - 1 minute ago (not relevant for any throttle events)"
 echo " "
 echo ""
 ################################################################################
@@ -77,37 +78,6 @@ g_UEIP=
 g_Quota_Consumption=
 
 ###################
-function ret_line() {
-local line_type=$1
-local line_num=$2
-
-if [ "$line_type" == "PCRF_EDR" ]
-then
-  if [ "$line_num" == "1" ]
-  then
-    echo "$g_TriggerType,$g_Time,,,$g_msisdn,,,,,";
-  elif [ "$line_num" == "2" ]
-  then
-    echo ",,,$g_SGSNAddress,,,,,,$g_UEIP";
-  elif [ "$line_num" == "3" ]
-  then
-    echo ",,,,,,$g_Quota_Name,$g_Quota_Status,$g_Quota_Consumption,";
-  elif [ "$line_num" == "4" ]
-  then
-    echo ",$g_Quota_Usage,$g_Quota_Next_Reset_Time,,,,,,,";
-  elif [ "$line_num" == "5" ]
-  then
-    echo ",,,,,,,,,";
-  elif [ "$line_num" == "6" ]
-  then
-    echo ",,,,,,,,,";
-  elif [ "$line_num" == "7" ]
-  then
-    echo ",,,,,,,$g_Quota_Value,,";
-  fi
-fi
-}
-###################
 # ROW1..usage (1) event only (bad quota status)
 TriggerType1=2;                                                g_TriggerType=$TriggerType1;
 Time1=$(date --date='50 hours ago' +"%Y-%m-%d %T");            g_Time=$Time1;
@@ -117,7 +87,7 @@ Quota_Status1=16;                                              g_Quota_Status=$Q
 Quota_Usage1=1;                                                g_Quota_Usage=$Quota_Usage1;
 Quota_Next_Reset_Time1=$(date --date='16 days' +"%Y-%m-%d %T");g_Quota_Next_Reset_Time=$Quota_Next_Reset_Time1;
 Quota_Value1=1;                                                g_Quota_Value=$Quota_Value1;
-PaymentType1=POSTPAID;                                         g_PaymentType=$PaymentType1;
+PaymentType1=$(get_flowtype_upper);                            g_PaymentType=$PaymentType1;
 InitialVolume1=1230;                                           g_InitialVolume=$InitialVolume1;
 IsRecurring1=Y;                                                g_IsRecurring=$IsRecurring1;
 SGSNAddress1=0;                                                g_SGSNAddress=$SGSNAddress1;
@@ -199,27 +169,28 @@ Quota_Total6=$(($Quota_Usage3+$Quota_Usage4+$Quota_Usage5+$Quota_Usage6))
 ###################
 rm -f ${throttle_input}.gz
 gzip $throttle_input
-cp ${throttle_input}.gz $data_dir/pcrf_files_postpaid/
+cp ${throttle_input}.gz $data_dir/pcrf_files_${SINGLE_FLOW_TYPE}/
 
 ################################################################################
-echo "${tc}: 2. postpaid lkp.."
-rm -f $postpaid_lkp_input
-echo "$msisdn1,$PaymentType1" >> $postpaid_lkp_input
-cp $postpaid_lkp_input $data_dir/lookup_paymenttype/
-cp $postpaid_lkp_input $data_dir/lookup_paymenttype/${postpaid_lkp_file}.done
+echo "${tc}: 2. ${SINGLE_FLOW_TYPE} lkp.."
+rm -f $paymenttype_lkp_input
+echo "$msisdn1,$PaymentType1" >> $paymenttype_lkp_input
+cp $paymenttype_lkp_input $data_dir/lookup_paymenttype/
+cp $paymenttype_lkp_input $data_dir/lookup_paymenttype/${paymenttype_lkp_file}.done
+copy_paymenttypes
 
 ################################################################################
 echo "${tc}: 3. recurring lkp.."
 rm -f $recurring_lkp_input ${recurring_lkp_input}.zip
 echo "$msisdn1,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
 
-cp ${recurring_lkp_input} $data_dir/lookup_recurring/OUT
-cd $data_dir/lookup_recurring/OUT
+cp ${recurring_lkp_input} $data_dir/lookup_requirring/OUT
+cd $data_dir/lookup_requirring/OUT
 zip ${recurring_lkp_file}.zip ./${recurring_lkp_file}
 #rm ${recurring_lkp_file}
 touch ${recurring_lkp_file}.zip.done
-echo "debug ls -rtl $data_dir/lookup_recurring/OUT"
-ls -rtl $data_dir/lookup_recurring/OUT
+echo "debug ls -rtl $data_dir/lookup_requirring/OUT"
+ls -rtl $data_dir/lookup_requirring/OUT
 cd $my_loc
 ################################################################################
 
@@ -238,14 +209,14 @@ echo " "
 echo "here is the contents we were looking for.."
 cat $expected_output
 echo " "
-echo "here is the postpaid lookup we used.."
-cat $data_dir/lookup_paymenttype/${tc}_input_data_postpaid_lkp.txt
+echo "here is the ${SINGLE_FLOW_TYPE} lookup we used.."
+cat $data_dir/lookup_paymenttype/${tc}_input_data_${SINGLE_FLOW_TYPE}_lkp.txt
 echo " "
 echo "here is the recurring lookup we used.."
-cat $data_dir/lookup_recurring/OUT/${tc}_input_data_recurring_lkp.txt
+cat $data_dir/lookup_requirring/OUT/${tc}_input_data_recurring_lkp.txt
 echo " "
 echo "here is the EDR stream we used.."
-gzip -dc $data_dir/pcrf_files_postpaid/${throttle_file}.gz
+gzip -dc $data_dir/pcrf_files_${SINGLE_FLOW_TYPE}/${throttle_file}.gz
 
 
 

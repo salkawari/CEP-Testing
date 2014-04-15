@@ -4,6 +4,8 @@
 # ./run_3flows.sh tc1_data_setup.sh |tee logs/test_execution_$(date +"%Y-%m-%d-%T").log
 # ./run_3flows.sh |tee logs/test_execution_$(date +"%Y-%m-%d-%T").log
 
+. ./pcrf_helper.sh
+
 echo "now calling $0 ${1} ${2}.."
 
 esp_server_dir=/home/$LOGNAME/Desktop/dev/2.2-pre/bin
@@ -42,7 +44,8 @@ cd $my_loc
 
 needed_directories=$(echo "$esp_server_dir $data_dir $error_dir $jar_adapter_path")
 needed_directories=$(echo "$needed_directories $input_dir $data_dir/pcrf_files_prepaid $data_dir/pcrf_files_postpaid")
-needed_directories=$(echo "$needed_directories $data_dir/lookup_paymenttype $data_dir/lookup_recurring/OUT")
+needed_directories=$(echo "$needed_directories $data_dir/lookup_postpaid $data_dir/lookup_paymenttype")
+needed_directories=$(echo "$needed_directories $data_dir/lookup_prepaid $data_dir/lookup_fonic $data_dir/lookup_requirring/OUT")
 needed_directories=$(echo "$needed_directories $data_dir/output_prepaid $data_dir/output_postpaid $data_dir/output_fonic")
 needed_directories=$(echo "$needed_directories $data_dir/bad_server_events ${jar_adapter_path} ${my_loc}/${start_stop_dir}")
 needed_directories=$(echo "$needed_directories $data_dir/persist_fonic_throttle_event $data_dir/persist_prepaid_throttle_event")
@@ -71,14 +74,24 @@ do
   rm -f *
   cd $data_dir/error_messages
   rm -f *
+  cd $data_dir/lookup_postpaid
+  rm -fr *
+  cd $data_dir/lookup_prepaid
+  rm -fr *
+  cd $data_dir/lookup_fonic
+  rm -fr *
+  cd $data_dir/lookup_paymenttype
+  rm -fr *
+  cd $data_dir/lookup_requirring/OUT
+  rm -fr *
 
   cd $my_loc  
   echo "############################################################################"
   echo "starting $test_case_name at $(date).."
   ./$i
-  export SINGLE_FLOW_TYPE=$(cat SINGLE_FLOW_TYPE.conf)
+  export SINGLE_FLOW_TYPE=$(get_flowtype_lower)
 
-  out_dir=$data_dir/output_$(echo ${SINGLE_FLOW_TYPE,,} )
+  out_dir=$data_dir/output_${SINGLE_FLOW_TYPE}
   if [ ! -d "$out_dir" ]
   then
     mkdir -p $out_dir;

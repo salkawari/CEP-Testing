@@ -6,18 +6,20 @@ my_loc=$(pwd)
 tc=tc202
 
 echo "PREPAID" > SINGLE_FLOW_TYPE.conf
-echo "EDR_PCRF_V6.36-PREPAID_load.xml" > MODEL_XML_NAME.conf
 echo "" > EXPECTED_BAD_FILES.conf
 
+. ./pcrf_helper.sh
+export SINGLE_FLOW_TYPE=$(get_flowtype_lower)
  
 throttle_file=${tc}_EDR_UPCC231_MPU484_4924_40131211100031.csv
 throttle_input=input_data/$throttle_file
 
-paymenttype_lkp_file=${tc}_input_data_paymenttype_lkp.txt
-paymenttype_lkp_input=input_data/$paymenttype_lkp_file
+paymenttype_lkp_file=${tc}_input_data_${SINGLE_FLOW_TYPE}_lkp.txt
+paymenttype_lkp_input=input_data/${paymenttype_lkp_file}
 
 recurring_lkp_file=${tc}_input_data_recurring_lkp.txt
 recurring_lkp_input=input_data/$recurring_lkp_file
+
 
 data_dir=/opt/app/sas/custom/data
 
@@ -196,6 +198,7 @@ echo "$msisdn7,FONIC" >> $paymenttype_lkp_input
 echo "$msisdn8,$PaymentType1" >> $paymenttype_lkp_input
 cp $paymenttype_lkp_input $data_dir/lookup_paymenttype/
 cp $paymenttype_lkp_input $data_dir/lookup_paymenttype/${paymenttype_lkp_file}.done
+copy_paymenttypes
 
 ################################################################################
 echo "${tc}: 3. recurring lkp.."
@@ -205,13 +208,13 @@ echo "$msisdn2,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_inp
 echo "$msisdn3,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
 echo "$msisdn4,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
 
-cp ${recurring_lkp_input} $data_dir/lookup_recurring/OUT
-cd $data_dir/lookup_recurring/OUT
+cp ${recurring_lkp_input} $data_dir/lookup_requirring/OUT
+cd $data_dir/lookup_requirring/OUT
 zip ${recurring_lkp_file}.zip ./${recurring_lkp_file}
 #rm ${recurring_lkp_file}
 touch ${recurring_lkp_file}.zip.done
-echo "debug ls -rtl $data_dir/lookup_recurring/OUT"
-ls -rtl $data_dir/lookup_recurring/OUT
+echo "debug ls -rtl $data_dir/lookup_requirring/OUT"
+ls -rtl $data_dir/lookup_requirring/OUT
 cd $my_loc
 ################################################################################
 
@@ -232,11 +235,11 @@ echo " "
 echo "here is the contents we were looking for.."
 cat $expected_output
 echo " "
-echo "here is the payment_type lookup we used.."
+echo "here is the paymenttype lookup we used.."
 cat $data_dir/lookup_paymenttype/${tc}_input_data_paymenttype_lkp.txt
 echo " "
 echo "here is the recurring lookup we used.."
-cat $data_dir/lookup_recurring/OUT/${tc}_input_data_recurring_lkp.txt
+cat $data_dir/lookup_requirring/OUT/${tc}_input_data_recurring_lkp.txt
 echo " "
 echo "here is the EDR stream we used.."
 gzip -dc $data_dir/pcrf_files_prepaid/${throttle_file}.gz

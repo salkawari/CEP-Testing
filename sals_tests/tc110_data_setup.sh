@@ -6,15 +6,16 @@ my_loc=$(pwd)
 tc=tc110
 
 echo "POSTPAID" > SINGLE_FLOW_TYPE.conf
-echo "EDR_PCRF_V6.36-POSTPAID_load.xml" > MODEL_XML_NAME.conf
 echo "" > EXPECTED_BAD_FILES.conf
 
+. ./pcrf_helper.sh
+export SINGLE_FLOW_TYPE=$(get_flowtype_lower)
  
 throttle_file=${tc}_EDR_UPCC231_MPU484_4924_40131211100031.csv
 throttle_input=input_data/$throttle_file
 
-paymenttype_lkp_file=${tc}_input_data_paymenttype_lkp.txt
-paymenttype_lkp_input=input_data/$paymenttype_lkp_file
+paymenttype_lkp_file=${tc}_input_data_${SINGLE_FLOW_TYPE}_lkp.txt
+paymenttype_lkp_input=input_data/${paymenttype_lkp_file}
 
 recurring_lkp_file=${tc}_input_data_recurring_lkp.txt
 recurring_lkp_input=input_data/$recurring_lkp_file
@@ -259,6 +260,7 @@ echo "$msisdn13,$PaymentType1" >> $paymenttype_lkp_input
 
 cp $paymenttype_lkp_input $data_dir/lookup_paymenttype/
 cp $paymenttype_lkp_input $data_dir/lookup_paymenttype/${paymenttype_lkp_file}.done
+copy_paymenttypes
 echo ""
 ################################################################################
 echo "${tc}: 3. recurring lkp.."
@@ -272,13 +274,13 @@ echo "$msisdn5,Q_110999999_local_Month,555,N" >> $recurring_lkp_input
 echo "$msisdn9,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
 echo "$msisdn9,Q_110999999_local_Month,555,N" >> $recurring_lkp_input
 
-cp ${recurring_lkp_input} $data_dir/lookup_recurring/OUT
-cd $data_dir/lookup_recurring/OUT
+cp ${recurring_lkp_input} $data_dir/lookup_requirring/OUT
+cd $data_dir/lookup_requirring/OUT
 zip ${recurring_lkp_file}.zip ./${recurring_lkp_file}
 #rm ${recurring_lkp_file}
 touch ${recurring_lkp_file}.zip.done
 
-ls -rtl $data_dir/lookup_recurring/OUT
+ls -rtl $data_dir/lookup_requirring/OUT
 
 Quota_Total1=$Quota_Usage1
 

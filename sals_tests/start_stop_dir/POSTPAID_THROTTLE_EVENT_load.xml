@@ -314,7 +314,6 @@
                                                                        or (Quota_Name == 'Q_109_local_Month') 
                                                                        or (Quota_Name == 'Q_117_local_Month') 
                                                                        or (Quota_Name == 'Q_127_local_Month')
-                                                                       or (Quota_Name == 'Q_11_local_Month') 
                                                                        or (Quota_Name == 'Q_25_local_Month')
                                                                        or (Quota_Name == 'Q_37_local_Month')
                                                                        or (Quota_Name == 'Q_73_local_Month')

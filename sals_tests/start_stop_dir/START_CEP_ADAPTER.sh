@@ -8,6 +8,9 @@ cep_adapter_log_file=$(cat START_STOP_CONFIG.txt|grep -i "cep_adapter_log_file"|
 cep_adapter_params1=$(cat START_STOP_CONFIG.txt|grep -i "cep_adapter_params1"|cut -d'=' -f2)
 cep_adapter_params2=$(cat START_STOP_CONFIG.txt|grep -i "cep_adapter_params2"|cut -d'=' -f2)
 recurring_lkp_dir=$(cat START_STOP_CONFIG.txt|grep -i "recurring_lkp_dir"|cut -d'=' -f2)
+postpaid_lkp_dir=$(cat START_STOP_CONFIG.txt|grep -i "postpaid_lkp_dir"|cut -d'=' -f2)
+prepaid_lkp_dir=$(cat START_STOP_CONFIG.txt|grep -i "prepaid_lkp_dir"|cut -d'=' -f2)
+fonic_lkp_dir=$(cat START_STOP_CONFIG.txt|grep -i "fonic_lkp_dir"|cut -d'=' -f2)
 
 
 if [ ! -d "${cep_adapter_dir}" ]
@@ -42,46 +45,73 @@ then
   exit
 fi
 
+if [ ! -d "${postpaid_lkp_dir}" ]
+then
+  echo "ERROR!! The specified postpaid_lkp dir doesnt exist (currently postpaid_lkp_dir=$postpaid_lkp_dir)!"
+  echo "Please correct the postpaid_lkp_dir entry in the START_STOP_CONFIG.txt."
+  echo "exiting script WITHOUT starting the CEP ADAPTER!!!!"
+  exit
+fi
+
+if [ ! -d "${prepaid_lkp_dir}" ]
+then
+  echo "ERROR!! The specified prepaid_lkp dir doesnt exist (currently prepaid_lkp_dir=$prepaid_lkp_dir)!"
+  echo "Please correct the prepaid_lkp_dir entry in the START_STOP_CONFIG.txt."
+  echo "exiting script WITHOUT starting the CEP ADAPTER!!!!"
+  exit
+fi
+
+if [ ! -d "${fonic_lkp_dir}" ]
+then
+  echo "ERROR!! The specified fonic_lkp dir doesnt exist (currently fonic_lkp_dir=$fonic_lkp_dir)!"
+  echo "Please correct the fonic_lkp_dir entry in the START_STOP_CONFIG.txt."
+  echo "exiting script WITHOUT starting the CEP ADAPTER!!!!"
+  exit
+fi
+
+
 #####################################
-# RECURRING LOOKUP LOGIC....
-
-last_used_recurring_file=; # this is the name of the stale used recurring lookup file..
-existing_new_recurring_lkp_flag=n # This flag tells us if there is a new recurring lkp file to be processed..
-
-# now we check to see if the .done folder already exists..
-if [ -d "${recurring_lkp_dir}/.done" ]
-then
+# refreshing the LOOKUP data....
+for i in $(echo "${recurring_lkp_dir} ${postpaid_lkp_dir} ${prepaid_lkp_dir} ${fonic_lkp_dir}")
+do
   
-  # we check to see if the .done folder has a lkp which could be used
-  if [ $(ls -tl "${recurring_lkp_dir}/.done"| grep "^-"|grep -v ".done$" |head -1 |wc -l) -eq 1 ]
+  last_used_lkp_file=; # this is the name of the stale used recurring lookup file..
+  existing_new_lkp_flag=n # This flag tells us if there is a new recurring lkp file to be processed..
+
+  lkp_dir=$i
+
+  # now we check to see if the .done folder already exists..
+  if [ -d "${lkp_dir}/.done" ]
   then
-    last_used_recurring_file=$(ls -tl "$recurring_lkp_dir/.done"| grep "^-"|grep -v ".done$" |head -1| awk '{print $9}')
+     
+    # we check to see if the .done folder has a lkp which could be used
+    if [ $(ls -tl "${lkp_dir}/.done"| grep "^-"|grep -v ".done$" |head -1 |wc -l) -eq 1 ]
+    then
+      last_used_lkp_file=$(ls -tl "$lkp_dir/.done"| grep "^-"|grep -v ".done$" |head -1| awk '{print $9}')
+    fi
+  
   fi
-
-fi
-
-
-
-# we check to see if there is a new recurring lkp file which can be used instead of the old stale one!
-if [ $(ls -tl $recurring_lkp_dir| grep "^-"|grep -v ".done$" |head -1 |wc -l) -eq 1 ]
-then
-
-  existing_new_recurring_lkp_flag=y
-fi
-
-
-if ( [ "$existing_new_recurring_lkp_flag" == "n" ] ) && ( [ $(echo "$last_used_recurring_file" |wc -w) -gt 0 ] ) 
-then
-  echo "copying stale recurring_lkp file.. cp ${recurring_lkp_dir}/.done/$last_used_recurring_file ${recurring_lkp_dir}"
-  cp "${recurring_lkp_dir}/.done/$last_used_recurring_file" "${recurring_lkp_dir}"
-
-  echo "touch ${recurring_lkp_dir}/.done/${last_used_recurring_file}.done"
-  touch ${recurring_lkp_dir}/${last_used_recurring_file}.done
-elif ( [ "$existing_new_recurring_lkp_flag" == "n" ] ) && ( [ $(echo "$last_used_recurring_file" |wc -w) -eq 0 ] ) 
-then
-  echo "no new recurring file to process and no stale file to process!!! This should never happen!!! Please copy a new recurring lkp file (and a .done) to the lookup directory!!!"
-fi
-
+  
+  # we check to see if there is a new recurring lkp file which can be used instead of the old stale one!
+  if [ $(ls -tl $lkp_dir| grep "^-"|grep -v ".done$" |head -1 |wc -l) -eq 1 ]
+  then
+  
+    existing_new_lkp_flag=y
+  fi
+  
+  
+  if ( [ "$existing_new_lkp_flag" == "n" ] ) && ( [ $(echo "$last_used_lkp_file" |wc -w) -gt 0 ] ) 
+  then
+    echo "copying stale lkp file.. cp ${lkp_dir}/.done/$last_used_lkp_file ${lkp_dir}"
+    cp "${lkp_dir}/.done/$last_used_lkp_file" "${lkp_dir}"
+  
+    echo "touch ${lkp_dir}/${last_used_lkp_file}.done"
+    touch ${lkp_dir}/${last_used_lkp_file}.done
+  elif ( [ "$existing_new_lkp_flag" == "n" ] ) && ( [ $(echo "$last_used_lkp_file" |wc -w) -eq 0 ] ) 
+  then
+    echo "no new lkp file ($i) to process and no stale file to process!!! This should never happen!!! Please copy a new recurring lkp file (and a .done) to the lookup directory!!!"
+  fi
+done
 #####################################
 
 my_loc=$(pwd)

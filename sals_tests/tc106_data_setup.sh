@@ -6,18 +6,20 @@ my_loc=$(pwd)
 tc=tc106
 
 echo "POSTPAID" > SINGLE_FLOW_TYPE.conf
-echo "EDR_PCRF_V6.36-POSTPAID_load.xml" > MODEL_XML_NAME.conf
 echo "b${tc}_EDR_UPCC231_MPU484_4924_40131211100031.csv" > EXPECTED_BAD_FILES.conf
 
+. ./pcrf_helper.sh
+export SINGLE_FLOW_TYPE=$(get_flowtype_lower)
  
 throttle_file=${tc}_EDR_UPCC231_MPU484_4924_40131211100031.csv
 throttle_input=input_data/$throttle_file
 
-paymenttype_lkp_file=${tc}_input_data_paymenttype_lkp.txt
-paymenttype_lkp_input=input_data/$paymenttype_lkp_file
+paymenttype_lkp_file=${tc}_input_data_${SINGLE_FLOW_TYPE}_lkp.txt
+paymenttype_lkp_input=input_data/${paymenttype_lkp_file}
 
 recurring_lkp_file=${tc}_input_data_recurring_lkp.txt
 recurring_lkp_input=input_data/$recurring_lkp_file
+
 
 data_dir=/opt/app/sas/custom/data
 
@@ -40,7 +42,7 @@ echo "${tc}:"
 ./requirement_7.sh
 echo " "
 echo "test strategy:"
-echo "prepare the lookups and put in the correct location"
+echo "(${SINGLE_FLOW_TYPE}) prepare the lookups and put in the correct location"
 echo "start CEP"
 echo "feed in a good EDR file"
 echo "feed in a corrupted EDR file"
@@ -135,19 +137,21 @@ rm -f $paymenttype_lkp_input
 echo "$msisdn1,$PaymentType1" >> $paymenttype_lkp_input
 cp $paymenttype_lkp_input $data_dir/lookup_paymenttype/
 cp $paymenttype_lkp_input $data_dir/lookup_paymenttype/${paymenttype_lkp_file}.done
+copy_paymenttypes
 echo ""
 ################################################################################
 echo "${tc}: 3. recurring lkp.."
 rm -f $recurring_lkp_input
 echo "$msisdn1,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
 
-cp ${recurring_lkp_input} $data_dir/lookup_recurring/OUT
-cd $data_dir/lookup_recurring/OUT
+
+cp ${recurring_lkp_input} $data_dir/lookup_requirring/OUT
+cd $data_dir/lookup_requirring/OUT
 zip ${recurring_lkp_file}.zip ./${recurring_lkp_file}
 #rm ${recurring_lkp_file}
 touch ${recurring_lkp_file}.zip.done
-echo "debug ls -rtl $data_dir/lookup_recurring/OUT"
-ls -rtl $data_dir/lookup_recurring/OUT
+echo "debug ls -rtl $data_dir/lookup_requirring/OUT"
+ls -rtl $data_dir/lookup_requirring/OUT
 cd $my_loc
 ################################################################################
 echo ""
