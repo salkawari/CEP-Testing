@@ -20,8 +20,7 @@ paymenttype_lkp_input=input_data/${paymenttype_lkp_file}
 recurring_lkp_file=${tc}_input_data_recurring_lkp.txt
 recurring_lkp_input=input_data/$recurring_lkp_file
 
-
-data_dir=/opt/app/sas/custom/data
+data_dir=/opt/app/sas/ESPData
 
 out_dir=$data_dir/output_postpaid
 if [ ! -d "$out_dir" ]

@@ -8,7 +8,7 @@
          thread pool of userdefined size. One can specify the pubsub
          port and type, number of threads for the project, index type
          and if using Tag Token data flow model. -->
-		<project name="POSTPAID_THROTTLE_EVENT" pubsub="auto" threads="4" use-tagged-token="true" action="load" >
+		<project name="POSTPAID_THROTTLE_EVENT" pubsub="manual" threads="4" use-tagged-token="true" action="load" >
 			<contqueries>
                 <!-- This specifies the continuous query container that holds
              a collection of windows and enables one to specify the
@@ -125,7 +125,7 @@
 
 
 						<window-filter name="FILTER_THROTTLE_EVENT_100" id="filter_throttle_event_100"
-							index="pi_EMPTY" pubsub='true'>
+							index="pi_EMPTY" >
 							<expression>(Quota_Status == 6) and (Quota_Value == 1)
 							</expression>
 						</window-filter>
@@ -300,8 +300,7 @@
 
 
 
-						<window-filter name="FILTER_PCRF_DATA_USAGE" id="filter_pcrf_data_usage" index="pi_EMPTY"
-							pubsub='true'>
+						<window-filter name="FILTER_PCRF_DATA_USAGE" id="filter_pcrf_data_usage" index="pi_EMPTY">
 							<expression> ((TriggerType == 1) or (TriggerType == 2) or (TriggerType == 3) 
                                                                    or (TriggerType == 4) or (TriggerType == 5) or (TriggerType == 6))
                                                                    and match_string(Quota_Name,'*local*')
@@ -324,6 +323,18 @@
                                                                        or (Quota_Name == 'Q_111_local_Month')
                                                                        or (Quota_Name == 'Q_124_local_Month')
                                                                        or (Quota_Name == 'Q_131_local_Month')
+																	   or (Quota_Name == 'Q_27_local_Month')
+																	   or (Quota_Name == 'Q_29_local_Month')
+																	   or (Quota_Name == 'Q_55_local_Month')
+																	   or (Quota_Name == 'Q_69_local_Month')
+																	   or (Quota_Name == 'Q_71_local_Month')
+																	   or (Quota_Name == 'Q_75_local_Month')
+																	   or (Quota_Name == 'Q_82_local_Month')
+																	   or (Quota_Name == 'Q_92_local_Month')
+																	   or (Quota_Name == 'Q_94_local_Month')
+																	   or (Quota_Name == 'Q_98_local_Month')
+																	   or (Quota_Name == 'Q_112_local_Month')
+																	   or (Quota_Name == 'Q_11_local_Month')
 							            )
 							</expression>
 						</window-filter>
@@ -362,7 +373,7 @@
 							</output>
 						</window-compute>
 
-						<window-join name="ADD_REQUIRRING" id="add_requirring" index='pi_EMPTY'>
+						<window-join name="ADD_REQUIRRING" id="add_requirring" index='pi_EMPTY' pubsub='true'>
 							<join type="leftouter" left="add_data_volume_used_in_last_48_hours" right="requirring_type_source"
 								no-regenerates='true'>
 								<conditions>

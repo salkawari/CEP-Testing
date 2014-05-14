@@ -20,8 +20,7 @@ paymenttype_lkp_input=input_data/${paymenttype_lkp_file}
 recurring_lkp_file=${tc}_input_data_recurring_lkp.txt
 recurring_lkp_input=input_data/$recurring_lkp_file
 
-
-data_dir=/opt/app/sas/custom/data
+data_dir=/opt/app/sas/ESPData
 
 out_dir=$data_dir/output_${SINGLE_FLOW_TYPE}
 if [ ! -d "$out_dir" ]
@@ -184,11 +183,7 @@ cd $my_loc
 echo ""
 echo "starting the cep components..."
 cd $my_loc/start_stop_dir
-./START_CEP_ENGINE.sh
-./START_CEP_MODEL.sh POSTPAID_THROTTLE_EVENT
-./START_CEP_MODEL.sh PREPAID_THROTTLE_EVENT
-./START_CEP_MODEL.sh FONIC_THROTTLE_EVENT
-./START_CEP_ADAPTER.sh
+./START_ALL_CEP.sh
 
 cd $my_loc
 ################################################################################
@@ -322,11 +317,7 @@ echo "I,N:$Time31,$msisdn3,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1
 
 echo "stopping the cep components..."
 cd $my_loc/start_stop_dir
-./STOP_CEP_ADAPTER.sh
-./STOP_CEP_MODEL.sh POSTPAID_THROTTLE_EVENT
-./STOP_CEP_MODEL.sh PREPAID_THROTTLE_EVENT
-./STOP_CEP_MODEL.sh FONIC_THROTTLE_EVENT
-./STOP_CEP_ENGINE.sh
+./STOP_ALL_CEP.sh
 
 cd $my_loc
 ################################################################################

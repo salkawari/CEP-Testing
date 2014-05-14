@@ -20,7 +20,7 @@ paymenttype_lkp_input=input_data/${paymenttype_lkp_file}
 recurring_lkp_file=${tc}_input_data_recurring_lkp.txt
 recurring_lkp_input=input_data/$recurring_lkp_file
 
-data_dir=/opt/app/sas/custom/data
+data_dir=/opt/app/sas/ESPData
 
 out_dir=$data_dir/output_${SINGLE_FLOW_TYPE}
 if [ ! -d "$out_dir" ]
@@ -83,6 +83,7 @@ g_Quota_Consumption=
 TriggerType1=2;                                                g_TriggerType=$TriggerType1; #p1
 Time1=$(date +"%Y-%m-%d %T");                                  g_Time=$Time1; #p1
 msisdn1=4912345678901;                                         g_msisdn=$msisdn1; #p1
+#SubscriberIdentifier1=9${msisdn1};                             g_SubscriberIdentifier=$SubscriberIdentifier1; #p1
 Quota_Name1=Q_110_local_Month;                                 g_Quota_Name=$Quota_Name1; #p3
 Quota_Status1=6;                                               g_Quota_Status=$Quota_Status1; #p3
 Quota_Usage1=1024;                                             g_Quota_Usage=$Quota_Usage1; #p4
@@ -130,7 +131,7 @@ echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 # ROW5.. bad quota value
 msisdn5=4912345678905; g_msisdn=$msisdn5;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Status4=6;       g_Quota_Status=$Quota_Status5; #p3
+Quota_Status5=6;       g_Quota_Status=$Quota_Status5; #p3
 p3=$(ret_line "PCRF_EDR" "3")
 Quota_Value5=11;       g_Quota_Value=$Quota_Value5; #p7
 p7=$(ret_line "PCRF_EDR" "7")
@@ -188,7 +189,8 @@ cd $my_loc
 echo "${tc}: 4. generating the expected output.."
 rm -f $expected_output
 
-echo "I,N:$Time1,$msisdn1,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
+Quota_Total1=$Quota_Usage1
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn1}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume1};Yes_No_1#${IsRecurring1};String_1#${Quota_Name1};MSISDN#${msisdn1};" >> $expected_output
 
 
 ################################################################################

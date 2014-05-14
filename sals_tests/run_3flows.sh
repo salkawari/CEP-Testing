@@ -6,22 +6,28 @@
 
 . ./pcrf_helper.sh
 
+# now we take care of soft links..
+echo "$(check_espdata)"
+
 echo "now calling $0 ${1} ${2}.."
 
-esp_server_dir=/home/$LOGNAME/Desktop/dev/2.2-pre/bin
-data_dir=/opt/app/sas/custom/data
-error_dir=/opt/app/sas/custom/data/error_messages
+start_stop_dir=start_stop_dir_tuned
+
+esp_server_dir=$(cat $start_stop_dir/START_STOP_CONFIG.txt|grep "esp_server_dir"|cut -d'=' -f2)
+
+data_dir=/opt/app/sas/ESPData
+error_dir=/opt/app/sas/ESPData/error_messages
 
 input_dir=input_data
 
-start_stop_dir=start_stop_dir
+
 
 output_file_name=result.csv
 
 # we set this to be blank to make sure our test sets this value..
 
-rm -fr $(cat start_stop_dir/START_STOP_CONFIG.txt|grep "cep_adapter_log_file"|cut -d'=' -f2)
-rm -fr $(cat start_stop_dir/START_STOP_CONFIG.txt|grep "cep_server_log_file"|cut -d'=' -f2)
+rm -fr $(cat $start_stop_dir/START_STOP_CONFIG.txt|grep "cep_adapter_log_file"|cut -d'=' -f2)
+rm -fr $(cat $start_stop_dir/START_STOP_CONFIG.txt|grep "cep_server_log_file"|cut -d'=' -f2)
 
 if (( $# == 1 ))
 then
@@ -47,9 +53,10 @@ needed_directories=$(echo "$needed_directories $input_dir $data_dir/pcrf_files_p
 needed_directories=$(echo "$needed_directories $data_dir/lookup_postpaid $data_dir/lookup_paymenttype")
 needed_directories=$(echo "$needed_directories $data_dir/lookup_prepaid $data_dir/lookup_fonic $data_dir/lookup_requirring/OUT")
 needed_directories=$(echo "$needed_directories $data_dir/output_prepaid $data_dir/output_postpaid $data_dir/output_fonic")
-needed_directories=$(echo "$needed_directories $data_dir/bad_server_events ${jar_adapter_path} ${my_loc}/${start_stop_dir}")
+needed_directories=$(echo "$needed_directories $data_dir/bad_events ${jar_adapter_path} ${my_loc}/${start_stop_dir}")
 needed_directories=$(echo "$needed_directories $data_dir/persist_fonic_throttle_event $data_dir/persist_prepaid_throttle_event")
-needed_directories=$(echo "$needed_directories $data_dir/persist_postpaid_throttle_event")
+needed_directories=$(echo "$needed_directories $data_dir/persist_postpaid_throttle_event $data_dir/mem-log $data_dir/cep-adapter-log")
+needed_directories=$(echo "$needed_directories $data_dir/cep-log")
 
 
 for needed_dir in $(echo $needed_directories)
@@ -64,26 +71,6 @@ done
 for i in $(echo $mylist)
 do
   test_case_name=$(echo $i|cut -d'_' -f1)
-  cd $error_dir
-  rm -f *
-  cd $data_dir/output_postpaid
-  rm -f *
-  cd $data_dir/output_prepaid
-  rm -f *
-  cd $data_dir/output_fonic
-  rm -f *
-  cd $data_dir/error_messages
-  rm -f *
-  cd $data_dir/lookup_postpaid
-  rm -fr *
-  cd $data_dir/lookup_prepaid
-  rm -fr *
-  cd $data_dir/lookup_fonic
-  rm -fr *
-  cd $data_dir/lookup_paymenttype
-  rm -fr *
-  cd $data_dir/lookup_requirring/OUT
-  rm -fr *
 
   cd $my_loc  
   echo "############################################################################"
@@ -105,11 +92,8 @@ do
   fi
   ################################################################################
   cd $my_loc/$start_stop_dir
-  ./START_CEP_ENGINE.sh
-  ./START_CEP_MODEL.sh POSTPAID_THROTTLE_EVENT
-  ./START_CEP_MODEL.sh PREPAID_THROTTLE_EVENT
-  ./START_CEP_MODEL.sh FONIC_THROTTLE_EVENT
-  ./START_CEP_ADAPTER.sh
+  pwd
+  ./START_ALL_CEP.sh
    cd $my_loc 
   ################################################################################
   sleep 4
@@ -121,6 +105,7 @@ do
     my_waits=$(($my_waits+1))
     sleep 5    
   done
+
   echo "######################"
   echo "debug2 my_waits=$my_waits, max_count=$max_count"
   echo "######################"
@@ -138,6 +123,10 @@ do
 
   if [ "$my_waits" != "$max_count" ]
   then
+    max_count=$(expr 70)
+    my_waits=$((0))
+    sleep 20
+
     echo "${test_case_name}:11. now we can compare results.."
     cat $out_dir/$output_file_name | sed s/'I,N:'/'\n''I,N:'/g > $out_dir/$output_file_name.tmp
   
@@ -223,11 +212,7 @@ do
   fi
 
     cd $my_loc/$start_stop_dir
-    ./STOP_CEP_ADAPTER.sh
-    ./STOP_CEP_MODEL.sh POSTPAID_THROTTLE_EVENT
-    ./STOP_CEP_MODEL.sh PREPAID_THROTTLE_EVENT
-    ./STOP_CEP_MODEL.sh FONIC_THROTTLE_EVENT
-    ./STOP_CEP_ENGINE.sh
+    ./STOP_ALL_CEP.sh
     ################################################################################
 
 
