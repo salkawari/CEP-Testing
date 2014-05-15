@@ -147,6 +147,8 @@ echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 ###################
 rm -f ${throttle_input}.gz
 gzip $throttle_input
+echo "debug $(pwd)"
+echo "cp ${throttle_input}.gz $data_dir/pcrf_files_${SINGLE_FLOW_TYPE}/"
 cp ${throttle_input}.gz $data_dir/pcrf_files_${SINGLE_FLOW_TYPE}/
 
 Quota_Total1=$Quota_Usage1

@@ -3,7 +3,9 @@
 echo "running test at $(date)"
 
 my_loc=$(pwd)
-tc=tc108
+tc=tc208
+
+start_stop_dir=start_stop_dir_1key
 
 echo "PREPAID" > SINGLE_FLOW_TYPE.conf
 echo "" > EXPECTED_BAD_FILES.conf
@@ -41,8 +43,8 @@ echo "${tc}:"
 ./requirement_11.sh
 echo " "
 echo "test strategy:"
-echo "send in quota_names that should be processed in phase2 and those which shouldnt"
-echo "send in all 19 good quota_names and"
+echo "(${SINGLE_FLOW_TYPE}) send in quota_names that should be processed in phase2 and those which shouldnt"
+echo "send in all 18 good quota_names and"
 echo "send in some other quota_names mixed in"
 echo " "
 echo ""
@@ -67,42 +69,11 @@ g_UEIP=
 g_Quota_Consumption=
 
 ###################
-function ret_line() {
-local line_type=$1
-local line_num=$2
-
-if [ "$line_type" == "PCRF_EDR" ]
-then
-  if [ "$line_num" == "1" ]
-  then
-    echo "$g_TriggerType,$g_Time,,,$g_msisdn,,,,,";
-  elif [ "$line_num" == "2" ]
-  then
-    echo ",,,$g_SGSNAddress,,,,,,$g_UEIP";
-  elif [ "$line_num" == "3" ]
-  then
-    echo ",,,,,,$g_Quota_Name,$g_Quota_Status,$g_Quota_Consumption,";
-  elif [ "$line_num" == "4" ]
-  then
-    echo ",$g_Quota_Usage,$g_Quota_Next_Reset_Time,,,,,,,";
-  elif [ "$line_num" == "5" ]
-  then
-    echo ",,,,,,,,,";
-  elif [ "$line_num" == "6" ]
-  then
-    echo ",,,,,,,,,";
-  elif [ "$line_num" == "7" ]
-  then
-    echo ",,,,,,,$g_Quota_Value,,";
-  fi
-fi
-}
-###################
 # ROW1..a throttle 100 event - good Q_23_local_Month..
 TriggerType1=2;                                                g_TriggerType=$TriggerType1;  #p1
 Time1=$(date --date='50 hours ago' +"%Y-%m-%d %T");            g_Time=$Time1; # p1
-msisdn1=4912345678901;                                         g_msisdn=$msisdn1; # p1
-Quota_Name1=Q_23_local_Month;                                  g_Quota_Name=$Quota_Name1; # p3
+msisdn1=4922345678901;                                         g_msisdn=$msisdn1; # p1
+Quota_Name1=Q_143_local_Month;                                 g_Quota_Name=$Quota_Name1; # p3
 Quota_Status1=6;                                               g_Quota_Status=$Quota_Status1; # p3
 Quota_Usage1=1;                                                g_Quota_Usage=$Quota_Usage1; # p4
 Quota_Next_Reset_Time1=$(date --date='16 days' +"%Y-%m-%d %T");g_Quota_Next_Reset_Time=$Quota_Next_Reset_Time1; # p4
@@ -124,265 +95,296 @@ p7=$(ret_line "PCRF_EDR" "7")
 
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
-# ROW2.. another throttle event but not in the list Q_923_local_Month..
-msisdn2=4912345678902; g_msisdn=$msisdn2;
+# ROW2.. another throttle event but not in the list Q_9143_local_Month..
+msisdn2=4922345678902; g_msisdn=$msisdn2;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name2=Q_923_local_Month;  g_Quota_Name=$Quota_Name2; # p3
+Quota_Name2=Q_9143_local_Month;  g_Quota_Name=$Quota_Name2; # p3
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
 
-# ROW3.. throttle in the list Q_68_local_Month
-msisdn3=4912345678903; g_msisdn=$msisdn3;
+# ROW3.. throttle in the list Q_144_local_Month
+msisdn3=4922345678903; g_msisdn=$msisdn3;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name3=Q_68_local_Month;  g_Quota_Name=$Quota_Name3; # p3
+Quota_Name3=Q_144_local_Month;  g_Quota_Name=$Quota_Name3; # p3
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
 # ROW4.. throttle in not the list Q_968_local_Month
-msisdn4=4912345678904; g_msisdn=$msisdn4;
+msisdn4=4922345678904; g_msisdn=$msisdn4;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name4=Q_968_local_Month;  g_Quota_Name=$Quota_Name4; # p3
+Quota_Name4=Q_9144_local_Month;  g_Quota_Name=$Quota_Name4; # p3
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
 
-# ROW5.. throttle in the list Q_72_local_Month
-msisdn5=4912345678905; g_msisdn=$msisdn5;
+# ROW5.. throttle in the list Q_145_local_Month
+msisdn5=4922345678905; g_msisdn=$msisdn5;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name5=Q_72_local_Month;  g_Quota_Name=$Quota_Name5; # p3
+Quota_Name5=Q_145_local_Month;  g_Quota_Name=$Quota_Name5; # p3
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
-# ROW6.. throttle in not the list Q_972_local_Month
-msisdn6=4912345678906; g_msisdn=$msisdn6;
+# ROW6.. throttle in not the list Q_9145_local_Month
+msisdn6=4922345678906; g_msisdn=$msisdn6;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name6=Q_972_local_Month;  g_Quota_Name=$Quota_Name6; # p3
-p3=$(ret_line "PCRF_EDR" "3")
-echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
-#########################
-
-# ROW7.. throttle in the list Q_74_local_Month
-msisdn7=4912345678907; g_msisdn=$msisdn7;
-p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name7=Q_74_local_Month;  g_Quota_Name=$Quota_Name7; # p3
-p3=$(ret_line "PCRF_EDR" "3")
-echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
-#########################
-# ROW8.. throttle in not the list Q_974_local_Month
-msisdn8=4912345678908; g_msisdn=$msisdn8;
-p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name8=Q_974_local_Month;  g_Quota_Name=$Quota_Name8; # p3
+Quota_Name6=Q_9145_local_Month;  g_Quota_Name=$Quota_Name6; # p3
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
 
-# ROW9.. throttle in the list Q_81_local_Month
-msisdn9=4912345678909; g_msisdn=$msisdn9;
+# ROW7.. throttle in the list Q_130_local_Month
+msisdn7=4922345678907; g_msisdn=$msisdn7;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name9=Q_81_local_Month;  g_Quota_Name=$Quota_Name9; # p3
+Quota_Name7=Q_130_local_Month;  g_Quota_Name=$Quota_Name7; # p3
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
-# ROW10.. throttle in not the list Q_981_local_Month
-msisdn10=4912345678910; g_msisdn=$msisdn10;
+# ROW8.. throttle in not the list Q_9130_local_Month
+msisdn8=4922345678908; g_msisdn=$msisdn8;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name10=Q_981_local_Month;  g_Quota_Name=$Quota_Name10; # p3
-p3=$(ret_line "PCRF_EDR" "3")
-echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
-#########################
-
-# ROW11.. throttle in the list Q_109_local_Month
-msisdn11=4912345678911; g_msisdn=$msisdn11;
-p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name11=Q_109_local_Month;  g_Quota_Name=$Quota_Name11; # p3
-p3=$(ret_line "PCRF_EDR" "3")
-echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
-#########################
-# ROW12.. throttle in not the list Q_9109_local_Month
-msisdn12=4912345678912; g_msisdn=$msisdn12;
-p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name12=Q_9109_local_Month;  g_Quota_Name=$Quota_Name12; # p3
+Quota_Name8=Q_9130_local_Month;  g_Quota_Name=$Quota_Name8; # p3
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
 
-# ROW13.. throttle in the list Q_117_local_Month
-msisdn13=4912345678913; g_msisdn=$msisdn13;
+# ROW9.. throttle in the list Q_126_local_Month
+msisdn9=4922345678909; g_msisdn=$msisdn9;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name13=Q_117_local_Month;  g_Quota_Name=$Quota_Name13; # p3
+Quota_Name9=Q_126_local_Month;  g_Quota_Name=$Quota_Name9; # p3
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
-# ROW14.. throttle in not the list Q_9117_local_Month
-msisdn14=4912345678914; g_msisdn=$msisdn14;
+# ROW10.. throttle in not the list Q_9126_local_Month
+msisdn10=4922345678910; g_msisdn=$msisdn10;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name14=Q_9117_local_Month;  g_Quota_Name=$Quota_Name14; # p3
-p3=$(ret_line "PCRF_EDR" "3")
-echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
-#########################
-
-# ROW15.. throttle in the list Q_127_local_Month
-msisdn15=4912345678915; g_msisdn=$msisdn15;
-p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name15=Q_127_local_Month;  g_Quota_Name=$Quota_Name15; # p3
-p3=$(ret_line "PCRF_EDR" "3")
-echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
-#########################
-# ROW16.. throttle in not the list Q_9127_local_Month
-msisdn16=4912345678916; g_msisdn=$msisdn16;
-p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name16=Q_9127_local_Month;  g_Quota_Name=$Quota_Name16; # p3
+Quota_Name10=Q_9126_local_Month;  g_Quota_Name=$Quota_Name10; # p3
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
 
-# ROW19.. throttle in the list Q_25_local_Month
-msisdn19=4912345678919; g_msisdn=$msisdn19;
+# ROW11.. throttle in the list Q_90_local_Month
+msisdn11=4922345678911; g_msisdn=$msisdn11;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name19=Q_25_local_Month;  g_Quota_Name=$Quota_Name19; # p3
+Quota_Name11=Q_90_local_Month;  g_Quota_Name=$Quota_Name11; # p3
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
-# ROW20.. throttle in not the list Q_925_local_Month
-msisdn20=4912345678920; g_msisdn=$msisdn20;
+# ROW12.. throttle in not the list Q_990_local_Month
+msisdn12=4922345678912; g_msisdn=$msisdn12;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name20=Q_925_local_Month;  g_Quota_Name=$Quota_Name20; # p3
+Quota_Name12=Q_990_local_Month;  g_Quota_Name=$Quota_Name12; # p3
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
 
-# ROW21.. throttle in the list Q_37_local_Month
-msisdn21=4912345678921; g_msisdn=$msisdn21;
+# ROW13.. throttle in the list Q_147_local_Month
+msisdn13=4922345678913; g_msisdn=$msisdn13;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name21=Q_37_local_Month;  g_Quota_Name=$Quota_Name21; # p3
+Quota_Name13=Q_147_local_Month;  g_Quota_Name=$Quota_Name13; # p3
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
-# ROW22.. throttle in not the list Q_937_local_Month
-msisdn22=4912345678922; g_msisdn=$msisdn22;
+# ROW14.. throttle in not the list Q_9147_local_Month
+msisdn14=4922345678914; g_msisdn=$msisdn14;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name22=Q_937_local_Month;  g_Quota_Name=$Quota_Name22; # p3
+Quota_Name14=Q_9147_local_Month;  g_Quota_Name=$Quota_Name14; # p3
+p3=$(ret_line "PCRF_EDR" "3")
+echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+#########################
+
+# ROW15.. throttle in the list Q_149_local_Month
+msisdn15=4922345678915; g_msisdn=$msisdn15;
+p1=$(ret_line "PCRF_EDR" "1")
+Quota_Name15=Q_149_local_Month;  g_Quota_Name=$Quota_Name15; # p3
+p3=$(ret_line "PCRF_EDR" "3")
+echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+#########################
+# ROW16.. throttle in not the list Q_9149_local_Month
+msisdn16=4922345678916; g_msisdn=$msisdn16;
+p1=$(ret_line "PCRF_EDR" "1")
+Quota_Name16=Q_9149_local_Month;  g_Quota_Name=$Quota_Name16; # p3
+p3=$(ret_line "PCRF_EDR" "3")
+echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+#########################
+
+# ROW17.. throttle in the list Q_11_local_Month
+msisdn17=4922345678917; g_msisdn=$msisdn17;
+p1=$(ret_line "PCRF_EDR" "1")
+Quota_Name17=Q_11_local_Month;  g_Quota_Name=$Quota_Name17; # p3
+p3=$(ret_line "PCRF_EDR" "3")
+echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+#########################
+# ROW18.. throttle in not the list Q_911_local_Month
+msisdn18=4922345678918; g_msisdn=$msisdn18;
+p1=$(ret_line "PCRF_EDR" "1")
+Quota_Name18=Q_911_local_Month;  g_Quota_Name=$Quota_Name18; # p3
+p3=$(ret_line "PCRF_EDR" "3")
+echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+#########################
+
+
+# ROW19.. throttle in the list Q_89_local_Month
+msisdn19=4922345678919; g_msisdn=$msisdn19;
+p1=$(ret_line "PCRF_EDR" "1")
+Quota_Name19=Q_89_local_Month;  g_Quota_Name=$Quota_Name19; # p3
+p3=$(ret_line "PCRF_EDR" "3")
+echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+#########################
+# ROW20.. throttle in not the list Q_989_local_Month
+msisdn20=4922345678920; g_msisdn=$msisdn20;
+p1=$(ret_line "PCRF_EDR" "1")
+Quota_Name20=Q_989_local_Month;  g_Quota_Name=$Quota_Name20; # p3
+p3=$(ret_line "PCRF_EDR" "3")
+echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+#########################
+
+# ROW21.. throttle in the list Q_148_local_Month
+msisdn21=4922345678921; g_msisdn=$msisdn21;
+p1=$(ret_line "PCRF_EDR" "1")
+Quota_Name21=Q_148_local_Month;  g_Quota_Name=$Quota_Name21; # p3
+p3=$(ret_line "PCRF_EDR" "3")
+echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+#########################
+# ROW22.. throttle in not the list Q_9148_local_Month
+msisdn22=4922345678922; g_msisdn=$msisdn22;
+p1=$(ret_line "PCRF_EDR" "1")
+Quota_Name22=Q_9148_local_Month;  g_Quota_Name=$Quota_Name22; # p3
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
 
 # ROW23.. throttle in the list Q_73_local_Month
-msisdn23=4912345678923; g_msisdn=$msisdn23;
+msisdn23=4922345678923; g_msisdn=$msisdn23;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name23=Q_73_local_Month;  g_Quota_Name=$Quota_Name23; # p3
+Quota_Name23=Q_89_local_Month;  g_Quota_Name=$Quota_Name23; # p3
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
-# ROW24.. throttle in not the list Q_937_local_Month
-msisdn24=4912345678924; g_msisdn=$msisdn24;
+# ROW24.. throttle in not the list Q_989_local_Month
+msisdn24=4922345678924; g_msisdn=$msisdn24;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name24=Q_973_local_Month;  g_Quota_Name=$Quota_Name24; # p3
-p3=$(ret_line "PCRF_EDR" "3")
-echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
-#########################
-
-# ROW25.. throttle in the list Q_91_local_Month
-msisdn25=4912345678925; g_msisdn=$msisdn25;
-p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name25=Q_91_local_Month;  g_Quota_Name=$Quota_Name25; # p3
-p3=$(ret_line "PCRF_EDR" "3")
-echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
-#########################
-# ROW26.. throttle in not the list Q_991_local_Month
-msisdn26=4912345678926; g_msisdn=$msisdn26;
-p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name26=Q_991_local_Month;  g_Quota_Name=$Quota_Name26; # p3
+Quota_Name24=Q_989_local_Month;  g_Quota_Name=$Quota_Name24; # p3
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
 
-# ROW27.. throttle in the list Q_93_local_Month
-msisdn27=4912345678927; g_msisdn=$msisdn27;
+# ROW25.. throttle in the list Q_148_local_Month
+msisdn25=4922345678925; g_msisdn=$msisdn25;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name27=Q_93_local_Month;  g_Quota_Name=$Quota_Name27; # p3
+Quota_Name25=Q_148_local_Month;  g_Quota_Name=$Quota_Name25; # p3
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
-# ROW28.. throttle in not the list Q_993_local_Month
-msisdn28=4912345678928; g_msisdn=$msisdn28;
+# ROW26.. throttle in not the list Q_9148_local_Month
+msisdn26=4922345678926; g_msisdn=$msisdn26;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name28=Q_993_local_Month;  g_Quota_Name=$Quota_Name28; # p3
-p3=$(ret_line "PCRF_EDR" "3")
-echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
-#########################
-
-# ROW29.. throttle in the list Q_108_local_Month
-msisdn29=4912345678929; g_msisdn=$msisdn29;
-p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name29=Q_108_local_Month;  g_Quota_Name=$Quota_Name29; # p3
-p3=$(ret_line "PCRF_EDR" "3")
-echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
-#########################
-# ROW30.. throttle in not the list Q_9108_local_Month
-msisdn30=4912345678930; g_msisdn=$msisdn30;
-p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name30=Q_9108_local_Month;  g_Quota_Name=$Quota_Name30; # p3
+Quota_Name26=Q_9148_local_Month;  g_Quota_Name=$Quota_Name26; # p3
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
 
-# ROW31.. throttle in the list Q_110_local_Month
-msisdn31=4912345678931; g_msisdn=$msisdn31;
+# ROW27.. throttle in the list Q_150_local_Month
+msisdn27=4922345678927; g_msisdn=$msisdn27;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name31=Q_110_local_Month;  g_Quota_Name=$Quota_Name31; # p3
+Quota_Name27=Q_150_local_Month;  g_Quota_Name=$Quota_Name27; # p3
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
-# ROW32.. throttle in not the list Q_9110_local_Month
-msisdn32=4912345678932; g_msisdn=$msisdn32;
+# ROW28.. throttle in not the list Q_9150_local_Month
+msisdn28=4922345678928; g_msisdn=$msisdn28;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name32=Q_9110_local_Month;  g_Quota_Name=$Quota_Name32; # p3
-p3=$(ret_line "PCRF_EDR" "3")
-echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
-#########################
-
-# ROW33.. throttle in the list Q_111_local_Month
-msisdn33=4912345678933; g_msisdn=$msisdn33;
-p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name33=Q_111_local_Month;  g_Quota_Name=$Quota_Name33; # p3
-p3=$(ret_line "PCRF_EDR" "3")
-echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
-#########################
-# ROW34.. throttle in not the list Q_9111_local_Month
-msisdn34=4912345678934; g_msisdn=$msisdn34;
-p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name34=Q_9111_local_Month;  g_Quota_Name=$Quota_Name34; # p3
+Quota_Name28=Q_9150_local_Month;  g_Quota_Name=$Quota_Name28; # p3
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
 
-# ROW35.. throttle in the list Q_124_local_Month
-msisdn35=4912345678935; g_msisdn=$msisdn35;
+# ROW29.. throttle in the list Q_146_local_Month
+msisdn29=4922345678929; g_msisdn=$msisdn29;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name35=Q_124_local_Month;  g_Quota_Name=$Quota_Name35; # p3
+Quota_Name29=Q_146_local_Month;  g_Quota_Name=$Quota_Name29; # p3
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
-# ROW36.. throttle in not the list Q_9124_local_Month
-msisdn36=4912345678936; g_msisdn=$msisdn36;
+# ROW30.. throttle in not the list Q_9146_local_Month
+msisdn30=4922345678930; g_msisdn=$msisdn30;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name36=Q_9124_local_Month;  g_Quota_Name=$Quota_Name36; # p3
+Quota_Name30=Q_9146_local_Month;  g_Quota_Name=$Quota_Name30; # p3
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
 
-# ROW37.. throttle in the list Q_131_local_Month
-msisdn37=4912345678937; g_msisdn=$msisdn37;
+# ROW31.. throttle in the list Q_128_local_Month
+msisdn31=4922345678931; g_msisdn=$msisdn31;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name37=Q_131_local_Month;  g_Quota_Name=$Quota_Name37; # p3
+Quota_Name31=Q_128_local_Month;  g_Quota_Name=$Quota_Name31; # p3
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
-# ROW38.. throttle in not the list Q_9131_local_Month
-msisdn38=4912345678938; g_msisdn=$msisdn38;
+# ROW32.. throttle in not the list Q_9128_local_Month
+msisdn32=4922345678932; g_msisdn=$msisdn32;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name38=Q_9131_local_Month;  g_Quota_Name=$Quota_Name38; # p3
+Quota_Name32=Q_9128_local_Month;  g_Quota_Name=$Quota_Name32; # p3
+p3=$(ret_line "PCRF_EDR" "3")
+echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+#########################
+
+# ROW33.. throttle in the list Q_58_local_Month
+msisdn33=4922345678933; g_msisdn=$msisdn33;
+p1=$(ret_line "PCRF_EDR" "1")
+Quota_Name33=Q_58_local_Month;  g_Quota_Name=$Quota_Name33; # p3
+p3=$(ret_line "PCRF_EDR" "3")
+echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+#########################
+# ROW34.. throttle in not the list Q_958_local_Month
+msisdn34=4922345678934; g_msisdn=$msisdn34;
+p1=$(ret_line "PCRF_EDR" "1")
+Quota_Name34=Q_958_local_Month;  g_Quota_Name=$Quota_Name34; # p3
+p3=$(ret_line "PCRF_EDR" "3")
+echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+#########################
+
+# ROW35.. throttle in the list Q_59_local_Month
+msisdn35=4922345678935; g_msisdn=$msisdn35;
+p1=$(ret_line "PCRF_EDR" "1")
+Quota_Name35=Q_59_local_Month;  g_Quota_Name=$Quota_Name35; # p3
+p3=$(ret_line "PCRF_EDR" "3")
+echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+#########################
+# ROW36.. throttle in not the list Q_959_local_Month
+msisdn36=4922345678936; g_msisdn=$msisdn36;
+p1=$(ret_line "PCRF_EDR" "1")
+Quota_Name36=Q_959_local_Month;  g_Quota_Name=$Quota_Name36; # p3
+p3=$(ret_line "PCRF_EDR" "3")
+echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+#########################
+
+# ROW37.. throttle in the list Q_38_local_Month
+msisdn37=4922345678937; g_msisdn=$msisdn37;
+p1=$(ret_line "PCRF_EDR" "1")
+Quota_Name37=Q_38_local_Month;  g_Quota_Name=$Quota_Name37; # p3
+p3=$(ret_line "PCRF_EDR" "3")
+echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+#########################
+# ROW38.. throttle in not the list Q_938_local_Month
+msisdn38=4922345678938; g_msisdn=$msisdn38;
+p1=$(ret_line "PCRF_EDR" "1")
+Quota_Name38=Q_938_local_Month;  g_Quota_Name=$Quota_Name38; # p3
+p3=$(ret_line "PCRF_EDR" "3")
+echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+#########################
+
+# ROW39.. throttle in the list Q_88_local_Month
+msisdn39=4922345678939; g_msisdn=$msisdn39;
+p1=$(ret_line "PCRF_EDR" "1")
+Quota_Name39=Q_88_local_Month;  g_Quota_Name=$Quota_Name39; # p3
+p3=$(ret_line "PCRF_EDR" "3")
+echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+#########################
+# ROW38.. throttle in not the list Q_988_local_Month
+msisdn40=4922345678940; g_msisdn=$msisdn40;
+p1=$(ret_line "PCRF_EDR" "1")
+Quota_Name40=Q_988_local_Month;  g_Quota_Name=$Quota_Name40; # p3
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
@@ -417,6 +419,8 @@ echo "$msisdn13,$PaymentType1" >> $paymenttype_lkp_input
 echo "$msisdn14,$PaymentType1" >> $paymenttype_lkp_input
 echo "$msisdn15,$PaymentType1" >> $paymenttype_lkp_input
 echo "$msisdn16,$PaymentType1" >> $paymenttype_lkp_input
+echo "$msisdn17,$PaymentType1" >> $paymenttype_lkp_input
+echo "$msisdn18,$PaymentType1" >> $paymenttype_lkp_input
 echo "$msisdn19,$PaymentType1" >> $paymenttype_lkp_input
 echo "$msisdn20,$PaymentType1" >> $paymenttype_lkp_input
 echo "$msisdn21,$PaymentType1" >> $paymenttype_lkp_input
@@ -446,8 +450,8 @@ echo ""
 echo "${tc}: 3. recurring lkp.."
 rm -f $recurring_lkp_input
 echo "$msisdn1,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
-echo "$msisdn2,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
-echo "$msisdn3,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
+echo "$msisdn2,$Quota_Name2,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
+echo "$msisdn3,$Quota_Name3,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
 
 
 cp ${recurring_lkp_input} $data_dir/lookup_requirring/OUT
@@ -459,42 +463,45 @@ touch ${recurring_lkp_file}.zip.done
 ls -rtl $data_dir/lookup_requirring/OUT
 
 Quota_Total1=$Quota_Usage1
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn1}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume1};Yes_No_1#${IsRecurring1};String_1#${Quota_Name1};MSISDN#${msisdn1};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn3}_${Quota_Name3}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume1};Yes_No_1#${IsRecurring1};String_1#${Quota_Name3};MSISDN#${msisdn3};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn5}_${Quota_Name5}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name5};MSISDN#${msisdn5};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn7}_${Quota_Name7}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name7};MSISDN#${msisdn7};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn9}_${Quota_Name9}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name9};MSISDN#${msisdn9};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn11}_${Quota_Name11}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name11};MSISDN#${msisdn11};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn13}_${Quota_Name13}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name13};MSISDN#${msisdn13};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn15}_${Quota_Name15}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name15};MSISDN#${msisdn15};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn17}_${Quota_Name17}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name17};MSISDN#${msisdn17};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn19}_${Quota_Name19}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name19};MSISDN#${msisdn19};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn21}_${Quota_Name21}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name21};MSISDN#${msisdn21};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn23}_${Quota_Name23}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name23};MSISDN#${msisdn23};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn25}_${Quota_Name25}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name25};MSISDN#${msisdn25};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn27}_${Quota_Name27}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name27};MSISDN#${msisdn27};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn29}_${Quota_Name29}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name29};MSISDN#${msisdn29};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn31}_${Quota_Name31}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name31};MSISDN#${msisdn31};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn33}_${Quota_Name33}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name33};MSISDN#${msisdn33};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn35}_${Quota_Name35}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name35};MSISDN#${msisdn35};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn37}_${Quota_Name37}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name37};MSISDN#${msisdn37};" >> $expected_output
 
-echo "I,N:$Time1,$msisdn1,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
-
-echo "I,N:$Time1,$msisdn3,$SGSNAddress1,$UEIP1,$Quota_Name3,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
-
-echo "I,N:$Time1,$msisdn5,$SGSNAddress1,$UEIP1,$Quota_Name5,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn7,$SGSNAddress1,$UEIP1,$Quota_Name7,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn9,$SGSNAddress1,$UEIP1,$Quota_Name9,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn11,$SGSNAddress1,$UEIP1,$Quota_Name11,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn13,$SGSNAddress1,$UEIP1,$Quota_Name13,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn15,$SGSNAddress1,$UEIP1,$Quota_Name15,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn19,$SGSNAddress1,$UEIP1,$Quota_Name19,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn21,$SGSNAddress1,$UEIP1,$Quota_Name21,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn23,$SGSNAddress1,$UEIP1,$Quota_Name23,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn25,$SGSNAddress1,$UEIP1,$Quota_Name25,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn27,$SGSNAddress1,$UEIP1,$Quota_Name27,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn29,$SGSNAddress1,$UEIP1,$Quota_Name29,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn31,$SGSNAddress1,$UEIP1,$Quota_Name31,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn33,$SGSNAddress1,$UEIP1,$Quota_Name33,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn35,$SGSNAddress1,$UEIP1,$Quota_Name35,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn37,$SGSNAddress1,$UEIP1,$Quota_Name37,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#Quota_Total1=$Quota_Usage1
+#echo "I,N:$Time1,$msisdn1,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
+#echo "I,N:$Time1,$msisdn3,$SGSNAddress1,$UEIP1,$Quota_Name3,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
+#echo "I,N:$Time1,$msisdn5,$SGSNAddress1,$UEIP1,$Quota_Name5,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn7,$SGSNAddress1,$UEIP1,$Quota_Name7,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn9,$SGSNAddress1,$UEIP1,$Quota_Name9,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn11,$SGSNAddress1,$UEIP1,$Quota_Name11,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn13,$SGSNAddress1,$UEIP1,$Quota_Name13,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn15,$SGSNAddress1,$UEIP1,$Quota_Name15,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn19,$SGSNAddress1,$UEIP1,$Quota_Name19,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn21,$SGSNAddress1,$UEIP1,$Quota_Name21,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn23,$SGSNAddress1,$UEIP1,$Quota_Name23,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn25,$SGSNAddress1,$UEIP1,$Quota_Name25,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn27,$SGSNAddress1,$UEIP1,$Quota_Name27,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn29,$SGSNAddress1,$UEIP1,$Quota_Name29,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn31,$SGSNAddress1,$UEIP1,$Quota_Name31,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn33,$SGSNAddress1,$UEIP1,$Quota_Name33,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn35,$SGSNAddress1,$UEIP1,$Quota_Name35,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn37,$SGSNAddress1,$UEIP1,$Quota_Name37,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
 
 cd $my_loc
 ################################################################################

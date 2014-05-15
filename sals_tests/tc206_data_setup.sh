@@ -3,7 +3,9 @@
 echo "running test at $(date)"
 
 my_loc=$(pwd)
-tc=tc106
+tc=tc206
+
+start_stop_dir=start_stop_dir_1key
 
 echo "PREPAID" > SINGLE_FLOW_TYPE.conf
 echo "b${tc}_EDR_UPCC231_MPU484_4924_40131211100031.csv" > EXPECTED_BAD_FILES.conf
@@ -41,7 +43,7 @@ echo "${tc}:"
 ./requirement_7.sh
 echo " "
 echo "test strategy:"
-echo "prepare the lookups and put in the correct location (${SINGLE_FLOW_TYPE})"
+echo "(${SINGLE_FLOW_TYPE}) prepare the lookups and put in the correct location"
 echo "start CEP"
 echo "feed in a good EDR file"
 echo "feed in a corrupted EDR file"
@@ -69,42 +71,11 @@ g_UEIP=
 g_Quota_Consumption=
 
 ###################
-function ret_line() {
-local line_type=$1
-local line_num=$2
-
-if [ "$line_type" == "PCRF_EDR" ]
-then
-  if [ "$line_num" == "1" ]
-  then
-    echo "$g_TriggerType,$g_Time,,,$g_msisdn,,,,,";
-  elif [ "$line_num" == "2" ]
-  then
-    echo ",,,$g_SGSNAddress,,,,,,$g_UEIP";
-  elif [ "$line_num" == "3" ]
-  then
-    echo ",,,,,,$g_Quota_Name,$g_Quota_Status,$g_Quota_Consumption,";
-  elif [ "$line_num" == "4" ]
-  then
-    echo ",$g_Quota_Usage,$g_Quota_Next_Reset_Time,,,,,,,";
-  elif [ "$line_num" == "5" ]
-  then
-    echo ",,,,,,,,,";
-  elif [ "$line_num" == "6" ]
-  then
-    echo ",,,,,,,,,";
-  elif [ "$line_num" == "7" ]
-  then
-    echo ",,,,,,,$g_Quota_Value,,";
-  fi
-fi
-}
-###################
 # ROW1..a throttle 100 event..
 TriggerType1=2;                                                g_TriggerType=$TriggerType1;
 Time1=$(date --date='50 hours ago' +"%Y-%m-%d %T");            g_Time=$Time1;
-msisdn1=4912345678901;                                         g_msisdn=$msisdn1;
-Quota_Name1=Q_110_local_Month;                                 g_Quota_Name=$Quota_Name1;
+msisdn1=4922345678901;                                         g_msisdn=$msisdn1;
+Quota_Name1=Q_143_local_Month;                                 g_Quota_Name=$Quota_Name1;
 Quota_Status1=6;                                               g_Quota_Status=$Quota_Status1;
 Quota_Usage1=1;                                                g_Quota_Usage=$Quota_Usage1;
 Quota_Next_Reset_Time1=$(date --date='16 days' +"%Y-%m-%d %T");g_Quota_Next_Reset_Time=$Quota_Next_Reset_Time1;
@@ -124,6 +95,7 @@ p5=$(ret_line "PCRF_EDR" "5")
 p6=$(ret_line "PCRF_EDR" "6")
 p7=$(ret_line "PCRF_EDR" "7")
 
+Quota_Total1=$Quota_Usage1
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 echo ""
 
@@ -155,7 +127,7 @@ cd $my_loc
 ################################################################################
 echo ""
 echo "starting the cep components..."
-cd $my_loc/start_stop_dir
+cd $my_loc/$start_stop_dir
 ./START_ALL_CEP.sh
 
 cd $my_loc
@@ -187,7 +159,7 @@ gzip input_data/a${throttle_file}
 echo ""
 echo "c) feeding in another good EDR file.."
 rm -f input_data/c${throttle_file}
-msisdn2=4912345678902; g_msisdn=$msisdn2;
+msisdn2=4922345678902; g_msisdn=$msisdn2;
 p1=$(ret_line "PCRF_EDR" "1")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> input_data/c${throttle_file}
 rm -f input_data/c${throttle_file}.gz
@@ -199,7 +171,7 @@ echo ""
 #######################################################################
 
 echo "stopping the cep components..."
-cd $my_loc/start_stop_dir
+cd $my_loc/$start_stop_dir
 ./STOP_ALL_CEP.sh
 
 cd $my_loc
@@ -207,10 +179,11 @@ cd $my_loc
 echo "${tc}: 4. generating the expected output.."
 rm -f $expected_output
 
-echo "I,N:$Time1,$msisdn1,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
+#echo "I,N:$Time1,$msisdn1,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
+#echo "I,N:$Time1,$msisdn2,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
 
-echo "I,N:$Time1,$msisdn2,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
-
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn1}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume1};Yes_No_1#${IsRecurring1};String_1#${Quota_Name1};MSISDN#${msisdn1};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn2}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume1};Yes_No_1#${IsRecurring1};String_1#${Quota_Name1};MSISDN#${msisdn1};" >> $expected_output
 
 ################################################################################
 echo " "

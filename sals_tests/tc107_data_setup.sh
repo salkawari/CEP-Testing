@@ -5,6 +5,8 @@ echo "running test at $(date)"
 my_loc=$(pwd)
 tc=tc107
 
+start_stop_dir=start_stop_dir_1key
+
 echo "POSTPAID" > SINGLE_FLOW_TYPE.conf
 echo "" > EXPECTED_BAD_FILES.conf
 
@@ -69,37 +71,6 @@ g_SGSNAddress=
 g_UEIP=
 g_Quota_Consumption=
 
-###################
-function ret_line() {
-local line_type=$1
-local line_num=$2
-
-if [ "$line_type" == "PCRF_EDR" ]
-then
-  if [ "$line_num" == "1" ]
-  then
-    echo "$g_TriggerType,$g_Time,,,$g_msisdn,,,,,";
-  elif [ "$line_num" == "2" ]
-  then
-    echo ",,,$g_SGSNAddress,,,,,,$g_UEIP";
-  elif [ "$line_num" == "3" ]
-  then
-    echo ",,,,,,$g_Quota_Name,$g_Quota_Status,$g_Quota_Consumption,";
-  elif [ "$line_num" == "4" ]
-  then
-    echo ",$g_Quota_Usage,$g_Quota_Next_Reset_Time,,,,,,,";
-  elif [ "$line_num" == "5" ]
-  then
-    echo ",,,,,,,,,";
-  elif [ "$line_num" == "6" ]
-  then
-    echo ",,,,,,,,,";
-  elif [ "$line_num" == "7" ]
-  then
-    echo ",,,,,,,$g_Quota_Value,,";
-  fi
-fi
-}
 ###################
 # ROW1..a throttle 100 event..
 TriggerType1=2;                                                g_TriggerType=$TriggerType1;
@@ -171,18 +142,20 @@ touch ${recurring_lkp_file}.zip.done
 
 ls -rtl $data_dir/lookup_requirring/OUT
 
-echo "I,N:$Time1,$msisdn1,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
+#echo "I,N:$Time1,$msisdn1,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
+#echo "I,N:$Time1,$msisdn2,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
+#echo "I,N:$Time1,$msisdn3,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
 
-echo "I,N:$Time1,$msisdn2,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
-
-echo "I,N:$Time1,$msisdn3,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
-
+Quota_Total1=$Quota_Usage1
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn1}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume1};Yes_No_1#${IsRecurring1};String_1#${Quota_Name1};MSISDN#${msisdn1};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn2}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume1};Yes_No_1#${IsRecurring1};String_1#${Quota_Name1};MSISDN#${msisdn2};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn3}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume1};Yes_No_1#${IsRecurring1};String_1#${Quota_Name1};MSISDN#${msisdn3};" >> $expected_output
 
 cd $my_loc
 ################################################################################
 echo ""
 echo "starting the cep components..."
-cd $my_loc/start_stop_dir
+cd $my_loc/$start_stop_dir
 ./START_ALL_CEP.sh
 
 cd $my_loc
@@ -246,11 +219,14 @@ gzip input_data/a${throttle_file}
 cp input_data/a${throttle_file}.gz $data_dir/pcrf_files_postpaid/
 
 # here is the expected output..
-echo "I,N:$Time21,$msisdn1,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring2,$InitialVolume2" >> $expected_output
+Quota_Total1=$Quota_Usage1
+echo "Name#Test;Transaction_ID#${Time21}_${msisdn1}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume2};Yes_No_1#${IsRecurring2};String_1#${Quota_Name1};MSISDN#${msisdn1};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time21}_${msisdn2}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume2};Yes_No_1#${IsRecurring2};String_1#${Quota_Name1};MSISDN#${msisdn2};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time21}_${msisdn3}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume2};Yes_No_1#${IsRecurring2};String_1#${Quota_Name1};MSISDN#${msisdn3};" >> $expected_output
 
-echo "I,N:$Time21,$msisdn2,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring2,$InitialVolume2" >> $expected_output
-
-echo "I,N:$Time21,$msisdn3,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring2,$InitialVolume2" >> $expected_output
+#echo "I,N:$Time21,$msisdn1,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring2,$InitialVolume2" >> $expected_output
+#echo "I,N:$Time21,$msisdn2,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring2,$InitialVolume2" >> $expected_output
+#echo "I,N:$Time21,$msisdn3,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring2,$InitialVolume2" >> $expected_output
 
 #############################################
 echo "${tc}: 6. we change the lookups back to what they were at the start.."
@@ -307,16 +283,20 @@ gzip input_data/b${throttle_file}
 cp input_data/b${throttle_file}.gz $data_dir/pcrf_files_postpaid/
 
 # here is the expected output..
-echo "I,N:$Time31,$msisdn1,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring3,$InitialVolume3" >> $expected_output
+Quota_Total1=$Quota_Usage1
+echo "Name#Test;Transaction_ID#${Time31}_${msisdn1}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume3};Yes_No_1#${IsRecurring3};String_1#${Quota_Name1};MSISDN#${msisdn1};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time31}_${msisdn2}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume3};Yes_No_1#${IsRecurring3};String_1#${Quota_Name1};MSISDN#${msisdn2};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time31}_${msisdn3}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume3};Yes_No_1#${IsRecurring3};String_1#${Quota_Name1};MSISDN#${msisdn3};" >> $expected_output
 
-echo "I,N:$Time31,$msisdn2,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring3,$InitialVolume3" >> $expected_output
+#echo "I,N:$Time31,$msisdn1,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring3,$InitialVolume3" >> $expected_output
+#echo "I,N:$Time31,$msisdn2,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring3,$InitialVolume3" >> $expected_output
+#echo "I,N:$Time31,$msisdn3,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring3,$InitialVolume3" >> $expected_output
 
-echo "I,N:$Time31,$msisdn3,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring3,$InitialVolume3" >> $expected_output
 
 #######################################################################
 
 echo "stopping the cep components..."
-cd $my_loc/start_stop_dir
+cd $my_loc/$start_stop_dir
 ./STOP_ALL_CEP.sh
 
 cd $my_loc

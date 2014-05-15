@@ -5,6 +5,8 @@ echo "running test at $(date)"
 my_loc=$(pwd)
 tc=tc108
 
+start_stop_dir=start_stop_dir_1key
+
 echo "POSTPAID" > SINGLE_FLOW_TYPE.conf
 echo "" > EXPECTED_BAD_FILES.conf
 
@@ -42,7 +44,7 @@ echo "${tc}:"
 echo " "
 echo "test strategy:"
 echo "(${SINGLE_FLOW_TYPE}) send in quota_names that should be processed in phase2 and those which shouldnt"
-echo "send in all 19 good quota_names and"
+echo "send in all 18 good quota_names and"
 echo "send in some other quota_names mixed in"
 echo " "
 echo ""
@@ -66,37 +68,6 @@ g_SGSNAddress=
 g_UEIP=
 g_Quota_Consumption=
 
-###################
-function ret_line() {
-local line_type=$1
-local line_num=$2
-
-if [ "$line_type" == "PCRF_EDR" ]
-then
-  if [ "$line_num" == "1" ]
-  then
-    echo "$g_TriggerType,$g_Time,,,$g_msisdn,,,,,";
-  elif [ "$line_num" == "2" ]
-  then
-    echo ",,,$g_SGSNAddress,,,,,,$g_UEIP";
-  elif [ "$line_num" == "3" ]
-  then
-    echo ",,,,,,$g_Quota_Name,$g_Quota_Status,$g_Quota_Consumption,";
-  elif [ "$line_num" == "4" ]
-  then
-    echo ",$g_Quota_Usage,$g_Quota_Next_Reset_Time,,,,,,,";
-  elif [ "$line_num" == "5" ]
-  then
-    echo ",,,,,,,,,";
-  elif [ "$line_num" == "6" ]
-  then
-    echo ",,,,,,,,,";
-  elif [ "$line_num" == "7" ]
-  then
-    echo ",,,,,,,$g_Quota_Value,,";
-  fi
-fi
-}
 ###################
 # ROW1..a throttle 100 event - good Q_23_local_Month..
 TriggerType1=2;                                                g_TriggerType=$TriggerType1;  #p1
@@ -446,8 +417,8 @@ echo ""
 echo "${tc}: 3. recurring lkp.."
 rm -f $recurring_lkp_input
 echo "$msisdn1,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
-echo "$msisdn2,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
-echo "$msisdn3,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
+echo "$msisdn2,$Quota_Name2,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
+echo "$msisdn3,$Quota_Name3,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
 
 
 cp ${recurring_lkp_input} $data_dir/lookup_requirring/OUT
@@ -459,42 +430,44 @@ touch ${recurring_lkp_file}.zip.done
 ls -rtl $data_dir/lookup_requirring/OUT
 
 Quota_Total1=$Quota_Usage1
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn1}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume1};Yes_No_1#${IsRecurring1};String_1#${Quota_Name1};MSISDN#${msisdn1};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn3}_${Quota_Name3}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume1};Yes_No_1#${IsRecurring1};String_1#${Quota_Name3};MSISDN#${msisdn3};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn5}_${Quota_Name5}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name5};MSISDN#${msisdn5};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn7}_${Quota_Name7}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name7};MSISDN#${msisdn7};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn9}_${Quota_Name9}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name9};MSISDN#${msisdn9};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn11}_${Quota_Name11}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name11};MSISDN#${msisdn11};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn13}_${Quota_Name13}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name13};MSISDN#${msisdn13};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn15}_${Quota_Name15}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name15};MSISDN#${msisdn15};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn19}_${Quota_Name19}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name19};MSISDN#${msisdn19};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn21}_${Quota_Name21}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name21};MSISDN#${msisdn21};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn23}_${Quota_Name23}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name23};MSISDN#${msisdn23};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn25}_${Quota_Name25}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name25};MSISDN#${msisdn25};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn27}_${Quota_Name27}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name27};MSISDN#${msisdn27};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn29}_${Quota_Name29}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name29};MSISDN#${msisdn29};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn31}_${Quota_Name31}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name31};MSISDN#${msisdn31};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn33}_${Quota_Name33}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name33};MSISDN#${msisdn33};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn35}_${Quota_Name35}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name35};MSISDN#${msisdn35};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn37}_${Quota_Name37}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name37};MSISDN#${msisdn37};" >> $expected_output
 
-echo "I,N:$Time1,$msisdn1,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
-
-echo "I,N:$Time1,$msisdn3,$SGSNAddress1,$UEIP1,$Quota_Name3,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
-
-echo "I,N:$Time1,$msisdn5,$SGSNAddress1,$UEIP1,$Quota_Name5,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn7,$SGSNAddress1,$UEIP1,$Quota_Name7,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn9,$SGSNAddress1,$UEIP1,$Quota_Name9,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn11,$SGSNAddress1,$UEIP1,$Quota_Name11,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn13,$SGSNAddress1,$UEIP1,$Quota_Name13,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn15,$SGSNAddress1,$UEIP1,$Quota_Name15,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn19,$SGSNAddress1,$UEIP1,$Quota_Name19,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn21,$SGSNAddress1,$UEIP1,$Quota_Name21,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn23,$SGSNAddress1,$UEIP1,$Quota_Name23,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn25,$SGSNAddress1,$UEIP1,$Quota_Name25,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn27,$SGSNAddress1,$UEIP1,$Quota_Name27,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn29,$SGSNAddress1,$UEIP1,$Quota_Name29,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn31,$SGSNAddress1,$UEIP1,$Quota_Name31,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn33,$SGSNAddress1,$UEIP1,$Quota_Name33,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn35,$SGSNAddress1,$UEIP1,$Quota_Name35,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-
-echo "I,N:$Time1,$msisdn37,$SGSNAddress1,$UEIP1,$Quota_Name37,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#Quota_Total1=$Quota_Usage1
+#echo "I,N:$Time1,$msisdn1,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
+#echo "I,N:$Time1,$msisdn3,$SGSNAddress1,$UEIP1,$Quota_Name3,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
+#echo "I,N:$Time1,$msisdn5,$SGSNAddress1,$UEIP1,$Quota_Name5,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn7,$SGSNAddress1,$UEIP1,$Quota_Name7,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn9,$SGSNAddress1,$UEIP1,$Quota_Name9,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn11,$SGSNAddress1,$UEIP1,$Quota_Name11,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn13,$SGSNAddress1,$UEIP1,$Quota_Name13,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn15,$SGSNAddress1,$UEIP1,$Quota_Name15,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn19,$SGSNAddress1,$UEIP1,$Quota_Name19,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn21,$SGSNAddress1,$UEIP1,$Quota_Name21,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn23,$SGSNAddress1,$UEIP1,$Quota_Name23,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn25,$SGSNAddress1,$UEIP1,$Quota_Name25,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn27,$SGSNAddress1,$UEIP1,$Quota_Name27,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn29,$SGSNAddress1,$UEIP1,$Quota_Name29,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn31,$SGSNAddress1,$UEIP1,$Quota_Name31,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn33,$SGSNAddress1,$UEIP1,$Quota_Name33,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn35,$SGSNAddress1,$UEIP1,$Quota_Name35,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+#echo "I,N:$Time1,$msisdn37,$SGSNAddress1,$UEIP1,$Quota_Name37,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
 
 cd $my_loc
 ################################################################################

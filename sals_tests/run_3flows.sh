@@ -11,14 +11,18 @@ echo "$(check_espdata)"
 
 echo "now calling $0 ${1} ${2}.."
 
-start_stop_dir=start_stop_dir_tuned
+my_loc=$(pwd)
+
+start_stop_dir=start_stop_dir_1key
 
 esp_server_dir=$(cat $start_stop_dir/START_STOP_CONFIG.txt|grep "esp_server_dir"|cut -d'=' -f2)
+
+cep_adapter_log_file=$(cat $start_stop_dir/START_STOP_CONFIG.txt|grep "cep_adapter_log_file"|cut -d'=' -f2)
 
 data_dir=/opt/app/sas/ESPData
 error_dir=/opt/app/sas/ESPData/error_messages
 
-input_dir=input_data
+input_dir=${my_loc}/input_data
 
 
 
@@ -39,17 +43,13 @@ fi
 echo "mylist=$mylist"
 
 #rm -fr $data_dir
-my_loc=$(pwd)
 
-echo "cleaning out $data_dir"
-rm -fr $data_dir
-rm -fr $my_loc/$input_dir
- 
-cd $my_loc
+
+
 
 
 needed_directories=$(echo "$esp_server_dir $data_dir $error_dir $jar_adapter_path")
-needed_directories=$(echo "$needed_directories $input_dir $data_dir/pcrf_files_prepaid $data_dir/pcrf_files_postpaid")
+needed_directories=$(echo "$needed_directories $input_dir $data_dir/pcrf_files_postpaid $data_dir/pcrf_files_prepaid $data_dir/pcrf_files_fonic")
 needed_directories=$(echo "$needed_directories $data_dir/lookup_postpaid $data_dir/lookup_paymenttype")
 needed_directories=$(echo "$needed_directories $data_dir/lookup_prepaid $data_dir/lookup_fonic $data_dir/lookup_requirring/OUT")
 needed_directories=$(echo "$needed_directories $data_dir/output_prepaid $data_dir/output_postpaid $data_dir/output_fonic")
@@ -59,18 +59,27 @@ needed_directories=$(echo "$needed_directories $data_dir/persist_postpaid_thrott
 needed_directories=$(echo "$needed_directories $data_dir/cep-log")
 
 
-for needed_dir in $(echo $needed_directories)
-do
-  if [ ! -d "$needed_dir" ]
-  then
-    echo "creating $needed_dir"
-    mkdir -p $needed_dir
-  fi
-done
+
 
 for i in $(echo $mylist)
 do
   test_case_name=$(echo $i|cut -d'_' -f1)
+
+  rm -fr $data_dir
+  for needed_dir in $(echo $needed_directories)
+  do
+    echo "cleaning out $data_dir"
+
+    rm -fr $my_loc/$input_dir
+ 
+   # cd $my_loc
+ 
+    if [ ! -d "$needed_dir" ]
+    then
+      echo "creating $needed_dir"
+      mkdir -p $needed_dir
+    fi
+  done
 
   cd $my_loc  
   echo "############################################################################"
@@ -99,16 +108,16 @@ do
   sleep 4
   max_count=$(expr 70)
   my_waits=$((0))
-  while [ $(ls $out_dir |grep "$output_file_name" | wc -l) -eq 0 ] && [ $my_waits -lt $max_count ]
-  do
-    echo "waiting for $out_dir/$output_file_name to be created.."
-    my_waits=$(($my_waits+1))
-    sleep 5    
-  done
-
-  echo "######################"
-  echo "debug2 my_waits=$my_waits, max_count=$max_count"
-  echo "######################"
+#  while [ $(ls $out_dir |grep "$output_file_name" | wc -l) -eq 0 ] && [ $my_waits -lt $max_count ]
+#  do
+#    echo "waiting for $out_dir/$output_file_name to be created.."
+#    my_waits=$(($my_waits+1))
+#    sleep 5    
+#  done
+#
+#  echo "######################"
+#  echo "debug2 my_waits=$my_waits, max_count=$max_count"
+#  echo "######################"
   output_matched_flag=n;
   bad_files_expected_flag=n;
   missing_bad_file_flag=n;
@@ -121,23 +130,17 @@ do
   fi
 
 
-  if [ "$my_waits" != "$max_count" ]
-  then
-    max_count=$(expr 70)
-    my_waits=$((0))
+#  if [ "$my_waits" != "$max_count" ]
+#  then
+#    max_count=$(expr 70)
+#    my_waits=$((0))
     sleep 20
 
     echo "${test_case_name}:11. now we can compare results.."
-    cat $out_dir/$output_file_name | sed s/'I,N:'/'\n''I,N:'/g > $out_dir/$output_file_name.tmp
-  
-    if [ $(head -1 $out_dir/$output_file_name.tmp | wc -w) -eq "0" ]
-    then
-      line_count1=$(wc -l $out_dir/$output_file_name.tmp| awk '{print $1}')
-      tail -${line_count1} $out_dir/$output_file_name.tmp > $out_dir/$output_file_name.OUT
-    else
-      cp $out_dir/$output_file_name.tmp $out_dir/$output_file_name.OUT
-    fi
-    rm -f $out_dir/$output_file_name.tmp
+
+    grep "Input for rtdm - only fields that are set" $cep_adapter_log_file | awk -F'Input for rtdm - only fields that are set: *' '{print $2}'  > $out_dir/$output_file_name.OUT
+
+#grep "Input for rtdm - only fields that are set" $cep_adapter_log_file | awk -F'Input for rtdm - only fields that are set: *' '{print $2}'
 
     ## checking that the output files matched the expected files..
     if [ $(diff -w $out_dir/$output_file_name.OUT $out_dir/${test_case_name}_result.expected |wc -l) -eq 0 ]
@@ -170,10 +173,10 @@ do
     echo "here is what we got.."
     cat $out_dir/$output_file_name.OUT
     echo ""
-  else
-    echo "here is the contents we were looking for, nothing recieved.."
-    cat $out_dir/${test_case_name}_result.expected
-  fi
+# else
+#    echo "here is the contents we were looking for, nothing recieved.."
+#    cat $out_dir/${test_case_name}_result.expected
+#  fi
   ## now we output the result of the test..
   if [ $my_waits -ge $max_count ]
   then 

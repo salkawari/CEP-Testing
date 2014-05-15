@@ -3,7 +3,7 @@
 echo "running test at $(date)"
 
 my_loc=$(pwd)
-tc=tc103
+tc=tc303
 
 echo "FONIC" > SINGLE_FLOW_TYPE.conf
 echo "" > EXPECTED_BAD_FILES.conf
@@ -41,7 +41,7 @@ echo "${tc}:"
 ./requirement_3.sh
 echo " "
 echo "test strategy:"
-echo "we have 2 usage ERDs followed by a throttle 100 FONIC event"
+echo "we have 2 usage ERDs followed by a throttle 100 fonic event"
 echo "The total usage should therefore be the total of these 3 EDRs"
 echo "another usage event after this should be ignored"
 echo " "
@@ -79,8 +79,8 @@ g_Quota_Consumption=
 # ROW1..usage (1) event only (bad quota status)
 TriggerType1=2;                                                g_TriggerType=$TriggerType1;
 Time1=$(date --date='10 minutes ago' +"%Y-%m-%d %T");          g_Time=$Time1;
-msisdn1=4912345678901;                                         g_msisdn=$msisdn1;
-Quota_Name1=Q_110_local_Month;                                 g_Quota_Name=$Quota_Name1;
+msisdn1=4932345678901;                                         g_msisdn=$msisdn1;
+Quota_Name1=Q_143_local_Month;                                 g_Quota_Name=$Quota_Name1;
 Quota_Status1=16;                                              g_Quota_Status=$Quota_Status1;
 Quota_Usage1=1;                                                g_Quota_Usage=$Quota_Usage1;
 Quota_Next_Reset_Time1=$(date --date='16 days' +"%Y-%m-%d %T");g_Quota_Next_Reset_Time=$Quota_Next_Reset_Time1;
@@ -165,7 +165,9 @@ cd $my_loc
 echo "${tc}: 4. generating the expected output.."
 rm -f $expected_output
 
-echo "I,N:$Time3,$msisdn1,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status3,$Quota_Consumption1,,,$Quota_Usage3,,,,,,,,,,$PaymentType1,$Quota_Total3,$IsRecurring1,$InitialVolume1" >> $expected_output
+#echo "I,N:$Time3,$msisdn1,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status3,$Quota_Consumption1,,,$Quota_Usage3,,,,,,,,,,$PaymentType1,$Quota_Total3,$IsRecurring1,$InitialVolume1" >> $expected_output
+
+echo "Name#Test;Transaction_ID#${Time3}_${msisdn1}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total3}.0;Int_3#${InitialVolume1};Yes_No_1#${IsRecurring1};String_1#${Quota_Name1};MSISDN#${msisdn1};" >> $expected_output
 
 
 ################################################################################

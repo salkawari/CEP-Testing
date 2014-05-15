@@ -3,7 +3,7 @@
 echo "running test at $(date)"
 
 my_loc=$(pwd)
-tc=tc101
+tc=tc201
 
 echo "PREPAID" > SINGLE_FLOW_TYPE.conf
 echo "" > EXPECTED_BAD_FILES.conf
@@ -22,10 +22,7 @@ recurring_lkp_input=input_data/$recurring_lkp_file
 
 data_dir=/opt/app/sas/ESPData
 
-export SINGLE_FLOW_TYPE=$(cat SINGLE_FLOW_TYPE.conf)
-
-out_dir=$data_dir/output_$(echo ${SINGLE_FLOW_TYPE,,} )
-  
+out_dir=$data_dir/output_${SINGLE_FLOW_TYPE}
 if [ ! -d "$out_dir" ]
 then 
   mkdir -p $out_dir;
@@ -41,7 +38,7 @@ then
 fi
 ################################################################################
 echo "${tc}:"
-./requirement_201.sh
+./requirement_1.sh
 ./requirement_20.sh
 echo " "
 echo "test strategy:"
@@ -49,12 +46,12 @@ echo "input various combinations of QuotaName, TriggerType, QuotaStatus and Quot
 echo "to confirm only valid combinations result in a processed prepaid throttle 100 event"
 echo " "
 echo "EDR data setup:"
-echo "Row1: a valid PREPAID throttle 100 event (Quota_Name=Q_110_local_Month, TriggerType=2, Quota_Status=6, QuotaValue=1)"
-echo "Row2: a not valid PREPAID throttle 100 event (TriggerType=7 instead of 1-6)"
-echo "Row3: a not valid PREPAID throttle 100 event (Quota_Name = Q_110_roaming_Month)"
-echo "Row4: a not valid PREPAID throttle 100 event (Quota_Status=4 instead of 6)"
-echo "Row5: a not valid PREPAID throttle 100 event (QuotaValue=11 instead of 1)"
-echo "Row6: a not valid PREPAID throttle 100 event (as its POSTPAID)"
+echo "Row1: a valid ${SINGLE_FLOW_TYPE} throttle 100 event (Quota_Name=Q_110_local_Month, TriggerType=2, Quota_Status=6, QuotaValue=1)"
+echo "Row2: a not valid ${SINGLE_FLOW_TYPE} throttle 100 event (TriggerType=7 instead of 1-6)"
+echo "Row3: a not valid ${SINGLE_FLOW_TYPE} throttle 100 event (Quota_Name = Q_110_roaming_Month)"
+echo "Row4: a not valid ${SINGLE_FLOW_TYPE} throttle 100 event (Quota_Status=4 instead of 6)"
+echo "Row5: a not valid ${SINGLE_FLOW_TYPE} throttle 100 event (QuotaValue=11 instead of 1)"
+echo "Row6: a not valid ${SINGLE_FLOW_TYPE} throttle 100 event (as its POSTPAID)"
 
 echo " "
 echo ""
@@ -80,47 +77,19 @@ g_UEIP=
 g_Quota_Consumption=
 
 ###################
-function ret_line() {
-local line_type=$1
-local line_num=$2
 
-if [ "$line_type" == "PCRF_EDR" ]
-then
-  if [ "$line_num" == "1" ]
-  then
-    echo "$g_TriggerType,$g_Time,,,$g_msisdn,,,,,";
-  elif [ "$line_num" == "2" ]
-  then
-    echo ",,,$g_SGSNAddress,,,,,,$g_UEIP";
-  elif [ "$line_num" == "3" ]
-  then
-    echo ",,,,,,$g_Quota_Name,$g_Quota_Status,$g_Quota_Consumption,";
-  elif [ "$line_num" == "4" ]
-  then
-    echo ",$g_Quota_Usage,$g_Quota_Next_Reset_Time,,,,,,,";
-  elif [ "$line_num" == "5" ]
-  then
-    echo ",,,,,,,,,";
-  elif [ "$line_num" == "6" ]
-  then
-    echo ",,,,,,,,,";
-  elif [ "$line_num" == "7" ]
-  then
-    echo ",,,,,,,$g_Quota_Value,,";
-  fi
-fi
-}
 
 # ROW1..
 TriggerType1=2;                                                g_TriggerType=$TriggerType1; #p1
 Time1=$(date +"%Y-%m-%d %T");                                  g_Time=$Time1; #p1
-msisdn1=4912345678901;                                         g_msisdn=$msisdn1; #p1
-Quota_Name1=Q_110_local_Month;                                 g_Quota_Name=$Quota_Name1; #p3
+msisdn1=4922345678901;                                         g_msisdn=$msisdn1; #p1
+#SubscriberIdentifier1=9${msisdn1};                             g_SubscriberIdentifier=$SubscriberIdentifier1; #p1
+Quota_Name1=Q_143_local_Month;                                 g_Quota_Name=$Quota_Name1; #p3
 Quota_Status1=6;                                               g_Quota_Status=$Quota_Status1; #p3
 Quota_Usage1=1024;                                             g_Quota_Usage=$Quota_Usage1; #p4
 Quota_Next_Reset_Time1=$(date --date='16 days' +"%Y-%m-%d %T");g_Quota_Next_Reset_Time=$Quota_Next_Reset_Time1; #p4
 Quota_Value1=1;                                                g_Quota_Value=$Quota_Value1; # p7
-PaymentType1=PREPAID;                                          g_PaymentType=$PaymentType1; # payment type lookup
+PaymentType1=$(get_flowtype_upper);                            g_PaymentType=$PaymentType1; # payment type lookup
 InitialVolume1=1230;                                           g_InitialVolume=$InitialVolume1; # recurring lkp
 IsRecurring1=Y;                                                g_IsRecurring=$IsRecurring1; # recurring lkp
 SGSNAddress1=0;                                                g_SGSNAddress=$SGSNAddress1; #p2
@@ -138,38 +107,38 @@ p7=$(ret_line "PCRF_EDR" "7")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 ####################
 # ROW2.. bad trigger type
-msisdn2=4912345678902; g_msisdn=$msisdn2;
+msisdn2=4922345678902; g_msisdn=$msisdn2;
 TriggerType2=7;        g_TriggerType=$TriggerType2; #p1
 p1=$(ret_line "PCRF_EDR" "1")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 
 ####
 # ROW3.. bad quota name
-msisdn3=4912345678903;          g_msisdn=$msisdn3;
-Quota_Name3=Q_110_roaming_Month; g_Quota_Name=$Quota_Name3; #p3
+msisdn3=4922345678903;          g_msisdn=$msisdn3;
+Quota_Name3=Q_143_roaming_Month; g_Quota_Name=$Quota_Name3; #p3
 p1=$(ret_line "PCRF_EDR" "1")
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 ####
 # ROW4.. bad quota status
-msisdn4=4912345678904; g_msisdn=$msisdn4;
+msisdn4=4922345678904; g_msisdn=$msisdn4;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name4=Q_110_local_Month; g_Quota_Name=$Quota_Name4; #p3
+Quota_Name4=Q_143_local_Month; g_Quota_Name=$Quota_Name4; #p3
 Quota_Status4=4;       g_Quota_Status=$Quota_Status4; #p3
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 ####
 # ROW5.. bad quota value
-msisdn5=4912345678905; g_msisdn=$msisdn5;
+msisdn5=4922345678905; g_msisdn=$msisdn5;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Status4=6;       g_Quota_Status=$Quota_Status5; #p3
+Quota_Status5=6;       g_Quota_Status=$Quota_Status5; #p3
 p3=$(ret_line "PCRF_EDR" "3")
 Quota_Value5=11;       g_Quota_Value=$Quota_Value5; #p7
 p7=$(ret_line "PCRF_EDR" "7")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 ####
 # ROW6.. its prepaid!
-msisdn6=4912345678906; g_msisdn=$msisdn6; #p1
+msisdn6=4922345678906; g_msisdn=$msisdn6; #p1
 p1=$(ret_line "PCRF_EDR" "1")
 Quota_Value6=1;       g_Quota_Value=$Quota_Value6; #p7
 p7=$(ret_line "PCRF_EDR" "7")
@@ -178,20 +147,22 @@ echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 ###################
 rm -f ${throttle_input}.gz
 gzip $throttle_input
-cp ${throttle_input}.gz $data_dir/pcrf_files_prepaid/
+cp ${throttle_input}.gz $data_dir/pcrf_files_${SINGLE_FLOW_TYPE}/
 
 Quota_Total1=$Quota_Usage1
 ################################################################################
-echo "${tc}: 2. prepaid lkp.."
-rm -f $prepaid_lkp_input
-echo "$msisdn1,$PaymentType1" >> $prepaid_lkp_input
-echo "$msisdn2,$PaymentType1" >> $prepaid_lkp_input
-echo "$msisdn3,$PaymentType1" >> $prepaid_lkp_input
-echo "$msisdn4,$PaymentType1" >> $prepaid_lkp_input
-echo "$msisdn5,$PaymentType1" >> $prepaid_lkp_input
-echo "$msisdn6,PREPAID" >> $prepaid_lkp_input
-cp $prepaid_lkp_input $data_dir/lookup_paymenttype/
-cp $prepaid_lkp_input $data_dir/lookup_paymenttype/${prepaid_lkp_file}.done
+echo "${tc}: 2. ${SINGLE_FLOW_TYPE} lkp.."
+rm -f $paymenttype_lkp_input
+echo "$msisdn1,$PaymentType1" >> $paymenttype_lkp_input
+echo "$msisdn2,$PaymentType1" >> $paymenttype_lkp_input
+echo "$msisdn3,$PaymentType1" >> $paymenttype_lkp_input
+echo "$msisdn4,$PaymentType1" >> $paymenttype_lkp_input
+echo "$msisdn5,$PaymentType1" >> $paymenttype_lkp_input
+echo "$msisdn6,POSTPAID" >> $paymenttype_lkp_input
+echo "cp $paymenttype_lkp_input $data_dir/lookup_paymenttype/"
+echo "cp $paymenttype_lkp_input $data_dir/lookup_paymenttype/${paymenttype_lkp_file}.done"
+cp $paymenttype_lkp_input $data_dir/lookup_paymenttype/
+cp $paymenttype_lkp_input $data_dir/lookup_paymenttype/${paymenttype_lkp_file}.done
 copy_paymenttypes
 
 ################################################################################
@@ -201,6 +172,7 @@ echo "$msisdn1,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_inp
 echo "$msisdn2,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
 echo "$msisdn3,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
 echo "$msisdn4,$Quota_Name1,$InitialVolume1,$IsRecurring1" >> $recurring_lkp_input
+
 
 cp ${recurring_lkp_input} $data_dir/lookup_requirring/OUT
 cd $data_dir/lookup_requirring/OUT
@@ -217,7 +189,8 @@ cd $my_loc
 echo "${tc}: 4. generating the expected output.."
 rm -f $expected_output
 
-echo "I,N:$Time1,$msisdn1,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
+Quota_Total1=$Quota_Usage1
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn1}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume1};Yes_No_1#${IsRecurring1};String_1#${Quota_Name1};MSISDN#${msisdn1};" >> $expected_output
 
 
 ################################################################################
@@ -225,14 +198,14 @@ echo " "
 echo "here is the contents we were looking for.."
 cat $expected_output
 echo " "
-echo "here is the prepaid lookup we used.."
-cat $data_dir/lookup_paymenttype/${tc}_input_data_prepaid_lkp.txt
+echo "here is the ${SINGLE_FLOW_TYPE} lookup we used.."
+cat $data_dir/lookup_paymenttype/${tc}_input_data_${SINGLE_FLOW_TYPE}_lkp.txt
 echo " "
-echo "here is the recurring lookup we used.."
+echo "here is the requirring lookup we used.."
 cat $data_dir/lookup_requirring/OUT/${tc}_input_data_recurring_lkp.txt
 echo " "
 echo "here is the EDR stream we used.."
-gzip -dc $data_dir/pcrf_files_prepaid/${throttle_file}.gz
+gzip -dc $data_dir/pcrf_files_${SINGLE_FLOW_TYPE}/${throttle_file}.gz
 
 
 
