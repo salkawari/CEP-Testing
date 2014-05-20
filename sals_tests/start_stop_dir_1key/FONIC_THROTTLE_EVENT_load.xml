@@ -103,7 +103,7 @@ and if using Tag Token data flow model. -->
                     </schema>
                 </window-source>
 
-                <window-source name="PAIDTYPE_SOURCE_LOOKUP" id="paidtype_source" index="pi_HASH">
+                <window-source name="PAIDTYPE_SOURCE_LOOKUP" id="paidtype_source" index="pi_HASH" >
                     <schema>
                         <fields>
                             <field name="MSISDN" type="int64" key="true" />
@@ -112,7 +112,7 @@ and if using Tag Token data flow model. -->
                     </schema>
                 </window-source>
 
-                <window-source name="REQUIRRING_TYPE_SOURCE_LOOKUP" id="requirring_type_source" index="pi_HASH">
+                <window-source name="REQUIRRING_TYPE_SOURCE_LOOKUP" id="requirring_type_source" index="pi_HASH" >
                     <schema>
                         <fields>
                             <field name="MSISDN" type="int64" key="true" />

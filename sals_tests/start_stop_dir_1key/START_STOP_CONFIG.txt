@@ -10,7 +10,8 @@ cep_server_log_file=/opt/app/sas/ESPData/cep-log/cep-server.log
 
 c!ep_adapter_dir=/opt/app/sas/home/sas/adapter
 c!ep_adapter_dir=/home/sal/sals_tests/try16
-cep_adapter_dir=/home/sal/sals_tests/adapter-1key-postpaid-prepaid-fonic
+c!ep_adapter_dir=/home/sal/sals_tests/adapter-1key-postpaid-prepaid-fonic
+cep_adapter_dir=/home/sal/sals_tests/cep-adapter-dist
 cep_adapter_file=o2-adapters-pcrf-2.12.2.jar
 
 cep_adapter_params1=-Xmx4g -Dorg.apache.camel.jmx.createRmiConnector=True -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=1616

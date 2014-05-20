@@ -20,11 +20,9 @@
 
 
 
-<!--
+
 	<camelContext id="camel" xmlns="http://camel.apache.org/schema/spring" streamCache="true"
 		errorHandlerRef="deadLetterErrorHandler">
--->
-	<camelContext id="camel" xmlns="http://camel.apache.org/schema/spring" streamCache="true" >
 
 <!--
 		<route routePolicyRef="myPolicy" id="pcrf-ftp-server-berlin" autoStartup="false">
@@ -218,7 +216,7 @@
 			<log message="CEP Engine Output for ADD_REQUIRRING: ${body}" />
 			<to uri="file:/opt/app/sas/ESPData/output_postpaid?fileName=result.csv&amp;fileExist=Append"></to>
 			<process ref="inputForPostpaidRTDM"></process> 
-      <log message="After the input for Web Service ${body}" />
+                        <log message="After the input for Web Service ${body}" />
 <!--			<throttle timePeriodMillis="1000">
 				<constant>3</constant>
 					<log message="Calling  postpaid web service" />
@@ -227,7 +225,6 @@
  			</throttle>
 			<process ref="outputFromRTDM"></process> 
 -->
-
 			<log message="Done CEP Engine Output for POSTPAID" />
 	</route>
 

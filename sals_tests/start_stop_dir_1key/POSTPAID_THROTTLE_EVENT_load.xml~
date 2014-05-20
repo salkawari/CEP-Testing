@@ -103,7 +103,7 @@ and if using Tag Token data flow model. -->
                     </schema>
                 </window-source>
 
-                <window-source name="PAIDTYPE_SOURCE_LOOKUP" id="paidtype_source" index="pi_HASH">
+                <window-source name="PAIDTYPE_SOURCE_LOOKUP" id="paidtype_source" index="pi_HASH" collapse-updates="false">
                     <schema>
                         <fields>
                             <field name="MSISDN" type="int64" key="true" />
@@ -112,7 +112,7 @@ and if using Tag Token data flow model. -->
                     </schema>
                 </window-source>
 
-                <window-source name="REQUIRRING_TYPE_SOURCE_LOOKUP" id="requirring_type_source" index="pi_HASH">
+                <window-source name="REQUIRRING_TYPE_SOURCE_LOOKUP" id="requirring_type_source" index="pi_HASH" collapse-updates="false">
                     <schema>
                         <fields>
                             <field name="MSISDN" type="int64" key="true" />
@@ -348,30 +348,6 @@ and if using Tag Token data flow model. -->
                     </expression>
                 </window-filter>
 
-
-<!--
-                <window-compute name='COMPUTE_PCRF_DATA_USAGE_4_FIELDS' id='compute_pcrf_data_usage_4_fields'
-                                index='pi_EMPTY'>
-                    <schema>
-                        <fields>
-                            <field name='UUID' type='string' key='true'/>
-			    <field name="MSISDN" type="int64"/>
-                            <field name="Quota_Name" type="string"/>
-                            <field name="Quota_Usage" type="int64" />
-                            <field name="Quota_Next_Reset_Time" type="stamp"/>
-                            <field name="Time" type="stamp" />
-                        </fields>
-                    </schema>
-                    <output>
-                        
-                        <field-expr>MSISDN</field-expr>
-                        <field-expr>Quota_Name</field-expr>
-                        <field-expr>Quota_Usage</field-expr>
-                        <field-expr>Quota_Next_Reset_Time</field-expr>
-                        <field-expr>Time</field-expr>
-                    </output>
-                </window-compute>
--->
                 <window-join name="ADD_REQUIRRING" id="add_requirring" index='pi_EMPTY'>
                     <join type="leftouter" left="add_data_volume_used_in_last_48_hours" right="requirring_type_source"
                           no-regenerates='true'>
@@ -423,10 +399,6 @@ and if using Tag Token data flow model. -->
                         <field-selection name="Account_Usage" source="l_Account_Usage" />
                         <field-selection name="PCRF_IP_Address" source="l_PCRF_IP_Address" />
                         <field-selection name="Account_Next_Reset_Time" source="l_Account_Next_Reset_Time" />
-                        <!--
-                            <field-selection name="Quota_Next_Reset_Time_Integer" source="l_Quota_Next_Reset_Time_Integer" />
-                            <field-selection name="Time_Integer" source="l_Time_Integer" />
-                        -->
                         <field-selection name="PaidType_From_Lookup" source="l_PaidType_From_Lookup" />
                         <field-selection name="VolumeIn48Hours" source="l_VolumeIn48Hours" />
 
@@ -450,17 +422,10 @@ and if using Tag Token data flow model. -->
 
                 <edge source="requirring_type_source" target="add_requirring" />
 
-
-
                 <edge source="pcrf_data_usage" target="add_paidtype" />
                 <edge source="add_paidtype" target="filter_pcrf_data_usage" />
 
-
-
-
-                <!--<edge source="filter_pcrf_data_usage" target="compute_pcrf_data_usage_4_fields" />
-                <edge source="compute_pcrf_data_usage_4_fields" target="copy_data_volume_used_in_last_48_hours" />-->
-<edge source="filter_pcrf_data_usage" target="copy_data_volume_used_in_last_48_hours" />
+                <edge source="filter_pcrf_data_usage" target="copy_data_volume_used_in_last_48_hours" />
 
                 <edge source="copy_data_volume_used_in_last_48_hours" target="aggr_data_volume_used_in_last_48_hours" />
                 <edge source="aggr_data_volume_used_in_last_48_hours" target="add_data_volume_used_in_last_48_hours" />
