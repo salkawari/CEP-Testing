@@ -14,7 +14,7 @@
 	<camelContext id="camel" streamCache="true" xmlns="http://camel.apache.org/schema/spring">
 		<!-- route from pcrf fact stream file to cep source window -->
 		<route autoStartup="false" id="pcrf-edr-postpaid-2nd-step" routePolicyRef="myPolicy">
-			<from uri="file:C:/Users/moritz/entwicklung/telefonica/integration/edr-stream-2nd-step?move=.done&amp;recursive=true&amp;sorter=#pcrfSorter"/>
+			<from uri="file:/opt/app/sas/ESPData/pcrf-edr-postpaid-2nd-step?move=.done&amp;recursive=true&amp;sorter=#pcrfSorter"/>
 			<log message="Starting to process EDR file: ${header.CamelFileName}"/>
 			<onCompletion>
 				<process ref="startCampaignContactRoute"/>
@@ -34,7 +34,7 @@
 		</route>
 		<!-- route from lookup paytype file to cep paytype source window -->
 		<route autoStartup="true" id="lookup-postpaid" routePolicyRef="myPolicy">
-			<from uri="file:C:/Users/moritz/entwicklung/telefonica/integration/lookup-payment-2nd-step?move=.done&amp;doneFileName=${file:name}.done"/>
+			<from uri="file:/opt/app/sas/ESPData/lookup_postpaid?move=.done&amp;doneFileName=${file:name}.done"/>
 			<onCompletion>
 				<process ref="startPostpaidRoute"/>
 			</onCompletion>
@@ -53,7 +53,7 @@
 		</route>
 		<!-- route from 2nd step last contact file to campaign contact stream source window -->
 		<route autoStartup="false" id="campaign_contact_stream" routePolicyRef="myPolicy">
-			<from uri="file:C:/Users/moritz/entwicklung/telefonica/integration/campaign-contact-2nd-step?move=.done&amp;doneFileName=${file:name}.done"/>
+			<from uri="file:/opt/app/sas/ESPData/campaign-contact-2nd-step?move=.done&amp;doneFileName=${file:name}.done"/>
 			<log message="Starting to process campaign contact file: ${header.CamelFileName}"/>
 			<unmarshal>
 				<zipFile/>
@@ -72,7 +72,7 @@
 		<route autoStartup="true" id="cep-output-2nd-step-postpaid">
 			<from uri="dfESP://localhost:55555/POSTPAID_SECOND_STEP/SECOND_STEP_EVENT_QUERY/FILTER_TO_LAZY"/>
 			<log message="CEP Engine Output for FILTER_TO_LAZY: ${body}"/>
-			<to uri="file:C:/Users/moritz/entwicklung/telefonica/integration/cep-output?fileName=result.csv&amp;fileExist=Append"/>
+			<to uri="file:/opt/app/sas/ESPData/output_postpaid_2nd_step?fileName=result.csv&amp;fileExist=Append"/>
 			<process ref="inputFor2ndStepPostpaidRTDM"/>
 			<log message="After the input for Web Service ${body}"/>
 			<!--<throttle timePeriodMillis="10000">
@@ -100,9 +100,9 @@
 	<bean class="com.sas.o2.cep.pcrf.ProcessorForStartingRoute" id="startCampaignContactRoute">
 		<constructor-arg index="0" value="campaign_contact_stream"/>
 	</bean>
-	<cxf:cxfEndpoint address="http://10.99.15.34:80/RTDM/Event" id="rtdm-webservice" serviceClass="com.sas.xml.schema.sas_svcs.rtdm_1_1.wsdl.EventPortType" wsdlURL="wsdl-postpaid/RTCC_CEP_EVENT.wsdl"/>
+	<cxf:cxfEndpoint address="http://localhost:80/RTDM/Event" id="rtdm-webservice" serviceClass="com.sas.xml.schema.sas_svcs.rtdm_1_1.wsdl.EventPortType" wsdlURL="wsdl-postpaid/RTCC_CEP_EVENT.wsdl"/>
 	<bean class="org.apache.camel.builder.DeadLetterChannelBuilder" id="deadLetterErrorHandler">
-		<property name="deadLetterUri" value="file:C:/Users/moritz/entwicklung/telefonica/integration/error.log"/>
+		<property name="deadLetterUri" value="file:/opt/app/sas/ESPData/error_messages/error.log"/>
 		<property name="useOriginalMessage" value="true"/>
 	</bean>
 </beans>

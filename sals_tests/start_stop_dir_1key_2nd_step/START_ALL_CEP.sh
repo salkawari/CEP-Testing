@@ -1,0 +1,19 @@
+#!/bin/bash
+
+echo "starting all cep components.."
+
+./START_CEP_ENGINE.sh
+#./START_CEP_MODEL.sh POSTPAID_THROTTLE_EVENT
+#./START_CEP_MODEL.sh PREPAID_THROTTLE_EVENT
+#./START_CEP_MODEL.sh FONIC_THROTTLE_EVENT
+./START_CEP_MODEL.sh POSTPAID_SECOND_STEP
+./START_CEP_ADAPTER.sh
+
+
+#if [ $(ps aux|grep $LOGNAME|grep showmem|grep -v grep|wc -l) == "0" ]
+#then
+#  nohup ./showmem.sh &
+#fi
+
+
+
