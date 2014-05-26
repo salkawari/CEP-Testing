@@ -102,7 +102,7 @@
 	</bean>
 	<cxf:cxfEndpoint address="http://localhost:80/RTDM/Event" id="rtdm-webservice" serviceClass="com.sas.xml.schema.sas_svcs.rtdm_1_1.wsdl.EventPortType" wsdlURL="wsdl-postpaid/RTCC_CEP_EVENT.wsdl"/>
 	<bean class="org.apache.camel.builder.DeadLetterChannelBuilder" id="deadLetterErrorHandler">
-		<property name="deadLetterUri" value="file:C:/Users/moritz/entwicklung/telefonica/integration/error.log"/>
+		<property name="deadLetterUri" value="file:/opt/app/sas/ESPData/error_messages/error.log"/>
 		<property name="useOriginalMessage" value="true"/>
 	</bean>
 </beans>

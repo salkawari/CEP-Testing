@@ -13,7 +13,7 @@
 	<!--<camelContext errorHandlerRef="deadLetterErrorHandler" id="camel" streamCache="true" xmlns="http://camel.apache.org/schema/spring">-->
 	<camelContext id="camel" streamCache="true" xmlns="http://camel.apache.org/schema/spring">
 		<!-- route from pcrf fact stream file to cep source window -->
-		<route autoStartup="false" id="pcrf-edr-postpaid-2nd-step" routePolicyRef="myPolicy">
+		<route autoStartup="true" id="pcrf-edr-postpaid-2nd-step" routePolicyRef="myPolicy">
 			<from uri="file:/opt/app/sas/ESPData/pcrf-edr-postpaid-2nd-step?move=.done&amp;recursive=true&amp;sorter=#pcrfSorter"/>
 			<log message="Starting to process EDR file: ${header.CamelFileName}"/>
 			<onCompletion>
@@ -31,26 +31,7 @@
 				<to uri="dfESP://localhost:55555/POSTPAID_SECOND_STEP/SECOND_STEP_EVENT_QUERY/PCRF_DATA_USAGE_STREAM"/>
 			</split>
 			<log message="Done processing EDR file: ${header.CamelFileName}"/>
-		</route>
-		<!-- route from lookup paytype file to cep paytype source window -->
-		<route autoStartup="true" id="lookup-postpaid" routePolicyRef="myPolicy">
-			<from uri="file:/opt/app/sas/ESPData/lookup_postpaid?move=.done&amp;doneFileName=${file:name}.done"/>
-			<onCompletion>
-				<process ref="startPostpaidRoute"/>
-			</onCompletion>
-			<split parallelProcessing="true" streaming="true">
-				<tokenize group="10000" token="\n"/>
-				<unmarshal>
-					<csv/>
-				</unmarshal>
-				<multicast>
-					<log message="Starting to process LOOKUP_POSTPAID file: ${header.CamelFileName}"/>
-					<!--<to uri="mock:paytype-LOOKUP"/>-->
-					<to uri="dfESP://localhost:55555/POSTPAID_SECOND_STEP/SECOND_STEP_EVENT_QUERY/PAIDTYPE_SOURCE_LOOKUP"/>
-					<log message="Done processing LOOKUP_POSTPAID file: ${header.CamelFileName}"/>
-				</multicast>
-			</split>
-		</route>
+		</route>		
 		<!-- route from 2nd step last contact file to campaign contact stream source window -->
 		<route autoStartup="false" id="campaign_contact_stream" routePolicyRef="myPolicy">
 			<from uri="file:/opt/app/sas/ESPData/campaign-contact-2nd-step?move=.done&amp;doneFileName=${file:name}.done"/>

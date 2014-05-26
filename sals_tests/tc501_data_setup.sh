@@ -23,7 +23,7 @@ fct_2nd_step_camp_input=input_data/${fct_2nd_step_camp_file}
 
 data_dir=/opt/app/sas/ESPData
 
-out_dir=$data_dir/output_${SINGLE_FLOW_TYPE}
+out_dir=$data_dir/output_${SINGLE_FLOW_TYPE}_2nd_step
 if [ ! -d "$out_dir" ]
 then 
   mkdir -p $out_dir;
@@ -45,11 +45,11 @@ echo "test strategy:"
 echo "input the data for a lazy user to be recognised by the POSTPAID_SECOND_STEP model"
 echo " "
 echo "EDR data setup:"
-echo "msisdn1: pcrf stream= 1 lazy edr only"
-echo "msisdn2: pcrf stream= 1st lazy, 2nd not lazy (quota_name changed), 3rd lazy"
-echo "msisdn3: pcrf stream= 1st lazy, 2nd not lazy (quota_name changed)"
-echo "msisdn4: pcrf stream= 1st not lazy (quota_status is not 6)"
-echo "msisdn5: pcrf stream= 1st lazy"
+echo "25 hours ago: msisdn1 lazy"
+echo "25 hours ago: msisdn2 not lazy"
+echo "24 hours ago: msisdn3 lazy"
+echo "24 hours ago: msisdn4 not lazy"
+echo "2 seconds ago: msisdn2 lazy"
 echo " "
 echo ""
 ################################################################################
@@ -75,12 +75,15 @@ g_Quota_Consumption=
 
 ###################
 
+# 52 works
+#51 doesnt work
 
-# ROW1..
+
+# ROW1.. 25 hours ago: msisdn1 lazy
 TriggerType1=2;                                                g_TriggerType=$TriggerType1; #p1
-Time1=$(date +"%Y-%m-%d %T");                                  g_Time=$Time1; #p1
+Time1=$(date --date='25 hours ago' +"%Y-%m-%d %T");            g_Time=$Time1; #p1
 msisdn1=4912345678901;                                         g_msisdn=$msisdn1; #p1
-Quota_Name1=Q_110_local_Month;                                 g_Quota_Name=$Quota_Name1; #p3
+Quota_Name1=Q_111_local_Month;                                 g_Quota_Name=$Quota_Name1; #p3
 Quota_Status1=6;                                               g_Quota_Status=$Quota_Status1; #p3
 Quota_Usage1=1024;                                             g_Quota_Usage=$Quota_Usage1; #p4
 Quota_Next_Reset_Time1=$(date --date='16 days' +"%Y-%m-%d %T");g_Quota_Next_Reset_Time=$Quota_Next_Reset_Time1; #p4
@@ -102,53 +105,34 @@ p7=$(ret_line "PCRF_EDR" "7")
 
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #####################
-# ROW2.. first for this msisdn..
+# ROW2.. 25 hours ago: msisdn2 not lazy
 msisdn2=4912345678902; g_msisdn=$msisdn2;
+Time2=$(date --date='25 hours ago' +"%Y-%m-%d %T");            g_Time=$Time2; #p1
 Quota_Name2=Q_110_local_Month;        g_Quota_Name=$Quota_Name2; #p3
 p1=$(ret_line "PCRF_EDR" "1")
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
-######################
-# ROW3.. 2nd for this msisdn..
-msisdn2=4912345678902; g_msisdn=$msisdn2;
-Quota_Name2=Q_111_local_Month;        g_Quota_Name=$Quota_Name2; #p3
-p1=$(ret_line "PCRF_EDR" "1")
-p3=$(ret_line "PCRF_EDR" "3")
-echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
-######################
-# ROW4.. 3rd for this msisdn..
-msisdn2=4912345678902; g_msisdn=$msisdn2;
-Quota_Name2=Q_110_local_Month;        g_Quota_Name=$Quota_Name2; #p3
-p1=$(ret_line "PCRF_EDR" "1")
-p3=$(ret_line "PCRF_EDR" "3")
-echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
-######################
-# ROW5.. 1st for this msisdn..
+#####################
+# ROW3.. 24 hours ago: msisdn3 lazy
 msisdn3=4912345678903; g_msisdn=$msisdn3;
-Quota_Name3=Q_110_local_Month;        g_Quota_Name=$Quota_Name3; #p3
-p1=$(ret_line "PCRF_EDR" "1")
-p3=$(ret_line "PCRF_EDR" "3")
-echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
-######################
-# ROW6.. 2nd for this msisdn..
-msisdn3=4912345678903; g_msisdn=$msisdn3;
+Time3=$(date --date='24 hours ago' +"%Y-%m-%d %T");            g_Time=$Time3; #p1
 Quota_Name3=Q_111_local_Month;        g_Quota_Name=$Quota_Name3; #p3
 p1=$(ret_line "PCRF_EDR" "1")
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
-######################
-# ROW7.. 1st for this msisdn..
+#####################
+# ROW4.. 24 hours ago: msisdn4 not lazy
 msisdn4=4912345678904; g_msisdn=$msisdn4;
-Quota_Name4=Q_111_local_Month;        g_Quota_Name=$Quota_Name4; #p3
-Quota_Status4=1;                      g_Quota_Status=$Quota_Status4; #p3
+Time4=$(date --date='24 hours ago' +"%Y-%m-%d %T");            g_Time=$Time4; #p1
+Quota_Name4=Q_110_local_Month;        g_Quota_Name=$Quota_Name4; #p3
 p1=$(ret_line "PCRF_EDR" "1")
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
-######################
-# ROW8.. 1st for this msisdn..
-msisdn5=4912345678905; g_msisdn=$msisdn5;
-Quota_Name5=Q_111_local_Month;        g_Quota_Name=$Quota_Name5; #p3
-Quota_Status4=6;                      g_Quota_Status=$Quota_Status4; #p3
+#####################
+# ROW5.. 2 seconds ago: msisdn2 lazy
+msisdn2=4912345678902; g_msisdn=$msisdn2;
+Time2=$(date --date='2 seconds ago' +"%Y-%m-%d %T");            g_Time=$Time2; #p1
+Quota_Name2=Q_111_local_Month;        g_Quota_Name=$Quota_Name2; #p3
 p1=$(ret_line "PCRF_EDR" "1")
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
@@ -162,19 +146,6 @@ cp ${throttle_input}.gz $data_dir/pcrf-edr-${SINGLE_FLOW_TYPE}-2nd-step
 
 Quota_Total1=$Quota_Usage1
 ################################################################################
-echo "${tc}: 2. ${SINGLE_FLOW_TYPE} lkp.."
-rm -f $paymenttype_lkp_input
-echo "$msisdn1,$PaymentType1" >> $paymenttype_lkp_input
-echo "$msisdn2,$PaymentType1" >> $paymenttype_lkp_input
-echo "$msisdn3,$PaymentType1" >> $paymenttype_lkp_input
-echo "$msisdn4,$PaymentType1" >> $paymenttype_lkp_input
-echo "$msisdn5,$PaymentType1" >> $paymenttype_lkp_input
-
-echo "cp $paymenttype_lkp_input $data_dir/lookup_paymenttype/"
-echo "cp $paymenttype_lkp_input $data_dir/lookup_paymenttype/${paymenttype_lkp_file}.done"
-cp $paymenttype_lkp_input $data_dir/lookup_paymenttype/
-cp $paymenttype_lkp_input $data_dir/lookup_paymenttype/${paymenttype_lkp_file}.done
-copy_paymenttypes
 
 ################################################################################
 echo "${tc}: 3. fct_2nd_step_camp.."
@@ -183,21 +154,14 @@ caa_id1=1; cam_id1=$(echo "1"); profile_id1=$Quota_Name1; ThrottleVol1=2; DaysRe
 caaSendDt1=$(date --date='16 days' +"%Y-%m-%d %T");
 caaValidToDt1=$(date --date='2 days' +"%Y-%m-%d %T");
 
-profile_id2=$Quota_Name2;
-caa_id2=2;
-
-# for the 3rd msisdn, the quota name has changed, so this shouldnt reach the lazy output!
-caa_id3=3;profile_id3=Q_23_local_Month;
-
-caa_id4=4;profile_id4=$Quota_Name4;
-
-caa_id5=5;profile_id5=$Quota_Name5;
+caa_id2=2;profile_id2=$Quota_Name2;
+caa_id3=3;profile_id3=$Quota_Name3;
+caa_id4=4;profile_id4=Q_111_local_Month
 
 echo "$caa_id1,$cam_id1,$msisdn1,$profile_id1,$ThrottleVol1,$DaysRemaining1,$caaSendDt1,$caaValidToDt1" >> $fct_2nd_step_camp_input
 echo "$caa_id2,$cam_id1,$msisdn2,$profile_id2,$ThrottleVol1,$DaysRemaining1,$caaSendDt1,$caaValidToDt1" >> $fct_2nd_step_camp_input
 echo "$caa_id3,$cam_id1,$msisdn3,$profile_id3,$ThrottleVol1,$DaysRemaining1,$caaSendDt1,$caaValidToDt1" >> $fct_2nd_step_camp_input
 echo "$caa_id4,$cam_id1,$msisdn4,$profile_id4,$ThrottleVol1,$DaysRemaining1,$caaSendDt1,$caaValidToDt1" >> $fct_2nd_step_camp_input
-echo "$caa_id5,$cam_id1,$msisdn5,$profile_id5,$ThrottleVol1,$DaysRemaining1,$caaSendDt1,$caaValidToDt1" >> $fct_2nd_step_camp_input
 
 cp ${fct_2nd_step_camp_input} $data_dir/campaign-contact-2nd-step
 cd $data_dir/campaign-contact-2nd-step
@@ -213,19 +177,16 @@ cd $my_loc
 echo "${tc}: 4. generating the expected output.."
 rm -f $expected_output
 
-echo "TransactionID#${caa_id1}_${Quota_Status1}_${profile_id1}_;MSISDN#${msisdn1};CAM_ID#${cam_id1}.0;IN_THROTTLE#true;CAA_ID#${caa_id1}.0;THROTTLE_VOLUME#${ThrottleVol1}.0;Days_Remaining#${DaysRemaining1}.0;PROFILE_ID#${profile_id1};CAA_SEND_DATE#${caaSendDt1};CAA_VALID_TO_DATE#${caaValidToDt1};Name#Test;" >> $expected_output
-echo "TransactionID#${caa_id2}_${Quota_Status1}_${profile_id2}_;MSISDN#${msisdn2};CAM_ID#${cam_id1}.0;IN_THROTTLE#true;CAA_ID#${caa_id2}.0;THROTTLE_VOLUME#${ThrottleVol1}.0;Days_Remaining#${DaysRemaining1}.0;PROFILE_ID#${profile_id2};CAA_SEND_DATE#${caaSendDt1};CAA_VALID_TO_DATE#${caaValidToDt1};Name#Test;" >> $expected_output
-echo "TransactionID#${caa_id5}_${Quota_Status1}_${profile_id5}_;MSISDN#${msisdn5};CAM_ID#${cam_id1}.0;IN_THROTTLE#true;CAA_ID#${caa_id5}.0;THROTTLE_VOLUME#${ThrottleVol1}.0;Days_Remaining#${DaysRemaining1}.0;PROFILE_ID#${profile_id5};CAA_SEND_DATE#${caaSendDt1};CAA_VALID_TO_DATE#${caaValidToDt1};Name#Test;" >> $expected_output
-
-
+echo "TransactionID#${caa_id2}_${Quota_Status1}_${profile_id2};MSISDN#${msisdn2};CAM_ID#${cam_id1}.0;IN_THROTTLE#true;CAA_ID#${caa_id2}.0;THROTTLE_VOLUME#${ThrottleVol1}.0;Days_Remaining#${DaysRemaining1}.0;PROFILE_ID#${profile_id2};CAA_SEND_DATE#${caaSendDt1};CAA_VALID_TO_DATE#${caaValidToDt1};Name#Test;" >> $expected_output
+echo "TransactionID#${caa_id3}_${Quota_Status1}_${profile_id3};MSISDN#${msisdn3};CAM_ID#${cam_id1}.0;IN_THROTTLE#true;CAA_ID#${caa_id3}.0;THROTTLE_VOLUME#${ThrottleVol1}.0;Days_Remaining#${DaysRemaining1}.0;PROFILE_ID#${profile_id3};CAA_SEND_DATE#${caaSendDt1};CAA_VALID_TO_DATE#${caaValidToDt1};Name#Test;" >> $expected_output
 
 ################################################################################
 echo " "
 echo "here is the contents we were looking for.."
 cat $expected_output
 echo " "
-echo "here is the ${SINGLE_FLOW_TYPE} lookup we used.."
-cat $data_dir/lookup_paymenttype/${tc}_input_data_${SINGLE_FLOW_TYPE}_lkp.txt
+#echo "here is the ${SINGLE_FLOW_TYPE} lookup we used.."
+#cat $data_dir/lookup_paymenttype/${tc}_input_data_${SINGLE_FLOW_TYPE}_lkp.txt
 echo " "
 echo "here is the campaign we used.."
 cat $data_dir/campaign-contact-2nd-step/${fct_2nd_step_camp_file}

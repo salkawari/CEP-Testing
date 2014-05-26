@@ -79,8 +79,10 @@ do
 if [ -a "$my_loc/MODEL_TYPE.conf" ]
 then
   start_stop_dir=start_stop_dir_1key_2nd_step
+  out_dir=$data_dir/output_${SINGLE_FLOW_TYPE}_2nd_step
 else
   start_stop_dir=start_stop_dir_1key
+  out_dir=$data_dir/output_${SINGLE_FLOW_TYPE}
 fi
 echo "start_stop_dir=$start_stop_dir .."
 
@@ -94,7 +96,7 @@ rm -fr $(cat $start_stop_dir/START_STOP_CONFIG.txt|grep "cep_adapter_log_file"|c
 rm -fr $(cat $start_stop_dir/START_STOP_CONFIG.txt|grep "cep_server_log_file"|cut -d'=' -f2)
 
 ###############################################################################
-  out_dir=$data_dir/output_${SINGLE_FLOW_TYPE}
+  
   if [ ! -d "$out_dir" ]
   then
     mkdir -p $out_dir;
@@ -112,8 +114,7 @@ rm -fr $(cat $start_stop_dir/START_STOP_CONFIG.txt|grep "cep_server_log_file"|cu
   ./START_ALL_CEP.sh
    cd $my_loc 
   ################################################################################
-  echo "sleeping 4 seconds.."
-  sleep 4
+
   max_count=$(expr 70)
   my_waits=$((0))
   output_matched_flag=n;
@@ -126,8 +127,15 @@ rm -fr $(cat $start_stop_dir/START_STOP_CONFIG.txt|grep "cep_server_log_file"|cu
   then
     found_bad_file_flag=y
   fi
-    echo "sleeping 20 seconds.."
-    sleep 20
+
+  if [ -a "$my_loc/MODEL_TYPE.conf" ]
+  then
+    echo "sleeping 10 seconds.."
+    sleep 10
+  else
+    echo "sleeping 14 seconds.."
+    sleep 14
+  fi
 
     echo "${test_case_name}:11. now we can compare results.."
 
