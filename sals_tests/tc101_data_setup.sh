@@ -192,7 +192,7 @@ echo "${tc}: 4. generating the expected output.."
 rm -f $expected_output
 
 Quota_Total1=$Quota_Usage1
-echo "Name#Test;Transaction_ID#${Time1}_${msisdn1}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume1};Yes_No_1#${IsRecurring1};String_1#${Quota_Name1};MSISDN#${msisdn1};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn1}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume1};Yes_No_1#${IsRecurring1};String_1#${Quota_Name1};String_2#6;MSISDN#${msisdn1};" >> $expected_output
 
 
 ################################################################################

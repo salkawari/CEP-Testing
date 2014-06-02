@@ -239,11 +239,8 @@ cd $my_loc
 echo "${tc}: 4. generating the expected output.."
 rm -f $expected_output
 
-#echo "I,N:$Time4,$msisdn1,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status4,$Quota_Consumption1,,,$Quota_Usage4,,,,,,,,,,$PaymentType1,$Quota_Total4,$IsRecurring2,$InitialVolume2" >> $expected_output
-#echo "I,N:$Time6,$msisdn1,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status6,$Quota_Consumption1,,,$Quota_Usage6,,,,,,,,,,$PaymentType1,$Quota_Total6,$IsRecurring2,$InitialVolume2" >> $expected_output
-
-echo "Name#Test;Transaction_ID#${Time4}_${msisdn1}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total4}.0;Int_3#${InitialVolume2};Yes_No_1#${IsRecurring2};String_1#${Quota_Name1};MSISDN#${msisdn1};" >> $expected_output
-echo "Name#Test;Transaction_ID#${Time6}_${msisdn1}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total6}.0;Int_3#${InitialVolume2};Yes_No_1#${IsRecurring2};String_1#${Quota_Name1};MSISDN#${msisdn1};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time4}_${msisdn1}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total4}.0;Int_3#${InitialVolume2};Yes_No_1#${IsRecurring2};String_1#${Quota_Name1};String_2#6;MSISDN#${msisdn1};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time6}_${msisdn1}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total6}.0;Int_3#${InitialVolume2};Yes_No_1#${IsRecurring2};String_1#${Quota_Name1};String_2#6;MSISDN#${msisdn1};" >> $expected_output
 
 
 ################################################################################

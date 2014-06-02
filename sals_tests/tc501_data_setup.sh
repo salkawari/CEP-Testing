@@ -141,8 +141,9 @@ echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 rm -f ${throttle_input}.gz
 gzip $throttle_input
 echo "debug $(pwd)"
-echo "cp ${throttle_input}.gz $data_dir/pcrf-edr-${SINGLE_FLOW_TYPE}-2nd-step"
-cp ${throttle_input}.gz $data_dir/pcrf-edr-${SINGLE_FLOW_TYPE}-2nd-step
+echo "cp ${throttle_input}.gz $data_dir/pcrf_files_post_2nd_step"
+cp ${throttle_input}.gz $data_dir/pcrf_files_post_2nd_step
+
 
 Quota_Total1=$Quota_Usage1
 ################################################################################
@@ -163,12 +164,12 @@ echo "$caa_id2,$cam_id1,$msisdn2,$profile_id2,$ThrottleVol1,$DaysRemaining1,$caa
 echo "$caa_id3,$cam_id1,$msisdn3,$profile_id3,$ThrottleVol1,$DaysRemaining1,$caaSendDt1,$caaValidToDt1" >> $fct_2nd_step_camp_input
 echo "$caa_id4,$cam_id1,$msisdn4,$profile_id4,$ThrottleVol1,$DaysRemaining1,$caaSendDt1,$caaValidToDt1" >> $fct_2nd_step_camp_input
 
-cp ${fct_2nd_step_camp_input} $data_dir/campaign-contact-2nd-step
-cd $data_dir/campaign-contact-2nd-step
+cp ${fct_2nd_step_camp_input} $data_dir/post_camp_stream
+cd $data_dir/post_camp_stream
 zip ${fct_2nd_step_camp_file}.zip ${fct_2nd_step_camp_file}
 touch ${fct_2nd_step_camp_file}.zip.done
-echo "debug ls -rtl $data_dir/campaign-contact-2nd-step"
-ls -rtl $data_dir/campaign-contact-2nd-step
+echo "debug ls -rtl $data_dir/post_camp_stream"
+ls -rtl $data_dir/post_camp_stream
 cd $my_loc
 ################################################################################
 
@@ -177,8 +178,8 @@ cd $my_loc
 echo "${tc}: 4. generating the expected output.."
 rm -f $expected_output
 
-echo "TransactionID#${caa_id2}_${Quota_Status1}_${profile_id2};MSISDN#${msisdn2};CAM_ID#${cam_id1}.0;IN_THROTTLE#true;CAA_ID#${caa_id2}.0;THROTTLE_VOLUME#${ThrottleVol1}.0;Days_Remaining#${DaysRemaining1}.0;PROFILE_ID#${profile_id2};CAA_SEND_DATE#${caaSendDt1};CAA_VALID_TO_DATE#${caaValidToDt1};Name#Test;" >> $expected_output
-echo "TransactionID#${caa_id3}_${Quota_Status1}_${profile_id3};MSISDN#${msisdn3};CAM_ID#${cam_id1}.0;IN_THROTTLE#true;CAA_ID#${caa_id3}.0;THROTTLE_VOLUME#${ThrottleVol1}.0;Days_Remaining#${DaysRemaining1}.0;PROFILE_ID#${profile_id3};CAA_SEND_DATE#${caaSendDt1};CAA_VALID_TO_DATE#${caaValidToDt1};Name#Test;" >> $expected_output
+echo "TransactionID#${caa_id2}_${Quota_Status1}_${profile_id2};MSISDN#${msisdn2};CAM_ID#${cam_id1};IN_THROTTLE#Yes;CAA_ID#${caa_id2};THROTTLE_VOLUME#${ThrottleVol1};Days_Remaining#${DaysRemaining1};PROFILE_ID#${profile_id2};CAA_SEND_DATE#${caaSendDt1};CAA_VALID_TO_DATE#${caaValidToDt1};Name#Test;" >> $expected_output
+echo "TransactionID#${caa_id3}_${Quota_Status1}_${profile_id3};MSISDN#${msisdn3};CAM_ID#${cam_id1};IN_THROTTLE#Yes;CAA_ID#${caa_id3};THROTTLE_VOLUME#${ThrottleVol1};Days_Remaining#${DaysRemaining1};PROFILE_ID#${profile_id3};CAA_SEND_DATE#${caaSendDt1};CAA_VALID_TO_DATE#${caaValidToDt1};Name#Test;" >> $expected_output
 
 ################################################################################
 echo " "
@@ -189,10 +190,10 @@ echo " "
 #cat $data_dir/lookup_paymenttype/${tc}_input_data_${SINGLE_FLOW_TYPE}_lkp.txt
 echo " "
 echo "here is the campaign we used.."
-cat $data_dir/campaign-contact-2nd-step/${fct_2nd_step_camp_file}
+cat $data_dir/post_camp_stream/${fct_2nd_step_camp_file}
 echo " "
 echo "here is the EDR stream we used.."
-gzip -dc $data_dir/pcrf-edr-${SINGLE_FLOW_TYPE}-2nd-step/${throttle_file}.gz
+gzip -dc $data_dir/pcrf_files_post_2nd_step/${throttle_file}.gz
 
 
 

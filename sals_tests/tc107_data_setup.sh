@@ -142,14 +142,10 @@ touch ${recurring_lkp_file}.zip.done
 
 ls -rtl $data_dir/lookup_requirring/OUT
 
-#echo "I,N:$Time1,$msisdn1,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
-#echo "I,N:$Time1,$msisdn2,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
-#echo "I,N:$Time1,$msisdn3,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
-
 Quota_Total1=$Quota_Usage1
-echo "Name#Test;Transaction_ID#${Time1}_${msisdn1}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume1};Yes_No_1#${IsRecurring1};String_1#${Quota_Name1};MSISDN#${msisdn1};" >> $expected_output
-echo "Name#Test;Transaction_ID#${Time1}_${msisdn2}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume1};Yes_No_1#${IsRecurring1};String_1#${Quota_Name1};MSISDN#${msisdn2};" >> $expected_output
-echo "Name#Test;Transaction_ID#${Time1}_${msisdn3}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume1};Yes_No_1#${IsRecurring1};String_1#${Quota_Name1};MSISDN#${msisdn3};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn1}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume1};Yes_No_1#${IsRecurring1};String_1#${Quota_Name1};String_2#6;MSISDN#${msisdn1};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn2}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume1};Yes_No_1#${IsRecurring1};String_1#${Quota_Name1};String_2#6;MSISDN#${msisdn2};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn3}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume1};Yes_No_1#${IsRecurring1};String_1#${Quota_Name1};String_2#6;MSISDN#${msisdn3};" >> $expected_output
 
 cd $my_loc
 ################################################################################
@@ -214,19 +210,19 @@ zip a${recurring_lkp_file}.zip ./a${recurring_lkp_file}
 touch a${recurring_lkp_file}.zip.done
 cd $my_loc
 
+echo "sleep 14 before feeding in edr.."
+sleep 14
+
 rm -f input_data/a${throttle_file}.gz
 gzip input_data/a${throttle_file}
 cp input_data/a${throttle_file}.gz $data_dir/pcrf_files_postpaid/
 
 # here is the expected output..
 Quota_Total1=$Quota_Usage1
-echo "Name#Test;Transaction_ID#${Time21}_${msisdn1}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume2};Yes_No_1#${IsRecurring2};String_1#${Quota_Name1};MSISDN#${msisdn1};" >> $expected_output
-echo "Name#Test;Transaction_ID#${Time21}_${msisdn2}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume2};Yes_No_1#${IsRecurring2};String_1#${Quota_Name1};MSISDN#${msisdn2};" >> $expected_output
-echo "Name#Test;Transaction_ID#${Time21}_${msisdn3}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume2};Yes_No_1#${IsRecurring2};String_1#${Quota_Name1};MSISDN#${msisdn3};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time21}_${msisdn1}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume2};Yes_No_1#${IsRecurring2};String_1#${Quota_Name1};String_2#6;MSISDN#${msisdn1};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time21}_${msisdn2}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume2};Yes_No_1#${IsRecurring2};String_1#${Quota_Name1};String_2#6;MSISDN#${msisdn2};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time21}_${msisdn3}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume2};Yes_No_1#${IsRecurring2};String_1#${Quota_Name1};String_2#6;MSISDN#${msisdn3};" >> $expected_output
 
-#echo "I,N:$Time21,$msisdn1,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring2,$InitialVolume2" >> $expected_output
-#echo "I,N:$Time21,$msisdn2,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring2,$InitialVolume2" >> $expected_output
-#echo "I,N:$Time21,$msisdn3,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring2,$InitialVolume2" >> $expected_output
 
 #############################################
 echo "${tc}: 6. we change the lookups back to what they were at the start.."
@@ -276,6 +272,8 @@ cd $data_dir/lookup_requirring/OUT
 zip b${recurring_lkp_file}.zip ./b${recurring_lkp_file}
 touch b${recurring_lkp_file}.zip.done
 
+echo "sleep 14 before feeding in edr.."
+sleep 14
 
 cd $my_loc
 rm -f input_data/b${throttle_file}.gz
@@ -284,14 +282,9 @@ cp input_data/b${throttle_file}.gz $data_dir/pcrf_files_postpaid/
 
 # here is the expected output..
 Quota_Total1=$Quota_Usage1
-echo "Name#Test;Transaction_ID#${Time31}_${msisdn1}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume3};Yes_No_1#${IsRecurring3};String_1#${Quota_Name1};MSISDN#${msisdn1};" >> $expected_output
-echo "Name#Test;Transaction_ID#${Time31}_${msisdn2}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume3};Yes_No_1#${IsRecurring3};String_1#${Quota_Name1};MSISDN#${msisdn2};" >> $expected_output
-echo "Name#Test;Transaction_ID#${Time31}_${msisdn3}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume3};Yes_No_1#${IsRecurring3};String_1#${Quota_Name1};MSISDN#${msisdn3};" >> $expected_output
-
-#echo "I,N:$Time31,$msisdn1,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring3,$InitialVolume3" >> $expected_output
-#echo "I,N:$Time31,$msisdn2,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring3,$InitialVolume3" >> $expected_output
-#echo "I,N:$Time31,$msisdn3,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring3,$InitialVolume3" >> $expected_output
-
+echo "Name#Test;Transaction_ID#${Time31}_${msisdn1}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume3};Yes_No_1#${IsRecurring3};String_1#${Quota_Name1};String_2#6;MSISDN#${msisdn1};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time31}_${msisdn2}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume3};Yes_No_1#${IsRecurring3};String_1#${Quota_Name1};String_2#6;MSISDN#${msisdn2};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time31}_${msisdn3}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#16;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume3};Yes_No_1#${IsRecurring3};String_1#${Quota_Name1};String_2#6;MSISDN#${msisdn3};" >> $expected_output
 
 #######################################################################
 

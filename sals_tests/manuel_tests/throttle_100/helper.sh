@@ -1,0 +1,154 @@
+##################################
+##################################
+function kill_cep() {
+  for i in $(ps aux |grep -i dfesp_xml_server|grep -v grep|awk '{print $2}')
+  do
+    if [ $(echo $i|wc -w) -ne 0 ]
+    then
+      echo "killing cep server $i"
+      kill -9 $i
+    fi
+  done
+
+  for i in $(ps aux |grep -i streamviewer|grep -v grep|awk '{print $2}')
+  do
+    if [ $(echo $i|wc -w) -ne 0 ]
+    then
+      echo "killing cep streamviewer $i"
+      kill -9 $i
+    fi
+  done
+}
+##################################
+##################################
+function start_cep_server() {
+echo "############################"
+echo "starting the cep server"
+$DFESP_HOME/bin/dfesp_xml_server -pubsub 55555 -server 55556 -loglevel debug -badevents bad_events.log &
+echo "sleep 2"
+sleep 2
+echo "############################"
+}
+##################################
+##################################
+start_cep_model() {
+MODEL_NAME=$1
+echo "############################"
+echo "starting ${MODEL_NAME}_load"
+$DFESP_HOME/bin/dfesp_xml_client -server localhost:55556 -file ${MODEL_NAME}_load.xml &
+echo "sleep 1"
+sleep 1
+echo "############################"
+
+echo "############################"
+echo "starting ${MODEL_NAME}_start"
+$DFESP_HOME/bin/dfesp_xml_client -server localhost:55556 -file ${MODEL_NAME}_start.xml &
+echo "sleep 1"
+sleep 1
+echo "############################"
+
+echo "############################"
+echo "restoring ${MODEL_NAME}_start"
+$DFESP_HOME/bin/dfesp_xml_client -server localhost:55556 -file ${MODEL_NAME}_restore.xml &
+echo "sleep 1"
+sleep 1
+echo "############################"
+}
+##################################
+
+##################################
+stop_cep_model() {
+MODEL_NAME=$1
+echo "############################"
+echo "starting ${MODEL_NAME}_load"
+$DFESP_HOME/bin/dfesp_xml_client -server localhost:55556 -file ${MODEL_NAME}_persist.xml &
+echo "sleep 1"
+sleep 1
+echo "############################"
+
+echo "############################"
+echo "starting ${MODEL_NAME}_start"
+$DFESP_HOME/bin/dfesp_xml_client -server localhost:55556 -file ${MODEL_NAME}_stop.xml &
+echo "sleep 1"
+sleep 1
+echo "############################"
+
+echo "############################"
+echo "restoring ${MODEL_NAME}_start"
+$DFESP_HOME/bin/dfesp_xml_client -server localhost:55556 -file ${MODEL_NAME}_remove.xml &
+echo "sleep 1"
+sleep 1
+echo "############################"
+}
+##################################
+
+##################################
+function start_stream_viewer() {
+MODEL_NAME=$1
+mylist=
+case "$MODEL_NAME" in
+
+  "POSTPAID_THROTTLE_EVENT")
+    ###############################################################################
+    mylist=$(echo $mylist dfESP://localhost:55555/POSTPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/PCRF_DATA_USAGE_STREAM)
+    mylist=$(echo $mylist dfESP://localhost:55555/POSTPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/PAIDTYPE_SOURCE_LOOKUP)
+    mylist=$(echo $mylist dfESP://localhost:55555/POSTPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/REQUIRRING_TYPE_SOURCE_LOOKUP)
+    mylist=$(echo $mylist dfESP://localhost:55555/POSTPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/FILTER_THROTTLE_EVENT_100)
+    mylist=$(echo $mylist dfESP://localhost:55555/POSTPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/COPY_DATA_VOLUME_USED_IN_LAST_48_HOURS)
+    mylist=$(echo $mylist dfESP://localhost:55555/POSTPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/AGGR_DATA_VOLUME_USED_IN_LAST_48_HOURS)
+    mylist=$(echo $mylist dfESP://localhost:55555/POSTPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/ADD_DATA_VOLUME_USED_IN_LAST_48_HOURS)    
+    mylist=$(echo $mylist dfESP://localhost:55555/POSTPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/ADD_PAIDTYPE)
+    mylist=$(echo $mylist dfESP://localhost:55555/POSTPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/FILTER_PCRF_DATA_USAGE)
+    mylist=$(echo $mylist dfESP://localhost:55555/POSTPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/ADD_REQUIRRING)
+    echo "mylist=$mylist"
+    ;;
+  "PREPAID_THROTTLE_EVENT")
+    ###############################################################################
+    mylist=$(echo $mylist dfESP://localhost:55555/PREPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/PCRF_DATA_USAGE_STREAM)
+    mylist=$(echo $mylist dfESP://localhost:55555/PREPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/PAIDTYPE_SOURCE_LOOKUP)
+    mylist=$(echo $mylist dfESP://localhost:55555/PREPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/REQUIRRING_TYPE_SOURCE_LOOKUP)
+    mylist=$(echo $mylist dfESP://localhost:55555/PREPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/FILTER_THROTTLE_EVENT_100)
+    mylist=$(echo $mylist dfESP://localhost:55555/PREPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/DUMMY_VOLUME_IN_48_HOURS)
+    mylist=$(echo $mylist dfESP://localhost:55555/PREPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/ADD_PAIDTYPE)
+    mylist=$(echo $mylist dfESP://localhost:55555/PREPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/FILTER_PCRF_DATA_USAGE)
+    mylist=$(echo $mylist dfESP://localhost:55555/PREPAID_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/ADD_REQUIRRING)
+    echo "mylist=$mylist"
+    ;;
+  "FONIC_THROTTLE_EVENT")
+    ###############################################################################
+    mylist=$(echo $mylist dfESP://localhost:55555/FONIC_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/PCRF_DATA_USAGE_STREAM)
+    mylist=$(echo $mylist dfESP://localhost:55555/FONIC_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/PAIDTYPE_SOURCE_LOOKUP)
+    mylist=$(echo $mylist dfESP://localhost:55555/FONIC_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/REQUIRRING_TYPE_SOURCE_LOOKUP)
+    mylist=$(echo $mylist dfESP://localhost:55555/FONIC_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/FILTER_THROTTLE_EVENT_100)
+    mylist=$(echo $mylist dfESP://localhost:55555/FONIC_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/DUMMY_VOLUME_IN_48_HOURS)
+    mylist=$(echo $mylist dfESP://localhost:55555/FONIC_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/ADD_PAIDTYPE)
+    mylist=$(echo $mylist dfESP://localhost:55555/FONIC_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/FILTER_PCRF_DATA_USAGE)
+    mylist=$(echo $mylist dfESP://localhost:55555/FONIC_THROTTLE_EVENT/THROTTLE_EVENT_QUERY/ADD_REQUIRRING)
+    echo "mylist=$mylist"
+    ;;
+  "POSTPAID_SECOND_STEP")
+    ###############################################################################
+    mylist=$(echo $mylist dfESP://localhost:55555/POSTPAID_SECOND_STEP/SECOND_STEP_EVENT_QUERY/PCRF_DATA_USAGE_STREAM)
+    mylist=$(echo $mylist dfESP://localhost:55555/POSTPAID_SECOND_STEP/SECOND_STEP_EVENT_QUERY/CAMPAIGN_CONTACT_STREAM)
+    mylist=$(echo $mylist dfESP://localhost:55555/POSTPAID_SECOND_STEP/SECOND_STEP_EVENT_QUERY/POSTPAID_THROTTLE_FILTER)
+    mylist=$(echo $mylist dfESP://localhost:55555/POSTPAID_SECOND_STEP/SECOND_STEP_EVENT_QUERY/PCRF_GATHER_24_HOURS_EVENT)
+    mylist=$(echo $mylist dfESP://localhost:55555/POSTPAID_SECOND_STEP/SECOND_STEP_EVENT_QUERY/PCRF_GATHER_24_HOURS_EVENT)
+    mylist=$(echo $mylist dfESP://localhost:55555/POSTPAID_SECOND_STEP/SECOND_STEP_EVENT_QUERY/PCRF_LAST_EVENT)
+    mylist=$(echo $mylist dfESP://localhost:55555/POSTPAID_SECOND_STEP/SECOND_STEP_EVENT_QUERY/CAMPAIGN_CONTACT_STREAM_ADD_LAST_EVENT)
+    mylist=$(echo $mylist dfESP://localhost:55555/POSTPAID_SECOND_STEP/SECOND_STEP_EVENT_QUERY/FILTER_TO_LAZY)
+    ;;
+  *)
+    echo "ERROR! UNKNOWN PAYMENT TYPE!!! $1"
+    exit -1
+esac
+
+echo "############################"
+echo "starting stream viewer for ${MODEL_NAME}.."
+java -classpath $DFESP_HOME/lib/dfx-esp-streamviewer.jar:$DFESP_HOME/lib/dfx-esp-api.jar streamviewer.StreamViewer $mylist -initialX 1 -initialY 1 -height 800 -width 600 -height 750 -width 1400 &
+echo "sleep 6"
+sleep 6
+echo "############################"
+
+}
+##################################
+##################################

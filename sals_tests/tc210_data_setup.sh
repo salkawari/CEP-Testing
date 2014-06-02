@@ -108,30 +108,23 @@ p6=$(ret_line "PCRF_EDR" "6")
 p7=$(ret_line "PCRF_EDR" "7")
 
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
-#echo $(date --date='16 days ago' +"%Y-%m-%d %T")
-#echo "Quota_Next_Reset_Time1=$Quota_Next_Reset_Time1"
-#tmp=$(date --date='16 days' +"%Y-%m-%d %T");
-#echo "tmp=$tmp"
-#echo "throttle_input 1 ($g_Quota_Next_Reset_Time, $Quota_Next_Reset_Time1) =$p1,$p2,$p3,$p4,$p5,$p6,$p7"
-#echo "............................................................................................................"
-
 #########################
-# ROW2.. invalid - missing msisdn
-msisdn2=; g_msisdn=$msisdn2; # p1
-p1=$(ret_line "PCRF_EDR" "1")
-echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
-msisdn2=4922345678902;
+## ROW2.. invalid - missing msisdn
+#msisdn2=; g_msisdn=$msisdn2; # p1
+#p1=$(ret_line "PCRF_EDR" "1")
+#echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+#msisdn2=4922345678902;
 #########################
 # ROW3.. valid
 msisdn3=4922345678903; g_msisdn=$msisdn3;
 p1=$(ret_line "PCRF_EDR" "1")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
-#########################
-# ROW4.. invalid - missing time
-msisdn4=4922345678904; g_msisdn=$msisdn4;
-Time4=;                g_Time=$Time4; # p1
-p1=$(ret_line "PCRF_EDR" "1")
-echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+##########################
+## ROW4.. invalid - missing time
+#msisdn4=4922345678904; g_msisdn=$msisdn4;
+#Time4=;                g_Time=$Time4; # p1
+#p1=$(ret_line "PCRF_EDR" "1")
+#echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
 # ROW5.. valid
 msisdn5=4922345678905; g_msisdn=$msisdn5;
@@ -139,12 +132,12 @@ Time5=$(date --date='16 days' +"%Y-%m-%d %T");  g_Time=$Time5; # p1
 p1=$(ret_line "PCRF_EDR" "1")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
-# ROW6.. invalid - missing quota_name
-msisdn6=4922345678906; g_msisdn=$msisdn6;
-p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name6=;                                 g_Quota_Name=$Quota_Name6; # p3
-p3=$(ret_line "PCRF_EDR" "3")
-echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+## ROW6.. invalid - missing quota_name
+#msisdn6=4922345678906; g_msisdn=$msisdn6;
+#p1=$(ret_line "PCRF_EDR" "1")
+#Quota_Name6=;                                 g_Quota_Name=$Quota_Name6; # p3
+#p3=$(ret_line "PCRF_EDR" "3")
+#echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
 # ROW7.. valid
 msisdn7=4922345678907; g_msisdn=$msisdn7;
@@ -153,12 +146,12 @@ Quota_Name7=Q_143_local_Month;                                 g_Quota_Name=$Quo
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
-# ROW8.. invalid - missing Quota_Next_Reset_Time
-msisdn8=4922345678908; g_msisdn=$msisdn8;
-p1=$(ret_line "PCRF_EDR" "1")
-Quota_Next_Reset_Time8=; g_Quota_Next_Reset_Time=$Quota_Next_Reset_Time8; # p4
-p4=$(ret_line "PCRF_EDR" "4")
-echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+## ROW8.. invalid - missing Quota_Next_Reset_Time
+#msisdn8=4922345678908; g_msisdn=$msisdn8;
+#p1=$(ret_line "PCRF_EDR" "1")
+#Quota_Next_Reset_Time8=; g_Quota_Next_Reset_Time=$Quota_Next_Reset_Time8; # p4
+#p4=$(ret_line "PCRF_EDR" "4")
+#echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
 # ROW9.. valid
 msisdn9=4922345678909; g_msisdn=$msisdn9;
@@ -167,11 +160,11 @@ Quota_Next_Reset_Time9=$(date --date='16 days' +"%Y-%m-%d %T");g_Quota_Next_Rese
 p4=$(ret_line "PCRF_EDR" "4")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
-# ROW10.. invalid time
-msisdn10=4922345678910; g_msisdn=$msisdn10;
-Time10=hello;                g_Time=$Time10; # p1
-p1=$(ret_line "PCRF_EDR" "1")
-echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+## ROW10.. invalid time
+#msisdn10=4922345678910; g_msisdn=$msisdn10;
+#Time10=hello;                g_Time=$Time10; # p1
+#p1=$(ret_line "PCRF_EDR" "1")
+#echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
 # ROW11.. valid
 msisdn11=4922345678911; g_msisdn=$msisdn11;
@@ -179,12 +172,12 @@ Time11=$(date --date='50 hours ago' +"%Y-%m-%d %T"); g_Time=$Time11; # p1
 p1=$(ret_line "PCRF_EDR" "1")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
-# ROW12.. invalid next_reset_time..
-msisdn12=4922345678912; g_msisdn=$msisdn12;
-p1=$(ret_line "PCRF_EDR" "1")
-Quota_Next_Reset_Time12=hi; g_Quota_Next_Reset_Time=$Quota_Next_Reset_Time12; # p4
-p4=$(ret_line "PCRF_EDR" "4")
-echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
+## ROW12.. invalid next_reset_time..
+#msisdn12=4922345678912; g_msisdn=$msisdn12;
+#p1=$(ret_line "PCRF_EDR" "1")
+#Quota_Next_Reset_Time12=hi; g_Quota_Next_Reset_Time=$Quota_Next_Reset_Time12; # p4
+#p4=$(ret_line "PCRF_EDR" "4")
+#echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
 # ROW13.. valid
 msisdn13=4922345678913; g_msisdn=$msisdn13;
@@ -202,6 +195,8 @@ echo "${tc}: 1. feeding in the EDR file.."
 rm -f input_data/${throttle_file}.gz
 gzip input_data/${throttle_file}
 cp input_data/${throttle_file}.gz $data_dir/pcrf_files_${SINGLE_FLOW_TYPE}/
+echo "ls $data_dir/pcrf_files_${SINGLE_FLOW_TYPE}/"
+ls $data_dir/pcrf_files_${SINGLE_FLOW_TYPE}/
 echo ""
 
 echo ""
@@ -251,23 +246,18 @@ touch ${recurring_lkp_file}.zip.done
 
 ls -rtl $data_dir/lookup_requirring/OUT
 
-Quota_Total1=$Quota_Usage1
-echo "Name#Test;Transaction_ID#${Time1}_${msisdn1}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume1};Yes_No_1#${IsRecurring1};String_1#${Quota_Name1};MSISDN#${msisdn1};" >> $expected_output
-echo "Name#Test;Transaction_ID#${Time1}_${msisdn3}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name1};MSISDN#${msisdn3};" >> $expected_output
-echo "Name#Test;Transaction_ID#${Time5}_${msisdn5}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#0;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume1};Yes_No_1#${IsRecurring1};String_1#${Quota_Name1};MSISDN#${msisdn5};" >> $expected_output
-echo "Name#Test;Transaction_ID#${Time5}_${msisdn7}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#0;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name1};MSISDN#${msisdn7};" >> $expected_output
-echo "Name#Test;Transaction_ID#${Time5}_${msisdn9}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#0;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume1};Yes_No_1#${IsRecurring1};String_1#${Quota_Name1};MSISDN#${msisdn9};" >> $expected_output
-echo "Name#Test;Transaction_ID#${Time1}_${msisdn11}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name1};MSISDN#${msisdn11};" >> $expected_output
-echo "Name#Test;Transaction_ID#${Time1}_${msisdn13}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name1};MSISDN#${msisdn13};" >> $expected_output
+################################################################################
+echo "${tc}: 4. generating the expected output.."
+rm -f $expected_output
 
-#Quota_Total1=$Quota_Usage1
-#echo "I,N:$Time1,$msisdn1,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
-#echo "I,N:$Time1,$msisdn3,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-#echo "I,N:$Time1,$msisdn5,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
-#echo "I,N:$Time1,$msisdn7,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-#echo "I,N:$Time1,$msisdn9,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,$IsRecurring1,$InitialVolume1" >> $expected_output
-#echo "I,N:$Time1,$msisdn11,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
-#echo "I,N:$Time1,$msisdn13,$SGSNAddress1,$UEIP1,$Quota_Name1,$Quota_Consumption1,$Quota_Next_Reset_Time1,$TriggerType1,,,,,,,,,,,$SGSNAddress1,,,,,,$UEIP1,,,,,,,$Quota_Status1,$Quota_Consumption1,,,$Quota_Usage1,,,,,,,,,,$PaymentType1,$Quota_Total1,," >> $expected_output
+Quota_Total1=$Quota_Usage1
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn1}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#0.0;Int_3#${InitialVolume1};Yes_No_1#${IsRecurring1};String_1#${Quota_Name1};String_2#6;MSISDN#${msisdn1};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn3}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#0.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name1};String_2#6;MSISDN#${msisdn3};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time5}_${msisdn5}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#0;Type#$PaymentType1;Float_1#0.0;Int_3#${InitialVolume1};Yes_No_1#${IsRecurring1};String_1#${Quota_Name1};String_2#6;MSISDN#${msisdn5};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time5}_${msisdn7}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#0;Type#$PaymentType1;Float_1#0.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name1};String_2#6;MSISDN#${msisdn7};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time5}_${msisdn9}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#0;Type#$PaymentType1;Float_1#0.0;Int_3#${InitialVolume1};Yes_No_1#${IsRecurring1};String_1#${Quota_Name1};String_2#6;MSISDN#${msisdn9};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn11}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#0.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name1};String_2#6;MSISDN#${msisdn11};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn13}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#0.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name1};String_2#6;MSISDN#${msisdn13};" >> $expected_output
 
 cd $my_loc
 ################################################################################

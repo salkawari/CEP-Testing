@@ -43,10 +43,11 @@ needed_directories=$(echo "$needed_directories $input_dir $data_dir/pcrf_files_p
 needed_directories=$(echo "$needed_directories $data_dir/lookup_postpaid $data_dir/lookup_paymenttype")
 needed_directories=$(echo "$needed_directories $data_dir/lookup_prepaid $data_dir/lookup_fonic $data_dir/lookup_requirring/OUT")
 needed_directories=$(echo "$needed_directories $data_dir/output_prepaid $data_dir/output_postpaid $data_dir/output_fonic")
-needed_directories=$(echo "$needed_directories $data_dir/bad_events ${jar_adapter_path}")
+needed_directories=$(echo "$needed_directories $data_dir/bad_events $data_dir/output_post_2nd_step ${jar_adapter_path}")
 needed_directories=$(echo "$needed_directories $data_dir/persist_fonic_throttle_event $data_dir/persist_prepaid_throttle_event")
 needed_directories=$(echo "$needed_directories $data_dir/persist_postpaid_throttle_event $data_dir/mem-log $data_dir/cep-adapter-log")
-needed_directories=$(echo "$needed_directories $data_dir/cep-log $data_dir/campaign-contact-2nd-step $data_dir/pcrf-edr-postpaid-2nd-step")
+needed_directories=$(echo "$needed_directories $data_dir/cep-log $data_dir/stream_post_camp")
+needed_directories=$(echo "$needed_directories $data_dir/pcrf_files_post_2nd_step")
 
 
 for i in $(echo $mylist)
@@ -76,12 +77,14 @@ do
   export SINGLE_FLOW_TYPE=$(get_flowtype_lower)
 
 ###############################################################################
+start_stop_dir=start_stop_dir-all-models
+
 if [ -a "$my_loc/MODEL_TYPE.conf" ]
 then
-  start_stop_dir=start_stop_dir_1key_2nd_step
+  #start_stop_dir=start_stop_dir_1key_2nd_step
   out_dir=$data_dir/output_${SINGLE_FLOW_TYPE}_2nd_step
 else
-  start_stop_dir=start_stop_dir_1key
+  #start_stop_dir=start_stop_dir_1key
   out_dir=$data_dir/output_${SINGLE_FLOW_TYPE}
 fi
 echo "start_stop_dir=$start_stop_dir .."
@@ -133,8 +136,8 @@ rm -fr $(cat $start_stop_dir/START_STOP_CONFIG.txt|grep "cep_server_log_file"|cu
     echo "sleeping 10 seconds.."
     sleep 10
   else
-    echo "sleeping 14 seconds.."
-    sleep 14
+    echo "sleeping 16 seconds.."
+    sleep 16
   fi
 
     echo "${test_case_name}:11. now we can compare results.."
@@ -222,6 +225,7 @@ rm -fr $(cat $start_stop_dir/START_STOP_CONFIG.txt|grep "cep_server_log_file"|cu
   fi
 
     cd $my_loc/$start_stop_dir
+
     ./STOP_ALL_CEP.sh
     ################################################################################
 

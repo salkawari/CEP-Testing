@@ -108,7 +108,7 @@ echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 # ROW2.. another throttle event Q_23_local_Month..
 msisdn2=4922345678902; g_msisdn=$msisdn2;
 p1=$(ret_line "PCRF_EDR" "1")
-Quota_Name2=Q_23_local_Month;  g_Quota_Name=$Quota_Name2; # p3
+Quota_Name2=Q_144_local_Month;  g_Quota_Name=$Quota_Name2; # p3
 p3=$(ret_line "PCRF_EDR" "3")
 echo "$p1,$p2,$p3,$p4,$p5,$p6,$p7" >> $throttle_input
 #########################
@@ -150,8 +150,8 @@ touch ${recurring_lkp_file}.zip.done
 ls -rtl $data_dir/lookup_requirring/OUT
 
 Quota_Total1=$Quota_Usage1
-echo "Name#Test;Transaction_ID#${Time1}_${msisdn1}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#${InitialVolume1};Yes_No_1#${IsRecurring1};String_1#${Quota_Name1};MSISDN#${msisdn1};" >> $expected_output
-echo "Name#Test;Transaction_ID#${Time1}_${msisdn2}_${Quota_Name2}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#${Quota_Total1}.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name2};MSISDN#${msisdn2};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn1}_${Quota_Name1}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#0.0;Int_3#${InitialVolume1};Yes_No_1#${IsRecurring1};String_1#${Quota_Name1};String_2#6;MSISDN#${msisdn1};" >> $expected_output
+echo "Name#Test;Transaction_ID#${Time1}_${msisdn2}_${Quota_Name2}_${Quota_Next_Reset_Time1};Int_1#18;Type#$PaymentType1;Float_1#0.0;Int_3#0;Yes_No_1#;String_1#${Quota_Name2};String_2#6;MSISDN#${msisdn2};" >> $expected_output
 
 
 cd $my_loc
